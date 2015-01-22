@@ -1,0 +1,75 @@
+create database tracnghiem;
+create table nguoidung(
+	manguoidung int auto_increment primary key,
+	matkhau varchar(20),
+	hoten varchar(100),
+	email varchar(100),
+	avatar blob
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table dethi(
+	made int auto_increment primary key,
+	tende varchar(100),
+	heso smallint,
+	thoigianlambai int,
+	trangthai boolean,
+	matkhaudethi varchar(20),
+	ngaytaode datetime,
+	ngaycapnhat datetime,
+	dando text,
+	solanthi int
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table dethi_nguoidung(
+	manguoidung int,
+	made int,
+	danhdau smallint,
+	khoabailam boolean,
+	ngaylam datetime,
+	diem float,
+	primary key (manguoidung, made),
+	foreign key (manguoidung) references nguoidung(manguoidung) on delete cascade on update cascade,
+	foreign key (made) references dethi(made) on delete cascade on update cascade
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table vaitro(
+	tenvaitro varchar(50) primary key
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table nguoidung_vaitro(
+	manguoidung int,
+	made int,
+	tenvaitro varchar(50),
+	primary key (manguoidung, made),
+	foreign key(manguoidung) references nguoidung(manguoidung),
+	foreign key(made) references dethi(made) on delete cascade on update cascade,
+	foreign key(tenvaitro) references vaitro(tenvaitro) on delete cascade on update cascade
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table loaicau(
+	loaicau varchar(100) primary key
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table cauhoi(
+	macauhoi int,
+	made int,
+	noidungcauhoi text,
+	dapandung varchar(200),
+	loaicau varchar(100),
+	diemcuacau float,
+	primary key(macauhoi, made),
+	foreign key(made) references dethi(made) on delete cascade on update cascade,
+	foreign key(loaicau) references loaicau(loaicau) on delete cascade on update cascade
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+create table cautraloi(
+	made int,	
+	macauhoi int,
+	macautraloi varchar,
+	noidungcautraloi text,
+	primary key(made, macauhoi, macautraloi),
+	foreign key(made) references dethi(made) on delete cascade on update cascade,
+	foreign key(macauhoi) references cauhoi(macauhoi) on delete cascade on update cascade
+)ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+
