@@ -1,0 +1,78 @@
+@import "font.css";
+@primary-cl: #2c3e50;
+@blue-cl: #5285b8;
+@gray-dark: #504f4f;
+@gray-cl: #a6a9ae;
+@orange-cl: #fab443;
+@red-cl: #dc3232;
+@green-light-cl: #b8d643;
+@green-cl: #21a689;
+
+img
+{
+	max-width: 100%;
+	height: auto;
+}
+
+.container
+{
+	.navbar-brand
+	{
+		padding: 0px;
+        font-size: 32px;
+        font-weight: 700;
+	}
+	.btn-login
+	{
+		border: 3px solid white;
+		background-color: @primary-cl;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+        margin-top: 10px;
+		&:hover
+		{
+			color: @green-cl;
+			background-color: @primary-cl;
+			border: 3px solid @green-cl;
+		}
+	}
+}
+
+.btn-green
+{
+	color: white !important;
+	background-color: @green-cl !important;
+}
+
+.intro
+{
+	display: block;
+	height: 500px;
+	max-height: 90%;
+	
+	.carousel-container
+	{
+		max-width: 90%;
+		border: 10px solid @primary-cl;
+		border-radius: 5px;
+		.carousel-control
+		{
+            background-image: none;
+		}
+	}
+}
+
+.benefit
+{
+	.thumbnail
+	{
+		padding-top: 20px;
+		background-color: #fafafa;
+		
+		&:hover
+		{
+			background-color: #fff;
+		}
+	}
+}
