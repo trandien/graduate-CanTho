@@ -1,0 +1,83 @@
+
+	@import "font.css";
+	.navbar-menu{
+		background-color: #34302d;
+		border-top: 4px solid #6db33f;
+		
+	}
+
+	.navbar-toggle{
+		border-color:#dddddd;
+		margin-top: 20px;
+	}
+
+	.navbar-toggle:hover{
+		background-color: #888;
+	}
+
+	.icon-bar{
+		background-color: #ddd;
+	}
+
+	#menu{
+		background-color: #6db33f;
+	}
+	.nav li a{
+		position: relative;
+		color: #eee;
+		font-family: Montserrat,sans-serif;
+		font-size: 14px;
+		text-shadow: none;
+		line-height: 14px;
+		
+		text-transform: uppercase;
+	}
+
+	.logo-anki-container{
+		display: inline-block;
+	}
+
+	.logo-anki{
+		margin: 12px 0 6px;
+		width: 160px;
+		height: 46px;
+		display: inline-block;
+		text-decoration: none;
+		background: url("../img/logo-anki.png") -1px -1px no-repeat transparent;
+	}
+
+	a.logo-anki:hover{
+		background: url("../img/logo-anki2.png") -1px -1px no-repeat transparent;
+	}
+
+	.container-header{
+		padding-left: 30px;
+		padding-right: 20px;
+	}
+
+	.dropdown .abc {
+            background: #ecf0f1;
+            width: 350px;
+            border-radius: 5px;
+            padding-top: 5px;
+            border: 1px solid 
+        }
+
+    .dropdown .dropdown-color:hover{
+        background-color: transparent;
+    }
+
+	 .btn-login{
+	 	border: 3px solid white;
+	 	background-color: #34302d;
+	 	color: white;
+	 	font-size: 16px;
+	 	font-weight: bold;
+	 	
+	 }
+	 .btn-login:hover{
+	 	border: 3px solid #6db33f;
+	 	background-color: #34302d;
+	 	color: #6db33f;
+	 	
+	 }

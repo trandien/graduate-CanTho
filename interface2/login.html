@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Đăng nhập Anki</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="custom/login.css" />
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/bootstrapValidator.min.js"></script>
+    <link href="css/bootstrapValidator.min.css" rel="stylesheet">
+
+    <script src="js/register.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-header">
+            <div class="login-title">
+                <div>Anki</div>
+                <em style="font-weight: 300; font-size: 20px;">Website tạo và thi trắc nghiệm</em>
+            </div>
+        </div>
+        <form class="form-horizontal" role="form" id="form-dang-ky">
+            <div class="form-group" style="margin-bottom: 10px;">
+                <div class="col-md-12">
+                
+                    <input type="text" name="username" id="username" class="form-control input-lg"  placeholder="Tài khoản" 
+                        data-bv-notempty="true"
+                        data-bv-notempty-message="Tài khoản phải khác rỗng"
+                        data-bv-stringlength="true"
+                        data-bv-stringlength-min="6"
+                        data-bv-stringlength-max="20"
+                        data-bv-stringlength-message="Tài khoản phải ít nhất là 6 ký tự và nhiều nhất là 20 ký tự">
+                    <div style="color: #a94442;font-size: 85%;padding-top: 5px;">                                
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 22px;">
+                <div class="col-md-12">
+                    <input type="text" name="username" id="username" class="form-control input-lg"  placeholder="Mật khẩu" 
+                        data-bv-notempty="true"
+                        data-bv-notempty-message="Tài khoản phải khác rỗng"
+                        data-bv-stringlength="true"
+                        data-bv-stringlength-min="6"
+                        data-bv-stringlength-max="20"
+                        data-bv-stringlength-message="Tài khoản phải ít nhất là 6 ký tự và nhiều nhất là 20 ký tự">
+                    <div style="color: #a94442;font-size: 85%;padding-top: 5px;">                                
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    <div class="checkbox" style="float: left;">
+                        <label>
+                            <input type="checkbox">Ghi nhớ
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary" type="submit" style="float: right;">Đăng Nhập</button>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0px;">
+                <div class="col-md-12">
+                    <a href="forget-password.html">Bạn đã quên mật khẩu ?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
