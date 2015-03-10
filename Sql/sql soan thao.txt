@@ -1,0 +1,386 @@
+drop table if exists CAUHOI;
+
+drop table if exists CAUTRALOI;
+
+drop table if exists CHO;
+
+drop table if exists CHUDE;
+
+drop table if exists DANGCAUHOI;
+
+drop table if exists DANGTHI;
+
+drop table if exists DETHI;
+
+drop table if exists DOKHO;
+
+drop table if exists HINHANH;
+
+drop table if exists HOCKY;
+
+drop table if exists KHOI;
+
+drop table if exists KITHI;
+
+drop table if exists LOP;
+
+drop table if exists MONHOC;
+
+drop table if exists NGUOIDUNG;
+
+drop table if exists NIENKHOA;
+
+drop table if exists PHANCONGVAITRO;
+
+drop table if exists PHONGTHI;
+
+drop table if exists THI;
+
+drop table if exists TRALOI;
+
+drop table if exists VAITRO;
+
+/*==============================================================*/
+/* Table: CAUHOI                                                */
+/*==============================================================*/
+create table CAUHOI
+(
+   MSDT                 varchar(5) not null,
+   MSCH                 int not null,
+   MSDCH                int not null,
+   MSDK                 int not null,
+   
+   CH_NOIDUNGCAUHOI     varchar(1000) not null,
+   
+   CH_DIEM               float not null,
+   CH_DAPANDUNG         varchar(2) not null,
+   primary key (MSDT, MSCH)
+);
+
+/*==============================================================*/
+/* Table: CAUTRALOI                                             */
+/*==============================================================*/
+create table CAUTRALOI
+(
+   MSDT                 varchar(5) not null,
+   MSCH                 int not null,
+   CTL_MA               varchar(10) not null,
+   CTL_NOIDUNG          varchar(1000) not null,
+   
+   primary key (MSDT, MSCH, CTL_MA)
+);
+
+/*==============================================================*/
+/* Table: CHO                                                   */
+/*==============================================================*/
+create table DETHI_LOP
+(
+   MSL                  varchar(10) not null,
+   MSDT                 varchar(5) not null,
+   primary key (MSL, MSDT)
+);
+
+/*==============================================================*/
+/* Table: CHUDE                                                 */
+/*==============================================================*/
+create table CHUDE
+(
+   MSCD                 int not null,
+   MSMH                 int not null,
+   CD_TEN               varchar(100) not null,
+   primary key (MSCD)
+);
+
+/*==============================================================*/
+/* Table: DANGCAUHOI                                            */
+/*==============================================================*/
+create table DANGCAUHOI
+(
+   MSDCH                int not null,
+   DCH_TEN              varchar(100) not null,
+   primary key (MSDCH)
+);
+
+/*==============================================================*/
+/* Table: DANGTHI                                               */
+/*==============================================================*/
+create table DANGTHI
+(
+   MSDTHI               int not null,
+   DT_TEN               varchar(20) not null,
+   DT_HESO              int not null,
+   primary key (MSDTHI)
+);
+
+/*==============================================================*/
+/* Table: DETHI                                                 */
+/*==============================================================*/
+create table DETHI
+(
+   MSDT                 varchar(5) not null,
+   MSNK                 int not null,
+MSKT                 int not null,
+   MSHK                 int not null,
+   MSDTHI               int not null,
+   MSCD                 int not null,
+   MSMH                 int not null,
+   DT_TENDE             varchar(100) not null,
+   DT_THOIGIANLAMBAI    int not null,
+   DT_TRANGTHAI         bool not null,
+   DT_MATKHAU           varchar(20) not null,
+   DT_NGAYTAODE         datetime not null,
+   DT_NGAYCAPNHAT       datetime not null,
+   DT_DANDO             text,
+   primary key (MSDT)
+);
+
+/*==============================================================*/
+/* Table: DOKHO                                                 */
+/*==============================================================*/
+create table DOKHO
+(
+   MSDK                 int not null,
+   DK_TEN               varchar(100) not null,
+   primary key (MSDK)
+);
+
+/*==============================================================*/
+/* Table: HINHANH                                               */
+/*==============================================================*/
+create table HINHANH
+(
+   MSHA               int not null,
+   MSDT                 varchar(5) not null,
+   
+   CTL_MA               varchar(10),
+   
+   MSCH                 int,
+   HA_NOIDUNG        longtext not null,
+   primary key (MSHACH)
+);
+
+/*==============================================================*/
+/* Table: HOCKY                                                 */
+/*==============================================================*/
+create table HOCKY
+(
+   MSHK                 int not null,
+   primary key (MSHK)
+);
+
+/*==============================================================*/
+/* Table: KHOI                                                  */
+/*==============================================================*/
+create table KHOI
+(
+   MSK                  varchar(10) not null,
+   primary key (MSK)
+);
+
+/*==============================================================*/
+/* Table: KITHI                                                 */
+/*==============================================================*/
+create table KITHI
+(
+   MSKT                 int not null,
+   KT_TEN               varchar(20) not null,
+   KT_SOLANCHOPHEP      int,
+   primary key (MSLT)
+);
+
+/*==============================================================*/
+/* Table: LOP                                                   */
+/*==============================================================*/
+create table LOP
+(
+   MSL                  varchar(10) not null,
+   MSK                  varchar(10) not null,
+   primary key (MSL)
+);
+
+/*==============================================================*/
+/* Table: MONHOC                                                */
+/*==============================================================*/
+create table MONHOC
+(
+   MSMH                 int not null,
+   MH_TEN               varchar(100) not null,
+   primary key (MSMH)
+);
+
+/*==============================================================*/
+/* Table: NGUOIDUNG                                             */
+/*==============================================================*/
+create table NGUOIDUNG
+(
+   ND_TAIKHOAN          varchar(10) not null,   
+   
+   MSVT                 varchar(200) not null,
+   MSL                  varchar(10) not null,
+   ND_MATKHAU           varchar(100) not null,
+   ND_HOTEN             varchar(100) not null,
+   ND_EMAIL             varchar(100) not null,
+   ND_AVATAR            longtext,
+   primary key (ND_TAIKHOAN)
+);
+
+/*==============================================================*/
+/* Table: NIENKHOA                                              */
+/*==============================================================*/
+create table NIENKHOA
+(
+   MSNK                 int not null,
+   NK_TEN               varchar(20) not null,
+   NK_NAMBATDAU         int not null,
+   NK_NAMKETTHUC        int not null,
+   NK_NGAYBATDAU        int not null,
+   NK_NGAYKETTHUC       int not null,
+   primary key (MSNK)
+);
+
+/*==============================================================*/
+/* Table: PHANCONGVAITRO                                        */
+/*==============================================================*/
+create table PHANCONGVAITRO
+(
+   MSDT                 varchar(5) not null,
+   ND_TAIKHOAN          varchar(10) not null,
+   MSVT                 int,
+   MSCD                int not null,
+   primary key (MSDT, ND_TAIKHOAN, MSVT)
+);
+
+/*==============================================================*/
+/* Table: PHONGTHI                                              */
+/*==============================================================*/
+create table PHONGTHI
+(
+   MSPT                 int not null,
+   PT_TEN               varchar(10) not null,
+   primary key (MSPT)
+);
+
+/*==============================================================*/
+/* Table: THI                                                   */
+/*==============================================================*/
+create table THI
+(
+   ND_TAIKHOAN          varchar(10) not null,
+   MSDT                 varchar(5) not null,
+   MSPT                 int not null,
+   T_DANHDAU            bool not null,
+   T_KHOABAILAM         bool not null,
+   T_NGAYLAM            datetime not null,
+   T_THOIGIANBATDAU     datetime not null,
+   T_THOIGIANKETTHUC    datetime not null,
+   T_DIEM               float not null,
+   primary key (ND_TAIKHOAN, MSDT)
+);
+
+/*==============================================================*/
+/* Table: TRALOI                                                */
+/*==============================================================*/
+create table TRALOI
+(
+   MSCH                 int not null,
+MSDT                 int not null,
+   ND_TAIKHOAN          varchar(10) not null,
+   TL_NOIDUNG                 varchar(5),
+   TL_DIEM              float not null,
+   primary key (MSDT, MSCH, ND_TAIKHOAN)
+);
+
+/*==============================================================*/
+/* Table: VAITRO                                                */
+/*==============================================================*/
+create table VAITRO
+(
+   MSVT                 int,
+   VT_TEN               varchar(20) not null,
+   primary key (MSVT)
+);
+
+alter table CAUHOI add constraint FK_CHUAW foreign key (MSDT)
+      references DETHI (MSDT) on delete cascade on update cascade;
+
+alter table CAUHOI add constraint FK_DOKHO_CAUHOI foreign key (MSDK)
+      references DOKHO (MSDK) on delete cascade on update cascade;
+
+alter table CAUHOI add constraint FK_RELATIONSHIP_21 foreign key (MSDT, MSCH)
+      references TRALOI (MSDT, MSCH) on delete cascade on update cascade;
+
+alter table CAUHOI add constraint FK_THUOC foreign key (MSDCH)
+      references DANGCAUHOI (MSDCH) on delete cascade on update cascade;
+
+alter table CAUTRALOI add constraint FK_CHUAF foreign key (MSDT, MSCH)
+      references CAUHOI (MSDT, MSCH) on delete cascade on update cascade;
+
+alter table DETHI_LOP add constraint FK_CHO foreign key (MSL)
+      references LOP (MSL) on delete cascade on update cascade;
+
+alter table DETHI_LOP add constraint FK_CHO2 foreign key (MSDT)
+      references DETHI (MSDT) on delete cascade on update cascade;
+
+alter table CHUDE add constraint FK_MON_CHUDE foreign key (MSMH)
+      references MONHOC (MSMH) on delete cascade on update cascade;
+
+alter table DETHI add constraint FK_CHUA foreign key (MSCD)
+      references CHUDE (MSCD) on delete cascade on update cascade;
+
+alter table DETHI add constraint FK_DETHI_NIENKHOA foreign key (MSNK)
+      references NIENKHOA (MSNK) on delete cascade on update cascade;
+
+alter table DETHI add constraint FK_HOCKY_DETHI foreign key (MSHK)
+      references HOCKY (MSHK) on delete cascade on update cascade;
+
+alter table DETHI add constraint FK_MON_DETHI foreign key (MSMH)
+      references MONHOC (MSMH) on delete cascade on update cascade;
+
+alter table DETHI add constraint FK_RELATIONSHIP_20 foreign key (MSDTHI)
+      references DANGTHI (MSDTHI) on delete cascade on update cascade;
+
+alter table HINHANH add constraint FK_CHUA1 foreign key (MSDT, MSCH)
+      references CAUHOI (MSDT, MSCH) on delete cascade on update cascade;
+
+alter table HINHANH add constraint FK_HINHANH_CAUTRALOI foreign key (MSDT, MSCH)
+      references CAUTRALOI (MSDT, MSCH) on delete cascade on update cascade;
+
+alter table DETHI  add constraint FK_LANTHI_DETHI foreign key (MSKT)
+      references KITHI(MSKT) on delete cascade on update cascade;
+
+alter table LOP add constraint FK_THUOCD foreign key (MSK)
+      references KHOI (MSK) on delete cascade on update cascade;
+
+alter table TRALOI add constraint FK_RELATIONSHIP_24 foreign key (ND_TAIKHOAN)
+      references NGUOIDUNG (ND_TAIKHOAN) on delete cascade on update cascade;
+
+alter table NGUOIDUNG add constraint FK_THUOCS foreign key (MSL)
+      references LOP (MSL) on delete cascade on update cascade;
+
+alter table NGUOIDUNG add constraint FK_VAITRO_NGUOIDUNG foreign key (MSVT)
+      references VAITRO (MSVT) on delete cascade on update cascade;
+
+alter table PHANCONGVAITRO add constraint FK_RELATIONSHIP_26 foreign key (MSDT)
+      references DETHI (MSDT) on delete cascade on update cascade;
+
+alter table PHANCONGVAITRO add constraint FK_RELATIONSHIP_27 foreign key (ND_TAIKHOAN)
+      references NGUOIDUNG (ND_TAIKHOAN) on delete cascade on update cascade;
+
+alter table PHANCONGVAITRO add constraint FK_RELATIONSHIP_28 foreign key (MSVT)
+      references VAITRO (MSVT) on delete cascade on update cascade;
+
+alter table THI add constraint FK_HOCSINH_LAM foreign key (ND_TAIKHOAN)
+      references NGUOIDUNG (ND_TAIKHOAN) on delete cascade on update cascade;
+
+alter table THI add constraint FK_LAM_DETHI foreign key (MSDT)
+      references DETHI (MSDT) on delete cascade on update cascade;
+
+alter table THI add constraint FK_THI_TRONG_PHONG foreign key (MSPT)
+      references PHONGTHI (MSPT) on delete cascade on update cascade;
+
+alter table TRALOI add constraint FK_RELATIONSHIP_22 foreign key (MSDT, MSCH)
+      references CAUHOI (MSDT, MSCH) on delete cascade on update cascade;
+
+alter table TRALOI add constraint FK_RELATIONSHIP_23 foreign key (ND_TAIKHOAN)
+      references NGUOIDUNG (ND_TAIKHOAN) on delete cascade on update cascade;
+
