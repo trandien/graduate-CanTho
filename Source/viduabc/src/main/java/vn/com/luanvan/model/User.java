@@ -21,22 +21,25 @@ import javax.persistence.Table;
 @Table(name = "user", catalog = "tracnghiem")
 public class User implements java.io.Serializable {
 
+	private String taiKhoan;
 	private String email;
 	private String matKhau;
 	private String hoTen;
 	private String avatar;
-
+	private String codeRandom;
 	public User() {
 	}
 
-	public User(String email, String matKhau, String hoTen, String avatar) {
+	public User(String taiKhoan, String email, String matKhau, String hoTen, String avatar, String codeRandom) {
+		this.taiKhoan = taiKhoan;
 		this.email = email;
 		this.matKhau = matKhau;
 		this.hoTen = hoTen;
 		this.avatar = avatar;
+		this.codeRandom = codeRandom;
 	}
 
-	@Id
+	
 	@Column(name = "EMAIL", unique = true, nullable = false, length = 100)
 	public String getEmail() {
 		return this.email;
@@ -64,6 +67,15 @@ public class User implements java.io.Serializable {
 		this.enabled = enabled;
 	}
 */
+	@Id
+	@Column(name = "TAIKHOAN", nullable = true, length=100)
+	public String getTaiKhoan() {
+		return this.taiKhoan;
+	}
+
+	public void setTaiKhoan(String taiKhoan) {
+		this.taiKhoan = taiKhoan;
+	}
 	
 	@Column(name = "HOTEN", nullable = true, length=100)
 	public String getHoTen() {
@@ -81,6 +93,15 @@ public class User implements java.io.Serializable {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+	
+	@Column(name = "CODERANDOM", nullable = true)
+	public String getCodeRandom() {
+		return this.codeRandom;
+	}
+
+	public void setCodeRandom(String codeRandom) {
+		this.codeRandom = codeRandom;
 	}
 
 	

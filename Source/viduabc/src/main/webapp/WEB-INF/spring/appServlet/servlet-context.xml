@@ -56,9 +56,15 @@
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	
-	<beans:bean id="userDaoImpl" class="vn.com.luanvan.dao.UserDaoImpl"/>
 	
-	<beans:bean id="serviceDao" class="vn.com.luanvan.service.UserServiceImpl"/>
+	<beans:bean id="userService" class="vn.com.luanvan.service.UserServiceImpl"/>
+	
+	<beans:bean id="chuDeDao" class="vn.com.luanvan.dao.ChuDeDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	
+	
+	<beans:bean id="chuDeService" class="vn.com.luanvan.service.ChuDeServiceImpl"/>
 	
 	
 	<!-- 
@@ -91,8 +97,9 @@
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <beans:property name="host" value="smtp.gmail.com" />
         <beans:property name="port" value="587" />
-        <beans:property name="username" value="kudoedogava@gmail.com" />
-        <beans:property name="password" value="matkhaula123" />
+        <beans:property name="defaultEncoding" value="UTF-8"/> 
+        <beans:property name="username" value="ankianpata@gmail.com" />
+        <beans:property name="password" value="tranthanhdien@123" />
         <beans:property name="javaMailProperties">
             <beans:props>
                 <beans:prop key="mail.transport.protocol">smtp</beans:prop>

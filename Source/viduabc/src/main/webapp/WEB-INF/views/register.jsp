@@ -23,7 +23,12 @@
 
 <script src="<c:url value="/resources/js/register.js" />"></script>
 
-<style type="text/css">
+<style>
+	.input-error-taikhoan{
+		color: #a94442;
+		border-color: #a94442;
+		background-color: #f2dede;
+	}
 </style>
 
 </head>
@@ -50,30 +55,7 @@
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse pull-right" id="navbar-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#"
-						class="dropdown-toggle dropdown-color" data-toggle="dropdown">
-							<button type="submit" class="btn btn-primary btn-login">Đăng
-								nhập</button>
-					</a>
-						<ul class="dropdown-menu abc">
-							<form action="XacThuc" method="POST" role="form" style="padding: 10px;">
-								<div class="form-group">
-									<input type="text" id="taiKhoan" class="form-control"
-										name='taiKhoan' placeholder="Tên tài khoản">
-								</div>
-								<div class="form-group">
-									<input type="password" class="form-control" name='matKhau'
-										placeholder="Mật khẩu">
-
-								</div>
-								<button type="submit" class="btn btn-default btn-login">Đăng
-									nhập</button>
-							</form>
-						</ul></li>
-				</ul>
-			</div>
+			
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- .row -->
@@ -83,16 +65,16 @@
 
 	<div class="container" style="padding-top: 160px;">
 		<div class="intro">
-			<form action="AjaxDangKy" method="POST" class="form-horizontal col-lg-5 col-sm-5 col-md-5" role="form"
+			<form action="XacThuc" method="POST" class="form-horizontal col-lg-5 col-sm-5 col-md-5" role="form"
 				style="padding-top: 90px; padding-bottom: 0px;" id="form-dang-ky">
 				<h4>Nếu bạn muốn tạo hoặc tham gia thi trắc nghiệm</h4>
 				<h4>Đây sẽ là một sự lựa chọn thích hợp</h4>
 				<div class="form-group"
 					style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">
 					<div class="input-group">
-						<span class="input-group-addon"><span
+						<span class="input-group-addon" id="icon-taikhoan" ><span
 							class="glyphicon glyphicon-user"></span></span> <input type="text"
-							name="username" id="username" class="form-control input-lg"
+							name="taiKhoan" id="taiKhoanDangKy" class="form-control input-lg"
 							placeholder="Tài khoản" data-bv-notempty="true"
 							data-bv-notempty-message="Tài khoản phải khác rỗng"
 							data-bv-stringlength="true" data-bv-stringlength-min="6"
@@ -101,32 +83,33 @@
 				
 					</div>
 					<div style="color: #a94442; font-size: 85%; padding-top: 5px;">
-						<!-- <div id = "thongbao_hoten"/>-->
-
+						<div id="thongbao_taikhoan" style="padding-bottom: 15px;"></div>
 					</div>
 					
 				</div>
 				<div class="form-group"
 					style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">
 					<div class="input-group">
-						<span class="input-group-addon"><span
-							class="glyphicon glyphicon-envelope"></span></span> <input type="email"
-							name="email" id="email" class="form-control input-lg"
-							required="required" placeholder="Email" data-bv-notempty="true"
-							data-bv-notempty-message="Email phải khác rỗng"
-							data-bv-emailaddress="true"
-							data-bv-emailaddress-message="Email nhập chưa chính xác">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                          <input type="password" name="matKhau" id="matKhau" class="form-control input-lg"  placeholder="Mật khẩu" 
+                            data-bv-notempty="true"
+                            data-bv-notempty-message="Tài khoản phải khác rỗng"
+                            data-bv-stringlength="true"
+                            data-bv-stringlength-min="6"
+                            data-bv-stringlength-max="20"
+                            data-bv-stringlength-message="Tài khoản phải ít nhất là 6 ký tự và nhiều nhất là 20 ký tự">
 					</div>
-					<div style="color: #a94442; font-size: 85%; padding-top: 5px;">
-						<!-- <div id = "thongbao_hoten"/>-->
-
+					<div style="color: #a94442;font-size: 85%;padding-top: 5px;">
+ 						<div id="thongbao_email"></div>
 					</div>
 					
 				</div>
-
+				<div style="margin-top: 10px;">
+                    <a href="Quen-Mat-Khau.html">Bạn đã quên mật khẩu?</a>
+                </div>
 				<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
-					<button class="btn btn-default pull-right btn-green"
-						onclick="ajaxDangKy()">Tạo tài khoản Anki</button>
+					<input id="btn-tao-tai-khoan" type="submit" class="btn btn-default pull-right btn-green"
+						 value="Đăng nhập"/>
 				</div>
 
 
@@ -201,53 +184,100 @@
 </body>
 <script type="text/javascript">
 	
+	
+	$(document).ready(function(){
+		$('#taiKhoanDangKy').keyup(function(){
+	        var Username = $(this).val(); 
+	        var UsernameAvailResult = $('#thongbao_taikhoan'); 
+	            $.ajax({
+	            type : 'POST',
+	            data : "TaiKhoan=" + $("#taiKhoanDangKy").val(),
+	            url  : 'AjaxCheckExistTaiKhoan',
+	            success: function(responseText){
+	                 if(responseText.length > 0){
+	                    UsernameAvailResult.html('Tài khoản đã có người sử dụng');
+	                    $("#btn-tao-tai-khoan").prop("disabled", true);
+	                    $("#taiKhoanDangKy").css("color", "a94442")
+	                }
+	                else{
+	                	 UsernameAvailResult.html('');
+	                }
+	            }
+	            });
+	      
+	    });
+		
+		
+		$("#emailDangKy").keyup(function(){
+			var email = $(this).val();
+			var EmailAvailResult = $('#thongbao_email'); 
+			$.ajax({
+				type: 'POST',
+				data: "Email=" + $("#emailDangKy").val(),
+				url: "AjaxCheckExistEmail",
+				success: function (result) {
+					if(result.length > 0) {
+						EmailAvailResult.html('Email đã có người dùng');
+						$("#btn-tao-tai-khoan").prop("disabled", true);
+					} else {
+						EmailAvailResult.html('');
+					}
+				}
+			});
+			
+		});
+	
+		$("#btn-tao-tai-khoan").click(function(){
+			
+		});
+		
+	});
+/*	
 	function ajaxDangKy(){
-	if($("#taiKhoan").val().length == 0){
-		$("#thongbao_taikhoan").text("");
-		$("#thongbao_taikhoan").text("Xin vui lòng điền email.");
-		$("#icon_taikhoan").removeClass("glyphicon-ok");
-		$("#icon_taikhoan").removeClass("sr-only");
-		$("#icon_taikhoan").addClass("glyphicon-warning-sign");
-		$("#inp_taikhoan").addClass("has-error has-feedback");
-		$("#taiKhoan").focus();
-		return;
+		var email = $("#emailDangKy").val();
+		var taiKhoan = $("#taiKhoanDangKy").val();
+		
+	    $.ajax({
+	        data: "Email=" + email + "&TaiKhoan=" + taiKhoan,
+	        type: "POST",
+	        url : "AjaxDangKy",
+	        success : function(result) {
+	        	if(result.length > 0) {
+	        		window.location.href = "/Anki/Dang-Nhap.html";	
+	        	} else {
+	        		window.location.href = "/Anki/Dang-Nhap.html";
+	        	}
+	        },
+	        error : function() {
+	        	window.location.href = "/Anki/Dang-Nhap.html";
+	        }
+	    });
 	}
-	
-	if($("#hoTen").val().length == 0){
-		$("#thongbao_hoten").text("");
-		$("#thongbao_hoten").text("Xin vui lòng điền họ tên.");
-		$("#icon_hoten").removeClass("glyphicon-ok");
-		$("#icon_hoten").removeClass("sr-only");
-		$("#icon_hoten").addClass("glyphicon-warning-sign");
-		$("#inp_hoten").addClass("has-error has-feedback");
-		$("#hoTen").focus();
-		return;
-	}
-	
+*/
+
+function ajaxDangKy(){
 	$.ajax({
-		data: "HoTen=" + $("#hoTen").val() + "&TaiKhoan=" + $("#taiKhoan").val(),
+		data: "TaiKhoan=" + $("#taiKhoanDangKy").val() + "&Email=" + $("#email").val(),
 		type: "POST",
 		url : "AjaxGuiMatKhau",
 		success : function(result) {
-			if(result.length == 0)
+			if(result.length > 0)
 			{
-				window.location.href = "/controller/Dang-Nhap-Page.htm";				
+				window.location.href = "/Anki/Dang-Nhap.html";				
 			}
 			else
 			{
-				$("#thongbao").text("");
-				$("#thongbao").text(result);
-				$("#icon_taikhoan").removeClass("glyphicon-ok");
-				$("#icon_taikhoan").removeClass("sr-only");
-				$("#icon_taikhoan").addClass("glyphicon-warning-sign");
-				$("#inp_taikhoan").addClass("has-error has-feedback");
-				$("#taiKhoan").focus();
+				$("#thongbao_taikhoan").html("Da duoc su dung");
+				
+				$("#taiKhoanDangKy").focus();
 			}
 		},
 		error : function() {
-			//alert("ERROR");
+			alert("ERROR");
 		}
 	});
 }
+
+
 </script>
 </html>

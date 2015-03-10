@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void sendMail(User user) {
-		userDao.sendMail(user);
+	public void sendMail(String emailTo, String subject, String text) {
+		userDao.sendMail(emailTo, subject, text);
 		
 	}
 
@@ -41,5 +41,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean ExistEmail(String email) {
 		return userDao.ExistEmail(email);
+	}
+
+	@Override
+	public String RanCode() {
+		return userDao.RanCode();
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		return userDao.getUserByEmail(email);
 	}
 }

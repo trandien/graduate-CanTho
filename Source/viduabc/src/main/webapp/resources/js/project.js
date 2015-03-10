@@ -159,9 +159,6 @@ $(document).on("click",".btn-edit-comment",function(){
 	field.select();
 });
 
-$(document).on("submit","form",function(e){
-	e.preventDefault();
-});
 
 $(document).ready(
 		function () {

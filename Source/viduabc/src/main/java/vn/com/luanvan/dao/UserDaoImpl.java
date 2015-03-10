@@ -2,6 +2,7 @@ package vn.com.luanvan.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -73,15 +74,13 @@ public class UserDaoImpl implements UserDao {
 	
 	
 	@Transactional
-	public void sendMail(User user){
+	public void sendMail(String emailTo, String subject, String text){
 		SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(user.getEmail());
-        email.setSubject("Đăng ký tài khoản Anki");
-        email.setText("Xin chào bạn đã đăng ký thành công tài khoản \n\n"
-        		+ "Tài khoản: "+user.getEmail() +"\n\n"
-        		+"Mật khẩu: "+user.getMatKhau()+ "\n"
-        		);
+        email.setTo(emailTo);
+        email.setSubject(subject);
+        email.setText(text);
         // sends the e-mail
+        email.setFrom("ankianpata@gmail.com");
         mailSender.send(email);
 	}
 	
@@ -97,24 +96,49 @@ public class UserDaoImpl implements UserDao {
 	@Transactional
 	public boolean ExistEmail(String email) {
 		User user = new User();
-		boolean result = false;
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from User where email=:email");
-			System.out.println("Loi o day");
 			query.setString("email", email);
 			user = (User) query.uniqueResult();
-			if(!user.getEmail().equals("") || user.getEmail()!=null) {
-				result = true;
-			} else {}
+			if(user!=null) {
+				System.out.println("Email ton tai");
+			} else {
+				System.out.println("Email chua ton tai");
+			}
 		} catch(Exception e) {
-			System.out.println("ExistEmail: Loi khi lay user");
+			System.out.println("Loi khi lay user");
 		}
-		if(result == false) {
-			System.out.println("ExistEmail: Tai khoan ton tai");
-		} else {
-			System.out.println("ExistEmail: Tai khoan khong ton tai");
+		return user!=null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public String RanCode() {
+		Random rm = new Random();
+		String matKhauRandom = "";
+		int tam = 0;
+		for (int i = 0; i < 8; i++) {
+			tam = rm.nextInt(74) + 48;
+			while ((tam > 57 && tam < 65) || (tam > 90 && tam < 97)) {
+				tam = rm.nextInt(74) + 48;
+			}
+			matKhauRandom += (char) tam;
 		}
-		return result;
+		return matKhauRandom;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public User getUserByEmail(String email) {
+		User user = new User();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE email=:email");
+			query.setString("email", email);
+			user = (User) query.uniqueResult();
+		} catch(Exception e) {
+			System.out.println("getUserByEmail: Loi khi lay user");
+		}
+		return user;
 	}
 
 }
