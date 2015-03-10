@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2015 at 02:53 PM
+-- Generation Time: Mar 10, 2015 at 03:46 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `cauhoi` (
 CREATE TABLE IF NOT EXISTS `cautraloi` (
   `MSDT` varchar(5) NOT NULL,
   `MSCH` int(11) NOT NULL,
-  `CTL_MA` varchar(10) NOT NULL,
+  `MSCTL` varchar(10) NOT NULL,
   `CTL_NOIDUNG` varchar(1000) NOT NULL,
-  PRIMARY KEY (`MSDT`,`MSCH`,`CTL_MA`)
+  PRIMARY KEY (`MSDT`,`MSCH`,`MSCTL`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -155,12 +155,13 @@ CREATE TABLE IF NOT EXISTS `dokho` (
 
 CREATE TABLE IF NOT EXISTS `hinhanh` (
   `MSHA` int(11) NOT NULL,
-  `MSDT` varchar(5) NOT NULL,
-  `CTL_MA` varchar(10) DEFAULT NULL,
+  `MSDT` varchar(5) DEFAULT NULL,
+  `MSCTL` varchar(10) DEFAULT NULL,
   `MSCH` int(11) DEFAULT NULL,
   `HA_NOIDUNG` longtext NOT NULL,
   PRIMARY KEY (`MSHA`),
-  KEY `FK_HINHANH_CAUTRALOI` (`MSDT`,`MSCH`)
+  KEY `FK_HINHANH_CAUTRALOI` (`MSDT`,`MSCH`),
+  KEY `FK_HINHANH_CAUTRALOIc` (`MSDT`,`MSCH`,`MSCTL`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -382,7 +383,7 @@ ALTER TABLE `dethi_lop`
 -- Constraints for table `hinhanh`
 --
 ALTER TABLE `hinhanh`
-  ADD CONSTRAINT `FK_HINHANH_CAUTRALOI` FOREIGN KEY (`MSDT`, `MSCH`) REFERENCES `cautraloi` (`MSDT`, `MSCH`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_HINHANH_CAUTRALOIc` FOREIGN KEY (`MSDT`, `MSCH`, `MSCTL`) REFERENCES `cautraloi` (`MSDT`, `MSCH`, `MSCTL`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_CHUA1` FOREIGN KEY (`MSDT`, `MSCH`) REFERENCES `cauhoi` (`MSDT`, `MSCH`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
