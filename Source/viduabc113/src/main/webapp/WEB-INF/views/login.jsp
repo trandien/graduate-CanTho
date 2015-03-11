@@ -63,7 +63,7 @@
 				style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; padding-bottom: 15px; ">
 				<div class="input-group" style="padding-bottom: 10px;">
 					<span class="input-group-addon"><span
-						class="glyphicon glyphicon-lock"></span></span> <input type="text"
+						class="glyphicon glyphicon-lock"></span></span> <input type="password"
 						name="matKhau" id="matKhau" class="form-control input-lg"
 						placeholder="Mật Khẩu" data-bv-notempty="true"
 						data-bv-notempty-message="Mật khẩu phải khác rỗng"

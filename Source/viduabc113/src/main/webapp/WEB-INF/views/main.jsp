@@ -100,7 +100,7 @@
                     <a class="logo-anki" href="home.html"></a>     
                 </div>	
                     <div class="col-md-6 col-lg-6 col-xs-6">
-                    	<img src="<c:url value="${user.avatar }" />" style="width: 50px; height: 50px; float: right; margin-top: 10px; cursor: pointer;" id="profile--panel-show">
+                    	<img src="<c:url value="${user.ndAvatar }" />" style="width: 50px; height: 50px; float: right; margin-top: 10px; cursor: pointer;" id="profile--panel-show">
                     </div>	
             </div>
             <!-- .row -->
@@ -113,11 +113,11 @@
 	<div class="bubble" style="display: none;">
 		<div class="panel-body">
 			<div class="avatar" >
-				<img src="${user.avatar }" class="img-responsive" style="width: 108px; height: 108px;">
+				<img src="${user.ndAvatar }" class="img-responsive" style="width: 108px; height: 108px;">
 			</div>
 			<div style="display: inline-block; color: white; padding-left: 20px;">
-				<div id="bubble-name" style="font-size: 24px;">${user.hoTen }</div>
-				<div>${user.taiKhoan }</div>
+				<div id="bubble-name" style="font-size: 24px;">${user.ndHoten }</div>
+				<div>${user.ndTaikhoan }</div>
 
 				<hr>
 				<div style="padding-left: 10px;">

@@ -88,7 +88,7 @@ public class LoginController {
 	@RequestMapping(value = "/Trang-chu.html", method = RequestMethod.GET)
 	public ModelAndView HomePage(ModelAndView model, HttpSession session) {
 		if (isLogin(session)) {
-			model.setViewName("abc");
+			model.setViewName("home");
 		} else {
 			model.setViewName("redirect:/Dang-Nhap.html");
 		}

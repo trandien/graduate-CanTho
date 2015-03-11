@@ -1,219 +1,545 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Anki</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto+Condensed|Roboto:400,300,500,700&subset=latin,vietnamese" rel="stylesheet" type="text/css" />
-    
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="custom/home.css" />
-    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="js/home.js" type="text/javascript"></script>
-    <script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
-	<meta name="description" content="Awesome Bubble Navigation with jQuery" />
-        <meta name="keywords" content="jquery, circular menu, navigation, round, bubble"/>
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-        <style>
-            *{
-                margin:0;
-                padding:0;
-            }
-            body{
-                font-family:Arial;
-                
-            }
-            .title{
-                width:548px;
-                height:119px;
-                position:absolute;
-                top:400px;
-                left:150px;
-                background:transparent url(title.png) no-repeat top left;
-            }
-            a.back{
-                background:transparent url(back.png) no-repeat top left;
-                position:fixed;
-                width:150px;
-                height:27px;
-                outline:none;
-                bottom:0px;
-                left:0px;
-            }
-            #content{
-                margin:0 auto;
-            }
-        </style>
+<title>Main</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome to Arcana</title>
+<link
+	<c:url value = "href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,500'"/>
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/main.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/bootstrap.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/custom/headPage.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/custom/project.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/custom/register.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/jquery.mCustomScrollbar.css" />" />
+<script src="<c:url value="/resources/js/jquery-1.11.1.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/project.js" />"></script>
+<script
+	src="<c:url value="/resources/js/jquery.mCustomScrollbar.concat.min.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap-datepicker.js" />"
+	type="text/javascript"></script>
+<style type="text/css">
+#timkiem {
+	background-color: #6699ff;
+	padding-top: 20px;
+}
 
-         <!-- The JavaScript -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script type="text/javascript" src="jquery.easing.1.3.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                $('#nav > div').hover(
-                function () {
-                    var $this = $(this);
-                    $this.find('img').stop().animate({
-                        'width'     :'199px',
-                        'height'    :'199px',
-                        'top'       :'-25px',
-                        'left'      :'-25px',
-                        'opacity'   :'1.0'
-                    },500,'easeOutBack',function(){
-                        $(this).parent().find('ul').fadeIn(700);
-                    });
+/* fast nav */
+</style>
 
-                    $this.find('a:first,h2').addClass('active');
-                },
-                function () {
-                    var $this = $(this);
-                    $this.find('ul').fadeOut(500);
-                    $this.find('img').stop().animate({
-                        'width'     :'52px',
-                        'height'    :'52px',
-                        'top'       :'0px',
-                        'left'      :'0px',
-                        'opacity'   :'0.1'
-                    },5000,'easeOutBack');
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#profile--panel-show').click(function() {
+	         $('.bubble').slideToggle("fast");
+	     });
+	    });		    
+</script>
 
-                    $this.find('a:first,h2').removeClass('active');
-                }
-            );
-            });
-        </script>
-    </head>
+</head>
+<body style="font-family: 'Source Sans Pro', sans-serif;">
 
+	<div id="form-card-delete" style="display: none">
+		<div class="form-header">Xóa đề thi</div>
+		<hr />
+		<div class="form-body">
+			Bạn có chắc chắn muốn xóa đề thi này ? <br /> <b>Chú ý:</b> Đề thi
+			đã xóa không thể khôi phục
+		</div>
+		<button onclick="ajaxXoaThe()" class="btn btn-danger btn-block"
+			id="btn-card-delete">Đồng ý</button>
+	</div>
 
-<body>
+	<form id="edit">
+		<div class="form-group">
+			<input class="form-id sr-only" type="text" value="" />
+			<textarea type="text" class="field form-control"
+				style="height: 66px;"></textarea>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-success btn-save">Lưu</button>
+			<button type="button" class="close cancel">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Đóng</span>
+			</button>
+		</div>
+	</form>
 
-	<header class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+	<!-- LAY THE ID
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:4000;">
+        <div class="modal-dialog" style="width: 700px;">
+            <div class="modal-content">
+                <div class="modal-header editable">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                     </button>
-                    <a class="navbar-brand" href="#"><h3>Anki</h3></a>
-                </div>
-            </div> <!-- .row -->
-     	</div>  
-    </header> <!-- /.container-fluid -->
-
-
-    <!-- Form Xóa kế hoạch -->
-    <div id="form-plan-delete" style="display: none">
-        <div class="form-header">Xóa kế hoạch</div>
-        <hr />
-        <div class="form-body">Bạn có chắc chắn muốn xóa kế hoạch này ?
-            Chú ý: kế hoạch đã xóa không thể khôi phục</div>
-        <input id="form-makehoach" type="hidden" value="" />
-        <input id="taiKhoan" type="hidden" name="taiKhoan" value="" />
-        <button onclick="ajaxXoaKeHoach()" class="btn btn-danger btn-block">
-            Đồng ý</button>
-    </div>
-    <!-- /.Form Xóa kế hoạch -->
-    
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li id="btn-profile" class="toggle" data-toggle="tooltip">
-                <div>
-                    <img src="img/user91.png" class="img-responsive">
-                </div>
-            </li>
-            <li id="btn-notification" class="toggle" data-toggle="tooltip" data-placement="left">
-                <div class="flaticon-lg"><i class="flaticon-notification"></i>
-                    <!--<br>THÔNG BÁO--></div>
-            </li>
-            <li id="btn-project" class="toggle" data-toggle="tooltip">
-                <div class="flaticon-lg"><i class="flaticon-project"></i>
-                </div>    <!--<br>KẾ HOẠCH-->
-            </li>
-        </ul>
-    </div>
-    <!-- /.sidebar-wrapper -->
-    
-    <!-- CREATE PROJECT PANEL -->
-    
-    </div>
-    <!-- CREATE PROJECT PANEL -->
-    <!-- /. PROFILE -->
-    <div class="bubble panel panel-default panel-container" id="panel-profile" style="display: none;">
-        <div class="panel-body">
-            <div class="avatar"><img src="img/user91.png" class="img-responsive"></div>
-            <div style="display: inline-block; color: white; padding-left: 20px;">
-                <div style="font-size: 24px;">Trần Thanh Điền</div>
-                <div>kudoedogava@gmail.com</div>
-
-                <hr>
-                <div style="padding-left: 10px;"><a href="ModifileProfile.html">Xem thông tin cá nhân</a>
+                    <div class="modal-title card-title" id="myModalLabel">Tên thẻ</div>
+                    <input class="sr-only modal-id" type="text" value="" />
+                    
                 </div>
             </div>
         </div>
-        <div class="panel-footer text-right">
-            <button class="btn btn-primary">Đăng xuất</button>
-        </div>
     </div>
-    <!-- /. PROFILE -->
+-->
 
-   <div class="container">
-   		
+	<header class="navbar navbar-menu header--menu" role="navigation">
+        <div class="container-fluid">
             <div class="row">
-                <div class="navigation" id="nav">
-                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                        <div class=" form-group">
-                             <div class="item user">
-                                <img src="images/bg_user1.png" alt="" width="199" height="199" class="circle"/>
-                                <a href="#" class="icon"></a>
-                                <h2>User</h2>
-             
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                        <div class=" form-group">
-                            <div class="item home">
-                                <img src="images/bg_home1.png" alt="" width="199" height="199" class="circle"/>
-                                <a href="#" class="icon"></a>
-                                <h2>Home</h2> 
-                            </div>
-                        </div>
-                    </div>
-         
-                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                        <div class=" form-group">   
-                            <div class="item shop">
-                                <img src="images/bg_shop1.png" alt="" width="199" height="199" class="circle"/>
-                                <a href="#" class="icon"></a>
-                                <h2>Shop</h2>                 
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-3">
-                        <div class=" form-group">
-                            <div class="item camera">
-                                <img src="images/bg_camera1.png" alt="" width="199" height="199" class="circle"/>
-                                <a href="#" class="icon"></a>
-                                <h2>Photos</h2>    
-                            </div>
-                        </div>
-                    </div> <!-- end navigation -->
-                </div> <!--end row-->
-            </div><!--end container-->
-        <!--end container-->
+                <div class="col-md-6 col-lg-6 col-xs-6">  
+                    <a class="logo-anki" href="home.html"></a>     
+                </div>	
+                    <div class="col-md-6 col-lg-6 col-xs-6">
+                    	<img src="<c:url value="${user.ndAvatar }" />" style="width: 50px; height: 50px; float: right; margin-top: 10px; cursor: pointer;" id="profile--panel-show">
+                    </div>	
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- /.container-fluid -->
+    </header>
 
-   </div>
-   
-   
+	<!-- /. PROFILE -->
+	
+	<div class="bubble" style="display: none;">
+		<div class="panel-body">
+			<div class="avatar" >
+				<img src="${user.ndAvatar }" class="img-responsive" style="width: 108px; height: 108px;">
+			</div>
+			<div style="display: inline-block; color: white; padding-left: 20px;">
+				<div id="bubble-name" style="font-size: 24px;">${user.ndHoten }</div>
+				<div>${user.ndTaikhoan }</div>
 
+				<hr>
+				<div style="padding-left: 10px;">
+					<a href="Thong-Tin-Ca-Nhan.html">Xem thông tin cá nhân</a>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer text-right">
+			<a class="btn btn-primary" href="DangXuat">Đăng xuất</a>
+		</div>
+	</div>
+	
+	<!-- /. PROFILE -->
 
+	<div class="container-fluid" style="padding-top: 15px;">
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<i class="glyphicon glyphicon-search pull-right"></i>
+						<h4>Tìm kiếm</h4>
+					</div>
+				</div>
+				<div class="panel-body">
+					<form class="form form-vertical">
+						<div class="form-group">
+							<div class="controls">
+								<input type="text" class="form-control" placeholder="Mã đề">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="controls">
+								<input type="text" class="form-control" placeholder="Tên đề thi">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="controls">
+								<input type="text" class="form-control" placeholder="Tên môn">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="controls">
+								<input type="text" class="form-control" placeholder="Khối">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="controls">
+								<input type="text" class="form-control"
+									placeholder="Tên người ra đề">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="controls">
+								<button type="submit" class="btn btn-primary"
+									style="margin-left: 40%;">Tìm kiếm</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!--/panel content-->
+			</div>
+			<!--/panel-->
+		</div>
+		<!--   	
+    <div class="container-fluid" style="padding-top: 50px">
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<form action="" method="POST" role="form" id='form-search'>
+				<legend align="center" id="timkiem">Tìm kiếm</legend>
+			
+				<div class="form-group">
+					<label>Khối</label>
+					<select class="form-control" id='khoi' name='khoi' required="required" onchange='search()'>
+						<option value='all'>--Tất cả--</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Hệ số bài kiểm</label>
+					<select id="input" class="form-control" id='heso' name='heso' onchange='search()'>
+						<option value='all'>--Tất cả--</option>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+					</select>
+				</div>
+			</form>	
+			</div>
+<!--			ajax load de thi
+			<script type="text/javascript">
+			$(function(){
+				search();
+			});
+			function search(){
+				$('#kq_tim_dethi').html('<h1>Đang tải</h1>');
+				$.ajax({
+					type: 'get',
+					url: 'timkiem/searchAjax',
+					data: $('#form-search').serialize(),
+					success: function(data) {
+						$('#kq_tim_dethi').html(data);
+					},
+					error: function () {
+						alert("Lỗi kết nối cơ sở dữ liệu.\nHãy thử lại!")
+					}
+				});
+			};
+			</script>
+-->
+		<!--End col 4 -->
+
+		<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" id="kq_tim_dethi">
+			<div class="container">
+				<h3 align="center" style="font-family: arial; color: #3b5998;">Danh
+					sách đề thi</h3>
+				<hr>
+				<div id="wrapper">
+					<!-- Page Content -->
+					<div id="page-content-wrapper">
+						<div class="container-fluid">
+
+							<div id="horizoltal-scroll">
+								<div class="col-xs-12">
+									<div class="list-wrapper" id="content-1">
+										<div class="list">
+											<div class="list-header editable">
+												<div class="list-id sr-only">1</div>
+												<!-- LIST ID -->
+												<div class="list-title">Nhóm I</div>
+												<div class="dropdown">
+													<div class="dropdown-toggle option" id="ddMenu1"
+														data-toggle="dropdown">
+														<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+													</div>
+													<ul class="dropdown-menu" role="menu"
+														aria-labelledby="ddMenu1">
+														<li role="presentation" class="dropdown-header"></li>
+														<li role="presentation" class="divider"></li>
+
+														<li role="presentation" class="divider"></li>
+														<li role="presentation" style="text-align: center;">
+															<button class="btn btn-danger btn-block">Xóa
+																nhóm</button>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<ul class="list-content">
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+
+											</ul>
+											
+										</div>
+
+										<div class="list">
+											<div class="list-header editable">
+												<div class="list-id sr-only">1</div>
+												<!-- LIST ID -->
+												<div class="list-title">Nhóm II</div>
+												<div class="dropdown">
+													<div class="dropdown-toggle option" id="ddMenu1"
+														data-toggle="dropdown">
+														<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+													</div>
+													<ul class="dropdown-menu" role="menu"
+														aria-labelledby="ddMenu1">
+														<li role="presentation" class="dropdown-header">Xóa
+															nhóm</li>
+														<li role="presentation" class="divider"></li>
+
+														<li role="presentation" class="divider"></li>
+														<li role="presentation" style="text-align: center;">
+															<button class="btn btn-danger btn-block">Xóa
+																nhóm</button>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<ul class="list-content">
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+												<li class="list-item" data-toggle="modal"
+													data-target="#myModal">
+													<div class="list-item-id sr-only">1</div>
+													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-info">
+														<div class="badge-deadline new">
+															<div class="deadline-text">16/10/2014</div>
+														</div>
+														<div class="badge-done">
+															<i class="flaticon-list"></i>
+															<div class="done-text">2/5</div>
+														</div>
+														&nbsp;
+														<div class="card-delete">
+															<input class="list-item-id" value="35" type="hidden">
+															<span class="glyphicon glyphicon-trash"
+																aria-hidden="true"></span>
+														</div>
+													</div>
+												</li>
+
+											</ul>
+											
+										</div>
+										<form:form role="form" action="ThemChuDe" method="POST" >
+											<div class="form-group create-list">
+												<input type="text" class="form-control" name="tenChuDe"
+													placeholder="Điền tên và bấm enter để thêm chủ đề">
+											</div>
+										</form:form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /#page-content-wrapper -->
+					</div>
+				</div>
+
+			</div>
+			<!--End col 9-->
+
+		</div>
+		<!--End container fluid -->
+	</div>
 </body>
-
 </html>
+<script>
+    (function ($) {
+        $(window).load(function () {
+            $(".list-content").mCustomScrollbar({
+                theme: "dark-2",
+                axis: "y"
+            });
+            $("#horizoltal-scroll").mCustomScrollbar({
+                theme: "dark-3",
+                axis: "x",
+                scrollInertia: 500
+            });
+        });
+    })(jQuery);
+</script>

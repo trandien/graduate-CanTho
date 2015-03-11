@@ -39,14 +39,14 @@
 								style="width: 110px; height: 110px; border: 3px solid #2c3e50;">
 								<div onclick="showDialog()"
 									style="height: 100px; width: 100px; padding: 0px; margin: 2px; cursor: pointer; z-index: 9;">
-									<c:if test="${empty user.avatar}">
+									<c:if test="${empty user.ndAvatar}">
 										<img name="avatar" id="uploadPreview"
 											src="<c:url value="/resources/img/user91.png" />"
 											style="height: 100px; width: 100px;">
 									</c:if>
 
-									<c:if test="${not empty user.avatar}">
-										<img name="avatar" id="uploadPreview" src="${user.avatar}"
+									<c:if test="${not empty user.ndAvatar}">
+										<img name="avatar" id="uploadPreview" src="${user.ndAvatar}"
 											style="height: 100px; width: 100px;">
 									</c:if>
 
@@ -66,7 +66,7 @@
 
 							<div id="profile-basic"
 								style="margin-left: 50px; margin-top: 15px;">
-								<div id="profile-name">${user.hoTen }</div>
+								<div id="profile-name">${user.ndHoten }</div>
 
 							</div>
 						</div>
@@ -79,7 +79,7 @@
 								<div class="col-sm-8 col-lg-8">
 									<input name="taiKhoan" class="form-control"
 										id="profile-name-edit" type="text" placeholder="Tài khoản"
-										value="${user.taiKhoan}" disabled />
+										value="${user.ndTaikhoan}" disabled />
 								</div>
 							</div>
 						
@@ -87,7 +87,7 @@
 								<label for="profile-email-edit"
 									class="col-sm-4 col-lg-4 control-label">Email</label>
 								<div class="col-sm-8 col-lg-8">
-									<input name="taiKhoan" value="${user.email}"
+									<input name="taiKhoan" value="${user.ndEmail}"
 										class="form-control" id="profile-email-edit" type="text"
 										disabled>
 								</div>
