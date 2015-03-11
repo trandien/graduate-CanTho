@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <meta name="description" content="Turn checkboxes and radio buttons in toggle switches.">
+	    <meta name="author" content="Mattia Larentis, Emanuele Marchi and Peter Stein">
+		<title>Title Page</title>
+
+		<!-- Bootstrap CSS -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<!-- Bootstrap JavaScript -->
+		
+		
+
+		<script>
+			$(document).ready(function(){
+				$("#thayDoiTenDe").click(function(){
+					$("#tenDe").prop("disabled", false);
+					$("#thayDoiTenDe").hide();
+					$("#thayDoiTenDeXong").prop("class", "btn btn-primary");
+					$("#thayDoiTenDeXong").show();
+					});
+
+				$("#thayDoiTenDeXong").click(function(){
+					$("#tenDe").prop("disabled", true);
+					$("#thayDoiTenDeXong").hide();
+					$("#thayDoiTenDe").show();
+					});
+
+				$("#thayDoiThoiGian").click(function(){
+					$("#thoiGian").prop("disabled", false);
+					$("#thayDoiThoiGian").hide();
+					$("#thayDoiThoiGianXong").prop("class", "btn btn-primary");
+					$("#thayDoiThoiGianXong").show();
+					});
+
+				$("#thayDoiThoiGianXong").click(function(){
+					$("#thoiGian").prop("disabled", true);
+					$("#thayDoiThoiGianXong").hide();
+					$("#thayDoiThoiGian").show();
+					});
+
+				$("#congDong").click(function(){
+					
+					$("#trangThai").hide();
+					$("#matKhau").hide();
+					
+					});
+				$("#caNhan").click(function(){
+					$("#trangThai").show();
+					$("#matKhau").show();	
+					});
+
+				$("#thayDoiThoiGianXong").click(function(){
+					$("#thoiGian").prop("disabled", true);
+					$("#thayDoiThoiGianXong").hide();
+					$("#thayDoiThoiGian").show();
+					});
+
+
+				$("#thayDoiDanDo").click(function(){
+					$("#danDo").prop("disabled", false);
+					$("#thayDoiDanDo").hide();
+					$("#thayDoiDanDoXong").prop("class", "btn btn-primary");
+					$("#thayDoiDanDoXong").show();
+					});
+
+				$("#thayDoiDanDoXong").click(function(){
+					$("#danDo").prop("disabled", true);
+					$("#thayDoiDanDoXong").hide();
+					$("#thayDoiDanDo").show();
+					});
+
+				$("#thayDoiPassword").click(function(){
+					$("#oldPass").prop("disabled", false);
+					$("#oldPass").prop("value", "");
+					$("#oldPass").prop("placeholder", "Mật khẩu cũ");
+					$("#thayDoiPassword").hide();
+					$("#thayDoiPasswordXong").prop("class", "btn btn-primary");
+					$("#thayDoiPasswordXong").show();
+					$("#newPass").prop("class", "form-control");
+					$("#newPass").show();
+					$("#newPassConfirm").prop("class", "form-control");
+					$("#newPassConfirm").show();
+					});
+
+				$("#thayDoiPasswordXong").click(function(){
+					$("#newPass").hide();
+					$("#newPassConfirm").hide();
+					$("#oldPass").prop("disabled", true);
+					$("#thayDoiPasswordXong").hide();
+					$("#thayDoiPassword").show();
+					});
+				
+				});
+
+		</script>
+		
+		
+	</head>
+	<body style="padding-top: 70px; font-family: 'Source Sans Pro', sans-serif;">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<a class="navbar-brand" href="#">Anki</a>
+			<ul class="nav navbar-nav pull-right" style="margin-right: 20px">
+				<li class="active" style="background-color: white; width: 55px; height: 55px;">
+					<img src="img/user91.png" width="50px" height="50px" style="margin-top: 5px;">
+				</li>
+			</ul>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="panel panel-default">
+					   <div class="panel-heading" style="text-align: center;">
+					      Quản lý
+					   </div>
+					   <div class="panel-body">
+						   <div class="tabs-left">
+							<ul class="nav nav-stacked tab-left">
+								<li class="classLi active text-left" id="deThi"><a
+									href="#tabDeThi" data-toggle="tab"><i
+										class="glyphicon glyphicon-list-alt"></i> Thông tin đề thi</a></li>
+								<li class="classLi text-left" id="DSThiSinh"><a
+									href="#tabDSThiSinh" data-toggle="tab"><i
+										class="glyphicon glyphicon-pencil"></i> Danh sách thí sinh</a></li>
+								<li class="classLi text-left" id="DSGiamThi"><a
+									href="#tabDsGiamThi" data-toggle="tab"><i
+										class="glyphicon glyphicon-info-sign"></i> Danh sách giám thị</a></li>
+								<li class="classLi text-left" id="cauHoi"><a
+									href="#tabCauHoi" data-toggle="tab"><i
+										class="glyphicon glyphicon-info-sign"></i> Nội dung câu hỏi</a></li>
+							</ul>
+						   </div>
+					   </div>
+					</div>
+				</div>
+
+				<div class="col-md-9">
+					<div class="panel panel-default">
+					   <div class="panel-heading" style="text-align: center;"> Thông tin đề thi </div>
+					   <div class="panel-body">
+						   <table class="table table-hover">
+						   	
+						   	<tbody>
+						   		<tr>
+<!--Mã đề-->						<td>Mã đề</td>
+						   			<td><strong>1203</strong></td>
+						   			<td></td>
+
+						   		</tr>
+						   		<tr>
+<!--Tên đề-->						<td>Tên đề</td>
+						   			<td>
+						   				<input id="tenDe" class="form-control" type="text" disabled="true" name="tenDe" value="123456">
+						   				
+						   			</td>
+						   			<td>
+						   				<input type="button" class="btn btn-primary" id="thayDoiTenDe" name="thayDoiTenDe" value="Thay Đổi">
+						   				<input type="button" id="thayDoiTenDeXong" name="thayDoiTenDe" value="Xong" hidden>
+						   			</td>
+						   		</tr>
+						   		<tr>
+<!--Loại đề-->						<td>Loại đề</td>
+						   			<td>
+						   				<div class="radio">
+											<label>
+												<input id="congDong" type="radio" name="loaiDe" id="input" value="congDong">
+												<span>Cộng đồng &nbsp;&nbsp;&nbsp;</span>
+											</label>
+											<label>
+												<input id="caNhan" type="radio" name="loaiDe" id="input" value="caNhan"  checked="checked">
+												<span>Cá nhân</span>
+											</label>
+										</div>
+						        		
+						   			</td>
+						   			<td>
+						   				
+						   			</td>
+						   		</tr>
+						   		<tr id="trangThai">
+<!--Trạng thái-->					<td>Trạng thái</td>
+						   			<td>
+						   				<div class="radio">
+											<label>
+												<input type="radio" name="trangThai" id="input" value="" checked="checked">
+												<span>Đóng&nbsp;&nbsp;&nbsp;</span>
+												
+											</label>
+											<label>
+												<input type="radio" name="trangThai" id="input" value="">
+												<span>Mở</span>
+											</label>
+										</div>
+						   			</td>
+						   			<td></td>
+						   		</tr>
+						   		<tr>
+<!--Thoi gian làm bài-->			<td>Thời gian làm bài <br> (phút)</td>
+						   			<td>
+						   				<input id="thoiGian" class="form-control" type="text" disabled="true" name="tenDe" value="30" style="width: 50%;">
+						   			</td>
+						   			<td>
+						   				<input type="button" class="btn btn-primary" id="thayDoiThoiGian" name="thayThoiGian" value="Thay Đổi">
+						   				<input hidden type="button" id="thayDoiThoiGianXong" name="thayDoiThoiGian" value="Xong" >
+						   			</td>
+						   		</tr>
+						   		<tr>
+<!--Ngày tạo đề-->					<td>Ngày tạo đề</td>
+						   			<td>20/11/2014</td>
+						   			<td></td>
+						   		</tr>
+						   		<tr>
+<!--Dặn dò-->						<td>Dặn dò</td>
+							   		<td>
+								   			
+									   <textarea id="danDo" disabled="true" class="form-control" rows="5">Không được mang tài liệu. Không được trao đổi trong lúc thi. Trừ điểm đối với những ai vi phạm
+										</textarea>
+								   		
+							   		</td>
+						   			<td>
+						   				<input type="button" class="btn btn-primary" id="thayDoiDanDo" name="thayDanDo" value="Thay Đổi">
+						   				<input hidden type="button" id="thayDoiDanDoXong" name="thayDoiDanDo" value="Xong" >
+						   			</td>
+						   			
+						   		</tr>
+						   		<tr id="matKhau">
+<!--Mật khẩu đề thi-->				<td>Mật khẩu đề thi</td>
+						   			<td>
+						   				<input id="oldPass" class="form-control" type="password" disabled="true" name="passDeThi" value="123456">
+						   				
+						   				
+						   				<input hidden id="newPass" type="password" name="passDeThi" value="" placeholder="Mật khẩu mới" >
+						   				<input hidden id="newPassConfirm" type="password" name="passDeThi" value="" placeholder="Nhắc lại mật khẩu mới" >
+						   				
+						   		
+						   			</td>
+
+						   			<td>
+						   				<input type="button" class="btn btn-primary" id="thayDoiPassword" name="thayDoiTenDe" value="Thay Đổi">
+						   				<input hidden type="button" id="thayDoiPasswordXong" name="thayDoiTenDe" value="Xong" >
+						   			</td>
+						   		</tr>
+						   	</tbody>
+						   </table>
+					   </div>
+					</div>
+
+				<div class="panel panel-default">
+					   <div class="panel-heading" style="text-align: center;"> Nội dung câu hỏi </div>
+					   <div class="panel-body">
+						   Câu 1 <br>
+						   Câu 2 <br>
+						</div>
+				</div>
+			</div> <!-- End col-md-9 -->
+		</div><!-- End row -->
+	</div> <!-- End container-fluid -->
+		
+
+	</body>
+</html>
