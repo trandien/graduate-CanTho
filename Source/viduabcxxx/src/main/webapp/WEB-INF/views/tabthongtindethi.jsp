@@ -8,6 +8,13 @@
 <head>
 <meta charset="utf-8">
 <title>Thêm đề thi</title>
+<script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
+<style type="text/css">
+	.empty-input{
+		border: 1px solid red;
+	}
+</style>
+</head>
 <body>
 	<div class="panel panel-default">
 		<div class="panel-heading"
@@ -23,20 +30,20 @@
 						<!--Tên đề-->
 						<td>Tên đề</td>
 						<td><input id="tenDe" class="form-control" type="text"
-							name="tenDe" placeholder="Tên đề thi"></td>
+							name="tenDe" placeholder="Tên đề thi">
+							<div id="thongbao_tende"></div>	
+						</td>
 						<td></td>
 					</tr>
 
 					<tr>
 						<!--Loại đề-->
 						<td>Niên khóa</td>
-						<td><select name="nienKhoan" id="inputNienKhoan"
+						<td><select name="nienKhoan" id="nienKhoan"
 							class="form-control" required="required" style="width: 50%;">
-								<option value="2005-2006">2005-2006</option>
-								<option value="2006-2007">2006-2007</option>
-								<option value="2007-2008">2007-2008</option>
-								<option value="2008-2009">2008-2009</option>
-								<option value="2009-2010">2009-2010</option>
+								<c:forEach items="${listNienKhoa}" var="NienKhoa">
+									<option value="${NienKhoa.msnk}">${NienKhoa.nkTen}</option>
+								</c:forEach>
 						</select></td>
 						<td></td>
 					</tr>
@@ -44,7 +51,7 @@
 					<tr>
 						<!--Loại đề-->
 						<td>Học kỳ</td>
-						<td><select name="hocKy" id="inputHocKy" class="form-control"
+						<td><select name="hocKy" id="hocKy" class="form-control"
 							required="required" style="width: 50%;">
 								<option value="1">I</option>
 								<option value="2">II</option>
@@ -58,34 +65,40 @@
 						<td>Chủ đề</td>
 						<td><select name="chuDe" id="chuDe" class="form-control"
 							required="required" style="width: 50%;">
-								<option value="1">Hóa hữu cơ</option>
-								<option value="2">Hóa vô cơ</option>
-								<option value="3">Hóa lượng tử</option>
+								<c:forEach items="${listChude }" var="ChuDe">
+									<c:choose>
+										<c:when test="${ChuDe.mscd == mscd}">
+											<option selected="selected" value="${ChuDe.mscd}">${ChuDe.cdTen}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${ChuDe.mscd }">${ChuDe.cdTen}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 						</select></td>
 						<td></td>
 					</tr>
-					
+
 					<tr>
 						<!--Môn học-->
 						<td>Môn học</td>
 						<td><select name="monHoc" id="monHoc" class="form-control"
 							required="required" style="width: 50%;">
-								<option value="1">Toán</option>
-								<option value="2">Lý</option>
-								<option value="3">Hóa</option>
+								<c:forEach items="${listMonHoc}" var="MonHoc">
+									<option value="${MonHoc.msmh}">${MonHoc.mhTen}</option>
+								</c:forEach>
 						</select></td>
 						<td></td>
 					</tr>
-					
+
 					<tr>
 						<!--Hệ số-->
 						<td>Hệ số</td>
 						<td><select name="heSo" id="heSo" class="form-control"
 							required="required" style="width: 50%;">
-								<option value="1">Kiểm tra hệ số 1</option>
-								<option value="2">Kiểm tra hệ số 2</option>
-								<option value="3">Kiểm tra hệ số 3</option>
-								<option value="0">Kiểm tra thử</option>
+								<c:forEach items="${listDangThi}" var="DangThi">
+									<option value="${DangThi.msdangthi}">${DangThi.dtTen}</option>
+								</c:forEach>
 						</select></td>
 						<td></td>
 					</tr>
@@ -95,11 +108,11 @@
 						<td>Trạng thái</td>
 						<td>
 							<div class="radio">
-								<label> <input type="radio" name="trangThai" id="input"
-									value="" checked="checked"> <span>Đóng&nbsp;&nbsp;&nbsp;</span>
+								<label> <input type="radio" name="trangThai"
+									id="trangThai" value="false" checked="checked"> <span>Đóng&nbsp;&nbsp;&nbsp;</span>
 
-								</label> <label> <input type="radio" name="trangThai" id="input"
-									value=""> <span>Mở</span>
+								</label> <label> <input type="radio" name="trangThai" id="trangThai"
+									value="true"> <span>Mở</span>
 								</label>
 							</div>
 						</td>
@@ -111,23 +124,27 @@
 						<td>Thời gian làm bài <br> (phút)
 						</td>
 						<td><input id="thoiGian" class="form-control" type="text"
-							name="tenDe" value="30" style="width: 50%;"></td>
+							name="thoiGian" value="" style="width: 50%;">
+							<div id="thongbao_thoigian"></div>
+						</td>
 						<td></td>
 					</tr>
 
 					<tr>
 						<!--Ngày tạo đề-->
 						<td>Ngày tạo đề</td>
-						<td><input type="date" name="" id="input"
+						<td><input type="date" name="ngayTaoDe" id="ngayTaoDe"
 							class="form-control" value="" required="required" title=""
-							style="width: 50%;"></td>
+							style="width: 50%;">
+							<div id="thongbao_ngaytaode"></div> 
+						</td>
 						<td></td>
 					</tr>
 
 					<tr>
 						<!--Dặn dò-->
 						<td>Dặn dò</td>
-						<td><textarea id="danDo" class="form-control" rows="5">Không được mang tài liệu. Không được trao đổi trong lúc thi. Trừ điểm đối với những ai vi phạm
+						<td><textarea id="danDo" class="form-control" rows="5">
 											</textarea></td>
 						<td></td>
 					</tr>
@@ -137,15 +154,18 @@
 						<td>Số lần cho phép thi</td>
 						<td><input type="number" name="soLanChoPhep"
 							id="soLanChoPhep" class="form-control" value=""
-							required="required" title="" style="width: 50%;"></td>
+							required="required" title="" style="width: 50%;">
+							<div id="thongbao_solanchophep"></div>
+							</td>
 						<td></td>
 					</tr>
 
 					<tr>
 						<!--Mật khẩu đề thi-->
 						<td>Mật khẩu đề thi</td>
-						<td><input id="matKhau" class="form-control" type="password"
-							name="matKhau" style="width: 50%; margin-bottom: 10px;">
+						<td><input id="matKhauDeThi" class="form-control"
+							type="password" name="matKhauDeThi"
+							style="width: 50%; margin-bottom: 10px;">
 							<div class="checkbox">
 								<label> <input type="checkbox" value=""> Hiện
 									mật khẩu
@@ -156,8 +176,9 @@
 					<tr>
 						<!--Mật khẩu đề thi-->
 						<td></td>
-						<td><input type="button" class="btn btn-primary"
-							value="Lưu thông tin đề thi"></td>
+						<td>
+							<button id="luu-thong-tin" class="btn btn-primary" onClick="AjaxLuuDeThi()">Lưu thông tin đề thi </button>
+						</td>
 
 						<td></td>
 					</tr>
@@ -167,4 +188,43 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#tenDe").keyup(function() {
+			var tenDe = $(this).val();
+			var result = $("#thongbao_tende");
+			if (tenDe.length > 0) {
+				$("#tenDe").removeClass("empty-input");
+				$("#thongbao_tende").html('');
+				} else {}
+	});
+
+		$("#thoiGian").keyup(function() {
+			var thoiGian = $(this).val();
+			var result = $("#thongbao_thoigian");
+			if (thoiGian.length > 0) {
+				$("#thoiGian").removeClass("empty-input");
+				$("#thongbao_thoigian").html('');
+				} else {}
+		});
+		
+		$("#ngayTaoDe").click(function() {
+			var solanchophep = $(this).val();
+			var result = $("#thongbao_ngaytaode");
+			if (solanchophep.length > 0) {
+				$("#ngayTaoDe").removeClass("empty-input");
+				$("#thongbao_ngaytaode").html('');
+				} else {}
+		});
+		
+		$("#soLanChoPhep").keyup(function() {
+			var solanchophep = $(this).val();
+			var result = $("#thongbao_solanchophep");
+			if (solanchophep.length > 0) {
+				$("#soLanChoPhep").removeClass("empty-input");
+				$("#thongbao_solanchophep").html('');
+				} else {}
+		});
+	});
+</script>
 </html>

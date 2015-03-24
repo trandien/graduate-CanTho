@@ -61,7 +61,7 @@ public class ChuDeDaoImpl implements ChuDeDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Chude TimChuDeByMa(int maChuDe) {
+	public Chude LayChuDeByMa(int maChuDe) {
 		Chude chude = new Chude();
 		try {
 			chude = (Chude) sessionFactory.getCurrentSession().get(Chude.class, maChuDe);
@@ -73,7 +73,7 @@ public class ChuDeDaoImpl implements ChuDeDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Chude> TimChuDeByTen (String tenChuDe){
+	public List<Chude> LayChuDeByTen (String tenChuDe){
 		List<Chude> listChuDe = new ArrayList<Chude>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Chude WHERE cd_Ten=:tenchude");

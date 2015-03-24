@@ -7,6 +7,13 @@
 
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -23,7 +30,7 @@
 						<div class="row">
 							<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
 								<div class="form-group">
-									<input type="text" class="form-control"
+									<input type="text" class="form-control" id="tenGV" path="tenGV"
 										placeholder="Nhập tên giám thị cần thêm " />
 								</div>
 								<div class="form-group">
@@ -111,5 +118,43 @@
 			</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+function split(val) {
+    return val.split(/,\s*/);
+}
+function extractLast(term) {//xxxxxxxxxxxxxxxxxxxxxx
+    return split(term).pop();//xxxxxxxxxxxxxxxxxxxxxx
+}
+ 
+$(document).ready(function() {
+     
+    $( "#tenGV").autocomplete({
+        source: function (request, response) {
+            $.getJSON("${pageContext. request. contextPath}/AutocompleteLoadGiaoVien.html", {
+                term: extractLast(request.term)//xxxxxxxxxxxxxxxxxxxxxx
+            }, response);
+        },
+        search: function () {
+            var term = extractLast(this.value);//xxxxxxxxxxxxxxxxxxxxxx
+            if (term.length < 1) {//xxxxxxxxxxxxxxxxxxxxxx
+                return false;
+            }
+        },
+        focus: function () {
+            return false;
+        },
+        select: function (event, ui) {
+            var terms = split(this.value);
+            terms.pop();
+            terms.push(ui.item.value);
+            terms.push("");
+            this.value = terms.join(", ");
+            return false;
+        }
+    });
+     
+});
+</script>
 </body>
+
 </html>

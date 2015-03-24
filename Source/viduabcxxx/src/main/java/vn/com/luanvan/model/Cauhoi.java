@@ -1,6 +1,4 @@
 package vn.com.luanvan.model;
-// Generated Mar 11, 2015 5:37:47 PM by Hibernate Tools 4.3.1
-
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AttributeOverride;
@@ -28,7 +26,6 @@ public class Cauhoi implements java.io.Serializable {
 	private String chNoidungcauhoi;
 	private float chDiem;
 	private String chDapandung;
-	private Set<Hinhanh> hinhanhs = new HashSet<Hinhanh>(0);
 	private Set<Traloi> tralois = new HashSet<Traloi>(0);
 	private Set<Cautraloi> cautralois = new HashSet<Cautraloi>(0);
 
@@ -48,7 +45,7 @@ public class Cauhoi implements java.io.Serializable {
 
 	public Cauhoi(CauhoiId id, Dangcauhoi dangcauhoi, Dethi dethi, Dokho dokho,
 			String chNoidungcauhoi, float chDiem, String chDapandung,
-			Set<Hinhanh> hinhanhs, Set<Traloi> tralois,
+			 Set<Traloi> tralois,
 			Set<Cautraloi> cautralois) {
 		this.id = id;
 		this.dangcauhoi = dangcauhoi;
@@ -57,14 +54,13 @@ public class Cauhoi implements java.io.Serializable {
 		this.chNoidungcauhoi = chNoidungcauhoi;
 		this.chDiem = chDiem;
 		this.chDapandung = chDapandung;
-		this.hinhanhs = hinhanhs;
 		this.tralois = tralois;
 		this.cautralois = cautralois;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false, length = 5)),
+			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false)),
 			@AttributeOverride(name = "msch", column = @Column(name = "MSCH", nullable = false)) })
 	public CauhoiId getId() {
 		return this.id;
@@ -131,14 +127,6 @@ public class Cauhoi implements java.io.Serializable {
 		this.chDapandung = chDapandung;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cauhoi")
-	public Set<Hinhanh> getHinhanhs() {
-		return this.hinhanhs;
-	}
-
-	public void setHinhanhs(Set<Hinhanh> hinhanhs) {
-		this.hinhanhs = hinhanhs;
-	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cauhoi")
 	public Set<Traloi> getTralois() {

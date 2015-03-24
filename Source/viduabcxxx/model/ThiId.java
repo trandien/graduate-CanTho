@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,12 +11,12 @@ import javax.persistence.Embeddable;
 public class ThiId implements java.io.Serializable {
 
 	private String ndTaikhoan;
-	private String msdt;
+	private int msdt;
 
 	public ThiId() {
 	}
 
-	public ThiId(String ndTaikhoan, String msdt) {
+	public ThiId(String ndTaikhoan, int msdt) {
 		this.ndTaikhoan = ndTaikhoan;
 		this.msdt = msdt;
 	}
@@ -30,12 +30,12 @@ public class ThiId implements java.io.Serializable {
 		this.ndTaikhoan = ndTaikhoan;
 	}
 
-	@Column(name = "MSDT", nullable = false, length = 5)
-	public String getMsdt() {
+	@Column(name = "MSDT", nullable = false)
+	public int getMsdt() {
 		return this.msdt;
 	}
 
-	public void setMsdt(String msdt) {
+	public void setMsdt(int msdt) {
 		this.msdt = msdt;
 	}
 
@@ -51,9 +51,7 @@ public class ThiId implements java.io.Serializable {
 		return ((this.getNdTaikhoan() == castOther.getNdTaikhoan()) || (this
 				.getNdTaikhoan() != null && castOther.getNdTaikhoan() != null && this
 				.getNdTaikhoan().equals(castOther.getNdTaikhoan())))
-				&& ((this.getMsdt() == castOther.getMsdt()) || (this.getMsdt() != null
-						&& castOther.getMsdt() != null && this.getMsdt()
-						.equals(castOther.getMsdt())));
+				&& (this.getMsdt() == castOther.getMsdt());
 	}
 
 	public int hashCode() {
@@ -63,8 +61,7 @@ public class ThiId implements java.io.Serializable {
 				* result
 				+ (getNdTaikhoan() == null ? 0 : this.getNdTaikhoan()
 						.hashCode());
-		result = 37 * result
-				+ (getMsdt() == null ? 0 : this.getMsdt().hashCode());
+		result = 37 * result + this.getMsdt();
 		return result;
 	}
 

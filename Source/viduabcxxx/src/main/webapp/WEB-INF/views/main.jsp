@@ -34,14 +34,17 @@
 
 <script src="<c:url value = "/resources/ajax/ajaxChuDe.js"/>"></script>
 
+<script type="text/javascript">
+	$(function() {
+		$("#myElem").delay(5000).fadeOut(0);
+	});
+</script>
 
 <style type="text/css">
 #timkiem {
 	background-color: #6699ff;
 	padding-top: 20px;
 }
-
-/* fast nav */
 </style>
 
 
@@ -49,6 +52,7 @@
 </head>
 <body style="font-family: 'Source Sans Pro', sans-serif;">
 	<input type="hidden" name="taiKhoan" value="${user.ndTaikhoan}">
+	
 	<div id="form-card-delete" style="display: none">
 		<div class="form-header">Xóa đề thi</div>
 		<hr />
@@ -233,7 +237,7 @@
 											</div>
 											<hr>
 											<div class="form-group">
-												<a href="De-Thi.html"><input type="button" class="form-control btn-primary"
+												<a href="De-Thi.html?mscd=${chude.mscd}"><input type="button" class="form-control btn-primary"
 													name="Them chu de" value="Thêm đề thi"></a>
 											</div>
 

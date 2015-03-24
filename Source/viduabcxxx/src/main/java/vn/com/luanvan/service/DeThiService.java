@@ -11,13 +11,17 @@ public interface DeThiService {
 
 	void XoaDeThi(Dethi DeThi);
 
-	List<Dethi> TimDeThiByTen(String tenDeThi);
+	List<Dethi> LayDeThiByTen(String tenDeThi);
 
-	List<Dethi> TimDeThiByNienKhoa(String tenNienKhoa);
+	List<Dethi> LayDeThiByNienKhoa(String tenNienKhoa);
 
-	List<Dethi> TimDeThiByChuDe(String tenChuDe);
+	List<Dethi> LayDeThiByChuDe(String tenChuDe);
 
-	List<Dethi> TimDeThiByMonHoc(String tenMonHoc);
+	List<Dethi> LayDeThiByMonHoc(String tenMonHoc);
 
-	List<Dethi> TimDeThiByHocKy(Integer mshk);
+	List<Dethi> LayDeThiByHocKy(Integer mshk);
+	
+	Integer LayMaxDeThi();
+	
+	Dethi LayDeThiByMa(Integer maDeThi);
 }

@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +19,6 @@ public class Monhoc implements java.io.Serializable {
 
 	private int msmh;
 	private String mhTen;
-	private Set<Chude> chudes = new HashSet<Chude>(0);
 	private Set<Dethi> dethis = new HashSet<Dethi>(0);
 
 	public Monhoc() {
@@ -30,10 +29,9 @@ public class Monhoc implements java.io.Serializable {
 		this.mhTen = mhTen;
 	}
 
-	public Monhoc(int msmh, String mhTen, Set<Chude> chudes, Set<Dethi> dethis) {
+	public Monhoc(int msmh, String mhTen, Set<Dethi> dethis) {
 		this.msmh = msmh;
 		this.mhTen = mhTen;
-		this.chudes = chudes;
 		this.dethis = dethis;
 	}
 
@@ -54,15 +52,6 @@ public class Monhoc implements java.io.Serializable {
 
 	public void setMhTen(String mhTen) {
 		this.mhTen = mhTen;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "monhoc")
-	public Set<Chude> getChudes() {
-		return this.chudes;
-	}
-
-	public void setChudes(Set<Chude> chudes) {
-		this.chudes = chudes;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "monhoc")

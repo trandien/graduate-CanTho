@@ -125,7 +125,7 @@ public class LoginController {
 			} else {
 				System.out.println("Email ton tai");
 			}
-			user.setCodeRanDom(codeRandom);
+			user.setCoderandom(codeRandom);
 			String subject = "Quên mật khẩu";
 			String text = "Mã đổi mật khẩu của bạn là: " + codeRandom;
 			userService.sendMail(user.getNdEmail(), subject, text);
@@ -151,7 +151,7 @@ public class LoginController {
 		String codeRandom = request.getParameter("codeRandom");
 		String kiemTraCode = null;
 		String model = "";
-		if (codeRandom.equals(user.getCodeRanDom())) {
+		if (codeRandom.equals(user.getCoderandom())) {
 			model = "redirect:/Doi-Mat-Khau.html";
 		} else {
 			kiemTraCode = "Code đổi mật khẩu không đúng, vui lòng kiểm tra lại!";
@@ -177,7 +177,7 @@ public class LoginController {
 		String loiCode = "";
 		String model = "";
 		User user = (User) session.getAttribute("userEmail");
-		if (user.getCodeRanDom() == null || user.getCodeRanDom().equals("")) {
+		if (user.getCoderandom() == null || user.getCoderandom().equals("")) {
 			loiCode = "Bạn chưa lấy mã code đổi mật khẩu, vui lòng kiểm tra lại!";
 			redirectattributes.addFlashAttribute("loiCode", loiCode);
 			return "redirect:/Doi-Mat-Khau.html";
@@ -185,7 +185,7 @@ public class LoginController {
 		if (matKhau.equals(nhacLaiMatKhau)) {
 
 			user.setNdMatkhau(matKhau);
-			user.setCodeRanDom(null);
+			user.setCoderandom(null);
 			userService.update(user);
 			thanhCong = "Đổi mật khẩu thành công";
 			redirectattributes.addFlashAttribute("thanhCong", thanhCong);

@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 public class Dethi  implements java.io.Serializable {
 
 
-     private String msdt;
+     private int msdt;
      private Chude chude;
      private Dangthi dangthi;
      private Hocky hocky;
@@ -40,6 +40,8 @@ public class Dethi  implements java.io.Serializable {
      private Date dtNgaytaode;
      private Date dtNgaycapnhat;
      private String dtDando;
+     private int dtSolanchophep;
+     private String dtNguoiRaDe;
      private Set<Cauhoi> cauhois = new HashSet<Cauhoi>(0);
      private Set<Kithi> kithis = new HashSet<Kithi>(0);
      private Set<Phancongvaitro> phancongvaitros = new HashSet<Phancongvaitro>(0);
@@ -50,7 +52,7 @@ public class Dethi  implements java.io.Serializable {
     }
 
 	
-    public Dethi(String msdt, Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, boolean dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat) {
+    public Dethi(int msdt, Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, boolean dtTrangthai, String dtMatkhau, int dtSolanchophep) {
         this.msdt = msdt;
         this.chude = chude;
         this.dangthi = dangthi;
@@ -61,10 +63,9 @@ public class Dethi  implements java.io.Serializable {
         this.dtThoigianlambai = dtThoigianlambai;
         this.dtTrangthai = dtTrangthai;
         this.dtMatkhau = dtMatkhau;
-        this.dtNgaytaode = dtNgaytaode;
-        this.dtNgaycapnhat = dtNgaycapnhat;
+        this.dtSolanchophep = dtSolanchophep;
     }
-    public Dethi(String msdt, Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, boolean dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, Set<Cauhoi> cauhois, Set<Kithi> kithis, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> this) {
+    public Dethi(int msdt, Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, boolean dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, String dtNguoiRaDe, Set<Cauhoi> cauhois, Set<Kithi> kithis, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> this) {
        this.msdt = msdt;
        this.chude = chude;
        this.dangthi = dangthi;
@@ -78,6 +79,8 @@ public class Dethi  implements java.io.Serializable {
        this.dtNgaytaode = dtNgaytaode;
        this.dtNgaycapnhat = dtNgaycapnhat;
        this.dtDando = dtDando;
+       this.dtSolanchophep = dtSolanchophep;
+       this.dtNguoiRaDe = dtNguoiRaDe;
        this.cauhois = cauhois;
        this.kithis = kithis;
        this.phancongvaitros = phancongvaitros;
@@ -88,12 +91,12 @@ public class Dethi  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="MSDT", unique=true, nullable=false, length=5)
-    public String getMsdt() {
+    @Column(name="MSDT", unique=true, nullable=false)
+    public int getMsdt() {
         return this.msdt;
     }
     
-    public void setMsdt(String msdt) {
+    public void setMsdt(int msdt) {
         this.msdt = msdt;
     }
 
@@ -188,7 +191,7 @@ public class Dethi  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="DT_NGAYTAODE", nullable=false, length=0)
+    @Column(name="DT_NGAYTAODE", length=0)
     public Date getDtNgaytaode() {
         return this.dtNgaytaode;
     }
@@ -198,7 +201,7 @@ public class Dethi  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="DT_NGAYCAPNHAT", nullable=false, length=0)
+    @Column(name="DT_NGAYCAPNHAT", length=0)
     public Date getDtNgaycapnhat() {
         return this.dtNgaycapnhat;
     }
@@ -215,6 +218,26 @@ public class Dethi  implements java.io.Serializable {
     
     public void setDtDando(String dtDando) {
         this.dtDando = dtDando;
+    }
+
+    
+    @Column(name="DT_solanchophep", nullable=false)
+    public int getDtSolanchophep() {
+        return this.dtSolanchophep;
+    }
+    
+    public void setDtSolanchophep(int dtSolanchophep) {
+        this.dtSolanchophep = dtSolanchophep;
+    }
+
+    
+    @Column(name="DT_NguoiRaDe", length=100)
+    public String getDtNguoiRaDe() {
+        return this.dtNguoiRaDe;
+    }
+    
+    public void setDtNguoiRaDe(String dtNguoiRaDe) {
+        this.dtNguoiRaDe = dtNguoiRaDe;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="dethi")

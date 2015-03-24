@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,22 +18,22 @@ import javax.persistence.Table;
 public class Chude implements java.io.Serializable {
 
 	private int mscd;
-	private Monhoc monhoc;
+	private String ndTaikhoan;
 	private String cdTen;
 	private Set<Dethi> dethis = new HashSet<Dethi>(0);
 
 	public Chude() {
 	}
 
-	public Chude(int mscd, Monhoc monhoc, String cdTen) {
+	public Chude(int mscd, String ndTaikhoan, String cdTen) {
 		this.mscd = mscd;
-		this.monhoc = monhoc;
+		this.ndTaikhoan = ndTaikhoan;
 		this.cdTen = cdTen;
 	}
 
-	public Chude(int mscd, Monhoc monhoc, String cdTen, Set<Dethi> dethis) {
+	public Chude(int mscd, String ndTaikhoan, String cdTen, Set<Dethi> dethis) {
 		this.mscd = mscd;
-		this.monhoc = monhoc;
+		this.ndTaikhoan = ndTaikhoan;
 		this.cdTen = cdTen;
 		this.dethis = dethis;
 	}
@@ -50,14 +48,13 @@ public class Chude implements java.io.Serializable {
 		this.mscd = mscd;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MSMH", nullable = false)
-	public Monhoc getMonhoc() {
-		return this.monhoc;
+	@Column(name = "ND_TAIKHOAN", nullable = false, length = 100)
+	public String getNdTaikhoan() {
+		return this.ndTaikhoan;
 	}
 
-	public void setMonhoc(Monhoc monhoc) {
-		this.monhoc = monhoc;
+	public void setNdTaikhoan(String ndTaikhoan) {
+		this.ndTaikhoan = ndTaikhoan;
 	}
 
 	@Column(name = "CD_TEN", nullable = false, length = 100)

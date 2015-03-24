@@ -1,5 +1,7 @@
 package vn.com.luanvan.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.luanvan.dao.UserDao;
@@ -51,5 +53,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserByEmail(String email) {
 		return userDao.getUserByEmail(email);
+	}
+
+	@Override
+	public List<String> LayDanhSachGiaoVien() {
+		return userDao.LayDanhSachGiaoVien();
+	}
+
+	@Override
+	public List<String> LayDanhSachHocSinh() {
+		return userDao.LayDanhSachHocSinh();
 	}
 }

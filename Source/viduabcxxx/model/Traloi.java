@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -39,7 +39,7 @@ public class Traloi implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false, length = 5)),
+			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false)),
 			@AttributeOverride(name = "msch", column = @Column(name = "MSCH", nullable = false)),
 			@AttributeOverride(name = "ndTaikhoan", column = @Column(name = "ND_TAIKHOAN", nullable = false, length = 100)) })
 	public TraloiId getId() {

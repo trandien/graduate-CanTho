@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thêm đề thi</title>
 <link
-	href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto+Condensed|Roboto:400,300,500,700&subset=latin,vietnamese"
+	href=" <c:url value="/resources/http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto+Condensed|Roboto:400,300,500,700&subset=latin,vietnamese"/>"
 	rel="stylesheet" type="text/css" />
 
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
@@ -30,24 +30,28 @@
 <script src="<c:url value="/resources/js/jquery.mCustomScrollbar.concat.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js" />" type="text/javascript"></script>
 	    
-		<style type="text/css">
-			
-		</style>
-
 		<script type="text/javascript">
 		     $(document).ready(function() {
 	            $('#profile--panel-show').click(function() {
 	                    $('.bubble').slideToggle("fast");
 	            });
 	       });
-		    
 	    </script>
+	    
+	    <style type="text/css">
+	    	#ketquathemdethi{
+	    		
+	    	}
+	    </style>
 </head>
 <body>
 
 
 	<%@ include file="/WEB-INF/views/head-page.jsp"%>
 	<!-- /header-->
+<div id="ketquathemdethi">
+	
+</div>
 
 	<div id="form-card-delete" style="display: none">
 		<div class="form-header">Xóa lớp</div>
@@ -107,7 +111,12 @@
 						<%@ include file="/WEB-INF/views/tabgiamthi.jsp"%>
 					</div>
 					<!--Kết thúc giám thị-->
-
+					
+					<!--Bắt đầu tab đề thi-->
+					<div class="tab-pane" id="tabNoiDunCauHoi">
+						<%@ include file="/WEB-INF/views/tabnoidungcauhoi.jsp"%>
+					</div>
+					<!--Kết thúc tab đề thi-->
 
 				</div>
 			</div>

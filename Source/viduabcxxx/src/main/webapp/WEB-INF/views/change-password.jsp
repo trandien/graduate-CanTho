@@ -17,10 +17,10 @@
 	type="text/javascript"></script>
 
 <script type="text/javascript">
-			  $(function() {
-			      $("#myElem").delay(5000).fadeOut(0);
-				});
-		</script>
+	$(function() {
+		$("#myElem").delay(5000).fadeOut(0);
+	});
+</script>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 	</c:if>
 
 	<c:if test="${not empty thatBai}">
-		<div >
+		<div>
 			<div class="alert alert-warning text-center"
 				style="width: 50%; margin: auto;">
 				<button type="button" class="close" data-dismiss="alert"
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 	</c:if>
-	
+
 	<c:if test="${not empty loiCode}">
 		<div>
 			<div class="alert alert-warning text-center"
@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</c:if>
-	
+
 	<div class="container">
 		<div class="login-header">
 			<div class="login-title">
@@ -106,32 +106,31 @@
 </body>
 
 <script type="text/javascript">
-       $(document).ready(function(){
-            $("#matKhau").keyup(function(){
-                var matKhau = $(this).val();
-                var result = $("#thongbao_matkhau");
-                if(matKhau.length < 6) {
-                    result.html('<span style="color: red">Mật khẩu phải từ 6 ký tự trở lên</span>');
-                    $("#doimatkhau").prop("disabled", true);
+	$(document).ready(function(){
+		$("#matKhau").keyup(function() {
+			var matKhau = $(this).val();
+			var result = $("#thongbao_matkhau");
+			if (matKhau.length < 6) {
+				result.html('<span style="color: red">Mật khẩu phải từ 6 ký tự trở lên</span>');
+				$("#doimatkhau").prop("disabled", true);
+			} else {
+					result.html('');
+				}
+	});
 
-                } else {
-                    result.html('');
-                }
-            });
-
-            $("#nhacLaiMatKhau").keyup(function(){
-                var matKhau = $('#matKhau').val();
-                var nhacLaiMatKhau = $(this).val();
-                var result = $("#thongbao_nhaclaimatkhau");
-                if(matKhau != nhacLaiMatKhau) {
-                    result.html('Mật khẩu không khớp');
-                    $("#doimatkhau").prop("disabled", true);
-                } else if (matKhau == nhacLaiMatKhau && matKhau.length >= 6){
-                     result.html('');
-                     $("#doimatkhau").prop("disabled", false);
-                }
-            });
-       });
-    </script>
+		$("#nhacLaiMatKhau").keyup(function() {
+				var matKhau = $('#matKhau').val();
+				var nhacLaiMatKhau = $(this).val();
+				var result = $("#thongbao_nhaclaimatkhau");
+				if (matKhau != nhacLaiMatKhau) {
+						result.html('Mật khẩu không khớp');
+						$("#doimatkhau").prop("disabled", true);
+					} else if (matKhau == nhacLaiMatKhau && matKhau.length >= 6) {
+							result.html('');
+							$("#doimatkhau").prop("disabled", false);
+						}
+		});
+	});
+</script>
 
 </html>

@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -39,15 +39,13 @@ public class User  implements java.io.Serializable {
     }
 
 	
-    public User(String ndTaikhoan, Lop lop, Vaitro vaitro, String ndMatkhau, String ndHoten, String ndEmail, String ndAvatar, String coderandom) {
+    public User(String ndTaikhoan, Vaitro vaitro, String ndMatkhau, String ndHoten, String ndEmail, String ndAvatar) {
         this.ndTaikhoan = ndTaikhoan;
-        this.lop = lop;
         this.vaitro = vaitro;
         this.ndMatkhau = ndMatkhau;
         this.ndHoten = ndHoten;
         this.ndEmail = ndEmail;
         this.ndAvatar = ndAvatar;
-        this.coderandom = coderandom;
     }
     public User(String ndTaikhoan, Lop lop, Vaitro vaitro, String ndMatkhau, String ndHoten, String ndEmail, String ndAvatar, String coderandom, Set<Thi> this, Set<Traloi> tralois, Set<Phancongvaitro> phancongvaitros) {
        this.ndTaikhoan = ndTaikhoan;
@@ -76,7 +74,7 @@ public class User  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="MSL", nullable=false)
+    @JoinColumn(name="MSL")
     public Lop getLop() {
         return this.lop;
     }
@@ -136,7 +134,7 @@ public class User  implements java.io.Serializable {
     }
 
     
-    @Column(name="coderandom", nullable=false, length=10)
+    @Column(name="coderandom", length=10)
     public String getCoderandom() {
         return this.coderandom;
     }

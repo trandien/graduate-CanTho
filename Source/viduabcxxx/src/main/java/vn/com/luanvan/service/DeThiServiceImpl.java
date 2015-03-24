@@ -30,28 +30,38 @@ public class DeThiServiceImpl implements DeThiService{
 	}
 
 	@Override
-	public List<Dethi> TimDeThiByTen(String tenDeThi) {
-		return deThiDao.TimDeThiByTen(tenDeThi);
+	public List<Dethi> LayDeThiByTen(String tenDeThi) {
+		return deThiDao.LayDeThiByTen(tenDeThi);
 	}
 
 	@Override
-	public List<Dethi> TimDeThiByNienKhoa(String tenNienKhoa) {
-		return deThiDao.TimDeThiByNienKhoa(tenNienKhoa);
+	public List<Dethi> LayDeThiByNienKhoa(String tenNienKhoa) {
+		return deThiDao.LayDeThiByNienKhoa(tenNienKhoa);
 	}
 
 	@Override
-	public List<Dethi> TimDeThiByChuDe(String tenChuDe) {
-		return deThiDao.TimDeThiByChuDe(tenChuDe);
+	public List<Dethi> LayDeThiByChuDe(String tenChuDe) {
+		return deThiDao.LayDeThiByChuDe(tenChuDe);
 	}
 
 	@Override
-	public List<Dethi> TimDeThiByMonHoc(String tenMonHoc) {
-		return deThiDao.TimDeThiByMonHoc(tenMonHoc);
+	public List<Dethi> LayDeThiByMonHoc(String tenMonHoc) {
+		return deThiDao.LayDeThiByMonHoc(tenMonHoc);
 	}
 
 	@Override
-	public List<Dethi> TimDeThiByHocKy(Integer mshk) {
-		return deThiDao.TimDeThiByHocKy(mshk);
+	public List<Dethi> LayDeThiByHocKy(Integer mshk) {
+		return deThiDao.LayDeThiByHocKy(mshk);
+	}
+
+	@Override
+	public Integer LayMaxDeThi() {
+		return deThiDao.LayMaxDeThi();
+	}
+
+	@Override
+	public Dethi LayDeThiByMa(Integer maDeThi) {
+		return deThiDao.LayDeThiByMa(maDeThi);
 	}
 
 }

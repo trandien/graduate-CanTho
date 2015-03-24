@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,25 +10,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class CautraloiId implements java.io.Serializable {
 
-	private String msdt;
+	private int msdt;
 	private int msch;
 	private int msctl;
 
 	public CautraloiId() {
 	}
 
-	public CautraloiId(String msdt, int msch, int msctl) {
+	public CautraloiId(int msdt, int msch, int msctl) {
 		this.msdt = msdt;
 		this.msch = msch;
 		this.msctl = msctl;
 	}
 
-	@Column(name = "MSDT", nullable = false, length = 5)
-	public String getMsdt() {
+	@Column(name = "MSDT", nullable = false)
+	public int getMsdt() {
 		return this.msdt;
 	}
 
-	public void setMsdt(String msdt) {
+	public void setMsdt(int msdt) {
 		this.msdt = msdt;
 	}
 
@@ -59,9 +59,7 @@ public class CautraloiId implements java.io.Serializable {
 			return false;
 		CautraloiId castOther = (CautraloiId) other;
 
-		return ((this.getMsdt() == castOther.getMsdt()) || (this.getMsdt() != null
-				&& castOther.getMsdt() != null && this.getMsdt().equals(
-				castOther.getMsdt())))
+		return (this.getMsdt() == castOther.getMsdt())
 				&& (this.getMsch() == castOther.getMsch())
 				&& (this.getMsctl() == castOther.getMsctl());
 	}
@@ -69,8 +67,7 @@ public class CautraloiId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result
-				+ (getMsdt() == null ? 0 : this.getMsdt().hashCode());
+		result = 37 * result + this.getMsdt();
 		result = 37 * result + this.getMsch();
 		result = 37 * result + this.getMsctl();
 		return result;

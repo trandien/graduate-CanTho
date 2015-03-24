@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,6 @@ public class Kithi implements java.io.Serializable {
 	private int mskt;
 	private Dethi dethi;
 	private String ktTen;
-	private String ktSolanchophep;
 
 	public Kithi() {
 	}
@@ -28,13 +27,6 @@ public class Kithi implements java.io.Serializable {
 		this.mskt = mskt;
 		this.dethi = dethi;
 		this.ktTen = ktTen;
-	}
-
-	public Kithi(int mskt, Dethi dethi, String ktTen, String ktSolanchophep) {
-		this.mskt = mskt;
-		this.dethi = dethi;
-		this.ktTen = ktTen;
-		this.ktSolanchophep = ktSolanchophep;
 	}
 
 	@Id
@@ -64,15 +56,6 @@ public class Kithi implements java.io.Serializable {
 
 	public void setKtTen(String ktTen) {
 		this.ktTen = ktTen;
-	}
-
-	@Column(name = "KT_SOLANCHOPHEP", length = 10)
-	public String getKtSolanchophep() {
-		return this.ktSolanchophep;
-	}
-
-	public void setKtSolanchophep(String ktSolanchophep) {
-		this.ktSolanchophep = ktSolanchophep;
 	}
 
 }

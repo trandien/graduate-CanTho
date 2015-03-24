@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.User;
 
 @Repository("userDao")
@@ -140,6 +141,40 @@ public class UserDaoImpl implements UserDao {
 			System.out.println("getUserByEmail: Loi khi lay user");
 		}
 		return user;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<String> LayDanhSachGiaoVien() {
+		List<User> listGV = new ArrayList<User>();
+		List<String> ketQua = new ArrayList<String>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE msvt=:msvt");
+			listGV = query.setInteger("msvt", 2).list();
+			for(int i=0; i<listGV.size(); i++) {
+				ketQua.add(listGV.get(i).getNdHoten());
+			}
+		} catch(Exception e) {
+			System.out.println("LayDanhSachGiaoVien: Loi khi lay danh sach");
+		}
+		return ketQua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<String> LayDanhSachHocSinh() {
+		List<User> listHS = new ArrayList<User>();
+		List<String> ketQua = new ArrayList<String>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE msvt=:msvt");
+			listHS = query.setInteger("msvt", 4).list();
+			for(int i=0; i<listHS.size(); i++) {
+				ketQua.add(listHS.get(i).getNdHoten());
+			}
+		} catch(Exception e) {
+			System.out.println("LayDanhSachGiaoVien: Loi khi lay danh sach");
+		}
+		return ketQua;
 	}
 
 }

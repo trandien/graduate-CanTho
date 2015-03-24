@@ -11,9 +11,9 @@ public interface ChuDeService {
 
 	void XoaChuDe(Chude chude);
 
-	Chude TimChuDeByMa(int maChuDe);
+	Chude LayChuDeByMa(int maChuDe);
 
-	List<Chude> TimChuDeByTen(String tenChuDe);
+	List<Chude> LayChuDeByTen(String tenChuDe);
 
 	Integer getMaChuDeMax();
 	

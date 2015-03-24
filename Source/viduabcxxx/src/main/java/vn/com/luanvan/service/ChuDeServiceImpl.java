@@ -27,13 +27,13 @@ public class ChuDeServiceImpl implements ChuDeService{
 	}
 
 	@Override
-	public Chude TimChuDeByMa(int maChuDe) {
-		return chuDeDao.TimChuDeByMa(maChuDe);
+	public Chude LayChuDeByMa(int maChuDe) {
+		return chuDeDao.LayChuDeByMa(maChuDe);
 	}
 
 	@Override
-	public List<Chude> TimChuDeByTen(String tenChuDe) {
-		return chuDeDao.TimChuDeByTen(tenChuDe);
+	public List<Chude> LayChuDeByTen(String tenChuDe) {
+		return chuDeDao.LayChuDeByTen(tenChuDe);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package vn.com.luanvan.service;
 
+import java.util.List;
+
 import vn.com.luanvan.model.User;
 
 public interface UserService {
@@ -22,4 +24,8 @@ public interface UserService {
 	User getUserByEmail(String email);
 	
 	String RanCode();
+	
+	List<String> LayDanhSachGiaoVien();
+
+	List<String> LayDanhSachHocSinh();
 }

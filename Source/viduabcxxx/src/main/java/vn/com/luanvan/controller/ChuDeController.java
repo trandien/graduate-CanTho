@@ -1,5 +1,6 @@
 package vn.com.luanvan.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import vn.com.luanvan.model.Chude;
@@ -20,6 +22,9 @@ import vn.com.luanvan.service.UserService;
 public class ChuDeController {
 	@Autowired
 	ChuDeService chuDeService;
+	
+	@Autowired
+	UserService userService;
 
 	private boolean isLogin(HttpSession session) {
 		return session.getAttribute("isLogin") != null
@@ -42,7 +47,7 @@ public class ChuDeController {
 			chuDeService.ThemChuDe(chude);
 			System.out.println("bat dau tao chu de moi");
 			/* Tạo Thông báo tạo danh sách */
-			System.out.println("Tao danh sach thanh cong");
+			System.out.println("Tao chu de thanh cong "+maChuDe);
 			
 			result += "<div class='list' id='list_" + chude.getMscd() + "' style='border: 1px solid #cccccc;' >";
 			result += "<div class='list-header editable'>";
@@ -66,10 +71,12 @@ public class ChuDeController {
 			result += "					<hr>";
 
 			result += " <div class='form-group'>";
-			result += "			<input type='button' class='form-control btn-primary' name='Them chu de' value='Thêm đề thi'>";
-			result += "			</div>";
+			result += "<a href='De-Thi.html?mscd="+chude.getMscd()+"'>";
+			result += "			<button class='form-control btn-primary' name='Them chu de'>Thêm đề thi</button>";
+			result += "</a>";
 			result += "</div>";
 			
+			result += "</div>";
 			
 			result += " <div class='form-group create-list'>";
 			result += "			<input type='hidden' name='taiKhoanChuDe' id='taiKhoanChuDe' value='${user.ndTaikhoan}'>";
@@ -82,4 +89,33 @@ public class ChuDeController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/AutocompleteLoadGiaoVien", method = RequestMethod.GET, headers = "Accept=*/*")
+	public @ResponseBody List<String> LoadGiaoVien(@RequestParam ("term") String tenGV) {
+		String ketQua = null;
+		tenGV = tenGV.toLowerCase();
+		System.out.println("AutocompleteLoadGiaoVien");
+		System.out.println("Ten gv "+tenGV);
+		List<String> listGV = userService.LayDanhSachGiaoVien();
+		List<String> DSGV = new ArrayList<String>();
+		for (int i =0; i<listGV.size(); i++) {
+			ketQua = listGV.get(i).toLowerCase();
+			if(ketQua.startsWith(tenGV)) {
+				DSGV.add(listGV.get(i));
+				try {
+					System.out.println("Ket qua "+DSGV.get(i));
+				} catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return DSGV;
+	}
+	/*
+	@RequestMapping(value = "/AutocompleteLoadHocSinh", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody List<User> LoadHocSinh() {
+		List<User> listHS = userService.LayDanhSachHocSinh();
+		return listHS;
+	}
+	*/
 }

@@ -1,5 +1,5 @@
 // default package
-// Generated Mar 11, 2015 6:02:34 PM by Hibernate Tools 4.3.1
+// Generated Mar 21, 2015 12:26:30 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,6 +23,7 @@ public class Phongthi  implements java.io.Serializable {
 
      private int mspt;
      private String ptTen;
+     private Set<Phancongvaitro> phancongvaitros = new HashSet<Phancongvaitro>(0);
      private Set<Thi> this = new HashSet<Thi>(0);
 
     public Phongthi() {
@@ -33,9 +34,10 @@ public class Phongthi  implements java.io.Serializable {
         this.mspt = mspt;
         this.ptTen = ptTen;
     }
-    public Phongthi(int mspt, String ptTen, Set<Thi> this) {
+    public Phongthi(int mspt, String ptTen, Set<Phancongvaitro> phancongvaitros, Set<Thi> this) {
        this.mspt = mspt;
        this.ptTen = ptTen;
+       this.phancongvaitros = phancongvaitros;
        this.this = this;
     }
    
@@ -52,13 +54,22 @@ public class Phongthi  implements java.io.Serializable {
     }
 
     
-    @Column(name="PT_TEN", nullable=false, length=10)
+    @Column(name="PT_TEN", nullable=false, length=100)
     public String getPtTen() {
         return this.ptTen;
     }
     
     public void setPtTen(String ptTen) {
         this.ptTen = ptTen;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="phongthi")
+    public Set<Phancongvaitro> getPhancongvaitros() {
+        return this.phancongvaitros;
+    }
+    
+    public void setPhancongvaitros(Set<Phancongvaitro> phancongvaitros) {
+        this.phancongvaitros = phancongvaitros;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="phongthi")

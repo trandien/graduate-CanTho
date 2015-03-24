@@ -1,5 +1,5 @@
 package vn.com.luanvan.model;
-// Generated Mar 11, 2015 5:37:47 PM by Hibernate Tools 4.3.1
+// Generated Mar 19, 2015 8:01:06 PM by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +25,6 @@ public class Cautraloi implements java.io.Serializable {
 	private CautraloiId id;
 	private Cauhoi cauhoi;
 	private String ctlNoidung;
-	private Set<Hinhanh> hinhanhs = new HashSet<Hinhanh>(0);
 
 	public Cautraloi() {
 	}
@@ -36,17 +35,10 @@ public class Cautraloi implements java.io.Serializable {
 		this.ctlNoidung = ctlNoidung;
 	}
 
-	public Cautraloi(CautraloiId id, Cauhoi cauhoi, String ctlNoidung,
-			Set<Hinhanh> hinhanhs) {
-		this.id = id;
-		this.cauhoi = cauhoi;
-		this.ctlNoidung = ctlNoidung;
-		this.hinhanhs = hinhanhs;
-	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false, length = 5)),
+			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false)),
 			@AttributeOverride(name = "msch", column = @Column(name = "MSCH", nullable = false)),
 			@AttributeOverride(name = "msctl", column = @Column(name = "MSCTL", nullable = false)) })
 	public CautraloiId getId() {
@@ -78,13 +70,5 @@ public class Cautraloi implements java.io.Serializable {
 		this.ctlNoidung = ctlNoidung;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cautraloi")
-	public Set<Hinhanh> getHinhanhs() {
-		return this.hinhanhs;
-	}
-
-	public void setHinhanhs(Set<Hinhanh> hinhanhs) {
-		this.hinhanhs = hinhanhs;
-	}
 
 }

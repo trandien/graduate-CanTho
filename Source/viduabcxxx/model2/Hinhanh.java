@@ -1,5 +1,5 @@
 package vn.com.luanvan.model;
-// Generated Mar 11, 2015 5:37:47 PM by Hibernate Tools 4.3.1
+// Generated Mar 19, 2015 8:01:06 PM by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

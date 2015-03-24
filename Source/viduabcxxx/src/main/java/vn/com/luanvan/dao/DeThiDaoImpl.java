@@ -64,7 +64,7 @@ public class DeThiDaoImpl implements DeThiDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Dethi> TimDeThiByTen(String tenDeThi) {
+	public List<Dethi> LayDeThiByTen(String tenDeThi) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi WHERE dt_Ten=:tenDeThi");
@@ -77,7 +77,7 @@ public class DeThiDaoImpl implements DeThiDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Dethi> TimDeThiByNienKhoa(String tenNienKhoa) {
+	public List<Dethi> LayDeThiByNienKhoa(String tenNienKhoa) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi dt JOIN Nienkhoa nk "
@@ -91,7 +91,7 @@ public class DeThiDaoImpl implements DeThiDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Dethi> TimDeThiByChuDe(String tenChuDe) {
+	public List<Dethi> LayDeThiByChuDe(String tenChuDe) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi dt JOIN Chude cd "
@@ -105,7 +105,7 @@ public class DeThiDaoImpl implements DeThiDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Dethi> TimDeThiByMonHoc(String tenMonHoc) {
+	public List<Dethi> LayDeThiByMonHoc(String tenMonHoc) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi dt JOIN Monhoc mh "
@@ -119,7 +119,7 @@ public class DeThiDaoImpl implements DeThiDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Dethi> TimDeThiByHocKy(Integer mshk) {
+	public List<Dethi> LayDeThiByHocKy(Integer mshk) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi WHERE mshk=:mshk");
@@ -128,6 +128,31 @@ public class DeThiDaoImpl implements DeThiDao{
 			System.out.println("TimDeThiByTen: Loi khi lay danh sach de thi");
 		}
 		return listDeThi;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Integer LayMaxDeThi(){
+		int ketQua = 0;
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("select max(msdt) from Dethi");
+			ketQua = (Integer) query.uniqueResult();
+		} catch(Exception e) {
+			System.out.println("getMaChuDeMax: Loi lay ma chu de");
+		}
+		return ketQua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Dethi LayDeThiByMa(Integer maDeThi) {
+		Dethi DeThi = new Dethi();
+		try {
+			DeThi = (Dethi) sessionFactory.getCurrentSession().get(Dethi.class, maDeThi);
+		} catch(Exception e) {
+			System.out.println("LayDeThiByMa: Loi khi lay chude");
+		}
+		return DeThi;
 	}
 
 }
