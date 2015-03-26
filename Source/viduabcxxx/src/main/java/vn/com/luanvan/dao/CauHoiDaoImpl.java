@@ -59,12 +59,12 @@ public class CauHoiDaoImpl implements CauHoiDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Integer LayMaxIdCauHoi(Integer maChuDe) {
+	public Integer LayMaxIdCauHoi(Integer maDeThi) {
 		int ketQua = 0;
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery(
-					"select max(msch) from Cauhoi WHERE mscd=:maChuDe");
-			query.setInteger("maChuDe", maChuDe);
+					"select max(msch) from Cauhoi WHERE msdt=:maDeThi");
+			query.setInteger("maDeThi", maDeThi);
 			ketQua = (Integer) query.uniqueResult();
 		} catch (Exception e) {
 			System.out.println("LayMaxIdCauHoi: Loi lay ma cau hoi");

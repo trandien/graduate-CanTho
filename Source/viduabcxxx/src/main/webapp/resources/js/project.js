@@ -40,7 +40,7 @@ $(document).on('click', '.list-item', function (e) {
 	khoiTaoThe(maThe);
 });
 
-//Mở box xóa thẻ
+//Mở box xóa đề thi
 $(document).on('click', '.card-delete', function (e) {
     var fcd = $("#form-card-delete");
     if (fcd.css("display") != "none") return;
@@ -55,10 +55,10 @@ $(document).on('click', '.card-delete', function (e) {
 
     fcd.show("fast");
     var id = $(this).children(".list-item-id").val();
-    $("#btn-card-delete").attr("onclick","ajaxXoaThe(\"" + id +"\")");
+    $("#btn-card-delete").attr("onclick","AjaxXoaDeThi(\"" + id +"\")");
 });
 
-//Xóa thẻ
+//Xóa đề thi
 $(document).on('mousedown', function (e) {
     container = $("#form-card-delete");
     if (!container.is(e.target) && container.has(e.target).length === 0)
@@ -77,17 +77,16 @@ $(document).on('mousedown', function (e) {
 //Các chức năng danh sách
 //-------------------------------------------------
 
-//Sửa tên danh sách
+//Sửa tên chủ đề
 $(document).on('click', '.list-title', function (e) {
 	$(".editable").removeClass("editing");
 	var editable = $(this).parent();
 	editable.append($("#edit"));
 	var field = editable.find("#edit > .form-group > .field");
-	var maDanhSach = editable.find(".list-id").text();
+	var mscd = editable.find(".list-id").text();
 	editable.addClass("editing");
-	
-	$("#edit .form-group .btn-save").attr("onclick","ajaxSuaDanhSach('"+maDanhSach+"')");
-	$(".form-id").val(maDanhSach);
+	$("#edit .form-group .btn-save").attr("onclick","AjaxSuaChuDe('"+mscd+"')");
+	$(".form-id").val(mscd);
 	
 	field.focus();
 	field.val($(this).text());

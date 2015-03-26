@@ -33,6 +33,7 @@
 	type="text/javascript"></script>
 
 <script src="<c:url value = "/resources/ajax/ajaxChuDe.js"/>"></script>
+<script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -60,23 +61,23 @@
 			Bạn có chắc chắn muốn xóa đề thi này ? <br /> <b>Chú ý:</b> Đề thi
 			đã xóa không thể khôi phục
 		</div>
-		<button onclick="ajaxXoaThe()" class="btn btn-danger btn-block"
+		<button onclick="AjaxXoaDeThi()" class="btn btn-danger btn-block"
 			id="btn-card-delete">Đồng ý</button>
 	</div>
-
-	<form id="edit">
+	
+	<div id="edit">
 		<div class="form-group">
 			<input class="form-id sr-only" type="text" value="" />
-			<textarea type="text" class="field form-control"
+			<textarea type="text" class="field form-control" id="ten-ChinhSua"
 				style="height: 66px;"></textarea>
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-success btn-save">Lưu</button>
+			<button class="btn btn-success btn-save">Lưu</button>
 			<button type="button" class="close cancel">
 				<span aria-hidden="true">&times;</span><span class="sr-only">Đóng</span>
 			</button>
 		</div>
-	</form>
+	</div>
 
 	<!-- LAY THE ID
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:4000;">
@@ -213,9 +214,9 @@
 							<div id="horizoltal-scroll">
 								<div class="list-wrapper" id="content-1">
 									<c:forEach items="${listChudes}" var="chude">
-										<div class="list" style="border: 1px solid #cccccc;">
-											<div class="list-header editable">
-												<div class="list-id sr-only">1</div>
+										<div class="list" style="border: 1px solid #cccccc;" id="chude_${chude.mscd }">
+											<div class="list-header editable" >
+												<div class="list-id sr-only">${chude.mscd }</div>
 												<!-- LIST ID -->
 												<div class="list-title">
 													<strong>${chude.cdTen }</strong>
@@ -227,9 +228,9 @@
 													</div>
 													<ul class="dropdown-menu" role="menu"
 														aria-labelledby="ddMenu1">
-
+														<input class="get-mscd" value="${chude.mscd }" type="hidden">
 														<li role="presentation" style="text-align: center;">
-															<button class="btn btn-danger btn-block">Xóa Chủ
+															<button class="btn btn-danger btn-block" onclick="AjaxXoaChuDe(${chude.mscd})">Xóa Chủ
 																đề</button>
 														</li>
 													</ul>
@@ -240,15 +241,17 @@
 												<a href="De-Thi.html?mscd=${chude.mscd}"><input type="button" class="form-control btn-primary"
 													name="Them chu de" value="Thêm đề thi"></a>
 											</div>
-
+											
+											<c:forEach items="${listDethis}" var="dethi">
+											<c:if test="${dethi.chude.mscd == chude.mscd}">
 											<ul class="list-content">
 												<li class="list-item" data-toggle="modal"
-													data-target="#myModal">
+													data-target="#myModal" id="dethi_${dethi.msdt }">
 													<div class="list-item-id sr-only">1</div>
-													<div class="list-item-title">AAAAAA</div>
+													<div class="list-item-title">${dethi.dtTende }</div>
 													<div class="list-item-info">
 														<div class="badge-deadline new">
-															<div class="deadline-text">16/10/2014</div>
+															<div class="deadline-text">${dethi.dtNgaytaode }</div>
 														</div>
 														<div class="badge-done">
 															<i class="flaticon-list"></i>
@@ -257,13 +260,17 @@
 
 														&nbsp;
 														<div class="card-delete">
-															<input class="list-item-id" value="35" type="hidden">
+															<input class="list-item-id" value="${dethi.msdt }" type="hidden">
 															<span class="glyphicon glyphicon-trash"
 																aria-hidden="true"></span>
+															
+															
 														</div>
 													</div>
 												</li>
 											</ul>
+											</c:if>
+											</c:forEach>
 										</div>
 									</c:forEach>
 									<div class="form-group create-list">

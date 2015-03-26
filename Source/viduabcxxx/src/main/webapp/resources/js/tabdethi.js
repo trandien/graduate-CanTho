@@ -73,6 +73,8 @@ function themsoluongcauhoi() {
 
 		        $('#edit2').editable({inlineMode: false})
 		        $('#luu-cau-hoi').on('click', function (e) {
+		        	$("#vidu").html($("#edit2").val());
+		        	
 		        	$("#huy-cau-hoi").hide();
 		        	$("#luu-cau-hoi").hide();
 		        	$("#sua-cau-hoi").prop("class","btn btn-primary");
@@ -81,10 +83,13 @@ function themsoluongcauhoi() {
 		        	$("#xoa-cau-hoi").show();
 		          console.log("Destroying Froala Editor...");
 		          $('#edit2').editable('destroy');
+		          $("#edit2").hide();
 		        });
 
     		$("#sua-cau-hoi").click(function(){
     			 console.log("Initializing Froala Editor...");
+    			 $("#vidu").html('');
+    			 $("#edit2").show();
 		         $('#edit2').editable({inlineMode: false});
     			$("#xong-cau-hoi").prop("class", "btn btn-primary");
     			$("#xong-cau-hoi").show();
@@ -93,7 +98,10 @@ function themsoluongcauhoi() {
 
     		$("#xong-cau-hoi").click(function(){
     			 console.log("Destroying Froala Editor...");
+    			 $("#vidu").html($("#edit2").val());
+    			 
 		          $('#edit2').editable('destroy');
+		          $("#edit2").hide();
     			$("#sua-cau-hoi").prop("class", "btn btn-primary");
     			$("#sua-cau-hoi").show();
     			$("#xong-cau-hoi").hide();

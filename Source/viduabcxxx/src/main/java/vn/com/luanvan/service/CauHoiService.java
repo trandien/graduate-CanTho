@@ -9,5 +9,5 @@ public interface CauHoiService {
 
 	void XoaCauHoi(Cauhoi CauHoi);
 	
-	Integer LayMaxIdCauHoi(Integer maChuDe);
+	Integer LayMaxIdCauHoi(Integer maDeThi);
 }

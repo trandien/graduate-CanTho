@@ -1,8 +1,11 @@
 package vn.com.luanvan.model;
 // Generated Mar 19, 2015 8:01:06 PM by Hibernate Tools 4.3.1
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

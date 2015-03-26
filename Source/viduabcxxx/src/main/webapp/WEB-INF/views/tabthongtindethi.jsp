@@ -209,9 +209,9 @@
 		});
 		
 		$("#ngayTaoDe").click(function() {
-			var solanchophep = $(this).val();
+			var ngaytaode = $(this).val();
 			var result = $("#thongbao_ngaytaode");
-			if (solanchophep.length > 0) {
+			if (ngaytaode != null) {
 				$("#ngayTaoDe").removeClass("empty-input");
 				$("#thongbao_ngaytaode").html('');
 				} else {}

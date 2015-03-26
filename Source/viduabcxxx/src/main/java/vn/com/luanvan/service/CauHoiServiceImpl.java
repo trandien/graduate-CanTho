@@ -25,8 +25,8 @@ public class CauHoiServiceImpl implements CauHoiService {
 	}
 
 	@Override
-	public Integer LayMaxIdCauHoi(Integer maChuDe) {
-		return cauHoiDao.LayMaxIdCauHoi(maChuDe);
+	public Integer LayMaxIdCauHoi(Integer maDeThi) {
+		return cauHoiDao.LayMaxIdCauHoi(maDeThi);
 	}
 
 }

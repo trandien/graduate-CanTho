@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.luanvan.dao.DeThiDao;
+import vn.com.luanvan.form.DeThiChuDeForm;
 import vn.com.luanvan.model.Dethi;
 
 public class DeThiServiceImpl implements DeThiService{
@@ -40,8 +41,8 @@ public class DeThiServiceImpl implements DeThiService{
 	}
 
 	@Override
-	public List<Dethi> LayDeThiByChuDe(String tenChuDe) {
-		return deThiDao.LayDeThiByChuDe(tenChuDe);
+	public List<Dethi> LayDeThiByTenChuDe(String tenChuDe) {
+		return deThiDao.LayDeThiByTenChuDe(tenChuDe);
 	}
 
 	@Override
@@ -62,6 +63,16 @@ public class DeThiServiceImpl implements DeThiService{
 	@Override
 	public Dethi LayDeThiByMa(Integer maDeThi) {
 		return deThiDao.LayDeThiByMa(maDeThi);
+	}
+
+	@Override
+	public List<Dethi> LayDeThiByMaChuDe(Integer maChuDe) {
+		return deThiDao.LayDeThiByMaChuDe(maChuDe);
+	}
+
+	@Override
+	public List<Dethi> LayDSDeThiByTaiKhoan(String taiKhoan) {
+		return deThiDao.LayDSDeThiByTaiKhoan(taiKhoan);
 	}
 
 }

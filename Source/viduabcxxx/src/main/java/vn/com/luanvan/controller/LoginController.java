@@ -2,8 +2,11 @@ package vn.com.luanvan.controller;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,9 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.com.luanvan.dao.UserDao;
 import vn.com.luanvan.dao.UserDaoImpl;
+import vn.com.luanvan.form.DeThiChuDeForm;
 import vn.com.luanvan.model.Chude;
+import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.ChuDeService;
+import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.UserService;
 import vn.com.luanvan.service.UserServiceImpl;
 
@@ -31,6 +37,9 @@ public class LoginController {
 	
 	@Autowired
 	ChuDeService chuDeService;
+	
+	@Autowired
+	DeThiService deThiService;
 
 	String useEmail;
 	String useTaiKhoan;
@@ -97,6 +106,8 @@ public class LoginController {
 			User user = (User) session.getAttribute("user");
 			String taiKhoan = user.getNdTaikhoan();
 			List<Chude> listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
+			List<Dethi> listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
+			model.addObject("listDethis", listDethis);
 			model.addObject("listChudes", listChudes);
 			model.setViewName("main");
 		} else {

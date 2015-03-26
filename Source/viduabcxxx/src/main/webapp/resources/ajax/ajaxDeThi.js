@@ -54,3 +54,18 @@ function AjaxLuuDeThi() {
 
 	});
 }
+
+function AjaxXoaDeThi(maDe) {
+	$.ajax({
+		data: "MaDeThi="+maDe,
+		type: "POST",
+		url: "AjaxXoaDeThi",
+		success: function(result) {
+			$("#dethi_"+maDe).remove();
+			$("#form-card-delete").hide();
+		},
+		error: function(){
+			alert("Xoa de thi that bai");
+		}
+	});
+}

@@ -97,13 +97,13 @@
 											<div class="form-group">
 												<div class="radio">
 													<label> <input type="radio" name="dokho2"
-														id="inputmucdode" value="3" checked="checked"> <span
+														id="doKho" value="3" checked="checked"> <span
 														id="idmucdode">Dễ</span>
 													</label><br> <label> <input type="radio" name="dokho2"
-														id="inputmucdotrungbinh" value="2"> <span
+														id="doKho" value="2"> <span
 														id="idmucdotrungbinh">Trung bình</span>
 													</label><br> <label> <input type="radio" name="dokho2"
-														id="inputmucdokho" value="1"> <span
+														id="doKho" value="1"> <span
 														id="idmucdokho">Khó</span>
 													</label>
 
@@ -116,31 +116,32 @@
 											<div class="form-group">
 												<div class="radio">
 													<label> <input type="radio" name="dangcauhoi"
-														id="choncaudungnhat" value="1" checked="checked">
+														id="dangCauHoi" value="1" checked="checked">
 														Chọn câu đúng nhất &nbsp; &nbsp;&nbsp;
 													</label> <label> <input type="radio" name="dangcauhoi"
-														id="chonnhieucaudung" value="2"> Chọn nhiều câu
+														id="dangCauHoi" value="2"> Chọn nhiều câu
 														đúng &nbsp; &nbsp;&nbsp;
 													</label> <label> <input type="radio" name="dangcauhoi"
-														id="dienvaochotrong" value="3"> Điền vào chổ trống
+														id="dangCauHoi" value="3"> Điền vào chổ trống
 													</label>
 												</div>
 											</div>
 											<div class="form-group">
 												<span>Điểm cho câu hỏi này là:</span><input type="text"
 													class="form-control" name="diemChoCauHoi1"
-													id="diemChoCauHoi1" style="width: 100px;">
+													id="diem1" style="width: 100px;">
 												<div id="thongbao_loinhapdiem"></div>
 											</div>
-<!-- editor  -->
+<!-- editor  --><div id="vidu"></div>
 											<section id="editor" style="width: 95%;">
-											<div id='edit2'
-												style="margin-top: 30px; margin-bottom: 10px;"></div>
+											<textarea id='edit2'
+												style="margin-top: 30px; margin-bottom: 10px; display: none;"></textarea>
 											</section>
+											
 											<section id="buttons"> <input type="button"
 												value="Hủy" class="btn btn-danger" id="huy-cau-hoi">
 											<button class="btn btn-primary"
-												id="luu-cau-hoi" onclick="themsoluongcauhoi()">Lưu </button>
+												id="luu-cau-hoi" onclick="LuuCauHoi()">Lưu </button>
 <!-- Sử dụng action thêm câu hỏi -->		
 											<button id="xong-cau-hoi" hidden>Xong </button>
 											<button id="sua-cau-hoi" hidden > Sửa</button>

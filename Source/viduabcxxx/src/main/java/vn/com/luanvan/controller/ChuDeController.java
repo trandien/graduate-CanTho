@@ -49,7 +49,7 @@ public class ChuDeController {
 			/* Tạo Thông báo tạo danh sách */
 			System.out.println("Tao chu de thanh cong "+maChuDe);
 			
-			result += "<div class='list' id='list_" + chude.getMscd() + "' style='border: 1px solid #cccccc;' >";
+			result += "<div class='list' id='chude_" + chude.getMscd() + "' style='border: 1px solid #cccccc;'  >";
 			result += "<div class='list-header editable'>";
 			result += "<div class='list-id sr-only'>" + chude.getMscd()
 					+ "</div>";
@@ -62,7 +62,7 @@ public class ChuDeController {
 			result += "<ul class='dropdown-menu' role='menu' aria-labelledby='list"
 					+ chude.getMscd() + "-menu'>";
 			result += "					<li role='presentation' style='text-align:center;'>";
-			result += "					<button class='btn btn-danger btn-block' onclick='ajaxXoaDanhSach("
+			result += "					<button class='btn btn-danger btn-block' onclick='AjaxXoaChuDe("
 					+ "\"" + chude.getMscd() + "\")'>Xóa Chủ đề</button>";
 			result += "					</li>";
 			result += "					</ul>";
@@ -82,8 +82,6 @@ public class ChuDeController {
 			result += "			<input type='hidden' name='taiKhoanChuDe' id='taiKhoanChuDe' value='${user.ndTaikhoan}'>";
 			result += "			<input type='text' class='form-control' name='tenChuDe' id='tao-tenchude' placeholder='Điền tên và bấm enter để thêm chủ đề'>";
 			result += "</div>";
-
-
 		} else {
 
 		}
@@ -118,4 +116,32 @@ public class ChuDeController {
 		return listHS;
 	}
 	*/
+	
+	@RequestMapping(value = "/AjaxXoaChuDe", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String XoaChuDe(HttpServletRequest request, HttpSession session) {
+		String result="";
+		if (isLogin(session)) {
+			int mscd = Integer.parseInt(request.getParameter("MaChuDe"));
+			System.out.println("ma so chu de: "+mscd);
+			Chude ChuDe = chuDeService.LayChuDeByMa(mscd);
+			chuDeService.XoaChuDe(ChuDe);
+			result = "Xoa chu de thanh cong";
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxSuaChuDe", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String SuaChuDe(HttpServletRequest request, HttpSession session) {
+		String tenChuDe = request.getParameter("TenChuDe");
+		if (isLogin(session)) {
+			int mscd = Integer.parseInt(request.getParameter("MaChuDe"));
+			System.out.println("Ten chu de: "+tenChuDe);
+			Chude ChuDe = chuDeService.LayChuDeByMa(mscd);
+			ChuDe.setCdTen(tenChuDe);
+			chuDeService.SuaChuDe(ChuDe);
+		}
+		System.out.println("Sua chu de thanh cong");
+		return tenChuDe;
+	}
 }

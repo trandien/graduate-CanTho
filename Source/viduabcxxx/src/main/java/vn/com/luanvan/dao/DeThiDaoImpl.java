@@ -9,15 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.luanvan.form.DeThiChuDeForm;
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dethi;
 
 @Repository("deThiDao")
-public class DeThiDaoImpl implements DeThiDao{
+public class DeThiDaoImpl implements DeThiDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -25,17 +26,17 @@ public class DeThiDaoImpl implements DeThiDao{
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public void ThemDeThi(Dethi DeThi) {
-		try{
+		try {
 			sessionFactory.getCurrentSession().save(DeThi);
 			System.out.println("Them de thi thanh cong");
 		} catch (Exception e) {
-			System.out.println("Them de thi that bai" +e.getMessage());
+			System.out.println("Them de thi that bai" + e.getMessage());
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -44,10 +45,10 @@ public class DeThiDaoImpl implements DeThiDao{
 		try {
 			sessionFactory.getCurrentSession().update(DeThi);
 			System.out.println("Sua de thi thanh cong");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Sua de thi that bai");
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -56,10 +57,10 @@ public class DeThiDaoImpl implements DeThiDao{
 		try {
 			sessionFactory.getCurrentSession().delete(DeThi);
 			System.out.println("Xoa de thi thanh cong");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Xoa de thi that bai");
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -67,9 +68,10 @@ public class DeThiDaoImpl implements DeThiDao{
 	public List<Dethi> LayDeThiByTen(String tenDeThi) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi WHERE dt_Ten=:tenDeThi");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Dethi WHERE dt_Ten=:tenDeThi");
 			listDeThi = query.setString("tenDeThi", tenDeThi).list();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("TimDeThiByTen: Loi khi lay danh sach de thi");
 		}
 		return listDeThi;
@@ -80,25 +82,48 @@ public class DeThiDaoImpl implements DeThiDao{
 	public List<Dethi> LayDeThiByNienKhoa(String tenNienKhoa) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi dt JOIN Nienkhoa nk "
-					+ "ON dt.MSNK=nk.MSNK AND nk.nk_ten=:tenNienKhoa");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Dethi dt JOIN Nienkhoa nk "
+							+ "ON dt.MSNK=nk.MSNK AND nk.nk_ten=:tenNienKhoa");
 			listDeThi = query.setString("tenNienKhoa", tenNienKhoa).list();
-		} catch(Exception e) {
-			System.out.println("TimDeThiByNienKhoa: Loi khi lay danh sach de thi Boi nien khoa");
+		} catch (Exception e) {
+			System.out
+					.println("TimDeThiByNienKhoa: Loi khi lay danh sach de thi Boi nien khoa");
 		}
 		return listDeThi;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Dethi> LayDeThiByChuDe(String tenChuDe) {
+	public List<Dethi> LayDeThiByTenChuDe(String tenChuDe) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi dt JOIN Chude cd "
-					+ "ON dt.MSCD=cd.MSCD AND cd.cd_ten=:tenChuDe");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Dethi dt JOIN Chude cd "
+							+ "ON dt.MSCD=cd.MSCD AND cd.cd_ten=:tenChuDe");
 			listDeThi = query.setString("tenChuDe", tenChuDe).list();
-		} catch(Exception e) {
-			System.out.println("TimDeThiByChuDe: Loi khi lay danh sach de thi boi chu de");
+		} catch (Exception e) {
+			System.out
+					.println("TimDeThiByChuDe: Loi khi lay danh sach de thi boi chu de");
+		}
+		return listDeThi;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Dethi> LayDeThiByMaChuDe(Integer maChuDe) {
+		List<Dethi> listDeThi = new ArrayList<Dethi>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Dethi dt JOIN dt.chude cd "
+									+ "WHERE cd.mscd=:maChuDe");
+			listDeThi = query.setInteger("maChuDe", maChuDe).list();
+			System.out.println("Da lay de thi thanh cong");
+		} catch (Exception e) {
+			System.out
+					.println("TimDeThiByChuDe: Loi khi lay danh sach de thi boi chu de "+e.getMessage());
 		}
 		return listDeThi;
 	}
@@ -108,11 +133,13 @@ public class DeThiDaoImpl implements DeThiDao{
 	public List<Dethi> LayDeThiByMonHoc(String tenMonHoc) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi dt JOIN Monhoc mh "
-					+ "ON dt.MSMH=mh.MSMH AND mh.mh_ten=:tenMonHoc");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Dethi dt JOIN Monhoc mh "
+							+ "ON dt.MSMH=mh.MSMH AND mh.mh_ten=:tenMonHoc");
 			listDeThi = query.setString("tenMonHoc", tenMonHoc).list();
-		} catch(Exception e) {
-			System.out.println("TimDeThiByMonHoc: Loi khi lay danh sach de thi boi monhoc");
+		} catch (Exception e) {
+			System.out
+					.println("TimDeThiByMonHoc: Loi khi lay danh sach de thi boi monhoc");
 		}
 		return listDeThi;
 	}
@@ -122,22 +149,24 @@ public class DeThiDaoImpl implements DeThiDao{
 	public List<Dethi> LayDeThiByHocKy(Integer mshk) {
 		List<Dethi> listDeThi = new ArrayList<Dethi>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Dethi WHERE mshk=:mshk");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Dethi WHERE mshk=:mshk");
 			listDeThi = query.setInteger("mshk", mshk).list();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("TimDeThiByTen: Loi khi lay danh sach de thi");
 		}
 		return listDeThi;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Integer LayMaxDeThi(){
+	public Integer LayMaxDeThi() {
 		int ketQua = 0;
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("select max(msdt) from Dethi");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"select max(msdt) from Dethi");
 			ketQua = (Integer) query.uniqueResult();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("getMaChuDeMax: Loi lay ma chu de");
 		}
 		return ketQua;
@@ -148,11 +177,26 @@ public class DeThiDaoImpl implements DeThiDao{
 	public Dethi LayDeThiByMa(Integer maDeThi) {
 		Dethi DeThi = new Dethi();
 		try {
-			DeThi = (Dethi) sessionFactory.getCurrentSession().get(Dethi.class, maDeThi);
-		} catch(Exception e) {
+			DeThi = (Dethi) sessionFactory.getCurrentSession().get(Dethi.class,
+					maDeThi);
+		} catch (Exception e) {
 			System.out.println("LayDeThiByMa: Loi khi lay chude");
 		}
 		return DeThi;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Dethi> LayDSDeThiByTaiKhoan(String taiKhoan) {
+		List<Dethi> listDeThi = new ArrayList<Dethi>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Dethi WHERE dt_nguoirade=:taikhoan");
+			listDeThi = query.setString("taikhoan", taiKhoan).list();
+		} catch (Exception e) {
+			System.out.println("LayDSDeThiByTaiKhoan: Loi khi lay danh sach de thi");
+		}
+		return listDeThi;
 	}
 
 }

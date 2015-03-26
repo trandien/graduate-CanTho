@@ -2,6 +2,7 @@ package vn.com.luanvan.dao;
 
 import java.util.List;
 
+import vn.com.luanvan.form.DeThiChuDeForm;
 import vn.com.luanvan.model.Dethi;
 
 public interface DeThiDao {
@@ -12,12 +13,16 @@ public interface DeThiDao {
 	void XoaDeThi(Dethi DeThi);
 	
 	Dethi LayDeThiByMa(Integer maDeThi);
+	
+	List<Dethi> LayDSDeThiByTaiKhoan(String taiKhoan);
 
 	List<Dethi> LayDeThiByTen(String tenDeThi);
 
 	List<Dethi> LayDeThiByNienKhoa(String tenNienKhoa);
 
-	List<Dethi> LayDeThiByChuDe(String tenChuDe);
+	List<Dethi> LayDeThiByTenChuDe(String tenChuDe);
+	
+	List<Dethi> LayDeThiByMaChuDe(Integer maChuDe);
 
 	List<Dethi> LayDeThiByMonHoc(String tenMonHoc);
 

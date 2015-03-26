@@ -48,3 +48,34 @@ $(document).on('keyup', '#tao-tenchude', function (e) {
 		});
 	}
 });
+
+function AjaxXoaChuDe(mscd) {
+	$.ajax({
+		data: "MaChuDe="+mscd,
+		type: "POST",
+		url: "AjaxXoaChuDe",
+		success: function() {
+			$("#chude_"+mscd).remove();
+		},
+		error : function(){
+			alert("Xóa chủ đề gặp lỗi");
+		}
+	});
+}
+
+function AjaxSuaChuDe(mscd) {
+	$.ajax({
+		data: "MaChuDe="+mscd + "&TenChuDe="+$("#ten-ChinhSua").val(),
+		type: "POST",
+		url: "AjaxSuaChuDe",
+		success: function(result) {
+			$("#chude_"+mscd).children(".list-header").removeClass("editing");
+			$("#chude_"+mscd).children(".list-header").children(".list-title").html("<strong>"+result+"</strong>");
+		},
+		error : function(){
+			alert("Xóa chủ đề gặp lỗi");
+		}
+	});
+}
+
+
