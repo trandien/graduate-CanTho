@@ -1,0 +1,72 @@
+
+
+        section {
+            width: 80%;
+            margin: auto;
+            text-align: left;
+        }
+
+        .caukho{
+        	border: 1px solid;
+        	font-size: 20px;
+        	opacity: 0.5;
+        	color: white;
+        	margin-left: 10px;
+        	padding-left: 7px;
+        	padding-right: 7px;
+        	background-color: #ff0000;
+        	border-radius: 100%;
+        }
+        .cautrungbinh{
+        	border: 1px solid;
+        	opacity: 0.5;
+        	color: white;
+        	font-size: 20px;
+        	margin-left: 10px;
+        	padding-left: 7px;
+        	padding-right: 7px;
+        	background-color: #0033ff;
+        	border-radius: 100%;
+        }
+        .caude{
+        	border: 1px solid;
+        	opacity: 0.5;
+        	color: white;
+        	font-size: 20px;
+        	margin-left: 10px;
+        	padding-left: 7px;
+        	padding-right: 7px;
+        	background-color: #009900;
+        	border-radius: 100%;
+        }
+        .soluongcauhoi{
+            text-align: center;
+        	border: 1px solid #ccc;
+        	font-family: Calibri, serif; font-size:14pt;
+        	margin-bottom: 15px;
+        }
+        .noidungcauhoi{
+        	border: 1px solid #ccc;
+        	padding: 8px;
+        }
+        #idnoidungcauhoi{
+        	font-family: Calibri, serif; font-size:14pt;
+        }
+        .cauhoi{
+        	border: 1px solid #ccc;
+        }
+        #idmucdode{
+        	color: #009900;
+        	margin-left: 0;
+        }
+        #idmucdokho{
+        	color: #ff0000;
+        	margin-left: 0;
+        }
+        #idmucdotrungbinh{
+        	color: #0033ff;
+        	margin-left: 0;
+        }
+        .themcauhoi{
+
+        }
