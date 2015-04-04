@@ -29,7 +29,7 @@ function AjaxLuuDeThi() {
 		}
 		return;
 	}
-	var ketqua;
+	var ketqua = "";
 	$.ajax({
 		data : "TenDe=" + $("#tenDe").val()
 				+ "&NienKhoa=" + $("#nienKhoan").val()
@@ -48,17 +48,8 @@ function AjaxLuuDeThi() {
 		success : function(result) {
 			
 			ketqua += "<input type='hidden' id='msdt' name='msdt' value='"+result+"'>";
-			ketqua += "<div id='myElem'>";
-			ketqua += "<div class='modal-body' style='width: 50%;'>";
-			ketqua += "<div class='alert alert-success text-center'>";
-			ketqua +="<button type='button' class='close' data-dismiss='alert'";
-			ketqua +="aria-hidden='true'>&times;</button>";
-			ketqua += "Thêm đề thi thành công";
-			ketqua +="</div>";
-			ketqua +="</div>";
-			ketqua +="</div>";
 			$("#ketquathemdethi").html(ketqua);
-			
+			$.growlUI('Thêm đề thi thành công'); 
 		},
 		error : function() {
 			alert("Thêm thất bại");
@@ -80,4 +71,8 @@ function AjaxXoaDeThi(maDe) {
 			alert("Xoa de thi that bai");
 		}
 	});
+}
+
+function trangtran(){
+	
 }

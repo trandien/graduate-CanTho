@@ -16,7 +16,6 @@
 	rel="stylesheet" type="text/css">
 <link href="<c:url value="/resources/css/tabdethi.css" />"
 	rel="stylesheet" type="text/css">
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/froala_editor.min.js" />"></script>
 <script src="<c:url value="/resources/js/plugins/tables.min.js" />"></script>
 <script src="<c:url value="/resources/js/plugins/lists.min.js" />"></script>
@@ -32,12 +31,16 @@
 	src="<c:url value="/resources/js/plugins/char_counter.min.js" />"></script>
 <script src="<c:url value="/resources/js/tabnoidungcauhoi.js" />"></script>
 <script src="<c:url value="/resources/ajax/ajaxCauHoi.js" />"></script>
+<script src="<c:url value="/resources/ajax/ajaxCauTraLoi.js" />"></script>
 <style type="text/css">
 .input-error-taikhoan {
 	color: #a94442;
 	border-color: #a94442;
 }
 
+th {
+	width: 50px;
+}
 .input-error-taikhoan1 {
 	border: 1px solid #a94442;
 }
@@ -140,11 +143,15 @@
 											</section>
 											
 											<section id="buttons"> 
+											
+											<!-- 
 											<button class="btn btn-primary" style="margin-top: 7px; margin-bottom: 30px;" 
-												id="luu-cau-hoi" onclick="LuuCauHoi()" >Lưu </button>
+												id="luu-cau-hoi"  >Lưu </button>
+												
+										 -->
 <!-- Vừa bỏ onclick="LuuCauHoi()" -->
 <!-- Sử dụng action thêm câu hỏi -->		
-											<button id="xong-cau-hoi" style="margin-top: 7px; margin-bottom: 30px;" hidden>Xong </button>
+											<button id="xong-cau-hoi" class='btn btn-primary'style="margin-top: 7px; margin-bottom: 30px; " >Xong </button>
 											<button id="sua-cau-hoi" style="margin-top: 7px; margin-bottom: 30px;" hidden > Sửa</button>
 <!--											
 <button id="xoa-cau-hoi" style="margin-top: 7px; margin-bottom: 30px;" data-toggle="modal" href='#modal-id' hidden>Xóa</button>
@@ -154,49 +161,37 @@
 										</div>
 										<br>
 <!-- Id Thêm câu trả lời -->
-										<div id="themcautraloi">
-											<div class="cautraloi" style="padding-top: 15px; text-align: center">
+							<div id="themcautraloi">
+								<div class="cautraloi" style="padding-top: 15px; text-align: center">
 
+									
+									
+									<span style="text-align: center; font-family: Calibri, serif; font-size: 14pt;">
+										<strong >Câu trả lời</strong>
+									</span>
+									<br>
 									<table class="table table-hover">
 										<thead>
-	<!-- Cau tra loi -->					<span style="text-align: center; font-family: Calibri, serif; font-size: 14pt;">
-												<strong >Câu trả lời</strong>
-											</span>
+	<!-- Cau tra loi -->					<span style="float: left; padding-left: 10px;font-family: Calibri, serif; font-size: 14pt;">Đáp án đúng: </span>
+											<div id="dapandung"></div>
+											<div id='kq-dapandung'></div>
 										</thead>
-										<tbody style="text-align: left;">
-											<tr>
-												<td>
-													<div id="sttcautraloi"></div>
-													<input id="laysothutucautraloi" type="hidden" value="64">
-												</td>
-												<td><section id="editor" style="width: 95%;">
-											<div id='editorcautraloi'
-												style="margin-top: 30px; margin-bottom: 10px;"></div>
-											</section></td>
-												<td>
-													<section id="buttons"> 
-														<input type="button" value="Xong" class="btn btn-success" id="sua-cau-tra-loi" onclick="LuuCauTraLoi()"> 
-														<input type="button" value="Sửa" id="sua-cau-tra-loi-xong" hidden> 
-													</section>
-												</td>
-												<td>
-													<input type="button" value="Hủy" class="btn btn-danger" id="xoa-cau-tra-loi">
-												</td>
-											</tr>
-											<div id="kq-themcautraloi"></div>
+										<tbody style="text-align: left;" id="kq-themcautraloi">
+											
 										</tbody>
 									</table>
 								<hr>
 
 							</div>
-										</div>
+						</div>
+<div id="idmsch"></div>										
 										<div class="form-group" id="idthemcautraloi">
 											<button class="btn btn-success" id="them-cau-tra-loi" onclick="ThemCauTraLoi()">
 <!-- btn them ctl -->					Thêm câu trả lời &nbsp;<span class="glyphicon glyphicon-plus"></span>
 											</button>
 										</div>
 										<div id="form-group" class="pull-right" style="margin-bottom: 15px;">
-											<button class="btn btn-primary">Hoàn thành &nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+											<button class="btn btn-primary" onclick="HoanThanh()">Hoàn thành &nbsp;<span class="glyphicon glyphicon-ok"></span></button>
 											<button class="btn btn-danger" id="huy-cau-hoi" data-toggle="modal" href='#modal-id'>Hủy &nbsp;<span class="glyphicon glyphicon-remove"></span></button>
 										</div>
 									</div>

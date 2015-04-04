@@ -32,10 +32,9 @@ public class CauTraLoiController {
 		String result = "";
 		if (isLogin(session)) {
 			Cautraloi CauTraLoi = new Cautraloi();
-			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
-			int msctl = cauTraLoiService.LayMaxCauTraLoi(msch) + 1;
-			String ctl_noidung = request.getParameter("NoiDungCauTraLoi");
+			int msctl = cauTraLoiService.LayMaxCauTraLoi(msch)+1;
+			String ctl_noidung = request.getParameter("NoiDungCTL");
 			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
 			CauTraLoi.setMsctl(msctl);
 			CauTraLoi.setCauhoi(CauHoi);

@@ -36,11 +36,6 @@
 
 <body>
 
-	<!-- start head page-->
-	<!-- Collect the nav links, forms, and other content for toggling -->
-
-	<!-- end head page-->
-
 	<header class="navbar navbar-menu navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="row">
@@ -53,10 +48,6 @@
 				</button>
 				<a class="logo-anki" href="home.html"></a>
 			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			
-			<!-- /.navbar-collapse -->
 		</div>
 		<!-- .row -->
 	</div>

@@ -11,7 +11,7 @@ public interface CauHoiDao {
 
 	void XoaCauHoi(Cauhoi CauHoi);
 	
-	int LayMaxIdCauHoi(int maDeThi);
+	int LayMaxIdCauHoi(String taiKhoan);
 	
 	Integer CountIdCauHoi(Integer maDeThi);
 	

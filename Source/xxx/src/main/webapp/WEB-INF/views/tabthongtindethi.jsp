@@ -9,11 +9,18 @@
 <meta charset="utf-8">
 <title>Thêm đề thi</title>
 <script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
+<script src="<c:url value = "/resources/js/bootstrap.min.js" />" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value = "/resources/css/bootstrap.css" />"/>
+<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
+ <script src="<c:url value="/resources/js/jquery.blockUI.js" />"></script>
+
 <style type="text/css">
 	.empty-input{
 		border: 1px solid red;
 	}
+	
 </style>
+
 </head>
 <body>
 	<div class="panel panel-default">
@@ -21,6 +28,7 @@
 			style="text-align: center; font-size: 20px;">
 			<i class="glyphicon glyphicon-list-alt"></i> &nbsp <strong>Thông
 				tin đề thi </strong>
+				
 		</div>
 		<div class="panel-body">
 			<table class="table table-hover">

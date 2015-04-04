@@ -13,10 +13,10 @@
 <link
 	href=" <c:url value="/resources/http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto+Condensed|Roboto:400,300,500,700&subset=latin,vietnamese"/>"
 	rel="stylesheet" type="text/css" />
-
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery.js" />"></script>
+	 <script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/resources/js/jquery.min.js" />" ></script>
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css" />" />
@@ -24,12 +24,12 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/project.css" />" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/ThemDeThi.css" />" />    
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jquery.mCustomScrollbar.css" />" />
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
+
 <script src="<c:url value="/resources/js/bootstrap.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/resources/js/project.js" />"></script>
 <script src="<c:url value="/resources/js/jquery.mCustomScrollbar.concat.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js" />" type="text/javascript"></script>
-	    
+	   
 		<script type="text/javascript">
 		     $(document).ready(function() {
 	            $('#profile--panel-show').click(function() {
@@ -39,9 +39,9 @@
 	    </script>
 	    
 	    <style type="text/css">
-	    	#ketquathemdethi{
-	    		
-	    	}
+	    	.growlUI h1, .growlUI h2 {
+			          color: white; padding: 0px 5px 0px 75px; text-align: left; font-size: 20px;
+			     }
 	    </style>
 </head>
 <body>

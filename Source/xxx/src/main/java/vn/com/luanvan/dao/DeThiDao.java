@@ -2,7 +2,6 @@ package vn.com.luanvan.dao;
 
 import java.util.List;
 
-import vn.com.luanvan.form.DeThiChuDeForm;
 import vn.com.luanvan.model.Dethi;
 
 public interface DeThiDao {

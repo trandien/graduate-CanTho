@@ -96,7 +96,7 @@ public class CauTraLoiDaoImpl implements CauTraLoiDao {
 			Query query = sessionFactory
 					.getCurrentSession()
 					.createSQLQuery(
-							"select max(msctrl) from Cautraloi ctl WHERE clt.cauhoi.msch=:msch");
+							"select max(msctrl) from Cautraloi ctl WHERE clt.msch=:msch");
 			query.setParameter("msch", maCauHoi);
 			ketQua = (Integer) query.uniqueResult();
 		} catch (Exception e) {

@@ -104,7 +104,7 @@ public class DeThiController {
 			String danDo = request.getParameter("DanDo");
 			String soLanChoPhepThi = request.getParameter("SoLanChoPhep");
 			String matKhauDeThi = request.getParameter("MatKhauDeThi");
-			
+	/*		
 			
 			System.out.println("Ten De: " + tenDe);
 			System.out.println("Nien Khoa: " + nienKhoa);
@@ -118,7 +118,7 @@ public class DeThiController {
 			System.out.println("Dan do: " + danDo);
 			System.out.println("So lan cho phep thi: " + soLanChoPhepThi);
 			System.out.println("mat khau de thi: " + matKhauDeThi);
-			
+			*/
 			SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
 		//	String ngayCapNhat = dinhDangThoiGian.format(thoiGian.getTime());
 			Date thoiGianTaoDe = dinhDangThoiGian.parse(ngayTaoDe);
