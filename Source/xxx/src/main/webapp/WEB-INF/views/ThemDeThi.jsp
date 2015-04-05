@@ -16,7 +16,7 @@
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 	 <script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
+
 <script src="<c:url value="/resources/js/jquery.min.js" />" ></script>
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css" />" />
@@ -29,6 +29,33 @@
 <script src="<c:url value="/resources/js/project.js" />"></script>
 <script src="<c:url value="/resources/js/jquery.mCustomScrollbar.concat.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js" />" type="text/javascript"></script>
+
+<link href="<c:url value="/resources/css/font-awesome.min.css" />"
+	rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/froala_editor.min.css" />"
+	rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/froala_style.min.css" />"
+	rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/tabdethi.css" />"
+	rel="stylesheet" type="text/css">
+
+<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
+<script src="<c:url value="/resources/js/froala_editor.min.js" />"></script>
+<script src="<c:url value="/resources/js/plugins/tables.min.js" />"></script>
+<script src="<c:url value="/resources/js/plugins/lists.min.js" />"></script>
+<script src="<c:url value="/resources/js/plugins/colors.min.js" />"></script>
+<script src="<c:url value="/resources/js/plugins/font_family.min.js" />"></script>
+<script src="<c:url value="/resources/js/plugins/font_size.min.js" />"></script>
+<script
+	src="<c:url value="/resources/js/plugins/block_styles.min.js" />"></script>
+<script
+	src="<c:url value="/resources/js/plugins/media_manager.min.js" />"></script>
+<script src="<c:url value="/resources/js/plugins/video.min.js" />"></script>
+<script
+	src="<c:url value="/resources/js/plugins/char_counter.min.js" />"></script>
+<script src="<c:url value="/resources/js/tabnoidungcauhoi.js" />"></script>
+<script src="<c:url value="/resources/ajax/ajaxCauHoi.js" />"></script>
+<script src="<c:url value="/resources/ajax/ajaxCauTraLoi.js" />"></script>
 	   
 		<script type="text/javascript">
 		     $(document).ready(function() {
@@ -42,6 +69,18 @@
 	    	.growlUI h1, .growlUI h2 {
 			          color: white; padding: 0px 5px 0px 75px; text-align: left; font-size: 20px;
 			     }
+			     
+			     .input-error-taikhoan {
+					color: #a94442;
+					border-color: #a94442;
+				}
+				
+				th {
+					width: 50px;
+				}
+				.input-error-taikhoan1 {
+					border: 1px solid #a94442;
+				}
 	    </style>
 </head>
 <body>

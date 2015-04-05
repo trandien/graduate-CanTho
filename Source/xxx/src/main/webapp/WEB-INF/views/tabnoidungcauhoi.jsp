@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <link href="<c:url value="/resources/css/font-awesome.min.css" />"
 	rel="stylesheet" type="text/css">
 <link href="<c:url value="/resources/css/froala_editor.min.css" />"
@@ -16,6 +17,7 @@
 	rel="stylesheet" type="text/css">
 <link href="<c:url value="/resources/css/tabdethi.css" />"
 	rel="stylesheet" type="text/css">
+	
 <script src="<c:url value="/resources/js/froala_editor.min.js" />"></script>
 <script src="<c:url value="/resources/js/plugins/tables.min.js" />"></script>
 <script src="<c:url value="/resources/js/plugins/lists.min.js" />"></script>
@@ -82,121 +84,17 @@ th {
 						</div>
 
 						<div class="form-group" style="text-align: center;">
-							<button type="button" class="btn btn-primary"  onClick="TaoCauHoi()">
+							<button type="button" class="btn btn-primary" id='them-cau-hoi' onClick="TaoCauHoi()">
 								Thêm câu hỏi &nbsp;<span class="glyphicon glyphicon-plus"></span>
 							</button>
 						</div>
 
-						<div class="noidungcauhoi">
+						<div class="noidungcauhoi" id='noidungcauhoi'>
 							<br> <span id="idnoidungcauhoi">Nội dung câu hỏi</span>
 							<hr>
+							
 <!--Them cau hoi-->
-							<div id="themcauhoi"
-								style="border: 1px solid #000077; margin-bottom: 15px;">
-								<div class="container-fluid">
-									<div class="row">
-										<div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
-<!-- Ajax-->							
-										<div id="tencauhoi"></div>
-											<div class="form-group">
-												<div class="radio">
-													<label> <input type="radio" name="dokho2"
-														id="doKho" value="3" checked="checked"> <span
-														id="idmucdode">Dễ</span>
-													</label><br> <label> <input type="radio" name="dokho2"
-														id="doKho" value="2"> <span
-														id="idmucdotrungbinh">Trung bình</span>
-													</label><br> <label> <input type="radio" name="dokho2"
-														id="doKho" value="1"> <span
-														id="idmucdokho">Khó</span>
-													</label>
-
-												</div>
-											</div>
-
-										</div>
-
-										<div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
-											<div class="form-group">
-												<div class="radio">
-													<label> <input type="radio" name="dangcauhoi"
-														id="dangCauHoi" value="1" checked="checked">
-														Chọn câu đúng nhất &nbsp; &nbsp;&nbsp;
-													</label> <label> <input type="radio" name="dangcauhoi"
-														id="dangCauHoi" value="2"> Chọn nhiều câu
-														đúng &nbsp; &nbsp;&nbsp;
-													</label> <label> <input type="radio" name="dangcauhoi"
-														id="dangCauHoi" value="3"> Điền vào chổ trống
-													</label>
-												</div>
-											</div>
-											<div class="form-group">
-												<span>Điểm cho câu hỏi này là:</span><input type="text"
-													class="form-control" name="diemChoCauHoi1"
-													id="diemChoCauHoi1" style="width: 100px;">
-												<div id="thongbao_loinhapdiem"></div>
-											</div>
-<!-- editor  --><div id="hienthicuahoi"></div>
-											<section id="editor" style="width: 95%;">
-											<textarea id='edit2'
-												style="margin-top: 30px; margin-bottom: 10px; display: none;"></textarea>
-											</section>
-											
-											<section id="buttons"> 
-											
-											<!-- 
-											<button class="btn btn-primary" style="margin-top: 7px; margin-bottom: 30px;" 
-												id="luu-cau-hoi"  >Lưu </button>
-												
-										 -->
-<!-- Vừa bỏ onclick="LuuCauHoi()" -->
-<!-- Sử dụng action thêm câu hỏi -->		
-											<button id="xong-cau-hoi" class='btn btn-primary'style="margin-top: 7px; margin-bottom: 30px; " >Xong </button>
-											<button id="sua-cau-hoi" style="margin-top: 7px; margin-bottom: 30px;" hidden > Sửa</button>
-<!--											
-<button id="xoa-cau-hoi" style="margin-top: 7px; margin-bottom: 30px;" data-toggle="modal" href='#modal-id' hidden>Xóa</button>
-  -->											
-											</section>
-											
-										</div>
-										<br>
-<!-- Id Thêm câu trả lời -->
-							<div id="themcautraloi">
-								<div class="cautraloi" style="padding-top: 15px; text-align: center">
-
-									
-									
-									<span style="text-align: center; font-family: Calibri, serif; font-size: 14pt;">
-										<strong >Câu trả lời</strong>
-									</span>
-									<br>
-									<table class="table table-hover">
-										<thead>
-	<!-- Cau tra loi -->					<span style="float: left; padding-left: 10px;font-family: Calibri, serif; font-size: 14pt;">Đáp án đúng: </span>
-											<div id="dapandung"></div>
-											<div id='kq-dapandung'></div>
-										</thead>
-										<tbody style="text-align: left;" id="kq-themcautraloi">
-											
-										</tbody>
-									</table>
-								<hr>
-
-							</div>
-						</div>
-<div id="idmsch"></div>										
-										<div class="form-group" id="idthemcautraloi">
-											<button class="btn btn-success" id="them-cau-tra-loi" onclick="ThemCauTraLoi()">
-<!-- btn them ctl -->					Thêm câu trả lời &nbsp;<span class="glyphicon glyphicon-plus"></span>
-											</button>
-										</div>
-										<div id="form-group" class="pull-right" style="margin-bottom: 15px;">
-											<button class="btn btn-primary" onclick="HoanThanh()">Hoàn thành &nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-											<button class="btn btn-danger" id="huy-cau-hoi" data-toggle="modal" href='#modal-id'>Hủy &nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-										</div>
-									</div>
-								</div>
-							</div>
+							
 <!-- Ket thuc Them cau hoi-->
 					</div>
 				</div>
@@ -204,9 +102,7 @@ th {
 </div>
 		</div>
 	</div>
-	</div>
-	</div>
-	</div>
+
 
 
 	<div class="modal fade" id="modal-id">

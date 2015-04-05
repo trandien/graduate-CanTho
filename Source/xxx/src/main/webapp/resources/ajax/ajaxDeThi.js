@@ -73,6 +73,3 @@ function AjaxXoaDeThi(maDe) {
 	});
 }
 
-function trangtran(){
-	
-}

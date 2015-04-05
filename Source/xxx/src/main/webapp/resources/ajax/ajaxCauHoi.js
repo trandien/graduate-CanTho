@@ -1,8 +1,3 @@
-function TaoCauHoi() {
-
-	$("#themcauhoi").show();
-
-}
 
 function LuuCauHoi() {
 	var maDangCauHoi = jQuery('input[name=dangcauhoi]:checked').val()

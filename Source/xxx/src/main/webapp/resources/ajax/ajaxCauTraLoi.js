@@ -1,3 +1,5 @@
+
+
 function LuuCauTraLoi() {
 	$.ajax({
 		data: "MaCauHoi="+$("#msch").val() + "&NoiDungCTL="+$("#editorcautraloi").val(), 
@@ -12,8 +14,7 @@ function LuuCauTraLoi() {
 	});
 }
 
-function ThemCauTraLoi() {
-	
+function ThemCauTraLoi(i) {
     $.ajax({
     	data:"MaDeThi="+$("#msdt").val(),
     	url: "AjaxLayMaxIdCauHoi",
