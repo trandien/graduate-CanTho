@@ -35,17 +35,17 @@
 <script src="<c:url value="/resources/ajax/ajaxCauHoi.js" />"></script>
 <script src="<c:url value="/resources/ajax/ajaxCauTraLoi.js" />"></script>
 <style type="text/css">
-.input-error-taikhoan {
-	color: #a94442;
-	border-color: #a94442;
-}
-
-th {
-	width: 50px;
-}
-.input-error-taikhoan1 {
-	border: 1px solid #a94442;
-}
+	.input-error-taikhoan {
+		color: #a94442;
+		border-color: #a94442;
+	}
+	
+	th {
+		width: 50px;
+	}
+	.input-error-taikhoan1 {
+		border: 1px solid #a94442;
+	}
 </style>
 </head>
 <body>
@@ -64,31 +64,34 @@ th {
 						<div class="soluongcauhoi">
 							<br> <span>Số lượng câu hỏi</span>
 							<hr>
+<!-- 					
 							<span class="caukho">1</span> <span class="cautrungbinh">2</span>
 							<span class="caude">3</span> <span class="caukho">4</span> <span
 								class="caukho">5</span> <span class="caukho">6</span> <span
 								class="cautrungbinh">7</span> <span class="cautrungbinh">8</span>
 							<span class="caude">9</span>
+ -->		
 							<div id="themsoluongcauhoi"></div>
 							<hr>
-							<span>Số câu dễ: &nbsp;</span><input id="socaude" value='2'
+							<span>Số câu dễ: &nbsp;</span><input id="socaude" value=''
 								disabled="true"
 								style="border: 0px; width: 50px; background-color: white;"><br>
 							<span>Số câu trung bình:&nbsp;</span><input id="socautrungbinh"
-								value='3' disabled="true"
+								value='' disabled="true"
 								style="border: 0px; width: 50px; background-color: white;"><br>
-							<span>Số câu khó:&nbsp;</span><input id="socaukho" value='4'
+							<span>Số câu khó:&nbsp;</span><input id="socaukho" value=''
 								disabled="true"
 								style="border: 0px; width: 50px; background-color: white;"><br>
 								
 						</div>
 
 						<div class="form-group" style="text-align: center;">
-							<button type="button" class="btn btn-primary" id='them-cau-hoi' onClick="TaoCauHoi()">
-								Thêm câu hỏi &nbsp;<span class="glyphicon glyphicon-plus"></span>
+								<button type="button" id='them-cau-hoi' onClick="TaoCauHoi()" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+								  Thêm câu hỏi &nbsp;<span class="glyphicon glyphicon-plus"></span>
+								</button>
 							</button>
 						</div>
-
+						<div id='xxx'></div>
 						<div class="noidungcauhoi" id='noidungcauhoi'>
 							<br> <span id="idnoidungcauhoi">Nội dung câu hỏi</span>
 							<hr>
@@ -103,8 +106,7 @@ th {
 		</div>
 	</div>
 
-
-
+<!-- 
 	<div class="modal fade" id="modal-id">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -114,18 +116,16 @@ th {
 					<h4 class="modal-title">Thông báo</h4>
 				</div>
 				<div class="modal-body">
-					Bạn muốn hủy thêm câu hỏi.<br> Lưu ý: khi xóa không thể
-					khôi phục lại được
+					Bạn muốn xóa câu hỏi.<br> <b>Lưu ý: </b>khi xóa không thể
+					khôi phục lại được 
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-primary">Đồng ý</button>
+					<button type="button" class="btn btn-primary" onclick='AjaxXoaCauHoi()'>Đồng ý</button>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
-	<!-- /.modal -->
+	 -->
 </body>
 </html>

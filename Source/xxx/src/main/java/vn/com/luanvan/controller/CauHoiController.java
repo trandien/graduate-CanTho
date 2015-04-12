@@ -84,7 +84,7 @@ public class CauHoiController {
 	}
 
 	@RequestMapping(value = "/AjaxLuuCauHoiVaCauTraLoi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public @ResponseBody String LuuCauHoiVaCauTraLoi(@RequestBody DeThiCauHoiForm tang, HttpServletRequest request) {
+	public @ResponseBody String LuuCauHoiVaCauTraLoi(@RequestBody DeThiCauHoiForm tang, HttpServletRequest request, HttpSession session) {
 		String result = "";
 		System.out.println("Ham AjaxLuuCauHoiVaCauTraLoi duoc goi");
 		System.out.println("noidung tra loi"+tang.getNoiDungCauTraLoi().size());
@@ -107,19 +107,12 @@ public class CauHoiController {
 		CauHoi.setChNoidungcauhoi(noiDungCauHoi);
 		CauHoi.setChDiem(diem);
 		CauHoi.setChDapandung(dapAnDung);
-		
-		
 		System.out.println("Diem "+tang.getDiem());
 		System.out.println("msdt "+tang.getMsdt());
 		System.out.println("Noi dung cau hoi "+tang.getNoiDungCauHoi());
 		System.out.println("Do kho "+tang.getMaDoKho());
 		System.out.println("Ma dang cau hoi "+tang.getMaDangCauHoi());
 		System.out.println("noidung tra loi: "+tang.getNoiDungCauTraLoi().size());
-		
-		
-		for(String ctl : tang.getNoiDungCauTraLoi()) {
-			System.out.println(ctl);
-		}
 		cauHoiService.ThemCauHoi(CauHoi);
 		Cautraloi CauTraLoi = new Cautraloi();
 		for(String ndctl : noiDungCauTraLoi) {
@@ -131,7 +124,12 @@ public class CauHoiController {
 		
 		System.out.println("-------------");
 		System.out.println("Them cau hoi va thanh cong");
-		return result;
+		
+		User user = (User)session.getAttribute("user");
+		String taiKhoan = user.getNdTaikhoan();
+		int maxIdCauHoi = cauHoiService.LayMaxIdCauHoi(taiKhoan);
+		
+		return String.valueOf(maxIdCauHoi);
 	}
 
 	
@@ -150,32 +148,97 @@ public class CauHoiController {
 	public @ResponseBody String SuaCauHoi(HttpServletRequest request, HttpSession session) {
 		String result = "";
 		if (isLogin(session)) {
-			Cauhoi CauHoi = new Cauhoi();
-			User user = (User)session.getAttribute("user");
-			String taiKhoan = user.getNdTaikhoan();
-			int maDeThi = Integer.parseInt(request.getParameter("MaDeThi"));
-			int maChuDe = Integer.parseInt(request.getParameter("MaChuDe"));
-			int maCauHoi = cauHoiService.LayMaxIdCauHoi(taiKhoan);
-			int maDangCauHoi = Integer.parseInt(request.getParameter("MaDangCauHoi"));
-			System.out.println("Ma dang cau hoi: "+maDangCauHoi);
-			int maDoKho = Integer.parseInt(request.getParameter("MaDoKho"));
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
 			String noiDungCauHoi = request.getParameter("NoiDungCauHoi");
 			float diem = Float.parseFloat(request.getParameter("Diem"));
-			String dapAnDung = request.getParameter("DapAnDung").trim();
-			Dangcauhoi DangCauHoi = dangCauHoiService.LayDangCauHoiByMa(maDangCauHoi);
-			Dokho DoKho = doKhoService.LayDoKhoByMa(maDoKho);
+			String dapAnDung = request.getParameter("DapAnDung");
 			
-			Dethi DeThi = deThiService.LayDeThiByMa(maDeThi);
-			CauHoi.setMsch(maCauHoi);
-			CauHoi.setDangcauhoi(DangCauHoi);
-			CauHoi.setDethi(DeThi);
-			CauHoi.setDokho(DoKho);
-			CauHoi.setChNoidungcauhoi(noiDungCauHoi);
-			CauHoi.setChDiem(diem);
 			CauHoi.setChDapandung(dapAnDung);
+			CauHoi.setChDiem(diem);
+			CauHoi.setChNoidungcauhoi(noiDungCauHoi);
 			
 			cauHoiService.SuaCauHoi(CauHoi);
 			System.out.println("Sua cau hoi thanh cong");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxHienThiCauHoiThem", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String HienThiCauHoiThem(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		Cauhoi CauHoi = new Cauhoi();
+		User user = (User)session.getAttribute("user");
+		String taiKhoan = user.getNdTaikhoan();
+		int maCauHoi = cauHoiService.LayMaxIdCauHoi(taiKhoan);
+		CauHoi = cauHoiService.LayCauHoiByMa(maCauHoi);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxXoaCauHoi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String XoaCauHoi(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try {
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
+			cauHoiService.XoaCauHoi(CauHoi);
+			result = "Xoa cau hoi thanh cong";
+		} catch(Exception e) {
+			result = "Xoa cau hoi that bai";
+		}
+		System.out.println("Thong bao sua cau hoi: "+result);
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxSuaDoKho", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String SuaDoKho(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try{
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			int mdk = Integer.parseInt(request.getParameter("MaDoKho"));
+			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
+			Dokho DoKho = doKhoService.LayDoKhoByMa(mdk);
+			CauHoi.setDokho(DoKho);
+			cauHoiService.SuaCauHoi(CauHoi);
+			
+		} catch(Exception e) {
+			System.out.println("Loi khi click do kho");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxSuaDangCauHoi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String SuaDangCauHoi(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try{
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			int mdch = Integer.parseInt(request.getParameter("MaDangCauHoi"));
+			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
+			System.out.println("IN IN IN "+mdch);
+			Dangcauhoi DangCauHoi = dangCauHoiService.LayDangCauHoiByMa(mdch);
+			CauHoi.setDangcauhoi(DangCauHoi);
+			cauHoiService.SuaCauHoi(CauHoi);
+			
+		} catch(Exception e) {
+			System.out.println("Loi khi click dang cau hoi");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxSuaDapAnDung", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String SuaDapAnDung(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try{
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
+			String dapandung = request.getParameter("DapAnDung");
+			System.out.println("IN IN IN "+dapandung);
+			CauHoi.setChDapandung(dapandung);
+			cauHoiService.SuaCauHoi(CauHoi);
+			
+		} catch(Exception e) {
+			System.out.println("Loi khi click dap an dung");
 		}
 		return result;
 	}

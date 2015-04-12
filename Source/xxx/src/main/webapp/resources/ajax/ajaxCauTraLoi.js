@@ -14,7 +14,8 @@ function LuuCauTraLoi() {
 	});
 }
 
-function ThemCauTraLoi(i) {
+function ThemCauTraLoi() {
+	/*
     $.ajax({
     	data:"MaDeThi="+$("#msdt").val(),
     	url: "AjaxLayMaxIdCauHoi",
@@ -23,7 +24,8 @@ function ThemCauTraLoi(i) {
     		$("#idmsch").html("<input type='hidden' id='msch' name = 'msch' value='"+result+"'>");
     	},
     	error: function() {
-    		
+    		alert("Loi khi them cau tra loi");
     	}
-    });
+    });*/
 }
+

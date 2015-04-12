@@ -54,6 +54,7 @@
 <script
 	src="<c:url value="/resources/js/plugins/char_counter.min.js" />"></script>
 <script src="<c:url value="/resources/js/tabnoidungcauhoi.js" />"></script>
+<script src="<c:url value="/resources/js/modal.js" />" ></script>
 <script src="<c:url value="/resources/ajax/ajaxCauHoi.js" />"></script>
 <script src="<c:url value="/resources/ajax/ajaxCauTraLoi.js" />"></script>
 	   
