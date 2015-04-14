@@ -16,4 +16,8 @@ public interface CauTraLoiService {
 	Cautraloi LayCauTraLoiByMa(Integer maCauTraLoi);
 	
 	Integer LayMaxCauTraLoi(Integer maCauHoi);
+	
+	public List<Integer> ListIdCauTraLoi(Integer maCauHoi);
+	
+	void ResetMaxIdCTL(Integer maCauHoi);
 }

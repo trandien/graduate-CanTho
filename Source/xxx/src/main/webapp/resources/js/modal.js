@@ -322,7 +322,7 @@ function TaoCauHoi() {
 		         ketqua+=			"<button style='margin-top: 7px; margin-bottom: 30px;'"; 
 		         ketqua+=			"id='luu-cau-tra-loix-"+sttCauHoi+"-"+bid+"' onclick='LuuCauTraLoi()' hidden >Lưu </button>";
 		         ketqua+=			"<button id='xong-cau-tra-loix-"+sttCauHoi+"-"+bid+"' onclick='XongCauTraLoi("+bid+")' style='margin-top: 7px; margin-bottom: 30px;' class='btn btn-success acXongCTLModal'>Xong </button>";
-		         ketqua+=			"<button class='pull-right acSuaCTLModal' id='sua-cau-tra-loix-"+sttCauHoi+"-"+bid+"' onclick='SuaCauTraLoi("+bid+")' style='margin-top: 7px; margin-bottom: 30px;' hidden > Sửa</button>";
+		         ketqua+=			"<button class='pull-right acSuaCTLModal' id='sua-cau-tra-loix-"+sttCauHoi+"-"+bid+"' style='margin-top: 7px; margin-bottom: 30px;' hidden > Sửa</button>";
 		         ketqua+=			"<button id='xoa-cau-tra-loix-"+sttCauHoi+"-"+bid+"' name='xoa-cau-tra-loix-"+sttCauHoi+"-"+bid+"' onclick='XoaCauTraLoi("+bid+")' class='btn btn-danger acXoaCTLModal'>Xóa</button>";
 		         ketqua+=		"</section>";
 		         ketqua+=	"</th>";

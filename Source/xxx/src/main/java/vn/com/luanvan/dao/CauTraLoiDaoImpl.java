@@ -96,13 +96,44 @@ public class CauTraLoiDaoImpl implements CauTraLoiDao {
 			Query query = sessionFactory
 					.getCurrentSession()
 					.createSQLQuery(
-							"select max(msctrl) from Cautraloi ctl WHERE clt.msch=:msch");
+							"select max(msctl) from Cautraloi WHERE msch=:msch");
 			query.setParameter("msch", maCauHoi);
 			ketQua = (Integer) query.uniqueResult();
 		} catch (Exception e) {
 			System.out.println("LayMaxCauTraLoi: Loi Lay Max Cau Tra Loi");
 		}
 		return ketQua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Integer> ListIdCauTraLoi(Integer maCauHoi) {
+		List<Integer>ketqua = new ArrayList<Integer>();
+		List<Cautraloi> cautraloi = new ArrayList<Cautraloi>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from Cautraloi ctl WHERE ctl.cauhoi.msch=:msch");
+			query.setParameter("msch", maCauHoi);
+			cautraloi =  query.list();
+			for(Cautraloi a : cautraloi) {
+				ketqua.add(a.getMsctl());
+			}
+		} catch(Exception e) {
+			System.out.println("ListIdCauTraLoi: Loi List Id Cau Tra Loi "+e.getMessage());
+		}
+		return ketqua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public void ResetMaxIdCTL(Integer maCauHoi) {
+		try	{
+			Query query = sessionFactory.getCurrentSession().createSQLQuery("ALTER TABLE Cautraloi AUTO_INCREMENT=:value");
+			int idReset = LayMaxCauTraLoi(maCauHoi) + 1;
+			query.setParameter("value", idReset);
+			System.out.println("Reset xong");
+		} catch(Exception e) {
+			System.out.println("Loi khi reset max id CTL: "+e.getMessage());
+		}
 	}
 
 }

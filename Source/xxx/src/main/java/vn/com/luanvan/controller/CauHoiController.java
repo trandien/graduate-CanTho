@@ -107,18 +107,11 @@ public class CauHoiController {
 		CauHoi.setChNoidungcauhoi(noiDungCauHoi);
 		CauHoi.setChDiem(diem);
 		CauHoi.setChDapandung(dapAnDung);
-		System.out.println("Diem "+tang.getDiem());
-		System.out.println("msdt "+tang.getMsdt());
-		System.out.println("Noi dung cau hoi "+tang.getNoiDungCauHoi());
-		System.out.println("Do kho "+tang.getMaDoKho());
-		System.out.println("Ma dang cau hoi "+tang.getMaDangCauHoi());
-		System.out.println("noidung tra loi: "+tang.getNoiDungCauTraLoi().size());
 		cauHoiService.ThemCauHoi(CauHoi);
 		Cautraloi CauTraLoi = new Cautraloi();
 		for(String ndctl : noiDungCauTraLoi) {
 			CauTraLoi.setCtlNoidung(ndctl);
 			CauTraLoi.setCauhoi(CauHoi);
-			System.out.println("Cau tra loi "+CauTraLoi.getCtlNoidung());
 			cauTraLoiService.ThemCauTraLoi(CauTraLoi);
 		}
 		
@@ -233,7 +226,6 @@ public class CauHoiController {
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
 			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
 			String dapandung = request.getParameter("DapAnDung");
-			System.out.println("IN IN IN "+dapandung);
 			CauHoi.setChDapandung(dapandung);
 			cauHoiService.SuaCauHoi(CauHoi);
 			

@@ -41,5 +41,15 @@ public class CauTraLoiServiceImpl implements CauTraLoiService{
 		return cauTraLoiDao.LayMaxCauTraLoi(maCauHoi);
 	}
 
+	@Override
+	public List<Integer> ListIdCauTraLoi(Integer maCauHoi) {
+		return cauTraLoiDao.ListIdCauTraLoi(maCauHoi);
+	}
+
+	@Override
+	public void ResetMaxIdCTL(Integer maCauHoi) {
+		cauTraLoiDao.ResetMaxIdCTL(maCauHoi);
+	}
+
 	
 }

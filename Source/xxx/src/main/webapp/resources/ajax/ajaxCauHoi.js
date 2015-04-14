@@ -31,7 +31,6 @@ function AjaxSuaCauHoi(msch){
 		type: "POST",
 		url: "AjaxSuaCauHoi",
 		success: function(result) {
-			alert("Sua cau hoi thanh cong");
 		},
 		error: function(result) {
 			alert("Loi khi Sua cau hoi");
@@ -136,16 +135,29 @@ function AjaxSuaDapAnDung(msch){
         	dapandung = $("#hienthicautraloi-"+msch+"-"+tam).html();
         	$("#kq-dapandung-"+msch).html(dapandung);
     } else if(isCheck.length > 1){
-         for(var k=0; k<isCheck.length; k++) {
-         	tam = isCheck[k].split("-")[2];
-         	dapandung = $("#hienthicautraloi-"+msch+"-"+tam).html();
-         	$("#kq-dapandung-"+msch).append(dapandung);
-         }
+    	$.ajax({
+   		 data: "MaCauHoi="+msch,
+   		 url: "AjaxLayListIdCTL",
+   		 type: "POST",
+   		 success : function(list) {
+   			 listIdCTL = list.split("-");
+   			for(var k=0; k<listIdCTL.length; k++) {
+   	         	tam = isCheck[k].split("-")[2];
+   	         	dapandung = $("#hienthicautraloi-"+msch+"-"+listIdCTL[k]).html();
+   	         	$("#kq-dapandung-"+msch).append(dapandung);
+   	         }
+   		 },
+   		 error : function(list){
+   			 alert("Loi lay list id ctl");
+   		 }
+   	 
+   	 });
+         
     	} else {
     		// trường hợp điền vào chổ trống sẽ lấy đáp án trực tiếp từ câu hỏi.
     	//	$("#kq-dapandung-"+i).html(dienvaochotrong);
     	}
-	 alert(dapandung);
+	 
 		$.ajax({
 		data: "MaCauHoi="+msch+"&DapAnDung="+dapandung,
 		url: "AjaxSuaDapAnDung",
