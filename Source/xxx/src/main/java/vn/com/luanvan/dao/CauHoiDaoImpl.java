@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.LongType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,26 +72,10 @@ public class CauHoiDaoImpl implements CauHoiDao {
 			Query query = sessionFactory.getCurrentSession().createSQLQuery(
 					"select max(msch) from Cauhoi ch, Dethi dt WHERE ch.msdt=dt.msdt AND dt.dt_nguoirade=:taiKhoan");
 			query.setParameter("taiKhoan", taiKhoan);
-
 			ketQua = (Integer) query.uniqueResult();
 		} catch (Exception e) {
 			System.out.println("LayMaxIdCauHoi: Loi lay ma cau hoi "
 					+ e.getMessage());
-		}
-		return ketQua;
-	}
-
-	@Override
-	public Integer CountIdCauHoi(Integer maDeThi) {
-		int ketQua = 0;
-		try {
-			Query query = sessionFactory.getCurrentSession().createSQLQuery(
-					"select count(msch) from Cauhoi WHERE msdt=:maDeThi");
-			query.setInteger("maDeThi", maDeThi);
-
-			ketQua = (Integer) query.uniqueResult();
-		} catch (Exception e) {
-			System.out.println("CountIdCauHoi: Loi lay ma cau hoi");
 		}
 		return ketQua;
 	}
@@ -121,6 +107,42 @@ public class CauHoiDaoImpl implements CauHoiDao {
 
 		}
 		return CauHoi;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Integer> ListIdCauHoi(Integer maDeThi) {
+		List<Integer>ketqua = new ArrayList<Integer>();
+		List<Cauhoi> cautraloi = new ArrayList<Cauhoi>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from Cauhoi ch WHERE ch.dethi.msdt=:msdt");
+			query.setParameter("msdt", maDeThi);
+			cautraloi =  query.list();
+			for(Cauhoi a : cautraloi) {
+				ketqua.add(a.getMsch());
+			}
+		} catch(Exception e) {
+			System.out.println("ListIdCauHoi: Loi List Id Cau Tra Hoi "+e.getMessage());
+		}
+		return ketqua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Integer> ListDoKho(Integer maDeThi) {
+		List<Integer>ketqua = new ArrayList<Integer>();
+		List<Cauhoi> cautraloi = new ArrayList<Cauhoi>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("from Cauhoi ch WHERE ch.dethi.msdt=:msdt");
+			query.setParameter("msdt", maDeThi);
+			cautraloi =  query.list();
+			for(Cauhoi a : cautraloi) {
+				ketqua.add(a.getDokho().getMsdk());
+			}
+		} catch(Exception e) {
+			System.out.println("ListIdCauHoi: Loi List Id Cau Tra Hoi "+e.getMessage());
+		}
+		return ketqua;
 	}
 
 }

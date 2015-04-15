@@ -4,6 +4,69 @@ function AjaxLuuDeThi() {
 	var ChuDe = $("#chuDe").val();
 	var MonHoc = $("#monHoc").val();
 	var HeSo = $("#heSo").val();
+	var TrangThai = jQuery("input[name='trangThai']:checked").val();
+	var ThoiGianLamBai = $("#thoiGian").val();
+	var NgayTaoDe = $("#ngayTaoDe").val();
+	var DanDo = $("#danDo").val();
+	var SoLanChoPhep = $("#soLanChoPhep").val();
+	var MatKhauDeThi = $("#matKhauDeThi").val();
+	if(TenDe=="" || ThoiGianLamBai=="" || NgayTaoDe=="" || SoLanChoPhep == "") {
+		if(TenDe=="") {
+			$("#tenDe").addClass("empty-input");
+			$("#thongbao_tende").html("<span style='color: #a94442'>Tên đề không được bỏ trống</span>");
+		} 
+		if(ThoiGianLamBai=="") {
+			$("#thoiGian").addClass("empty-input");
+			$("#thongbao_thoigian").html("<span style='color: #a94442'>Thời gian làm bài không được bỏ trống</span>");
+		}
+		if(NgayTaoDe=="") {
+			$("#ngayTaoDe").addClass("empty-input");
+			$("#thongbao_ngaytaode").html("<span style='color: #a94442'>Ngày tạo đề không được bỏ trống</span>");
+		}
+		if(SoLanChoPhep=="") {
+			$("#soLanChoPhep").addClass("empty-input");
+			$("#thongbao_solanchophep").html("<span style='color: #a94442'>Số lần cho phép thi không được bỏ trống</span>");
+		}
+		return;
+	}
+	var ketqua = "";
+	$.ajax({
+		data : "TenDe=" + $("#tenDe").val()
+				+ "&NienKhoa=" + $("#nienKhoan").val()
+				+ "&HocKy=" + $("#hocKy").val()
+				+ "&ChuDe=" + $("#chuDe").val()
+				+ "&MonHoc=" + $("#monHoc").val()
+				+ "&HeSo=" + $("#heSo").val()
+				+ "&TrangThai=" + jQuery("input[name='trangThai']:checked").val()
+				+ "&ThoiGian=" + $("#thoiGian").val()
+				+ "&NgayTaoDe=" + $("#ngayTaoDe").val()
+				+ "&DanDo=" + $("#danDo").val()
+				+ "&SoLanChoPhep=" + $("#soLanChoPhep").val()
+				+ "&MatKhauDeThi=" + $("#matKhauDeThi").val(),
+		type : "POST",
+		url : "AjaxLuuDeThi",
+		success : function(result) {
+			
+			ketqua += "<input type='hidden' id='msdt' name='msdt' value='"+result+"'>";
+			$("#ketquathemdethi").html(ketqua);
+			$.growlUI('Thêm đề thi thành công'); 
+			$("#luu-thong-tin").remove();
+			$("#sua-thong-tin").prop("class", "btn btn-success");
+		},
+		error : function() {
+			alert("Thêm thất bại");
+		}
+
+	});
+}
+
+function AjaxSuaThongTinDeThi() {
+	var msdt = $("#msdt").val();
+	var TenDe = $("#tenDe").val();
+	var NienKhoa = $("#nienKhoan").val();
+	var ChuDe = $("#chuDe").val();
+	var MonHoc = $("#monHoc").val();
+	var HeSo = $("#heSo").val();
 	var TrangThai = $("#trangThai").val();
 	var ThoiGianLamBai = $("#thoiGian").val();
 	var NgayTaoDe = $("#ngayTaoDe").val();
@@ -37,19 +100,21 @@ function AjaxLuuDeThi() {
 				+ "&ChuDe=" + $("#chuDe").val()
 				+ "&MonHoc=" + $("#monHoc").val()
 				+ "&HeSo=" + $("#heSo").val()
-				+ "&TrangThai=" + $("#trangThai").val()
+				+ "&TrangThai=" + jQuery("input[name='trangThai']:checked").val()
 				+ "&ThoiGian=" + $("#thoiGian").val()
 				+ "&NgayTaoDe=" + $("#ngayTaoDe").val()
 				+ "&DanDo=" + $("#danDo").val()
 				+ "&SoLanChoPhep=" + $("#soLanChoPhep").val()
-				+ "&MatKhauDeThi=" + $("#matKhauDeThi").val(),
+				+ "&MatKhauDeThi=" + $("#matKhauDeThi").val()
+				+ "&MaDeThi="+$("#msdt").val(),
 		type : "POST",
-		url : "AjaxLuuDeThi",
+		url : "AjaxSuaThongTinDeThi",
 		success : function(result) {
-			
-			ketqua += "<input type='hidden' id='msdt' name='msdt' value='"+result+"'>";
+			var ketqua = "<input type='hidden' id='msdt' name='msdt' value='"+result+"'>";
 			$("#ketquathemdethi").html(ketqua);
-			$.growlUI('Thêm đề thi thành công'); 
+			$.growlUI('Sửa đề thi thành công'); 
+			$("#luu-thong-tin").remove();
+			$("#sua-thong-tin").prop("class", "btn btn-success");
 		},
 		error : function() {
 			alert("Thêm thất bại");
@@ -72,4 +137,16 @@ function AjaxXoaDeThi(maDe) {
 		}
 	});
 }
+
+function showPassword(){
+	var isCheck = $("#showPassword").is(':checked');
+	if(isCheck) {
+		$("#matKhauDeThi").prop('type', 'text');
+	} else {
+		$("#matKhauDeThi").prop('type', 'password');
+	}
+}
+
+
+
 

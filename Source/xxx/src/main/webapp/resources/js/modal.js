@@ -262,7 +262,7 @@ function TaoCauHoi() {
 	                    tam++;
 	                 } else {}
 	    			if($("#editorcauhoix-"+sttCauHoi).val().length == 1) {
-			        	$("#hienthicuahoix-"+sttCauHoi).html("<span style='color: #a94442'>Lưu ý: câu hỏi không được bỏ trống</span>");
+			        	$("#hienthicuahoix-"+sttCauHoi).html("<span style='color: #a94442'>Lưu ý: Câu hỏi không được bỏ trống</span>");
 			        	tam++;
 			        } else {
 			        }

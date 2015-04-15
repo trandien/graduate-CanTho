@@ -234,6 +234,49 @@ public class CauHoiController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/AjaxLaySLCauHoi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String LaySLCauHoi(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try{
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			int kq = cauHoiService.listCauHoi(msdt).size();
+			result = String.valueOf(kq);
+		} catch(Exception e) {
+			System.out.println("Loi khi lay sl cau hoi");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxLayListIdCH", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String LayListIdCH(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		if (isLogin(session)) {
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			List<Integer> listIdCH = cauHoiService.ListIdCauHoi(msdt);
+			for(int i=0; i<listIdCH.size(); i++) {
+				result += String.valueOf(listIdCH.get(i)) +"-";
+			}
+		}
+		
+		System.out.println("List Id cau hoi: "+result);
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxLayListDoKho", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String LayListDoKho(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		if (isLogin(session)) {
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			List<Integer> listIdCH = cauHoiService.ListDoKho(msdt);
+			for(int i=0; i<listIdCH.size(); i++) {
+				result += String.valueOf(listIdCH.get(i)) +"-";
+			}
+		}
+		
+		System.out.println("List do kho: "+result);
+		return result;
+	}
 }
 
 

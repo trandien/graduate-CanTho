@@ -246,7 +246,7 @@
 											<c:if test="${dethi.chude.mscd == chude.mscd}">
 											<ul class="list-content">
 												<li class="list-item" data-toggle="modal"
-													data-target="#myModal" id="dethi_${dethi.msdt }">
+													data-target="#myModal" id="dethi_${dethi.msdt }" href="De-Thi.html?msdt=${dethi.msdt }">
 													<div class="list-item-id sr-only">1</div>
 													<div class="list-item-title">${dethi.dtTende }</div>
 													<div class="list-item-info">

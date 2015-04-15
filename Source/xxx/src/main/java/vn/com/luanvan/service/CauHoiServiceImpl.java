@@ -32,11 +32,6 @@ public class CauHoiServiceImpl implements CauHoiService {
 	}
 
 	@Override
-	public Integer CountIdCauHoi(Integer maDeThi) {
-		return cauHoiDao.CountIdCauHoi(maDeThi);
-	}
-
-	@Override
 	public List<Cauhoi> listCauHoi(Integer maDeThi) {
 		return cauHoiDao.listCauHoi(maDeThi);
 	}
@@ -44,6 +39,16 @@ public class CauHoiServiceImpl implements CauHoiService {
 	@Override
 	public Cauhoi LayCauHoiByMa(Integer maCauHoi) {
 		return cauHoiDao.LayCauHoiByMa(maCauHoi);
+	}
+
+	@Override
+	public List<Integer> ListIdCauHoi(Integer maDeThi) {
+		return cauHoiDao.ListIdCauHoi(maDeThi);
+	}
+
+	@Override
+	public List<Integer> ListDoKho(Integer maDeThi) {
+		return cauHoiDao.ListDoKho(maDeThi);
 	}
 
 	

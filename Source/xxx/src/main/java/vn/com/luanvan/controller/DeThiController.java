@@ -104,28 +104,10 @@ public class DeThiController {
 			String danDo = request.getParameter("DanDo");
 			String soLanChoPhepThi = request.getParameter("SoLanChoPhep");
 			String matKhauDeThi = request.getParameter("MatKhauDeThi");
-	/*		
-			
-			System.out.println("Ten De: " + tenDe);
-			System.out.println("Nien Khoa: " + nienKhoa);
-			System.out.println("Hoc Ky: " + hocKy);
-			System.out.println("Chu De: " + mscd);
-			System.out.println("Mon Hoc: " + monHoc);
-			System.out.println("Dang Thi: " + dangThi);
-			System.out.println("Trang thai: " + trangThai);
-			System.out.println("Thoi gian lam bai: " + thoiGianLamBai);
-			System.out.println("Ngay tao de: " + ngayTaoDe);
-			System.out.println("Dan do: " + danDo);
-			System.out.println("So lan cho phep thi: " + soLanChoPhepThi);
-			System.out.println("mat khau de thi: " + matKhauDeThi);
-			*/
 			SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
 		//	String ngayCapNhat = dinhDangThoiGian.format(thoiGian.getTime());
 			Date thoiGianTaoDe = dinhDangThoiGian.parse(ngayTaoDe);
 		//	Date ngayCapNhat = new Date();
-			
-			
-			
 			DeThi.setDtTende(tenDe);
 			DeThi.setDtMatkhau(matKhauDeThi);
 			DeThi.setDtNgaycapnhat(null);
@@ -133,7 +115,7 @@ public class DeThiController {
 			DeThi.setDtNgaytaode(thoiGianTaoDe);
 			DeThi.setDtSolanchophep(Integer.parseInt(soLanChoPhepThi));
 			DeThi.setDtThoigianlambai(Integer.parseInt(thoiGianLamBai));
-			DeThi.setDtTrangthai(Boolean.parseBoolean(trangThai));
+			DeThi.setDtTrangthai(Integer.parseInt(trangThai));
 			DeThi.setDtNguoirade(taiKhoan);
 			
 
@@ -161,20 +143,69 @@ public class DeThiController {
 			deThiService.ThemDeThi(DeThi);
 			int msdt = deThiService.LayMaxDeThiByTaiKhoan(taiKhoan);
 			System.out.println("msdt: " + msdt);
-		/*	
+			System.out.println("Them thanh cong");
 			
-			result +="<input type='hidden' value='"+msdt+"' id='msdt' name='msdt'>";
-			result += "<div id='myElem'>";
-			result += "<div class='modal-body' style='width: 50%;'>";
-			result += "<div class='alert alert-success text-center'>";
-			result +="<button type='button' class='close' data-dismiss='alert'";
-			result +="aria-hidden='true'>&times;</button>";
-			result += "Thêm đề thi thành công";
-			result +="</div>";
-			result +="</div>";
-			result +="</div>";
+			return String.valueOf(msdt);
+		} else {
+			return result;
+		}
+	}
+	
+	@RequestMapping(value = "/AjaxSuaThongTinDeThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String SuaDeThi(ModelAndView model,
+			HttpSession session, HttpServletRequest request)
+			throws ParseException {
+		String result="";
+		if (isLogin(session)) {
+			User user = (User) session.getAttribute("user");
+			String taiKhoan = user.getNdTaikhoan();
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			System.out.println("Ham de thi duoc goi");
+			Dethi DeThi = deThiService.LayDeThiByMa(msdt);
+			String tenDe = request.getParameter("TenDe");
+			String nienKhoa = request.getParameter("NienKhoa");
+			String hocKy = request.getParameter("HocKy");
+			String mscd = request.getParameter("ChuDe");
+			String monHoc = request.getParameter("MonHoc");
+			String dangThi = request.getParameter("HeSo");
+			String trangThai = request.getParameter("TrangThai");
+			String thoiGianLamBai = request.getParameter("ThoiGian");
+			String ngayTaoDe = request.getParameter("NgayTaoDe");
+			String danDo = request.getParameter("DanDo");
+			String soLanChoPhepThi = request.getParameter("SoLanChoPhep");
+			String matKhauDeThi = request.getParameter("MatKhauDeThi");
+			SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
+		//	String ngayCapNhat = dinhDangThoiGian.format(thoiGian.getTime());
+			Date thoiGianTaoDe = dinhDangThoiGian.parse(ngayTaoDe);
+		//	Date ngayCapNhat = new Date();
+			DeThi.setDtTende(tenDe);
+			DeThi.setDtMatkhau(matKhauDeThi);
+			DeThi.setDtNgaycapnhat(null);
+			DeThi.setDtDando(danDo);
+			DeThi.setDtNgaytaode(thoiGianTaoDe);
+			DeThi.setDtSolanchophep(Integer.parseInt(soLanChoPhepThi));
+			DeThi.setDtThoigianlambai(Integer.parseInt(thoiGianLamBai));
+			DeThi.setDtTrangthai(Integer.parseInt(trangThai));
+			DeThi.setDtNguoirade(taiKhoan);
 			
-			*/
+			Nienkhoa NienKhoa = new Nienkhoa();
+			Hocky HocKy = new Hocky(Integer.parseInt(hocKy));
+			Chude ChuDe = new Chude();
+			Monhoc MonHoc = new Monhoc();
+			Dangthi DangThi = new Dangthi();
+			
+			ChuDe = chuDeService.LayChuDeByMa(Integer.parseInt(mscd));
+			MonHoc = monHocService.LayMonHocByMa(Integer.parseInt(monHoc));
+			NienKhoa = nienKhoaService.TimNienKhoaByMa(Integer.parseInt(nienKhoa));
+			DangThi = dangThiService.TimDangThiByMa(Integer.parseInt(dangThi));
+			
+			DeThi.setChude(ChuDe);
+			DeThi.setMonhoc(MonHoc);
+			DeThi.setNienkhoa(NienKhoa);
+			DeThi.setDangthi(DangThi);
+			DeThi.setHocky(HocKy);
+			
+			deThiService.SuaDeThi(DeThi);
 			System.out.println("Them thanh cong");
 			
 			return String.valueOf(msdt);

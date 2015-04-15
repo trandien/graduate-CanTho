@@ -35,7 +35,19 @@ function SuaCauTraLoi(msch, msctl) {
 		url: "AjaxSuaCauTraLoi",
 		type: "POST",
 		success: function(result) {
-			alert("Sua cau tra loi thanh cong");
+			var editor = $("#editorcautraloi-"+msch+"-"+msctl);
+    		var hienthi = $("#hienthicautraloi-"+msch+"-"+msctl);
+  			 if(editor.val().length == 0) {
+		        	hienthi.html("<span style='color: #a94442'>Lưu ý: Câu trả lời không được bỏ trống</span>");
+		        	return;
+		        } else {
+		        	hienthi.html(editor.val());
+		        }
+  			editor.editable('destroy');
+  			editor.hide();
+  			$("#sua-cau-tra-loi-"+msch+"-"+msctl).prop("class", "btn btn-success acSuaCTL");
+  			$("#sua-cau-tra-loi-"+msch+"-"+msctl).show();
+  			$("#xong-cau-tra-loi-"+msch+"-"+msctl).hide();
 		}, 
 		error: function () {
 			alert("Sua cau tra loi that bai");
@@ -102,6 +114,20 @@ function CapNhatCTL(msch, msctl) {
 		type: "POST",
 		success : function(result) {
 			$("#xong-cau-tra-loi-"+msch+"-"+msctl).attr('onclick', "SuaCauTraLoi("+msch+","+msctl+")");
+			var editor = $("#editorcautraloi-"+msch+"-"+msctl);
+    		var hienthi = $("#hienthicautraloi-"+msch+"-"+msctl);
+  			 if(editor.val().length == 0) {
+		        	hienthi.html("<span style='color: #a94442'>Lưu ý: Câu trả lời không được bỏ trống</span>");
+		        	return;
+		        } else {
+		        	hienthi.html(editor.val());
+		        }
+  			editor.editable('destroy');
+  			editor.hide();
+  			$("#sua-cau-tra-loi-"+msch+"-"+msctl).prop("class", "btn btn-success acSuaCTL");
+  			$("#sua-cau-tra-loi-"+msch+"-"+msctl).show();
+  			$("#xong-cau-tra-loi-"+msch+"-"+msctl).hide();
+  			 $("#dapandung-"+msch).show();
 		},
 		error : function(result) {
 			alert("loi khi cap nhat ctl");
@@ -157,6 +183,17 @@ function CapNhatCTL(msch, msctl) {
 				         ketqua+="</tr>";
 				         document.getElementById("kq-themcautraloi-"+msch).innerHTML+= ketqua;
 				         $("#editorcautraloi-"+msch+"-"+slctl).editable({inlineMode: false});
+				         var maDangCauHoi = jQuery("input[name=dangcauhoi-"+msch+"]:checked").val();
+					     var typeMaDangCauHoi = "";
+					     if(maDangCauHoi == 1) {
+					    	 typeMaDangCauHoi = 'radio';
+					    } else if(maDangCauHoi == 2) {
+					    	 typeMaDangCauHoi = 'checkbox';
+					    } 
+				         $("#dapandung-"+msch).append("" +
+				         		"<input name='dapandung-"+msch+"' onclick='AjaxSuaDapAnDung("+msch+")' class='dapandung-"+msch+"' type='"+typeMaDangCauHoi+"' id='iddapandung-"+msch+"-"+slctl+"'>" +
+				         		"<span id='kitu-"+msch+"-"+slctl+"'style='margin-left: 10px; margin-right: 40px;'>"+kitu+"</span>");
+				         $("#dapandung-"+msch).hide();
 					},
 					error : function(maxId) {
 						

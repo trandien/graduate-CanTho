@@ -117,10 +117,10 @@
 						<td>
 							<div class="radio">
 								<label> <input type="radio" name="trangThai"
-									id="trangThai" value="false" checked="checked"> <span>Đóng&nbsp;&nbsp;&nbsp;</span>
+									id="trangThai" checked="checked" value="0"> <span>Đóng&nbsp;&nbsp;&nbsp;</span>
 
 								</label> <label> <input type="radio" name="trangThai" id="trangThai"
-									value="true"> <span>Mở</span>
+									value="1"> <span>Mở</span>
 								</label>
 							</div>
 						</td>
@@ -175,7 +175,7 @@
 							type="password" name="matKhauDeThi"
 							style="width: 50%; margin-bottom: 10px;">
 							<div class="checkbox">
-								<label> <input type="checkbox" value=""> Hiện
+								<label> <input type="checkbox" value="" onclick="showPassword()" id="showPassword"> Hiện
 									mật khẩu
 								</label>
 							</div></td>
@@ -186,6 +186,7 @@
 						<td></td>
 						<td>
 							<button id="luu-thong-tin" class="btn btn-primary" onClick="AjaxLuuDeThi()">Lưu thông tin đề thi </button>
+							<button hidden id="sua-thong-tin" onClick="AjaxSuaThongTinDeThi()">Sửa thông tin đề thi </button>
 						</td>
 
 						<td></td>

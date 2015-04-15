@@ -37,7 +37,7 @@ public class Dethi  implements java.io.Serializable {
      private Nienkhoa nienkhoa;
      private String dtTende;
      private int dtThoigianlambai;
-     private boolean dtTrangthai;
+     private int dtTrangthai;
      private String dtMatkhau;
      private Date dtNgaytaode;
      private Date dtNgaycapnhat;
@@ -54,7 +54,7 @@ public class Dethi  implements java.io.Serializable {
     }
 
 	
-    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, boolean dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, int dtSolanchophep) {
+    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, int dtSolanchophep) {
         this.chude = chude;
         this.dangthi = dangthi;
         this.hocky = hocky;
@@ -68,7 +68,7 @@ public class Dethi  implements java.io.Serializable {
         this.dtNgaycapnhat = dtNgaycapnhat;
         this.dtSolanchophep = dtSolanchophep;
     }
-    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, boolean dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, Set<Kithi> kithis, Set<Cauhoi> cauhois, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> thi) {
+    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, Set<Kithi> kithis, Set<Cauhoi> cauhois, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> thi) {
        this.chude = chude;
        this.dangthi = dangthi;
        this.hocky = hocky;
@@ -173,11 +173,11 @@ public class Dethi  implements java.io.Serializable {
 
     
     @Column(name="DT_TRANGTHAI", nullable=false)
-    public boolean isDtTrangthai() {
+    public int isDtTrangthai() {
         return this.dtTrangthai;
     }
     
-    public void setDtTrangthai(boolean dtTrangthai) {
+    public void setDtTrangthai(int dtTrangthai) {
         this.dtTrangthai = dtTrangthai;
     }
 

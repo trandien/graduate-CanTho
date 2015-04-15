@@ -13,9 +13,11 @@ public interface CauHoiDao {
 	
 	int LayMaxIdCauHoi(String taiKhoan);
 	
-	Integer CountIdCauHoi(Integer maDeThi);
-	
 	List<Cauhoi> listCauHoi (Integer maDeThi);
+	
+	List<Integer> ListIdCauHoi(Integer maDeThi);
+	
+	List<Integer> ListDoKho(Integer maDeThi);
 	
 	Cauhoi LayCauHoiByMa(Integer maCauHoi);
 }

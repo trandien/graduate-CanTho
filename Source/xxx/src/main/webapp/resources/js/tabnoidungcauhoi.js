@@ -34,7 +34,7 @@ function showCauHoi(maDangCauHoi, maDoKho, noiDungCauHoi, diem, dapAnDung, msdt,
 	result += " </div>";
 	
 	result += " <div id='icon-delete-cauhoi' class='card-delete' style='width: 30px; height: 30px;'>";
-	result += " <span title='Xóa câu hỏi' data-toggle='modal' href='#modal-id' class='glyphicon glyphicon-trash' style='height: 30px; font-size: 30px; margin-top: 20px;'></span>";
+	result += " <span title='Xóa câu hỏi' data-toggle='modal' href='#modal-id"+msch+"' class='glyphicon glyphicon-trash' style='height: 30px; font-size: 30px; margin-top: 20px;'></span>";
 	result += " </div>";
 	
 	result += " </div>";
@@ -96,19 +96,18 @@ function showCauHoi(maDangCauHoi, maDoKho, noiDungCauHoi, diem, dapAnDung, msdt,
 	result += " </div>";
 	result += " </div>";
 	result += ModalXoaCauHoi(msch);
-	
      
 	return result;
 }
 
 function ModalXoaCauHoi(msch){
 	var result = "";
-	result += " <div class='modal fade' id='modal-id'>";
+	result += " <div class='modal fade' id='modal-id"+msch+"'>";
 	result += " 		<div class='modal-dialog'>";
 	result += " 			<div class='modal-content'>";
 	result += " 				<div class='modal-header'>";
 	result += " 	<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
-	result += " 	<h4 class='modal-title'>Thông báo</h4>";
+	result += " 	<h4 class='modal-title'>Xóa câu hỏi</h4>";
 	result += " 				</div>";
 	result += " 				<div class='modal-body'>";
 	result += " Bạn muốn xóa câu hỏi.<br> <b>";
@@ -252,7 +251,7 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
     			$("#xong-cau-hoi-"+sttCauHoi).show();
     			$("#sua-cau-hoi-"+sttCauHoi).hide();
     		});
-		        
+	/*	        
 		        var varDangCauHoi; // trả về dạng câu hỏi đã chọn, dùng để xử lý ở những hàm sau.
 		        $(document).on('change', '.acDangCauHoi', function(){
 		        	var sttCauHoi = $(this).attr('id').split("-")[1];
@@ -283,8 +282,9 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
 		        		$(".dapandung-"+sttCauHoi).hide();
 		        	}
 		        });
-
+*/
 //OK 
+    		 /*
 		        $(document).on('click', '.acXongCH', function (e) {
 		        	var tam = 0;
 		        	var sttCauHoi = $(this).attr('id').split("-")[3];
@@ -336,49 +336,14 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
 	    			$("#sua-cau-hoi-"+sttCauHoi).show();
 	    			$("#xong-cau-hoi-"+sttCauHoi).hide();
 		        });
-    		
+    		*/
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx		        
 		        $(document).on('click', '.acHuyCH', function (e) {
 		        	 var sttCauHoi = $(this).attr('id').split("-")[3];
 		        	 $("#themcauhoi-"+sttCauHoi).hide();
 		        	 --sttCH;
 		        });
-		/*   
-		    $(document).on('click', '.acXongCTL', function (e) {
-		    	
-		    	var sttCauHoi = $(this).attr('id').split("-")[4];
-		    	var sttCTL = $(this).attr('id').split("-")[5];
-		    	var maDangCauHoi = jQuery("input[name=dangcauhoi-"+sttCauHoi+"]:checked").val();
-		    	var typeMaDangCauHoi = "";
-		    	if(maDangCauHoi == 1) {
-		    		typeMaDangCauHoi = 'radio';
-		    	} else if(maDangCauHoi == 2) {
-		    		typeMaDangCauHoi = 'checkbox';
-		    	} 
-		    	
-		    	var capnhatkitu = $("#idClickx").val();
-	    		capnhatkitu = new Number(capnhatkitu);
-	    		var kitu = String.fromCharCode(solanthem + 64);
-	    		var editor = $("#editorcautraloi-"+sttCauHoi+"-"+sttCTL);
-	    		var hienthi = $("#hienthicautraloi-"+sttCauHoi+"-"+sttCTL);
-	  			 if(editor.val().length == 0) {
-			        	hienthi.html("<span style='color: #a94442'>Lưu ý: Câu trả lời không được bỏ trống</span>");
-			        	return;
-			        } else {
-			        	hienthi.html(editor.val());
-			        }
-	  			editor.editable('destroy');
-	  			editor.hide();
-	  			if(sua==0) {
-	  				$("#dapandung-"+sttCauHoi).append("<input name='dapandung-"+sttCauHoi+"' class='dapandung-"+sttCauHoi+"' type='"+typeMaDangCauHoi+"' id='iddapandung-"+sttCauHoi+"-"+sttCTL+"'><span id='kitu-"+sttCauHoi+"-"+sttCTL+"'style='margin-left: 10px; margin-right: 40px;'>"+kitu+"</span>");
-	  			} else {
-	  				sua = 0;
-	  			}
-	  			$("#sua-cau-tra-loi-"+sttCauHoi+"-"+sttCTL).prop("class", "btn btn-success acSuaCTL");
-	  			$("#sua-cau-tra-loi-"+sttCauHoi+"-"+sttCTL).show();
-	  			$("#xong-cau-tra-loi-"+sttCauHoi+"-"+sttCTL).hide();
-		    });
-*/
+		        
 //OK
 		    $(document).on('click', '.acSuaCTL', function (e) {
 		    	var sttCauHoi = $(this).attr('id').split("-")[4];
@@ -475,12 +440,12 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
     			"msdt" : msdt,
     			"noiDungCauTraLoi" : listCauTraLoi
     		};
-    		/*
+    		
     		if (typeof msdt == "undefined") {
     			alert("Bạn vui lòng thêm đề thi trước khi thêm câu hỏi!!");
     			return;
     		}
-    		*/
+    		
     		
     		if(xongCauHoi==0) {
     			alert("Bạn chưa hoàn thành câu hỏi. Vui lòng kiểm tra lại!");
@@ -601,23 +566,19 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
 		    			        			 alert("Loi lay list id ctl");
 		    			        		 }
 		    			        	 
-		    			        	 });
-		    	   			
+		    			        	 }); //the end AjaxLayListIdCTL
 		    			        	 sttCH++;
-		    						
 		    					},
 		    					error: function(){
 		    						alert('Loi khi lax max id cau hoi xxx');
 		    					}
-		    				});
+		    				}); // the end AjaxLayMaxIdCauHoi
     				
     			},
     			error : function(result) {
  //   				$.growlUI('Đã lưu câu hỏi'); 
     				alert('Lỗi khi lưu câu hỏi');
-    				
-    				
     			}
-    		});
+    		}); // the end AjaxLuuCauHoiVaCauTraLoi
     	}
 
