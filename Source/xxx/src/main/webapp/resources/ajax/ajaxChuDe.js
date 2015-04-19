@@ -78,4 +78,70 @@ function AjaxSuaChuDe(mscd) {
 	});
 }
 
+function AjaxLoadDSGV() {
+	var listDSGV = new Array();
+	alert("AutocompleteDSGV duoc goi");
+	$.ajax({
+		data: ({}),
+		type: "POST",
+		url: "AutocompleteLoadGiaoVien",
+		success : function(dsgv) {
+			listDSGV = dsgv.split(";");
+			
+			for(var k=0; k<listDSGV.length - 1; k++) {
+				alert(listDSGV[k]);
+			}
+		},
+		error : function (dsgv) {
+			alert("loi AutocompleteLoadGiaoVien");
+		}
+	});
+}
+/*
+$(document).on('click', '.AjaxLoadDSGV', function (e) {
+	var listDSGV = new Array();
+	alert("AutocompleteDSGV duoc goi");
+	$.ajax({
+		data: ({}),
+		type: "POST",
+		url: "AutocompleteLoadGiaoVien",
+		success : function(dsgv) {
+			listDSGV = dsgv.split(";");
+			
+			for(var k=0; k<listDSGV.length - 1; k++) {
+				alert(listDSGV[k]);
+			}
+		},
+		error : function (dsgv) {
+			alert("loi AutocompleteLoadGiaoVien");
+		}
+	});
+});
+*/
+
+$(document).on('click', '#AjaxLoadDSGV', function (e) {
+	var listDSGV = new Array();
+	$.ajax({
+		cache: false,
+		type: "GET",
+		url: "AutocompleteLoadGiaoVien",
+		contentType : "application/json; charset=utf-8",
+		dataType : "json",
+		processData:false,
+		success: function (data) {
+			$("#AjaxLoadDSGV").html('');
+			$.each(data, function(i,obj){
+				$("#AjaxLoadDSGV").append("'<option value:"+obj.split("-")[0]+">"+obj.split("-")[1]+"</option>})");
+			});
+			
+	        },
+		error : function (data) {
+			alert("loi AutocompleteLoadGiaoVien "+data);
+		}
+	});
+});
+
+
+
+
 

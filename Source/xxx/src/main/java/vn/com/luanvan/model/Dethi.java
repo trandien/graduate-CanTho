@@ -2,14 +2,18 @@ package vn.com.luanvan.model;
 // Generated Mar 30, 2015 9:02:58 AM by Hibernate Tools 4.3.1
 
 
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -44,6 +48,7 @@ public class Dethi  implements java.io.Serializable {
      private String dtDando;
      private int dtSolanchophep;
      private String dtNguoirade;
+     private Integer lancapnhat;
      private Set<Kithi> kithis = new HashSet<Kithi>(0);
      private Set<Cauhoi> cauhois = new HashSet<Cauhoi>(0);
      private Set<Phancongvaitro> phancongvaitros = new HashSet<Phancongvaitro>(0);
@@ -54,7 +59,7 @@ public class Dethi  implements java.io.Serializable {
     }
 
 	
-    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, int dtSolanchophep) {
+    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, int dtSolanchophep, String dtNguoirade) {
         this.chude = chude;
         this.dangthi = dangthi;
         this.hocky = hocky;
@@ -65,10 +70,10 @@ public class Dethi  implements java.io.Serializable {
         this.dtTrangthai = dtTrangthai;
         this.dtMatkhau = dtMatkhau;
         this.dtNgaytaode = dtNgaytaode;
-        this.dtNgaycapnhat = dtNgaycapnhat;
         this.dtSolanchophep = dtSolanchophep;
+        this.dtNguoirade = dtNguoirade;
     }
-    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, Set<Kithi> kithis, Set<Cauhoi> cauhois, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> thi) {
+    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, String dtNguoirade, Integer lancapnhat, Set<Kithi> kithis, Set<Cauhoi> cauhois, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> thi) {
        this.chude = chude;
        this.dangthi = dangthi;
        this.hocky = hocky;
@@ -82,6 +87,8 @@ public class Dethi  implements java.io.Serializable {
        this.dtNgaycapnhat = dtNgaycapnhat;
        this.dtDando = dtDando;
        this.dtSolanchophep = dtSolanchophep;
+       this.dtNguoirade = dtNguoirade;
+       this.lancapnhat = lancapnhat;
        this.kithis = kithis;
        this.cauhois = cauhois;
        this.phancongvaitros = phancongvaitros;
@@ -239,6 +246,15 @@ public class Dethi  implements java.io.Serializable {
     public void setDtNguoirade(String dtNguoirade) {
         this.dtNguoirade = dtNguoirade;
     }
+    
+    @Column(name="LANCAPNHAT")
+    public Integer getLancapnhat() {
+        return this.lancapnhat;
+    }
+    
+    public void setLancapnhat(Integer lancapnhat) {
+        this.lancapnhat = lancapnhat;
+    }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="dethi")
     public Set<Kithi> getKithis() {
@@ -284,9 +300,9 @@ public class Dethi  implements java.io.Serializable {
     public void setThis(Set<Thi> thi) {
         this.thi = thi;
     }
+    
 
-
-
+    
 
 }
 

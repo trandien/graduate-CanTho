@@ -37,4 +37,14 @@ public class PhanCongVaiTroServiceImpl implements PhanCongVaiTroService{
 		return phanCongVaiTroDao.KiemTraTonTaiPhanCongVaiTro(msdt, taiKhoan, msvt, mscd);
 	}
 
+	@Override
+	public Integer getMaxIdByMaDeThi(Integer msdt) {
+		return phanCongVaiTroDao.getMaxIdByMaDeThi(msdt);
+	}
+
+	@Override
+	public Phancongvaitro LayPhanCongVaiTroByMa(Integer mspcvt) {
+		return phanCongVaiTroDao.LayPhanCongVaiTroByMa(mspcvt);
+	}
+
 }

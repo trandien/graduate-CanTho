@@ -7,6 +7,26 @@
 
 <head>
 <meta charset="utf-8">
+ <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+    <script src="<c:url value="/resources/js/jquery.js" />"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css" />" />
+   
+	<link rel="stylesheet" href="<c:url value="/resources/autocomplete/flexselect.css" />" type="text/css" media="screen" />
+	 <script src="<c:url value="/resources/autocomplete/liquidmetal.js" />" type="text/javascript"></script>
+	 <script src="<c:url value="/resources/autocomplete/jquery.flexselect.js" />" type="text/javascript"></script>
+    
+ <script src="<c:url value="/resources/ajax/ajaxChuDe.js" />"></script>
+ <script src="<c:url value="/resources/ajax/ajaxPhanCongVaiTro.js" />"></script>
+ <script type="text/javascript">
+	 jQuery(document).ready(function() {
+	     $("select.flexselect").flexselect();
+	   });
+ </script>
+ <style>
+ 	.empty-input{
+		border: 1px solid red;
+	}
+ </style>
 </head>
 <body>
 	<div class="panel panel-default">
@@ -15,6 +35,17 @@
 			<i class="glyphicon glyphicon-user">&nbsp</i> <strong> Danh
 				sách giám thị </strong>
 		</div>
+		
+		<div id="form-card-delete" style="display: none">
+			<div class="form-header">Xóa phân công giám thị</div>
+			<hr />
+			<div class="form-body">
+				Bạn có chắc chắn muốn xóa phân công này ? <br /> <b>Chú ý:</b> Phân công
+				đã xóa không thể khôi phục
+			</div>
+			<button onclick="AjaxXoaDeThi()" class="btn btn-danger btn-block"
+				id="btn-card-delete">Đồng ý</button>
+		</div>
 		<div class="panel-body">
 			<div id="wrapper">
 				<div id="page-content-wrapper">
@@ -22,131 +53,81 @@
 						<div class="row">
 							<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
 								<div class="form-group">
-									<input type="text" class="form-control" id="tenGV" path="tenGV"
-										placeholder="Nhập tên giám thị cần thêm " />
-								</div>
-								<div class="form-group">
-									<select name="phongThi" id="inputPhongThi" class="form-control"
-										required="required">
-										<option value="1">Phòng 1</option>
-										<option value="2">Phòng 2</option>
-										<option value="3">Phòng 3</option>
-										<option value="4">Phòng 4</option>
-										<option value="5">Phòng 5</option>
+									<!--  
+									<input id='tenGV' type="text" class="form-control" id="tenGV" path="tenGV"
+										placeholder="Nhập tên giám thị cần thêm" onclick="AjaxLoadDSGV()"/>
+									-->
+									 <label for="tengv">Tên:</label>
+									<select class="flexselect form-control" id='tengv'>
+										<c:forEach items='${listGV }' var='gv'>
+											<option value="${gv.ndTaikhoan }">${gv.ndHoten }</option>
+										</c:forEach>
 									</select>
 								</div>
 								<div class="form-group">
-									<input type="date" name="thoiGian" id="input"
-										class="form-control" value="" title="Thời gian">
+									<label for="inputPhongThi">Phòng:</label>
+									<select name="phongThi" id="inputPhongThi" class="form-control"
+										required="required">
+										<c:forEach items='${listPhongThi }' var='pt'>
+											<option value="${pt.mspt }">${pt.ptTen }</option>
+										</c:forEach>
+									</select>
 								</div>
-
+								<label for="inputThoiGian">Ngày gác thi:</label>
+								<div class="form-group">
+									<input type="date" name="thoiGian" id="inputThoiGian"
+										class="form-control" value="" title="Thời gian">
+									<div id="thongbao_inputThoiGian"></div>
+									<div id='kiemtraphancongvaitro'></div>
+								</div>
+								
+								
+							</div>
+							
+							<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+								<div class="form-group">
+								        <label for="gioibatdau">Giờ bắt đầu:</label>
+								        <input type="time" name="" id="giobatdau" class="form-control" value="" required="required" title="" >
+								        <div id="thongbao_giobatdau"></div>
+							      </div>
+							      
+							      <div class="form-group" >
+								        <label for="gioketthuc" class="control-label" style="margin-top: 15px; ">Giờ kết thúc:</label>
+								        <input type="time" name="" id="gioketthuc" class="form-control" value="" required="required" title=""  >
+							      		<div id="thongbao_gioketthuc"></div>
+							      </div>
 							</div>
 						</div>
 						<!-- .row -->
 					</div>
 				</div>
 			</div>
-
+			
 			<input type="button" id="themDSLopThamGiaThi" value="Thêm"
 				class="btn btn-primary"
-				style="margin-top: -30px; margin-left: 50px;">
+				style="margin-top: -20px; margin-left: 50px;" onclick="ThemPhanCongVaiTro()">
 
 			<table class="table table-hover"
-				style="width: 100%; border: 1px solid #ccc;">
+				style="width: 100%; border: 1px solid #ccc; margin-top: 20px;">
 				<thead>
-					</tr>
+					
 					<tr>
 						<th>STT</th>
 						<th>Xóa</th>
-						<th>Tài khoản</th>
 						<th>Họ tên</th>
 						<th>Phòng</th>
-						<th>Thời Gian</th>
+						<th>Ngày gác thi</th>
+						<th>Giờ bắt đầu</th>
+						<th>Giờ kết thúc</th>
 					</tr>
 
 				</thead>
-				<tbody>
+				<tbody id='bang-giam-thi-'>
 
-					<tr>
-						<th scope="row">1</th>
-						<td>
-							<div class="card-delete">
-								<input class="list-item-id" value="35" type="hidden"> <span
-									class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</div>
-						</td>
-						<td>huynhxuanhiep</td>
-						<td>Huỳnh Xuân Hiệp</td>
-						<td>Phòng 3</td>
-						<td>20/02/2012</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>
-							<div class="card-delete">
-								<input class="list-item-id" value="35" type="hidden"> <span
-									class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</div>
-						</td>
-						<td>huynhxuanhiep</td>
-						<td>Huỳnh Xuân Hiệp</td>
-						<td>Phòng 3</td>
-						<td>20/02/2012</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>
-							<div class="card-delete">
-								<input class="list-item-id" value="35" type="hidden"> <span
-									class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</div>
-						</td>
-						<td>huynhxuanhiep</td>
-						<td>Huỳnh Xuân Hiệp</td>
-						<td>Phòng 3</td>
-						<td>20/02/2012</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<script type="text/javascript">
-function split(val) {
-    return val.split(/,\s*/);
-}
-function extractLast(term) {//xxxxxxxxxxxxxxxxxxxxxx
-    return split(term).pop();//xxxxxxxxxxxxxxxxxxxxxx
-}
- 
-$(document).ready(function() {
-     
-    $( "#tenGV").autocomplete({
-        source: function (request, response) {
-            $.getJSON("${pageContext. request. contextPath}/AutocompleteLoadGiaoVien.html", {
-                term: extractLast(request.term)//xxxxxxxxxxxxxxxxxxxxxx
-            }, response);
-        },
-        search: function () {
-            var term = extractLast(this.value);//xxxxxxxxxxxxxxxxxxxxxx
-            if (term.length < 1) {//xxxxxxxxxxxxxxxxxxxxxx
-                return false;
-            }
-        },
-        focus: function () {
-            return false;
-        },
-        select: function (event, ui) {
-            var terms = split(this.value);
-            terms.pop();
-            terms.push(ui.item.value);
-            terms.push("");
-            this.value = terms.join(", ");
-            return false;
-        }
-    });
-     
-});
-</script>
 </body>
 
 </html>

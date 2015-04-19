@@ -48,7 +48,9 @@
 		<beans:property name="hibernateProperties">
 		    <beans:props>
 			<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</beans:prop>
+			<beans:prop key="hibernate.enable_lazy_load_no_trans">true</beans:prop>
 		    </beans:props>
+		    
 		</beans:property>
 	</beans:bean>
 	
@@ -107,6 +109,16 @@
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="cauTraLoiService" class="vn.com.luanvan.service.CauTraLoiServiceImpl"/>
+	
+	<beans:bean id="thiSinhThiDao" class="vn.com.luanvan.dao.ThiSinhThiDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="thiSinhThiService" class="vn.com.luanvan.service.ThiSinhThiServiceImpl"/>
+	
+	<beans:bean id="phongThiDao" class="vn.com.luanvan.dao.PhongThiDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="phongThiService" class="vn.com.luanvan.service.PhongThiServiceImpl"/>
 	
 	<!-- 
 	<beans:bean id="myUserDetailsService" class="vn.com.luanvan.service.MyUserDetailsService">

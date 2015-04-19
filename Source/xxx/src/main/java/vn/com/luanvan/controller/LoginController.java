@@ -19,15 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import vn.com.luanvan.dao.UserDao;
-import vn.com.luanvan.dao.UserDaoImpl;
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.ChuDeService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.UserService;
-import vn.com.luanvan.service.UserServiceImpl;
 
 @Controller
 public class LoginController {
@@ -208,13 +205,6 @@ public class LoginController {
 		return model;
 	}
 
-	/*
-	 * @RequestMapping(value = "/KiemTraCode", method = RequestMethod.GET)
-	 * public ModelAndView KiemTraCode(ModelAndView model, HttpServletRequest
-	 * request) { String ketQuaKiemTra = request.getParameter("email");
-	 * System.out.println("KiemTraCode: "+ketQuaKiemTra); String codeRandom =
-	 * request.getParameter("codeRandom"); return model; }
-	 */
 	@RequestMapping(value = "/AjaxCheckExistEmail", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String Check_Exist_Email(HttpServletRequest request) {
 		String email = request.getParameter("Email");

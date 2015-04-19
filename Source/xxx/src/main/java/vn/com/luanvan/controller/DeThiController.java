@@ -24,7 +24,7 @@ import vn.com.luanvan.model.Hocky;
 import vn.com.luanvan.model.Monhoc;
 import vn.com.luanvan.model.Nienkhoa;
 import vn.com.luanvan.model.Phancongvaitro;
-import vn.com.luanvan.model.PhancongvaitroId;
+import vn.com.luanvan.model.Phongthi;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.model.Vaitro;
 import vn.com.luanvan.service.ChuDeService;
@@ -32,10 +32,19 @@ import vn.com.luanvan.service.DangThiService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.MonHocService;
 import vn.com.luanvan.service.NienKhoaService;
+import vn.com.luanvan.service.PhanCongVaiTroService;
+import vn.com.luanvan.service.PhongThiService;
+import vn.com.luanvan.service.UserService;
 
 @Controller
 public class DeThiController {
 
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	PhongThiService phongThiService;
+	
 	@Autowired
 	DeThiService deThiService;
 
@@ -50,6 +59,9 @@ public class DeThiController {
 
 	@Autowired
 	NienKhoaService nienKhoaService;
+	
+	@Autowired
+	PhanCongVaiTroService phanCongVaiTroService;
 	
 	private boolean isLogin(HttpSession session) {
 		return session.getAttribute("isLogin") != null
@@ -68,6 +80,12 @@ public class DeThiController {
 			List<Dangthi> listDangThi = dangThiService.DSDangThi();
 			List<Chude> listChude = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
 			List<Nienkhoa> listNienKhoa = nienKhoaService.DSNienKhoa();
+			List<User> listGV = userService.LayDanhSachGiaoVien();
+			List<Phongthi> listPhongThi = phongThiService.danhSachPhongThi();
+			
+			redirectAttributes.addFlashAttribute("sua", "0");
+			model.addObject("listPhongThi", listPhongThi);
+			model.addObject("listGV", listGV);
 			model.addObject("listMonHoc", listMonHoc);
 			model.addObject("listDangThi", listDangThi);
 			model.addObject("listChude", listChude);
@@ -104,10 +122,10 @@ public class DeThiController {
 			String danDo = request.getParameter("DanDo");
 			String soLanChoPhepThi = request.getParameter("SoLanChoPhep");
 			String matKhauDeThi = request.getParameter("MatKhauDeThi");
+			
 			SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
-		//	String ngayCapNhat = dinhDangThoiGian.format(thoiGian.getTime());
 			Date thoiGianTaoDe = dinhDangThoiGian.parse(ngayTaoDe);
-		//	Date ngayCapNhat = new Date();
+			
 			DeThi.setDtTende(tenDe);
 			DeThi.setDtMatkhau(matKhauDeThi);
 			DeThi.setDtNgaycapnhat(null);
@@ -124,10 +142,7 @@ public class DeThiController {
 			Chude ChuDe = new Chude();
 			Monhoc MonHoc = new Monhoc();
 			Dangthi DangThi = new Dangthi();
-			Vaitro vaiTro = new Vaitro();
-			vaiTro.setMsvt(5);
-			vaiTro.setVtTen("GVRaDe");
-			
+		
 			
 			ChuDe = chuDeService.LayChuDeByMa(Integer.parseInt(mscd));
 			MonHoc = monHocService.LayMonHocByMa(Integer.parseInt(monHoc));
@@ -139,12 +154,23 @@ public class DeThiController {
 			DeThi.setNienkhoa(NienKhoa);
 			DeThi.setDangthi(DangThi);
 			DeThi.setHocky(HocKy);
-			
 			deThiService.ThemDeThi(DeThi);
+				
+			Vaitro vaiTro = new Vaitro();
+			vaiTro.setMsvt(5);
+			vaiTro.setVtTen("GVRaDe");
+			
 			int msdt = deThiService.LayMaxDeThiByTaiKhoan(taiKhoan);
 			System.out.println("msdt: " + msdt);
 			System.out.println("Them thanh cong");
 			
+			Phancongvaitro PhanCongVaiTro = new Phancongvaitro();
+			PhanCongVaiTro.setVaitro(vaiTro);
+			PhanCongVaiTro.setUser(user);
+			PhanCongVaiTro.setDethi(DeThi);
+			PhanCongVaiTro.setMscda(Integer.parseInt(mscd));
+			
+			phanCongVaiTroService.ThemPhanCongVaiTro(PhanCongVaiTro);
 			return String.valueOf(msdt);
 		} else {
 			return result;
@@ -229,5 +255,26 @@ public class DeThiController {
 		}
 		System.out.println(result);
 		return result;
+	}
+	
+	@RequestMapping(value = "/Thong-tin-de-thi.html")
+	public ModelAndView ChuyenTrangSuaDeThi(ModelAndView model,
+			HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes){
+		if (isLogin(session)) {
+			int msdt = Integer.parseInt(request.getParameter("msdt"));
+			Dethi DeThi = deThiService.LayDeThiByMa(msdt);
+			List<Monhoc> listMonHoc = monHocService.DSMonHoc();
+			List<Dangthi> listDangThi = dangThiService.DSDangThi();
+			List<Nienkhoa> listNienKhoa = nienKhoaService.DSNienKhoa();
+			redirectAttributes.addFlashAttribute("sua", "1");
+			model.addObject("listMonHoc", listMonHoc);
+			model.addObject("listDangThi", listDangThi);
+			model.addObject("listNienKhoa", listNienKhoa);
+			model.addObject("DeThi", DeThi);
+			model.setViewName("SuaDeThi");
+		} else {
+			model.setViewName("redirect:/Dang-Nhap.html");
+		}
+		return model;
 	}
 }

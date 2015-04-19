@@ -15,4 +15,8 @@ public interface PhanCongVaiTroDao {
 	List<Phancongvaitro> ListPhanCongVaiTro(Integer msdt);
 	
 	Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan, Integer msvt, Integer mscd);
+	
+	Integer getMaxIdByMaDeThi(Integer msdt);
+	
+	Phancongvaitro LayPhanCongVaiTroByMa(Integer mspcvt);
 }

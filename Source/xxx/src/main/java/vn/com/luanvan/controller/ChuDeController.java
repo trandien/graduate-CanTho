@@ -88,26 +88,15 @@ public class ChuDeController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/AutocompleteLoadGiaoVien", method = RequestMethod.GET, headers = "Accept=*/*")
-	public @ResponseBody List<String> LoadGiaoVien(@RequestParam ("term") String tenGV) {
-		String ketQua = null;
-		tenGV = tenGV.toLowerCase();
+	@RequestMapping(value = "/AutocompleteLoadGiaoVien", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8", headers = "Accept=application/json")
+	public @ResponseBody List<String> LoadGiaoVien() {
+		List<String> kq = new ArrayList<String>();
 		System.out.println("AutocompleteLoadGiaoVien");
-		System.out.println("Ten gv "+tenGV);
-		List<String> listGV = userService.LayDanhSachGiaoVien();
-		List<String> DSGV = new ArrayList<String>();
-		for (int i =0; i<listGV.size(); i++) {
-			ketQua = listGV.get(i).toLowerCase();
-			if(ketQua.startsWith(tenGV)) {
-				DSGV.add(listGV.get(i));
-				try {
-					System.out.println("Ket qua "+DSGV.get(i));
-				} catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
+		List<User> listGV = userService.LayDanhSachGiaoVien();
+		for(User userx : listGV) {
+			kq.add(userx.getNdTaikhoan()+"-"+userx.getNdHoten());
 		}
-		return DSGV;
+		return kq;
 	}
 	/*
 	@RequestMapping(value = "/AutocompleteLoadHocSinh", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")

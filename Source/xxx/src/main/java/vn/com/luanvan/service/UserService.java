@@ -25,7 +25,7 @@ public interface UserService {
 	
 	String RanCode();
 	
-	List<String> LayDanhSachGiaoVien();
+	List<User> LayDanhSachGiaoVien();
 
-	List<String> LayDanhSachHocSinh();
+	List<User> LayDanhSachHocSinh();
 }

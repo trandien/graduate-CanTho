@@ -64,13 +64,6 @@
 						<div class="soluongcauhoi">
 							<br> <span>Số lượng câu hỏi</span>
 							<hr>
-<!-- 					
-							<span class="caukho">1</span> <span class="cautrungbinh">2</span>
-							<span class="caude">3</span> <span class="caukho">4</span> <span
-								class="caukho">5</span> <span class="caukho">6</span> <span
-								class="cautrungbinh">7</span> <span class="cautrungbinh">8</span>
-							<span class="caude">9</span>
- -->		
 							<div id="themsoluongcauhoi"></div>
 							<hr>
 							<span>Số câu dễ: &nbsp;</span><input id="socaude" value=''
@@ -89,7 +82,9 @@
 								<button type="button" id='them-cau-hoi' onClick="TaoCauHoi()" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 								  Thêm câu hỏi &nbsp;<span class="glyphicon glyphicon-plus"></span>
 								</button>
-							</button>
+									<button type="button" id='thi-thu' onclick="ThiThu()" class="btn btn-success btn-lg">
+									  Thi thử &nbsp;<span class="glyphicon glyphicon-list-alt"></span>
+									</button>
 						</div>
 						<div id='xxx'></div>
 						<div class="noidungcauhoi" id='noidungcauhoi'>
@@ -106,26 +101,5 @@
 		</div>
 	</div>
 
-<!-- 
-	<div class="modal fade" id="modal-id">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Thông báo</h4>
-				</div>
-				<div class="modal-body">
-					Bạn muốn xóa câu hỏi.<br> <b>Lưu ý: </b>khi xóa không thể
-					khôi phục lại được 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-					<button type="button" class="btn btn-primary" onclick='AjaxXoaCauHoi()'>Đồng ý</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	 -->
 </body>
 </html>

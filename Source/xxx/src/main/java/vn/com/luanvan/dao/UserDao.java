@@ -26,7 +26,7 @@ public interface UserDao {
 
 	String RanCode();
 
-	List<String> LayDanhSachGiaoVien();
+	List<User> LayDanhSachGiaoVien();
 
-	List<String> LayDanhSachHocSinh();
+	List<User> LayDanhSachHocSinh();
 }

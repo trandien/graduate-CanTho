@@ -207,7 +207,6 @@
 				$("#thongbao_tende").html('');
 				} else {}
 	});
-
 		$("#thoiGian").keyup(function() {
 			var thoiGian = $(this).val();
 			var result = $("#thongbao_thoigian");

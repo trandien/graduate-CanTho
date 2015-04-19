@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="user"
     ,catalog="tracnghiem"
 )
-public class User  implements java.io.Serializable {
+public class User implements java.io.Serializable {
 
 
      private String ndTaikhoan;

@@ -147,6 +147,19 @@ function showPassword(){
 	}
 }
 
+function ThiThu(){
+	var msdt = $("#msdt").val();
+	if (typeof msdt == "undefined") {
+		alert("Đề thi chưa được thêm. Vui lòng kiểm tra lại!");
+		return;
+	}
+	 window.location.href = "Test.html?msdt="+msdt;
+//	setTimeout(function() {  window.location.href = "Dang-Nhap.html";}, 5000 );
+	
+	
+}
+
+
 
 
 

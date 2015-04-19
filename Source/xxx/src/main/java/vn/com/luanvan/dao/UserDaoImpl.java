@@ -38,7 +38,6 @@ public class UserDaoImpl implements UserDao {
 	public User findByUserName(String taikhoan) {
 		User user = null;
 		try {
-			System.out.println("Tai khoan dang nhap la "+taikhoan);
 			Query query = sessionFactory.getCurrentSession().createQuery("from User where nd_taikhoan=:taikhoan");
 			query.setString("taikhoan", taikhoan);
 			user = (User) query.uniqueResult();
@@ -145,36 +144,28 @@ public class UserDaoImpl implements UserDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<String> LayDanhSachGiaoVien() {
+	public List<User> LayDanhSachGiaoVien() {
 		List<User> listGV = new ArrayList<User>();
-		List<String> ketQua = new ArrayList<String>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE msvt=:msvt");
 			listGV = query.setInteger("msvt", 2).list();
-			for(int i=0; i<listGV.size(); i++) {
-				ketQua.add(listGV.get(i).getNdHoten());
-			}
 		} catch(Exception e) {
 			System.out.println("LayDanhSachGiaoVien: Loi khi lay danh sach");
 		}
-		return ketQua;
+		return listGV;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<String> LayDanhSachHocSinh() {
+	public List<User> LayDanhSachHocSinh() {
 		List<User> listHS = new ArrayList<User>();
-		List<String> ketQua = new ArrayList<String>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE msvt=:msvt");
 			listHS = query.setInteger("msvt", 4).list();
-			for(int i=0; i<listHS.size(); i++) {
-				ketQua.add(listHS.get(i).getNdHoten());
-			}
 		} catch(Exception e) {
 			System.out.println("LayDanhSachGiaoVien: Loi khi lay danh sach");
 		}
-		return ketQua;
+		return listHS;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.luanvan.model.Cauhoi;
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Phancongvaitro;
@@ -31,7 +32,7 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 	public void ThemPhanCongVaiTro(Phancongvaitro phancongvaitro) {
 		try{
 			sessionFactory.getCurrentSession().save(phancongvaitro);
-			System.out.println("Them phancongvaitro thanh cong");
+			System.out.println("Them phan cong vai tro thanh cong");
 		} catch (Exception e) {
 			System.out.println("Them phancongvaitro that bai" +e.getMessage());
 		}
@@ -80,8 +81,8 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 	public Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan, Integer msvt, Integer mscd) {
 		boolean ketqua = false;
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Phancongvaitro WHERE msdt=:msdt"
-					+ " AND nd_taikhoan=:taikhoan AND msvt=:msvt AND mscda=:mscda");
+			Query query = sessionFactory.getCurrentSession().createQuery("from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt"
+					+ " AND pcvt.user.nd_taikhoan=:taikhoan AND pcvt.vaitro.msvt=:msvt AND mscda=:mscda");
 			query.setInteger("msdt", msdt);
 			query.setInteger("msvt", msvt);
 			query.setInteger("mscda", mscd);
@@ -93,6 +94,37 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 			System.out.println("Phancongvaitro: Loi khi lay Phancongvaitro");
 		}
 		return ketqua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Integer getMaxIdByMaDeThi(Integer msdt) {
+		int ketQua = 0;
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createSQLQuery(
+							"select max(mspcvt) from Phancongvaitro WHERE msdt=:msdt");
+			query.setParameter("msdt", msdt);
+			ketQua = (Integer) query.uniqueResult();
+		} catch (Exception e) {
+			System.out.println("getMaxIdByMaDeThi: xay ra loi");
+		}
+		return ketQua;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Phancongvaitro LayPhanCongVaiTroByMa(Integer mspcvt) {
+		Phancongvaitro PhanCongVaiTro = new Phancongvaitro();
+		try {
+			PhanCongVaiTro = (Phancongvaitro) sessionFactory.getCurrentSession().get(
+					Phancongvaitro.class, mspcvt);
+			
+		} catch (Exception e) {
+			System.out.println("LayPhanCongVaiTroByMa: Loi");
+		}
+		return PhanCongVaiTro;
 	}
 
 }

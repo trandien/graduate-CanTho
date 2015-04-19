@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.luanvan.dao.UserDao;
-import vn.com.luanvan.dao.UserDaoImpl;
 import vn.com.luanvan.model.User;
 
 public class UserServiceImpl implements UserService{
@@ -56,12 +55,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<String> LayDanhSachGiaoVien() {
+	public List<User> LayDanhSachGiaoVien() {
 		return userDao.LayDanhSachGiaoVien();
 	}
 
 	@Override
-	public List<String> LayDanhSachHocSinh() {
+	public List<User> LayDanhSachHocSinh() {
 		return userDao.LayDanhSachHocSinh();
 	}
 }

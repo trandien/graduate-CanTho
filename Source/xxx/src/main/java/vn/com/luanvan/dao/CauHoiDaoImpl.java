@@ -86,7 +86,7 @@ public class CauHoiDaoImpl implements CauHoiDao {
 		List<Cauhoi> listDeThis = new ArrayList<Cauhoi>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery(
-					"from Cauhoi ch WHERE ch.dethi.msdt=:maDeThi");
+					"from Cauhoi ch WHERE ch.dethi.msdt=:maDeThi ORDER BY RAND()");
 			query.setParameter("maDeThi", maDeThi);
 			listDeThis = query.list();
 		} catch (Exception e) {

@@ -35,17 +35,20 @@
 <script src="<c:url value = "/resources/ajax/ajaxChuDe.js"/>"></script>
 <script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
 
-<script type="text/javascript">
-	$(function() {
-		$("#myElem").delay(5000).fadeOut(0);
-	});
-</script>
-
 <style type="text/css">
-#timkiem {
-	background-color: #6699ff;
-	padding-top: 20px;
-}
+	#timkiem {
+		background-color: #6699ff;
+		padding-top: 20px;
+	}
+	a:link { 
+	text-decoration: none; 
+	} 
+	a:visited { 
+	text-decoration: none; 
+	} 
+	a:active { 
+	text-decoration: none; 
+	} 
 </style>
 
 
@@ -245,10 +248,13 @@
 											<c:forEach items="${listDethis}" var="dethi">
 											<c:if test="${dethi.chude.mscd == chude.mscd}">
 											<ul class="list-content">
+											
 												<li class="list-item" data-toggle="modal"
-													data-target="#myModal" id="dethi_${dethi.msdt }" href="De-Thi.html?msdt=${dethi.msdt }">
+													data-target="#myModal" id="dethi_${dethi.msdt }">
+													<a href="Thong-tin-de-thi.html?msdt=${dethi.msdt }" style="margin-top: 10px">
 													<div class="list-item-id sr-only">1</div>
 													<div class="list-item-title">${dethi.dtTende }</div>
+													</a>
 													<div class="list-item-info">
 														<div class="badge-deadline new">
 															<div class="deadline-text">${dethi.dtNgaytaode }</div>
@@ -263,11 +269,10 @@
 															<input class="list-item-id" value="${dethi.msdt }" type="hidden">
 															<span class="glyphicon glyphicon-trash"
 																aria-hidden="true"></span>
-															
-															
 														</div>
 													</div>
 												</li>
+												
 											</ul>
 											</c:if>
 											</c:forEach>
