@@ -95,10 +95,11 @@ $(document).on('click', '#giobatdau', function (e) {
 
 function AjaxXoaPhanCongVaiTro(mspcvt) {
 	$.ajax({
-		data : "MSPCVT="+mspcvt,
+		data : "MSPCVT="+mspcvt + "&MaDeThi="+$("#msdt").val(),
 		url: "AjaxXoaPhanCongVaiTro",
 		type: "POST",
 		success : function(result) {
+			alert(result);
 			$("#pcvt-"+mspcvt).remove();
 		} ,
 		error : function(result) {
@@ -107,6 +108,61 @@ function AjaxXoaPhanCongVaiTro(mspcvt) {
 	});
 }
 
+function AjaxThemLopThamGiaThi() {
+	var msdt = $("#msdt").val();
+	var msl = $("#tenlop").val();
+	if (typeof msdt == "undefined") {
+		alert("Bạn vui lòng thêm đề thi trước khi lớp tham gia thi!!");
+		return;
+	}
+	$.ajax({
+		data: "MaLop="+msl+"&MaDeThi="+msdt,
+		url: "AjaxThemLopVaoDeThi",
+		type: "POST",
+		success : function(result) {
+			$("#bang-lop-").attr('id',"bang-lop-"+msdt);
+			$("#bang-lop-"+msdt).append(result);
+		},
+		error : function(result) {
+			
+		}
+	});
+}
+
+function AjaxLoadHSTrongLop(){
+	var msl = $("#lopxxx").val();
+	$.ajax({
+		data: "MaLop="+msl,
+		url: "AjaxLoadHSTrongLop",
+		type: "POST",
+		success : function(result) {
+			var list = result.split(";");
+			for(var k=0; k<list.length-1; k++) {
+				$("#tokenizexxx").append($("<option></option>").val(list[k].split("-")[0]).html(list[k].split("-")[1]));
+			}
+		} ,
+		error : function(result) {
+			
+		}
+	});
+}
+
+function AjaxThemHSVaoDeThi() {
+	var listHS = $("#tokenizexxx").val();
+	$.ajax({
+		data : JSON.stringify(listHS),
+		type : "POST",
+		url : "AjaxThemHSVaoDeThi",
+		contentType : "application/json; charset=utf-8",
+		dataType : "json",
+		success : function(result) {
+			
+		} ,
+		error : function(result) {
+			
+		}
+	});
+}
 
 
 

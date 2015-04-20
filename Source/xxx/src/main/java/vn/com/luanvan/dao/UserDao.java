@@ -29,4 +29,6 @@ public interface UserDao {
 	List<User> LayDanhSachGiaoVien();
 
 	List<User> LayDanhSachHocSinh();
+	
+	List<User> LayDanhSachHSTrongLop(String msl);
 }

@@ -63,4 +63,9 @@ public class UserServiceImpl implements UserService{
 	public List<User> LayDanhSachHocSinh() {
 		return userDao.LayDanhSachHocSinh();
 	}
+
+	@Override
+	public List<User> LayDanhSachHSTrongLop(String msl) {
+		return userDao.LayDanhSachHSTrongLop(msl);
+	}
 }

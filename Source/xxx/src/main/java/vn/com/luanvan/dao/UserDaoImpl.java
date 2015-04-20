@@ -21,9 +21,8 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Autowired
-    protected JavaMailSender mailSender;
-	
-	
+	protected JavaMailSender mailSender;
+
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -31,22 +30,23 @@ public class UserDaoImpl implements UserDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
-	/*Ham dung de tim kiem nguoi dung*/
+
+	/* Ham dung de tim kiem nguoi dung */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public User findByUserName(String taikhoan) {
 		User user = null;
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from User where nd_taikhoan=:taikhoan");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from User where nd_taikhoan=:taikhoan");
 			query.setString("taikhoan", taikhoan);
 			user = (User) query.uniqueResult();
-		} catch(Exception e) {
-			System.out.println("Loi khi lay user "+e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Loi khi lay user " + e.getMessage());
 		}
 		return user;
 	}
-	
+
 	/**
 	 * @author lonel_000
 	 */
@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			sessionFactory.getCurrentSession().update(user);
 			System.out.println("Update thanh cong");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Update that bai");
 		}
 	}
@@ -68,48 +68,48 @@ public class UserDaoImpl implements UserDao {
 		try {
 			sessionFactory.getCurrentSession().save(user);
 			System.out.println("Them thanh cong");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Them that bai");
 		}
 	}
-	
-	
+
 	@Transactional
-	public void sendMail(String emailTo, String subject, String text){
+	public void sendMail(String emailTo, String subject, String text) {
 		SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(emailTo);
-        email.setSubject(subject);
-        email.setText(text);
-        // sends the e-mail
-        email.setFrom("ankianpata@gmail.com");
-        mailSender.send(email);
+		email.setTo(emailTo);
+		email.setSubject(subject);
+		email.setText(text);
+		// sends the e-mail
+		email.setFrom("ankianpata@gmail.com");
+		mailSender.send(email);
 	}
-	
+
 	@Transactional
-	public boolean checkOldPassword (User user, String oldPass){
-		if(oldPass.equals(user.getNdMatkhau())){
+	public boolean checkOldPassword(User user, String oldPass) {
+		if (oldPass.equals(user.getNdMatkhau())) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public boolean ExistEmail(String email) {
 		User user = new User();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from User where nd_email=:email");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from User where nd_email=:email");
 			query.setString("email", email);
 			user = (User) query.uniqueResult();
-			if(user!=null) {
+			if (user != null) {
 				System.out.println("Email ton tai");
 			} else {
 				System.out.println("Email chua ton tai");
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Loi khi lay user");
 		}
-		return user!=null;
+		return user != null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,10 +133,11 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByEmail(String email) {
 		User user = new User();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE nd_email=:email");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from User WHERE nd_email=:email");
 			query.setString("email", email);
 			user = (User) query.uniqueResult();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("getUserByEmail: Loi khi lay user");
 		}
 		return user;
@@ -147,9 +148,10 @@ public class UserDaoImpl implements UserDao {
 	public List<User> LayDanhSachGiaoVien() {
 		List<User> listGV = new ArrayList<User>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE msvt=:msvt");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from User WHERE msvt=:msvt");
 			listGV = query.setInteger("msvt", 2).list();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("LayDanhSachGiaoVien: Loi khi lay danh sach");
 		}
 		return listGV;
@@ -160,10 +162,28 @@ public class UserDaoImpl implements UserDao {
 	public List<User> LayDanhSachHocSinh() {
 		List<User> listHS = new ArrayList<User>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from User WHERE msvt=:msvt");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from User WHERE msvt=:msvt");
 			listHS = query.setInteger("msvt", 4).list();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("LayDanhSachGiaoVien: Loi khi lay danh sach");
+		}
+		return listHS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<User> LayDanhSachHSTrongLop(String msl) {
+		List<User> listHS = new ArrayList<User>();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from User u WHERE u.lop.msl=:msl AND u.vaitro.msvt=:msvt");
+			query.setParameter("msl", msl);
+			query.setParameter("msvt", 4);
+			listHS = query.list();
+
+		} catch (Exception e) {
+			System.out.println("LayDanhSachHSTrongLop: Loi khi lay danh sach");
 		}
 		return listHS;
 	}

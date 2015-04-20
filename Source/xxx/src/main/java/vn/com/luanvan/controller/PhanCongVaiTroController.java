@@ -2,6 +2,7 @@ package vn.com.luanvan.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,14 +23,19 @@ import vn.com.luanvan.model.Phongthi;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.model.Vaitro;
 import vn.com.luanvan.service.DeThiService;
+import vn.com.luanvan.service.LopService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
 import vn.com.luanvan.service.PhongThiService;
 import vn.com.luanvan.service.UserService;
 
 @Controller
 public class PhanCongVaiTroController {
+	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	LopService lopService;
 
 	@Autowired
 	DeThiService deThiService;
@@ -81,11 +88,14 @@ public class PhanCongVaiTroController {
 			PhanCongVaiTro.setNgay(thoiGian);
 			PhanCongVaiTro.setGiobatdau(timeStart);
 			PhanCongVaiTro.setGioketthuc(timeEnd);
-
+			
 			phanCongVaiTroService.ThemPhanCongVaiTro(PhanCongVaiTro);
+			
+			int sttPCVT = phanCongVaiTroService.ListPhanCongVaiTro(msdt).size() - 1;
+			
 			int mspcvt = phanCongVaiTroService.getMaxIdByMaDeThi(msdt);
 			result += " <tr id='pcvt-"+mspcvt+"'>";
-			result += " <td id='sttPCVT'>1</td>";
+			result += " <td id='sttPCVT-"+mspcvt+"'>"+sttPCVT+"</td>";
 			result += " <td>";
 			result += "<div class='btn-group'>";
 			result += "<div class='dropdown-toggle' data-toggle='dropdown' href='#'>";
@@ -120,6 +130,7 @@ public class PhanCongVaiTroController {
 			int mspcvt = Integer.parseInt(request.getParameter("MSPCVT"));
 			Phancongvaitro PhanCongVaiTro = phanCongVaiTroService.LayPhanCongVaiTroByMa(mspcvt);
 			phanCongVaiTroService.XoaPhanCongVaiTro(PhanCongVaiTro);
+			System.out.println("Ma De Thi xxx : "+request.getParameter("MaDeThi"));
 			result = "Xoa phan cong vai tro thanh cong";
 		}
 		System.out.println(result);
@@ -202,4 +213,67 @@ public class PhanCongVaiTroController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/AjaxThemLopVaoDeThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String ThemLopVaoDeThi(ModelAndView model,
+			HttpSession session, HttpServletRequest request)
+			throws ParseException {
+		String result="";
+		int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+		String msl = request.getParameter("MaLop");
+		try {
+			lopService.ThemLopVaoDeThi(msdt, msl);
+			result += "<tr id='them-lop-"+msdt+"'>";
+			result += "<th scope='row'>1</th>";
+			result += "<td>"+msl+"</td>";
+			result += "<td>";
+			result += "<div class='card-delete'>";
+			result += "<input class='list-item-id' value='35' type='hidden'>";
+			result += "<span class='glyphicon glyphicon-trash' aria-hidden='true'></span>";
+			result += "</div>";
+			result += "</td>";
+			result += "</tr>";
+		} catch(Exception e) {
+			result = "Them lop vao de thi that bai";
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxLoadHSTrongLop", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String LoadHSTrongLop(ModelAndView model,
+			HttpSession session, HttpServletRequest request)
+			throws ParseException {
+		String result = "";
+		List<User> listHS = new ArrayList<User>();
+		String msl = request.getParameter("MaLop");
+		listHS = userService.LayDanhSachHSTrongLop(msl);
+		for(User u : listHS) {
+			result += u.getNdTaikhoan()+"-"+ u.getNdHoten()+";";
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxThemHSVaoDeThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String ThemHSVaoDeThi(ModelAndView model,
+			HttpSession session, @RequestBody List<String> listHS)
+			throws ParseException {
+		String result = "";
+		for(String a : listHS)
+		System.out.println("XXX: "+a);
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

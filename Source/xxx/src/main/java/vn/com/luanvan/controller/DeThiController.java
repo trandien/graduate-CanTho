@@ -21,6 +21,7 @@ import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dangthi;
 import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Hocky;
+import vn.com.luanvan.model.Lop;
 import vn.com.luanvan.model.Monhoc;
 import vn.com.luanvan.model.Nienkhoa;
 import vn.com.luanvan.model.Phancongvaitro;
@@ -30,6 +31,7 @@ import vn.com.luanvan.model.Vaitro;
 import vn.com.luanvan.service.ChuDeService;
 import vn.com.luanvan.service.DangThiService;
 import vn.com.luanvan.service.DeThiService;
+import vn.com.luanvan.service.LopService;
 import vn.com.luanvan.service.MonHocService;
 import vn.com.luanvan.service.NienKhoaService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
@@ -44,6 +46,9 @@ public class DeThiController {
 	
 	@Autowired
 	PhongThiService phongThiService;
+	
+	@Autowired
+	LopService lopService;
 	
 	@Autowired
 	DeThiService deThiService;
@@ -82,8 +87,10 @@ public class DeThiController {
 			List<Nienkhoa> listNienKhoa = nienKhoaService.DSNienKhoa();
 			List<User> listGV = userService.LayDanhSachGiaoVien();
 			List<Phongthi> listPhongThi = phongThiService.danhSachPhongThi();
-			
+			List<Lop> listLop = lopService.listLop();
 			redirectAttributes.addFlashAttribute("sua", "0");
+			
+			model.addObject("listLop", listLop);
 			model.addObject("listPhongThi", listPhongThi);
 			model.addObject("listGV", listGV);
 			model.addObject("listMonHoc", listMonHoc);

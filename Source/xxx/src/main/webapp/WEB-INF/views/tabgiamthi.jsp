@@ -36,16 +36,6 @@
 				sách giám thị </strong>
 		</div>
 		
-		<div id="form-card-delete" style="display: none">
-			<div class="form-header">Xóa phân công giám thị</div>
-			<hr />
-			<div class="form-body">
-				Bạn có chắc chắn muốn xóa phân công này ? <br /> <b>Chú ý:</b> Phân công
-				đã xóa không thể khôi phục
-			</div>
-			<button onclick="AjaxXoaDeThi()" class="btn btn-danger btn-block"
-				id="btn-card-delete">Đồng ý</button>
-		</div>
 		<div class="panel-body">
 			<div id="wrapper">
 				<div id="page-content-wrapper">
