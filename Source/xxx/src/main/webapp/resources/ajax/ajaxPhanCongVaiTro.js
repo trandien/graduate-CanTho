@@ -88,7 +88,7 @@ $(document).on('click', '#gioketthuc', function (e) {
 });
 
 $(document).on('click', '#giobatdau', function (e) {
-	var time = $("#gioibatdau").val();
+	var time = $("#giobatdau").val();
 	$("#giobatdau").removeClass('empty-input');
 	$("#thongbao_gioibatdau").html("");
 });
@@ -148,23 +148,82 @@ function AjaxLoadHSTrongLop(){
 }
 
 function AjaxThemHSVaoDeThi() {
+	var test = 0;
 	var listHS = $("#tokenizexxx").val();
+	var msdt = $("#msdt").val();
+	var mscd = $("#mscd").val();
+	var msl = $("#lopxxx").val();
+	var mspt = $("#phongThiHS").val();
+	var time = $("#inputThoiGianhs").val();
+	var timeStart = $("#giobatdauhs").val();
+	var timeEnd = $("#gioketthuchs").val();
+
+	if (typeof msdt == "undefined") {
+		alert("Bạn vui lòng thêm đề thi trước khi thêm học sinh tham gia thi!!");
+		return;
+	}
+	if (typeof mscd == "undefined") {
+		alert("Bạn vui lòng thêm chủ đề trước khi thêm học sinh tham gia thi!!");
+		return;
+	}
+	
+	if(time == "") {
+		$("#inputThoiGianhs").addClass('empty-input');
+		$("#thongbao_inputThoiGianhs").html("<span style='color: #a94442'>Bạn vui lòng chọn ngày thi</span>");
+		test++;
+	}
+	if(timeStart == "") {
+		$("#giobatdauhs").addClass('empty-input');
+		$("#thongbao_giobatdauhs").html("<span style='color: #a94442'>Bạn vui lòng chọn thời gian bắt đầu thi</span>");
+		test++;
+	}
+	if(timeEnd == "") {
+		$("#gioketthuchs").addClass('empty-input');
+		$("#thongbao_gioketthuchs").html("<span style='color: #a94442'>Bạn vui lòng chọn thời gian kết thúc thi</span>");
+		test++;
+	}
+	if(test>0) return;
+	var xxx = new Object();
+	xxx.taiKhoan = listHS;
+	xxx.mscd = mscd;
+	xxx.msdt = msdt;
+	xxx.msl = msl;
+	xxx.ngay = time;
+	xxx.giobatdau = timeStart;
+	xxx.gioketthuc = timeEnd;
+	xxx. mspt = mspt;
+	
 	$.ajax({
-		data : JSON.stringify(listHS),
+		data : JSON.stringify(xxx),
 		type : "POST",
 		url : "AjaxThemHSVaoDeThi",
 		contentType : "application/json; charset=utf-8",
-		dataType : "json",
 		success : function(result) {
-			
-		} ,
-		error : function(result) {
-			
+			$("#bang-hs-thi-").attr('id',"bang-hs-thi-"+msdt);
+			$("#bang-hs-thi-"+msdt).append(result);
+
+    	},
+		error : function(result, e) {
+			alert("that bai "+e);
 		}
-	});
+	}); // the end AjaxLuuCauHoiVaCauTraLoi
 }
 
+$(document).on('click', '#inputThoiGianhs', function (e) {
+	var time = $("#inputThoiGianhs").val();
+	$("#inputThoiGianhs").removeClass('empty-input');
+	$("#thongbao_inputThoiGianhs").html("");
+});
 
+$(document).on('click', '#gioketthuchs', function (e) {
+	var time = $("#gioketthuchs").val();
+	$("#gioketthuchs").removeClass('empty-input');
+	$("#thongbao_gioketthuchs").html("");
+});
 
-
+$(document).on('click', '#giobatdauhs', function (e) {
+	var time = $("#giobatdauhs").val();
+	$("#giobatdauhs").removeClass('empty-input');
+	$("#thongbao_gioibatdauhs").html("");
+});
 

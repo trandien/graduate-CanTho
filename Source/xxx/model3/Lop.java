@@ -1,5 +1,5 @@
 // default package
-// Generated Apr 19, 2015 9:21:03 PM by Hibernate Tools 4.3.1
+// Generated Apr 22, 2015 4:57:38 PM by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,7 +21,7 @@ public class Lop implements java.io.Serializable {
 
 	private String msl;
 	private Khoi khoi;
-	private Set<Dethi> dethis = new HashSet<Dethi>(0);
+	private Set<DethiLop> dethiLops = new HashSet<DethiLop>(0);
 	private Set<User> users = new HashSet<User>(0);
 
 	public Lop() {
@@ -34,10 +32,10 @@ public class Lop implements java.io.Serializable {
 		this.khoi = khoi;
 	}
 
-	public Lop(String msl, Khoi khoi, Set<Dethi> dethis, Set<User> users) {
+	public Lop(String msl, Khoi khoi, Set<DethiLop> dethiLops, Set<User> users) {
 		this.msl = msl;
 		this.khoi = khoi;
-		this.dethis = dethis;
+		this.dethiLops = dethiLops;
 		this.users = users;
 	}
 
@@ -61,14 +59,13 @@ public class Lop implements java.io.Serializable {
 		this.khoi = khoi;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "dethi_lop", catalog = "tracnghiem", joinColumns = { @JoinColumn(name = "MSL", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "MSDT", nullable = false, updatable = false) })
-	public Set<Dethi> getDethis() {
-		return this.dethis;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "lop")
+	public Set<DethiLop> getDethiLops() {
+		return this.dethiLops;
 	}
 
-	public void setDethis(Set<Dethi> dethis) {
-		this.dethis = dethis;
+	public void setDethiLops(Set<DethiLop> dethiLops) {
+		this.dethiLops = dethiLops;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "lop")

@@ -21,21 +21,31 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dethi;
+import vn.com.luanvan.model.Monhoc;
+import vn.com.luanvan.model.Phancongvaitro;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.ChuDeService;
 import vn.com.luanvan.service.DeThiService;
+import vn.com.luanvan.service.MonHocService;
+import vn.com.luanvan.service.PhanCongVaiTroService;
 import vn.com.luanvan.service.UserService;
 
 @Controller
 public class LoginController {
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ChuDeService chuDeService;
-	
+
 	@Autowired
 	DeThiService deThiService;
+	
+	@Autowired
+	MonHocService monHocService;
+	
+	@Autowired
+	PhanCongVaiTroService phanCongVaiTroService;
 
 	String useEmail;
 	String useTaiKhoan;
@@ -69,7 +79,7 @@ public class LoginController {
 		return "login";
 	}
 
-	//Ham nay chua xong
+	// Ham nay chua xong
 	@RequestMapping(value = "/Thong-Tin-Ca-Nhan.html")
 	public ModelAndView ThongTinCaNhan(ModelAndView model, HttpSession session) {
 		if (isLogin(session)) {
@@ -82,10 +92,11 @@ public class LoginController {
 		}
 		return model;
 	}
-	
+
 	// Hàm này chua xong
 	@RequestMapping(value = "/SuaThongTin", method = RequestMethod.POST)
-	public String SuaThongTin(ModelAndView model, HttpServletRequest request, HttpSession session) {
+	public String SuaThongTin(ModelAndView model, HttpServletRequest request,
+			HttpSession session) {
 		String result = "";
 		System.out.println("ham SuaThongTin duoc goi");
 		User user = (User) session.getAttribute("user");
@@ -101,11 +112,27 @@ public class LoginController {
 		if (isLogin(session)) {
 			User user = (User) session.getAttribute("user");
 			String taiKhoan = user.getNdTaikhoan();
-			List<Chude> listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
-			List<Dethi> listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
-			model.addObject("listDethis", listDethis);
-			model.addObject("listChudes", listChudes);
-			model.setViewName("main");
+			if(user.getVaitro().getMsvt() == 1 || user.getVaitro().getMsvt() == 2 || user.getVaitro().getMsvt() == 3|| user.getVaitro().getMsvt() == 5)
+			{
+				List<Chude> listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
+				List<Dethi> listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
+				model.addObject("listDethis", listDethis);
+				model.addObject("listChudes", listChudes);
+				model.setViewName("main");
+			} else {
+				List<Dethi> listDeThiThamGiaThi = new ArrayList<Dethi>();
+				Dethi dt = new Dethi();
+				List<Monhoc> listMonHoc = monHocService.DSMonHoc();
+				List<Phancongvaitro> listPCVT = phanCongVaiTroService.LayDeThiHS(taiKhoan);
+				for(Phancongvaitro a : listPCVT) {
+					listDeThiThamGiaThi.add(deThiService.LayDeThiByMa(a.getDethi().getMsdt()));
+				}
+				model.addObject("listDeThiThamGiaThi", listDeThiThamGiaThi);
+				model.addObject("user", user);
+				model.addObject("listPCVT", listPCVT);
+				model.addObject("listMonHoc", listMonHoc);
+				model.setViewName("TSMain");
+			}
 		} else {
 			model.setViewName("redirect:/Dang-Nhap.html");
 		}
@@ -271,9 +298,9 @@ public class LoginController {
 		if (user != null && user.getNdMatkhau().equals(matKhau)) {
 			System.out.println("Tai khoan va mat khau dung");
 			/*
-			session.setAttribute("taiKhoan", taiKhoan);
-			session.setAttribute("hoTen", user.getNdHoten());
-			*/
+			 * session.setAttribute("taiKhoan", taiKhoan);
+			 * session.setAttribute("hoTen", user.getNdHoten());
+			 */
 			session.setAttribute("isLogin", true);
 			request.getSession().setAttribute("user", user);
 		} else {

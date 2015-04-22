@@ -13,4 +13,9 @@ public class ThiSinhThiServiceImpl implements ThiSinhThiService{
 		thiSinhThiDao.CreateTableExam(taiKhoan, msdt, soLanThi);
 	}
 
+	@Override
+	public boolean KiemTraSoLanThi(String taiKhoan, int msdt, int soLanThi) {
+		return thiSinhThiDao.KiemTraSoLanThi(taiKhoan, msdt, soLanThi);
+	}
+
 }

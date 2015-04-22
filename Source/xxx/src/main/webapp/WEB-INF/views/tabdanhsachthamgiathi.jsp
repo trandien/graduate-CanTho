@@ -8,12 +8,13 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
 <link rel="stylesheet" href="<c:url value="/resources/autocomplete/flexselect.css" />" type="text/css" media="screen" />
 <script src="<c:url value="/resources/autocomplete/liquidmetal.js" />" type="text/javascript"></script>
 <script src="<c:url value="/resources/autocomplete/jquery.flexselect.js" />" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/auto/jquery.tokenize.css" />" />
 <script type="text/javascript" src="<c:url value="/resources/auto/jquery.tokenize.js"/>" > </script>
-    
+<script type="text/javascript" src="<c:url value="/resources/ajax/ajaxPhanCongVaiTro.js"/>" > </script>
 
  <script type="text/javascript">
 			 jQuery(document).ready(function() {
@@ -112,26 +113,36 @@
 						style="width: 100%; border: 1px solid #ccc;">
 						<thead>
 							<tr>
-								<th colspan="5" style="text-align: center;">Danh sách thí
+								<th colspan="8" style="text-align: center;">Danh sách thí
 									sinh tham gia thi</th>
 							</tr>
 
 							<tr>
-								<th colspan="5">
+								<th colspan="8">
 									<div id="wrapper">
 										<div id="page-content-wrapper">
 											<div class="container-fluid">
 												<div class="row">
-													<div class="col-md-12">
+													<div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
 													
 														<div class="form-group" style="margin-top: 15px; margin-bottom: 15px;">
-													        <div class="col-sm-5">
+													        <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5">
 													          <select name="" id="lopxxx" class="form-control" onchange="AjaxLoadHSTrongLop()">
 													          	<option value="0">- - - - - - Chọn tên lớp - - - - - - </option>
 													            <c:forEach items='${listLop }' var='lop'>
 																	<option value="${lop.msl }">${lop.msl }</option>
 																</c:forEach>
 													          </select>
+													       </div>
+													       
+													       <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5">
+																<select name="phongThiHS" id="phongThiHS" class="form-control"
+																	required="required">
+																	<option value="0">- - - - - - Chọn phòng thi - - - - - - </option>
+																	<c:forEach items='${listPhongThi }' var='pt'>
+																		<option value="${pt.mspt }">${pt.ptTen }</option>
+																	</c:forEach>
+																</select>
 													       </div>
 													       </div>
 													       <br>
@@ -141,6 +152,29 @@
 
 													      </select>
 													</div>
+													<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+													
+														<div class="form-group" style="margin-top: 95px;">
+															<label for="inputThoiGian">Ngày thi:</label>
+															<input type="date" name="thoiGian" id="inputThoiGianhs"
+																class="form-control" value="" title="Thời gian">
+															<div id="thongbao_inputThoiGianhs"></div>
+														</div>
+													</div>
+													<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+														<div class="form-group" style="margin-top: 95px;">
+														        <label for="gioibatdau">Giờ bắt đầu:</label>
+														        <input type="time" name="" id="giobatdauhs" class="form-control" value="" required="required" title="" >
+														        <div id="thongbao_giobatdauhs"></div>
+													      </div>
+													  </div>
+													  <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">    
+													      <div class="form-group" style="margin-top: 80px;">
+														        <label for="gioketthuc" class="control-label" style="margin-top: 15px; ">Giờ kết thúc:</label>
+														        <input type="time" name="" id="gioketthuchs" class="form-control" value="" required="required" title=""  >
+													      		<div id="thongbao_gioketthuchs"></div>
+													      </div>
+													</div>
 													</div>
 												</div>
 												<!-- .row -->
@@ -148,60 +182,24 @@
 										</div>
 									</div> <input type="button" id="themDSHSThamGiaThi" value="Thêm"
 									class="btn btn-primary"
-									style="margin-top: 70px; margin-left: 50px;" onclick="AjaxThemHSVaoDeThi()">
+									style="margin-left: 50px; margin-top: -10px" onclick="AjaxThemHSVaoDeThi()">
 								</th>
 							</tr>
 							<tr>
 								<th>STT</th>
 								<th>Xóa</th>
-								<th>Tài khoản</th>
-								<th>Họ Tên</th>
+								<th>Họ tên</th>
+								<th>Phòng</th>
+								<th>Ngày thi</th>
+								<th>Giờ bắt đầu</th>
+								<th>Giờ kết thúc</th>
 								<th>Lớp</th>
 
 							</tr>
 
 						</thead>
-						<tbody>
+						<tbody id="bang-hs-thi-">
 
-							<tr>
-								<th scope="row">1</th>
-								<td>
-									<div class="card-delete">
-										<input class="list-item-id" value="35" type="hidden">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-									</div>
-								</td>
-								<td>tranthanhdien</td>
-								<td>Trần Thanh Điền</td>
-								<td>12A2</td>
-
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>
-									<div class="card-delete">
-										<input class="list-item-id" value="35" type="hidden">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-									</div>
-								</td>
-								<td>huynhnhatminh</td>
-								<td>huỳnh Nhật Minh</td>
-								<td>12A2</td>
-
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>
-									<div class="card-delete">
-										<input class="list-item-id" value="35" type="hidden">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-									</div>
-								</td>
-								<td>hohuunhan</td>
-								<td>Hồ Hữu Nhân</td>
-								<td>12A3</td>
-
-							</tr>
 						</tbody>
 					</table>
 				</div>

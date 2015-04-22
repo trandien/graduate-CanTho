@@ -7,17 +7,17 @@
 
 <head>
 <meta charset="utf-8">
- <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-    <script src="<c:url value="/resources/js/jquery.js" />"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css" />" />
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/js/jquery.js" />"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css" />" />
    
-	<link rel="stylesheet" href="<c:url value="/resources/autocomplete/flexselect.css" />" type="text/css" media="screen" />
-	 <script src="<c:url value="/resources/autocomplete/liquidmetal.js" />" type="text/javascript"></script>
-	 <script src="<c:url value="/resources/autocomplete/jquery.flexselect.js" />" type="text/javascript"></script>
-    
- <script src="<c:url value="/resources/ajax/ajaxChuDe.js" />"></script>
- <script src="<c:url value="/resources/ajax/ajaxPhanCongVaiTro.js" />"></script>
- <script type="text/javascript">
+<link rel="stylesheet" href="<c:url value="/resources/autocomplete/flexselect.css" />" type="text/css" media="screen" />
+<script src="<c:url value="/resources/autocomplete/liquidmetal.js" />" type="text/javascript"></script>
+<script src="<c:url value="/resources/autocomplete/jquery.flexselect.js" />" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
+<script src="<c:url value="/resources/ajax/ajaxChuDe.js" />"></script>
+<script src="<c:url value="/resources/ajax/ajaxPhanCongVaiTro.js" />"></script>
+<script type="text/javascript">
 	 jQuery(document).ready(function() {
 	     $("select.flexselect").flexselect();
 	   });

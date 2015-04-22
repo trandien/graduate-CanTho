@@ -15,10 +15,10 @@ import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Phancongvaitro;
 
 @Repository("phanCongVaiTroDao")
-public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
+public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -26,17 +26,17 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public void ThemPhanCongVaiTro(Phancongvaitro phancongvaitro) {
-		try{
+		try {
 			sessionFactory.getCurrentSession().save(phancongvaitro);
 			System.out.println("Them phan cong vai tro thanh cong");
 		} catch (Exception e) {
-			System.out.println("Them phancongvaitro that bai" +e.getMessage());
+			System.out.println("Them phancongvaitro that bai" + e.getMessage());
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,7 +45,7 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 		try {
 			sessionFactory.getCurrentSession().update(phancongvaitro);
 			System.out.println("Sua phancongvaitro thanh cong");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Sua phancongvaitro that bai");
 		}
 	}
@@ -56,11 +56,10 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 		try {
 			sessionFactory.getCurrentSession().delete(phancongvaitro);
 			System.out.println("Xoa phancongvaitro thanh cong");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Xoa phancongvaitro that bai");
 		}
-		
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -68,9 +67,10 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 	public List<Phancongvaitro> ListPhanCongVaiTro(Integer msdt) {
 		List<Phancongvaitro> listPhanCongVaiTro = new ArrayList<Phancongvaitro>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Phancongvaitro WHERE msdt=:msdt");
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"from Phancongvaitro WHERE msdt=:msdt");
 			listPhanCongVaiTro = query.setInteger("msdt", msdt).list();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Phancongvaitro: Loi khi lay Phancongvaitro");
 		}
 		return listPhanCongVaiTro;
@@ -78,19 +78,23 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan, Integer msvt, Integer mscd) {
+	public Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan,
+			Integer msvt, Integer mscd) {
 		boolean ketqua = false;
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt"
-					+ " AND pcvt.user.nd_taikhoan=:taikhoan AND pcvt.vaitro.msvt=:msvt AND mscda=:mscda");
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt"
+									+ " AND pcvt.user.nd_taikhoan=:taikhoan AND pcvt.vaitro.msvt=:msvt AND mscda=:mscda");
 			query.setInteger("msdt", msdt);
 			query.setInteger("msvt", msvt);
 			query.setInteger("mscda", mscd);
 			query.setString("taikhoan", taiKhoan);
-			if(query.list().size() > 0) {
+			if (query.list().size() > 0) {
 				ketqua = true;
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Phancongvaitro: Loi khi lay Phancongvaitro");
 		}
 		return ketqua;
@@ -101,10 +105,8 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 	public Integer getMaxIdByMaDeThi(Integer msdt) {
 		int ketQua = 0;
 		try {
-			Query query = sessionFactory
-					.getCurrentSession()
-					.createSQLQuery(
-							"select max(mspcvt) from Phancongvaitro WHERE msdt=:msdt");
+			Query query = sessionFactory.getCurrentSession().createSQLQuery(
+					"select max(mspcvt) from Phancongvaitro WHERE msdt=:msdt");
 			query.setParameter("msdt", msdt);
 			ketQua = (Integer) query.uniqueResult();
 		} catch (Exception e) {
@@ -118,13 +120,45 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao{
 	public Phancongvaitro LayPhanCongVaiTroByMa(Integer mspcvt) {
 		Phancongvaitro PhanCongVaiTro = new Phancongvaitro();
 		try {
-			PhanCongVaiTro = (Phancongvaitro) sessionFactory.getCurrentSession().get(
-					Phancongvaitro.class, mspcvt);
-			
+			PhanCongVaiTro = (Phancongvaitro) sessionFactory
+					.getCurrentSession().get(Phancongvaitro.class, mspcvt);
+
 		} catch (Exception e) {
 			System.out.println("LayPhanCongVaiTroByMa: Loi");
 		}
 		return PhanCongVaiTro;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Phancongvaitro> LayDeThiHS(String taiKhoan) {
+		List<Phancongvaitro> ListDeThiHS = new ArrayList<Phancongvaitro>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Phancongvaitro pcvt WHERE pcvt.user.ndTaikhoan=:taikhoan AND pcvt.vaitro.msvt=4");
+			ListDeThiHS = query.setParameter("taikhoan", taiKhoan).list();
+		} catch (Exception e) {
+			System.out.println("LayDeThiHS: Loi "+e.getMessage());
+		}
+		return ListDeThiHS;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Phancongvaitro> LayDeThiGiamThi(String taiKhoan) {
+		List<Phancongvaitro> ListDeThiGiamThi = new ArrayList<Phancongvaitro>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Phancongvaitro pcvt WHERE pcvt.user.ndTaikhoan=:taikhoan AND pcvt.vaitro.msvt=3");
+			ListDeThiGiamThi = query.setParameter("taikhoan", taiKhoan).list();
+		} catch (Exception e) {
+			System.out.println("LayDeThiGiamthi: Loi ");
+		}
+		return ListDeThiGiamThi;
 	}
 
 }

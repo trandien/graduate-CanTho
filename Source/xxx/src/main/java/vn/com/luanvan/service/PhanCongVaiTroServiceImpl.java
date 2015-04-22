@@ -47,4 +47,14 @@ public class PhanCongVaiTroServiceImpl implements PhanCongVaiTroService{
 		return phanCongVaiTroDao.LayPhanCongVaiTroByMa(mspcvt);
 	}
 
+	@Override
+	public List<Phancongvaitro> LayDeThiHS(String taiKhoan) {
+		return phanCongVaiTroDao.LayDeThiHS(taiKhoan);
+	}
+
+	@Override
+	public List<Phancongvaitro> LayDeThiGiamThi(String taiKhoan) {
+		return phanCongVaiTroDao.LayDeThiGiamThi(taiKhoan);
+	}
+
 }

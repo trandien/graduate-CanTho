@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value = "/resources/css/bootstrap.css" />"/>
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
  <script src="<c:url value="/resources/js/jquery.blockUI.js" />"></script>
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
 <style type="text/css">
 	.empty-input{
 		border: 1px solid red;

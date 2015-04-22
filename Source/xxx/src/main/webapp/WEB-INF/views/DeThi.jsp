@@ -37,7 +37,7 @@ p {
 </head>
 <body style="font-family: 'Calibri', sans-serif; font-size: 16px;">
 	<%@ include file="/WEB-INF/views/head-page.jsp"%>
-	<span>${load }</span>
+	${load }
 
 </body>
 </html>

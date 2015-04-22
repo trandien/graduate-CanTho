@@ -180,7 +180,7 @@ public class Dethi  implements java.io.Serializable {
 
     
     @Column(name="DT_TRANGTHAI", nullable=false)
-    public int isDtTrangthai() {
+    public int getDtTrangthai() {
         return this.dtTrangthai;
     }
     

@@ -81,24 +81,6 @@
 			</button>
 		</div>
 	</div>
-
-	<!-- LAY THE ID
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:4000;">
-        <div class="modal-dialog" style="width: 700px;">
-            <div class="modal-content">
-                <div class="modal-header editable">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <div class="modal-title card-title" id="myModalLabel">Tên thẻ</div>
-                    <input class="sr-only modal-id" type="text" value="" />
-                    
-                </div>
-            </div>
-        </div>
-    </div>
--->
-
-	<!-- /. PROFILE -->
 	
 	<%@ include file="/WEB-INF/views/head-page.jsp"%>
 
@@ -244,10 +226,10 @@
 												<a href="De-Thi.html?mscd=${chude.mscd}"><input type="button" class="form-control btn-primary"
 													name="Them chu de" value="Thêm đề thi"></a>
 											</div>
-											
+											<ul class="list-content">
 											<c:forEach items="${listDethis}" var="dethi">
 											<c:if test="${dethi.chude.mscd == chude.mscd}">
-											<ul class="list-content">
+											
 											
 												<li class="list-item" data-toggle="modal"
 													data-target="#myModal" id="dethi_${dethi.msdt }">
@@ -273,9 +255,10 @@
 													</div>
 												</li>
 												
-											</ul>
+											
 											</c:if>
 											</c:forEach>
+											</ul>
 										</div>
 									</c:forEach>
 									<div class="form-group create-list">

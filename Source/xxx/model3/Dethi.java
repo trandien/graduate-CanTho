@@ -1,5 +1,5 @@
 // default package
-// Generated Apr 19, 2015 9:21:03 PM by Hibernate Tools 4.3.1
+// Generated Apr 22, 2015 4:57:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -48,7 +47,7 @@ public class Dethi  implements java.io.Serializable {
      private Set<Kithi> kithis = new HashSet<Kithi>(0);
      private Set<Cauhoi> cauhois = new HashSet<Cauhoi>(0);
      private Set<Phancongvaitro> phancongvaitros = new HashSet<Phancongvaitro>(0);
-     private Set<Lop> lops = new HashSet<Lop>(0);
+     private Set<DethiLop> dethiLops = new HashSet<DethiLop>(0);
      private Set<Thi> this = new HashSet<Thi>(0);
 
     public Dethi() {
@@ -69,7 +68,7 @@ public class Dethi  implements java.io.Serializable {
         this.dtSolanchophep = dtSolanchophep;
         this.dtNguoirade = dtNguoirade;
     }
-    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, String dtNguoirade, Integer lancapnhat, Set<Kithi> kithis, Set<Cauhoi> cauhois, Set<Phancongvaitro> phancongvaitros, Set<Lop> lops, Set<Thi> this) {
+    public Dethi(Chude chude, Dangthi dangthi, Hocky hocky, Monhoc monhoc, Nienkhoa nienkhoa, String dtTende, int dtThoigianlambai, int dtTrangthai, String dtMatkhau, Date dtNgaytaode, Date dtNgaycapnhat, String dtDando, int dtSolanchophep, String dtNguoirade, Integer lancapnhat, Set<Kithi> kithis, Set<Cauhoi> cauhois, Set<Phancongvaitro> phancongvaitros, Set<DethiLop> dethiLops, Set<Thi> this) {
        this.chude = chude;
        this.dangthi = dangthi;
        this.hocky = hocky;
@@ -88,7 +87,7 @@ public class Dethi  implements java.io.Serializable {
        this.kithis = kithis;
        this.cauhois = cauhois;
        this.phancongvaitros = phancongvaitros;
-       this.lops = lops;
+       this.dethiLops = dethiLops;
        this.this = this;
     }
    
@@ -281,13 +280,13 @@ public class Dethi  implements java.io.Serializable {
         this.phancongvaitros = phancongvaitros;
     }
 
-@ManyToMany(fetch=FetchType.LAZY, mappedBy="dethis")
-    public Set<Lop> getLops() {
-        return this.lops;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="dethi")
+    public Set<DethiLop> getDethiLops() {
+        return this.dethiLops;
     }
     
-    public void setLops(Set<Lop> lops) {
-        this.lops = lops;
+    public void setDethiLops(Set<DethiLop> dethiLops) {
+        this.dethiLops = dethiLops;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="dethi")

@@ -24,7 +24,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/project.css" />" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/ThemDeThi.css" />" />    
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jquery.mCustomScrollbar.css" />" />
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
 <script src="<c:url value="/resources/js/bootstrap.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/resources/js/project.js" />"></script>
 <script src="<c:url value="/resources/js/jquery.mCustomScrollbar.concat.min.js" />"></script>

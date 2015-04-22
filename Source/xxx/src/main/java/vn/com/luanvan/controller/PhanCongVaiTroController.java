@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import vn.com.luanvan.form.HocSinhDeThiForm;
 import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Phancongvaitro;
 import vn.com.luanvan.model.Phongthi;
@@ -234,7 +235,6 @@ public class PhanCongVaiTroController {
 			result += "</td>";
 			result += "</tr>";
 		} catch(Exception e) {
-			result = "Them lop vao de thi that bai";
 		}
 		System.out.println(result);
 		return result;
@@ -255,12 +255,75 @@ public class PhanCongVaiTroController {
 	}
 	
 	@RequestMapping(value = "/AjaxThemHSVaoDeThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public @ResponseBody String ThemHSVaoDeThi(ModelAndView model,
-			HttpSession session, @RequestBody List<String> listHS)
+	public @ResponseBody String ThemHSVaoDeThi(HttpSession session, @RequestBody HocSinhDeThiForm abc)
 			throws ParseException {
 		String result = "";
-		for(String a : listHS)
-		System.out.println("XXX: "+a);
+		Phancongvaitro PhanCongVaiTro;
+		int msdt = Integer.parseInt(abc.getMsdt());
+		int mscd = Integer.parseInt(abc.getMscd());
+		int mspt = Integer.parseInt(abc.getMspt());
+		SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat(
+				"yyyy-MM-dd");
+		Date time = dinhDangThoiGian.parse(abc.getNgay());
+		SimpleDateFormat dinhDangtime = new SimpleDateFormat(
+				"hh:mm");
+		Date timeStart = dinhDangtime.parse(abc.getGiobatdau());
+		Date timeEnd = dinhDangtime.parse(abc.getGioketthuc());
+		Vaitro VaiTro = new Vaitro();
+		VaiTro.setMsvt(4);
+		VaiTro.setVtTen("HocSinh");
+		
+		Phongthi PhongThi = phongThiService.LayPhongThiByMa(mspt);
+		
+		Dethi DeThi = deThiService.LayDeThiByMa(msdt);
+		User user = new User();
+		int sttPCVT = 0;
+		int mspcvt = 0;
+		for(String hs : abc.getTaiKhoan()) {
+			user = userService.findByUserName(hs);
+			PhanCongVaiTro = new Phancongvaitro();
+			PhanCongVaiTro.setDethi(DeThi);
+			PhanCongVaiTro.setVaitro(VaiTro);
+			PhanCongVaiTro.setUser(user);
+			PhanCongVaiTro.setMscda(mscd);
+			PhanCongVaiTro.setGiobatdau(timeStart);
+			PhanCongVaiTro.setGioketthuc(timeEnd);
+			PhanCongVaiTro.setNgay(time);
+			PhanCongVaiTro.setMspt(mspt);
+			phanCongVaiTroService.ThemPhanCongVaiTro(PhanCongVaiTro);
+			sttPCVT = phanCongVaiTroService.ListPhanCongVaiTro(msdt).size() - 1;
+			mspcvt = phanCongVaiTroService.getMaxIdByMaDeThi(msdt);
+			result += " <tr id='pcvths-"+mspcvt+"'>";
+			result += " <td id='sttPCVThs-"+mspcvt+"'>"+sttPCVT+"</td>";
+			result += " <td>";
+			result += "<div class='btn-group'>";
+			result += "<div class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+			result += "<span class='glyphicon glyphicon-trash'></span></div>";
+			result += "<div class='dropdown-menu'>";
+			result += "<hr>";
+			result += "<BUTTON class='btn btn-danger' style='width: 100%' onclick='AjaxXoaPhanCongVaiTro("+mspcvt+")'>";
+			result += "Xóa</BUTTON>";
+			result += "</div>";
+			result += "</div>";
+			result += " </td>";
+			result += " <td title='" + hs + "'>"
+					+ user.getNdHoten() + "</td>";
+			result += " <td>" + PhongThi.getPtTen() + "</td>";
+			result += " <td>" + time + "</td>";
+			result += " <td>" + timeStart + "</td>";
+			result += " <td>" + timeEnd + "</td>";
+			result += " <td>" + user.getLop().getMsl() + "</td>";
+			result += " </tr>";
+		}
+		return result;
+	}
+	
+	//?????
+	@RequestMapping(value = "/AjaxXoaHSVaoDeThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String XoaHSVaoDeThi(ModelAndView model,
+			HttpSession session, HttpServletRequest request)
+			throws ParseException {
+		String result = "";
 		return result;
 	}
 }

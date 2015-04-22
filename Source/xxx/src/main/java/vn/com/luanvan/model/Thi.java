@@ -1,7 +1,9 @@
 package vn.com.luanvan.model;
 // Generated Mar 30, 2015 9:02:58 AM by Hibernate Tools 4.3.1
 
+
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -53,7 +55,8 @@ public class Thi implements java.io.Serializable {
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "ndTaikhoan", column = @Column(name = "ND_TAIKHOAN", nullable = false, length = 100)),
-			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false)) })
+			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false)),
+			@AttributeOverride(name = "lanthi", column = @Column(name = "lanthi", nullable = false)) })
 	public ThiId getId() {
 		return this.id;
 	}
@@ -148,5 +151,6 @@ public class Thi implements java.io.Serializable {
 	public void setTDiem(float TDiem) {
 		this.TDiem = TDiem;
 	}
+
 
 }

@@ -34,6 +34,7 @@
 <script src="<c:url value="/resources/js/tabnoidungcauhoi.js" />"></script>
 <script src="<c:url value="/resources/ajax/ajaxCauHoi.js" />"></script>
 <script src="<c:url value="/resources/ajax/ajaxCauTraLoi.js" />"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
 <style type="text/css">
 	.input-error-taikhoan {
 		color: #a94442;

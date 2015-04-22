@@ -12,10 +12,15 @@ public interface PhanCongVaiTroService {
 	void XoaPhanCongVaiTro(Phancongvaitro phancongvaitro);
 
 	List<Phancongvaitro> ListPhanCongVaiTro(Integer msdt);
-	
-	Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan, Integer msvt, Integer mscd);
-	
+
+	List<Phancongvaitro> LayDeThiHS(String taiKhoan);
+
+	List<Phancongvaitro> LayDeThiGiamThi(String taiKhoan);
+
+	Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan,
+			Integer msvt, Integer mscd);
+
 	Integer getMaxIdByMaDeThi(Integer msdt);
-	
+
 	Phancongvaitro LayPhanCongVaiTroByMa(Integer mspcvt);
 }

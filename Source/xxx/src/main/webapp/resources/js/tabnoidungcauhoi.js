@@ -446,7 +446,6 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
     			return;
     		}
     		
-    		
     		if(xongCauHoi==0) {
     			alert("Bạn chưa hoàn thành câu hỏi. Vui lòng kiểm tra lại!");
     			return;
@@ -582,3 +581,5 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
     		}); // the end AjaxLuuCauHoiVaCauTraLoi
     	}
 
+    	
+    	
