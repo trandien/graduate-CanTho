@@ -22,6 +22,7 @@ import vn.com.luanvan.service.CauHoiService;
 import vn.com.luanvan.service.CauTraLoiService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
+import vn.com.luanvan.service.ThiSinhThiService;
 
 @Controller
 public class ThiSinhThiController {
@@ -34,6 +35,9 @@ public class ThiSinhThiController {
 
 	@Autowired
 	CauHoiService cauHoiService;
+	
+	@Autowired
+	ThiSinhThiService thiSinhThiService;
 
 	@Autowired
 	CauTraLoiService cauTraLoiService;
@@ -75,21 +79,73 @@ public class ThiSinhThiController {
 
 	@RequestMapping(value = "/AjaxKiemTraMatKhauDeThi", method = RequestMethod.POST)
 	public @ResponseBody String KiemTraMatKhauDeThi(ModelAndView model,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		String matKhauDeThi = request.getParameter("MatKhauNhap");
 		String result = "";
-		int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
-		Dethi DeThi = deThiService.LayDeThiByMa(msdt);
+		int msdt = 0;
+		Dethi DeThi = new Dethi();
+		msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+		DeThi = deThiService.LayDeThiByMa(msdt);
+		
 		if (DeThi.getDtMatkhau().equals(matKhauDeThi)) {
 			result = "Mat khau dung";
 			System.out.println(result);
+			
 		} else {
 			System.out.println("Mat khau sai");
 		}
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/AjaxKiemTraSoLanChoPhep", method = RequestMethod.POST)
+	public @ResponseBody String KiemTraSoLanChoPhep(ModelAndView model,
+			HttpServletRequest request, HttpSession session) {
+		System.out.println("Kiem tra so lan cho phep duoc goi");
+		String result = "";
+		int msdt = 0;
+		Dethi DeThi = new Dethi();
+		int soLanThiChoPhep = 0;
+		int soLanThi = 0;
+		String taiKhoan = "";
+		
+		msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+		DeThi = deThiService.LayDeThiByMa(msdt);
+		User user = new User();
+		user = (User) session.getAttribute("user");
+		taiKhoan = user.getNdTaikhoan();
+		soLanThiChoPhep = DeThi.getDtSolanchophep();
+		
+		soLanThi = thiSinhThiService.KiemTraSoLanThi(taiKhoan, msdt);
+		
+		if(soLanThi == soLanThiChoPhep) {
+			// insert
+			++soLanThi;
+			result = String.valueOf(soLanThi);
+			System.out.println("Ban da thi vuot qua so lan cho phep");
+		}
+		return result;
+	}
 
+	@RequestMapping(value = "/AjaxTaoBangThiSinhThi", method = RequestMethod.POST)
+	public @ResponseBody String TaoBangThiSinhThi(ModelAndView model,
+			HttpServletRequest request, HttpSession session) {
+		String matKhauDeThi = request.getParameter("MatKhauNhap");
+		String result = "";
+		int msdt = 0;
+		Dethi DeThi = new Dethi();
+		msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+		
+		if (DeThi.getDtMatkhau().equals(matKhauDeThi)) {
+			result = "Mat khau dung";
+			System.out.println(result);
+			
+		} else {
+			System.out.println("Mat khau sai");
+		}
+
+		return result;
+	}
 
 	@RequestMapping(value = "/Test.html", method = RequestMethod.GET)
 	public ModelAndView ChuyenTrangThi(ModelAndView model,
@@ -165,8 +221,6 @@ public class ThiSinhThiController {
 					listCTL = cauTraLoiService.LayDSCauTraLoi(listCauHoi.get(
 							j - 1).getMsch());
 					String labelAnswer = "";
-					System.out.println(listCauHoi.get(j - 1)
-							.getChNoidungcauhoi());
 					if (dangCauHoi == 1) { // Dạng câu hỏi là radio
 						for (int k = 0; k < listCTL.size(); k++) {
 							labelAnswer = "";
@@ -187,7 +241,6 @@ public class ThiSinhThiController {
 							result += "          </div> ";
 							result += "        </div>";
 
-							System.out.println(listCTL.get(k).getCtlNoidung());
 						}
 
 					} else if (dangCauHoi == 2) { // Dạng câu hỏi là checkbox
@@ -209,7 +262,6 @@ public class ThiSinhThiController {
 							result += "            </label>";
 							result += "          </div> ";
 							result += "        </div>";
-							System.out.println(listCTL.get(k).getCtlNoidung());
 						}
 					} else {
 						// Dạng câu hỏi điền vào chổ trống

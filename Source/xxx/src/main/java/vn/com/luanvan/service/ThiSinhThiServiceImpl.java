@@ -14,8 +14,8 @@ public class ThiSinhThiServiceImpl implements ThiSinhThiService{
 	}
 
 	@Override
-	public boolean KiemTraSoLanThi(String taiKhoan, int msdt, int soLanThi) {
-		return thiSinhThiDao.KiemTraSoLanThi(taiKhoan, msdt, soLanThi);
+	public Integer KiemTraSoLanThi(String taiKhoan, int msdt) {
+		return thiSinhThiDao.KiemTraSoLanThi(taiKhoan, msdt);
 	}
 
 }

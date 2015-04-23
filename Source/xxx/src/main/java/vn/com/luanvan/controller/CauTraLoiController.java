@@ -139,9 +139,10 @@ public class CauTraLoiController {
 		String result = "";
 		if (isLogin(session)) {
 			Cautraloi CauTraLoi = new Cautraloi();
+			Cauhoi CauHoi = new Cauhoi();
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
 			String ctl_noidung = request.getParameter("NoiDungCTL");
-			Cauhoi CauHoi = cauHoiService.LayCauHoiByMa(msch);
+			CauHoi = cauHoiService.LayCauHoiByMa(msch);
 			
 			CauTraLoi.setCauhoi(CauHoi);
 			CauTraLoi.setCtlNoidung(ctl_noidung);
