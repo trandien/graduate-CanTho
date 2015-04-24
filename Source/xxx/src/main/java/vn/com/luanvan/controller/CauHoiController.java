@@ -94,7 +94,6 @@ public class CauHoiController {
 		float diem = Float.parseFloat(tang.getDiem().trim());
 		String noiDungCauHoi = tang.getNoiDungCauHoi().trim();
 		String dapAnDung = tang.getDapAnDung().trim();
-		dapAnDung = dapAnDung.substring(0, dapAnDung.length());
 		List<String> noiDungCauTraLoi = tang.getNoiDungCauTraLoi();
 		Dokho DoKho = doKhoService.LayDoKhoByMa(maDoKho);
 		Dethi DeThi = deThiService.LayDeThiByMa(msdt);

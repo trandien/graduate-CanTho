@@ -25,6 +25,7 @@ public class Phongthi  implements java.io.Serializable {
 
      private Integer mspt;
      private String ptTen;
+     private Set<Thi> thi = new HashSet<Thi>(0);
 
     public Phongthi() {
     }
@@ -32,6 +33,10 @@ public class Phongthi  implements java.io.Serializable {
 	
     public Phongthi(String ptTen) {
         this.ptTen = ptTen;
+    }
+    public Phongthi(String ptTen, Set<Thi> thi) {
+       this.ptTen = ptTen;
+       this.thi = thi;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -55,6 +60,18 @@ public class Phongthi  implements java.io.Serializable {
     public void setPtTen(String ptTen) {
         this.ptTen = ptTen;
     }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="phongthi")
+    public Set<Thi> getThis() {
+        return this.thi;
+    }
+    
+    public void setThis(Set<Thi> thi) {
+        this.thi = thi;
+    }
+
+
+
 
 }
 
