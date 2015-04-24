@@ -396,12 +396,12 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
            if(isCheck.length == 1) {
 	        	tam = isCheck[0].split("-")[2];
 	           	dapandung = $("#hienthicautraloix-"+i+"-"+tam).html();
-	           	$("#kq-dapandungx-"+i).html(dapandung);
+	           	$("#kq-dapandungx-"+i).html(tam);
            } else if(isCheck.length > 1){
 	            for(var k=0; k<isCheck.length; k++) {
 	            	tam = isCheck[k].split("-")[2];
 	            	dapandung = $("#hienthicautraloix-"+i+"-"+tam).html();
-	            	$("#kq-dapandungx-"+i).append(dapandung);
+	            	$("#kq-dapandungx-"+i).append(tam+"-");
 	            }
            	} else {
            		// trường hợp điền vào chổ trống sẽ lấy đáp án trực tiếp từ câu hỏi.
@@ -525,34 +525,61 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
 				    			        			$("#dapandung-"+msch).show();
 				    			        			var k;
 				    			        			var kitu = "";
+				    			        			var dapAnDungInList = "";
+				    			        			var vitriCheck = new Number(isCheck[0].split("-")[2]);
 				    			        			for (k=1; k<=listCauTraLoi.length; k++) {
 				    			        				$("#dapandung-"+msch).append("" +
 				    			        						"<input onclick='AjaxSuaDapAnDung("+msch+")' name='dapandung-"+msch+"' class='dapandung-"+msch+"' type='radio' id='iddapandung-"+msch+"-"+listIdCTL[k-1]+"'>" +
 				    			        						"<span id='kitu-"+msch+"-"+listIdCTL[k-1]+"'style='margin-left: 10px; margin-right: 40px;'>"+String.fromCharCode(k+64)+"</span>");
 				    			        				$("#iddapandung-"+msch+"-"+listIdCTL[k-1]).prop('type', 'radio');
-				    			        				
-				    			        				for(var t=0; t<vitri.length; t++)
-				    			        				if(k == vitri[t]) {
-				    			        					$("#iddapandung-"+msch+"-"+listIdCTL[k-1]).prop('checked', true);
-				    			        				}
+					    			        			$("#iddapandung-"+msch+"-"+listIdCTL[vitriCheck-1]).prop('checked', true);
 				    			        			}
+				    			        			dapAnDungInList = listIdCTL[vitriCheck-1];
+				    			        			$.ajax({
+			    			        					data: "MaCauHoi="+msch+"&DapAnDung="+dapAnDungInList,
+			    			        					url: "AjaxSuaDapAnDung",
+			    			        					type: "POST",
+			    			        					success: function(result) {
+			    			        						
+			    			        					},
+			    			        					error: function (result){
+			    			        						
+			    			        					}
+			    			        				});
+				    			        			
 				    			        	 } else if(maDangCauHoi == 2) { //Chọn nhiều câu đúng
 				    			        		 $("#dangCauHoi-"+msch+"-2").prop('checked', true);
 				    			        		 $("#idthemcautraloi-"+msch).show();
 				    			        		 $(".table-hover").show();
 				    			        		 $("#dapandung-"+msch).show();
 				    			        		 var k;
+				    			        		 var dapAnDungInList = "";
+				    			        		 var lengthIsCheck = isCheck.length;
 				    			        		 for (k=1; k<=listCauTraLoi.length; k++) {
 				    			        			$("#dapandung-"+msch).append("" +
-				    			        						"<input onclick='AjaxSuaDapAnDung("+msch+")' name='dapandung-"+msch+"' class='dapandung-"+msch+"' type='checkbox' id='iddapandung-"+msch+"-"+k+"'>" +
-				    			        						"<span id='kitu-"+msch+"-"+k+"'style='margin-left: 10px; margin-right: 40px;'>"+String.fromCharCode(k+64)+"</span>");
-				    			        			$("#iddapandung-"+msch+"-"+k).prop('type', 'checkbox');
-				    			        				
-				    			        			for(var t=0; t<vitri.length; t++)
-				    				        			if(k == vitri[t]) {
-				    				        				$("#iddapandung-"+msch+"-"+k).prop('checked', true);
+				    			        						"<input onclick='AjaxSuaDapAnDung("+msch+")' name='dapandung-"+msch+"' class='dapandung-"+msch+"' type='checkbox' id='iddapandung-"+msch+"-"+listIdCTL[k-1]+"'>" +
+				    			        						"<span id='kitu-"+msch+"-"+listIdCTL[k-1]+"'style='margin-left: 10px; margin-right: 40px;'>"+String.fromCharCode(k+64)+"</span>");
+				    			        			$("#iddapandung-"+msch+"-"+listIdCTL[k-1]).prop('type', 'checkbox');
+				    			        			
+				    			        			for(var t=0; t<lengthIsCheck; t++){
+				    			        				var vitriCheck = new Number(isCheck[t].split("-")[2]);
+				    				        			if(k == vitriCheck) {
+				    				        				$("#iddapandung-"+msch+"-"+listIdCTL[vitriCheck-1]).prop('checked', true);
+				    				        				dapAnDungInList += listIdCTL[vitriCheck-1]+"-";
 				    				        			}
 				    			        			}
+				    			        			}
+				    			        		 $.ajax({
+			    			        					data: "MaCauHoi="+msch+"&DapAnDung="+dapAnDungInList,
+			    			        					url: "AjaxSuaDapAnDung",
+			    			        					type: "POST",
+			    			        					success: function(result) {
+			    			        						
+			    			        					},
+			    			        					error: function (result){
+			    			        						
+			    			        					}
+			    			        				});
 				    			        	 } else if(maDangCauHoi == 3) { // Điền vào chổ trống
 				    			        		 $("#dangCauHoi-"+msch+"-3").prop('checked', true);
 				    			        		 $("#idthemcautraloi-"+msch).hide();
@@ -560,6 +587,7 @@ function LayDapAnDung(listCauTraLoi, maDangCauHoi, msch) {
 				    			        		$(".dapandung-"+msch).hide();
 				    			        	 }
 		    			        			 document.getElementById("kq-themcautraloi-"+msch).innerHTML+= ThemCTL(listCauTraLoi, msch, listIdCTL);
+		    			        			 
 		    			        		 },
 		    			        		 error : function(list){
 		    			        			 alert("Loi lay list id ctl");

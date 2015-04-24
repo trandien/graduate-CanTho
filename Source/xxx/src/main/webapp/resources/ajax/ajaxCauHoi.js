@@ -236,12 +236,12 @@ function AjaxSuaDapAnDung(msch){
 	 if(isCheck.length == 1) {
      	tam = isCheck[0].split("-")[2];
         	dapandung = $("#hienthicautraloi-"+msch+"-"+tam).html();
-        	$("#kq-dapandung-"+msch).html(dapandung);
+        	$("#kq-dapandung-"+msch).html(tam);
     } else if(isCheck.length > 1){
         for(var k=0; k<isCheck.length; k++) {
         	tam = isCheck[k].split("-")[2];
         	dapandung = $("#hienthicautraloi-"+msch+"-"+tam).html();
-        	$("#kq-dapandung-"+msch).append(dapandung);
+        	$("#kq-dapandung-"+msch).append(tam+"-");
         }
    	} else {
    		$("#kq-dapandung-"+msch).html("");

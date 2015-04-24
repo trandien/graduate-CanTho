@@ -1,6 +1,5 @@
 
 //Kiểm tra mật khẩu đề thi
-
 function CheckPassTest(){
 	var msdt = $("#msdt").val();
 	var matKhauNhap = $("#inputMatKhauDeThi").val();
@@ -19,6 +18,17 @@ function CheckPassTest(){
 					success : function(kq) {
 						if(kq.length == 0) {
 							window.location.href = "Test.html?msdt="+msdt;
+							
+							$.ajax({
+								data: "MaDeThi="+msdt+"&SoLanThi="+kq,
+								url: "AjaxTaoBangThiSinhThi",
+								type: "POST",
+								success : function(create) {
+								},
+								error : function(error) {
+									
+								}
+							});
 						} else {
 							$("#thongbao_nhapmatkhaudethi").html("<span style='color: #a94442'>Số lần cho phép thi của bạn đã hết!</span>");
 						}
@@ -35,3 +45,14 @@ function CheckPassTest(){
 		}
 	});
 }
+
+
+
+
+
+
+
+
+
+
+
