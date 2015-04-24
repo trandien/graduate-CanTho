@@ -1,13 +1,28 @@
+
 $(document).ready(function(){
 	var url = $(location).attr('href');
 	var existURL = url.match(/Test.html/i);
+	var delay = 59 ;
+    /*
+    countdown() ;
 	if(existURL == null) {
 		
 	} else {
-		var time = $("#finish-time").val();
-		time = new Number(time)*60000;
+		var phut = new Number($("#finish-time").val());
+		var giay = new Number(phut)*60000;
+		function countdown() {
+			
+		    setTimeout(countdown, 1000) ;
+		    $("#time-limit").html("Thời gian còn lại: 00 : "+phut+" : "  + delay  + " s");
+		    delay --;
+		    if (delay < 0 ) {
+			    delay = 59 ;
+			    phut--;
+		    }
+	    }
 		setTimeout(function() {  window.location.href = "Ket-Qua-Thi.html";}, time );
 	}
+	*/
 	$(document).on('click', '.isTag', function(e) {
 		var sttCauHoi = $(this).attr('id').split("-")[2];
 		var abc = $(this).attr('id');
@@ -39,5 +54,5 @@ function LayURL() {
 }
 
 function test() {
-	window.location.href = "DangXuat";
+	window.location.href = "Ket-Qua-Thi.html";
 }

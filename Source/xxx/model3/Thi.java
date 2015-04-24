@@ -1,13 +1,13 @@
 // default package
-// Generated Apr 22, 2015 4:57:38 PM by Hibernate Tools 4.3.1
+// Generated Apr 23, 2015 10:00:35 PM by Hibernate Tools 4.3.1
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
 @Table(name = "thi", catalog = "tracnghiem")
 public class Thi implements java.io.Serializable {
 
-	private ThiId id;
+	private Integer mst;
 	private Dethi dethi;
-	private Phongthi phongthi;
 	private User user;
-	private boolean TDanhdau;
-	private boolean TKhoabailam;
+	private Integer solanthi;
+	private Boolean TDanhdau;
+	private Boolean TKhoabailam;
 	private Date TNgaylam;
 	private Date TThoigianbatdau;
 	private Date TThoigianketthuc;
@@ -35,13 +35,18 @@ public class Thi implements java.io.Serializable {
 	public Thi() {
 	}
 
-	public Thi(ThiId id, Dethi dethi, Phongthi phongthi, User user,
-			boolean TDanhdau, boolean TKhoabailam, Date TNgaylam,
-			Date TThoigianbatdau, Date TThoigianketthuc, float TDiem) {
-		this.id = id;
+	public Thi(Dethi dethi, User user, float TDiem) {
 		this.dethi = dethi;
-		this.phongthi = phongthi;
 		this.user = user;
+		this.TDiem = TDiem;
+	}
+
+	public Thi(Dethi dethi, User user, Integer solanthi, Boolean TDanhdau,
+			Boolean TKhoabailam, Date TNgaylam, Date TThoigianbatdau,
+			Date TThoigianketthuc, float TDiem) {
+		this.dethi = dethi;
+		this.user = user;
+		this.solanthi = solanthi;
 		this.TDanhdau = TDanhdau;
 		this.TKhoabailam = TKhoabailam;
 		this.TNgaylam = TNgaylam;
@@ -50,21 +55,19 @@ public class Thi implements java.io.Serializable {
 		this.TDiem = TDiem;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "ndTaikhoan", column = @Column(name = "ND_TAIKHOAN", nullable = false, length = 100)),
-			@AttributeOverride(name = "msdt", column = @Column(name = "MSDT", nullable = false)),
-			@AttributeOverride(name = "lanthi", column = @Column(name = "lanthi", nullable = false)) })
-	public ThiId getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "MST", unique = true, nullable = false)
+	public Integer getMst() {
+		return this.mst;
 	}
 
-	public void setId(ThiId id) {
-		this.id = id;
+	public void setMst(Integer mst) {
+		this.mst = mst;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MSDT", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "MSDT", nullable = false)
 	public Dethi getDethi() {
 		return this.dethi;
 	}
@@ -74,17 +77,7 @@ public class Thi implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MSPT", nullable = false)
-	public Phongthi getPhongthi() {
-		return this.phongthi;
-	}
-
-	public void setPhongthi(Phongthi phongthi) {
-		this.phongthi = phongthi;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ND_TAIKHOAN", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "ND_TAIKHOAN", nullable = false)
 	public User getUser() {
 		return this.user;
 	}
@@ -93,26 +86,35 @@ public class Thi implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "T_DANHDAU", nullable = false)
-	public boolean isTDanhdau() {
+	@Column(name = "SOLANTHI")
+	public Integer getSolanthi() {
+		return this.solanthi;
+	}
+
+	public void setSolanthi(Integer solanthi) {
+		this.solanthi = solanthi;
+	}
+
+	@Column(name = "T_DANHDAU")
+	public Boolean getTDanhdau() {
 		return this.TDanhdau;
 	}
 
-	public void setTDanhdau(boolean TDanhdau) {
+	public void setTDanhdau(Boolean TDanhdau) {
 		this.TDanhdau = TDanhdau;
 	}
 
-	@Column(name = "T_KHOABAILAM", nullable = false)
-	public boolean isTKhoabailam() {
+	@Column(name = "T_KHOABAILAM")
+	public Boolean getTKhoabailam() {
 		return this.TKhoabailam;
 	}
 
-	public void setTKhoabailam(boolean TKhoabailam) {
+	public void setTKhoabailam(Boolean TKhoabailam) {
 		this.TKhoabailam = TKhoabailam;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "T_NGAYLAM", nullable = false, length = 0)
+	@Column(name = "T_NGAYLAM", length = 0)
 	public Date getTNgaylam() {
 		return this.TNgaylam;
 	}
@@ -122,7 +124,7 @@ public class Thi implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "T_THOIGIANBATDAU", nullable = false, length = 0)
+	@Column(name = "T_THOIGIANBATDAU", length = 0)
 	public Date getTThoigianbatdau() {
 		return this.TThoigianbatdau;
 	}
@@ -132,7 +134,7 @@ public class Thi implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "T_THOIGIANKETTHUC", nullable = false, length = 0)
+	@Column(name = "T_THOIGIANKETTHUC", length = 0)
 	public Date getTThoigianketthuc() {
 		return this.TThoigianketthuc;
 	}

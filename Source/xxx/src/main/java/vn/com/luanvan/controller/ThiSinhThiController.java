@@ -17,11 +17,13 @@ import vn.com.luanvan.model.Cauhoi;
 import vn.com.luanvan.model.Cautraloi;
 import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Phancongvaitro;
+import vn.com.luanvan.model.Thi;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.CauHoiService;
 import vn.com.luanvan.service.CauTraLoiService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
+import vn.com.luanvan.service.ThiSinhThiService;
 
 @Controller
 public class ThiSinhThiController {
@@ -34,9 +36,14 @@ public class ThiSinhThiController {
 
 	@Autowired
 	CauHoiService cauHoiService;
+	
+	@Autowired
+	ThiSinhThiService thiSinhThiService;
 
 	@Autowired
 	CauTraLoiService cauTraLoiService;
+	
+	private String tableThiSinh = "";
 
 	private boolean isLogin(HttpSession session) {
 		return session.getAttribute("isLogin") != null
@@ -75,26 +82,91 @@ public class ThiSinhThiController {
 
 	@RequestMapping(value = "/AjaxKiemTraMatKhauDeThi", method = RequestMethod.POST)
 	public @ResponseBody String KiemTraMatKhauDeThi(ModelAndView model,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		String matKhauDeThi = request.getParameter("MatKhauNhap");
 		String result = "";
-		int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
-		Dethi DeThi = deThiService.LayDeThiByMa(msdt);
+		int msdt = 0;
+		Dethi DeThi = new Dethi();
+		msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+		DeThi = deThiService.LayDeThiByMa(msdt);
+		
 		if (DeThi.getDtMatkhau().equals(matKhauDeThi)) {
 			result = "Mat khau dung";
 			System.out.println(result);
+			
 		} else {
 			System.out.println("Mat khau sai");
 		}
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/AjaxKiemTraSoLanChoPhep", method = RequestMethod.POST)
+	public @ResponseBody String KiemTraSoLanChoPhep(ModelAndView model,
+			HttpServletRequest request, HttpSession session) {
+		System.out.println("Kiem tra so lan cho phep duoc goi");
+		String result = "";
+		int msdt = 0;
+		Dethi DeThi = new Dethi();
+		int soLanThiChoPhep = 0;
+		int soLanThi = 0;
+		String taiKhoan = "";
+		
+		msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+		DeThi = deThiService.LayDeThiByMa(msdt);
+		User user = new User();
+		user = (User) session.getAttribute("user");
+		taiKhoan = user.getNdTaikhoan();
+		soLanThiChoPhep = DeThi.getDtSolanchophep();
+		
+		soLanThi = thiSinhThiService.KiemTraSoLanThi(taiKhoan, msdt);
+		
+		if(soLanThi >= soLanThiChoPhep) {
+			result = "Ban da thi vuot qua so lan cho phep";
+			System.out.println("Ban da thi vuot qua so lan cho phep");
+		} else {
+			++soLanThi;
+			Thi thi = new Thi();
+			thi.setDethi(DeThi);
+			thi.setUser(user);
+			thi.setSolanthi(soLanThi);
+			thiSinhThiService.ThemThiSinhThi(thi);
+			System.out.println("Them vao bang thi thanh cong");
+		}
+		return result;
+	}
 
+	@RequestMapping(value = "/AjaxTaoBangThiSinhThi", method = RequestMethod.POST)
+	public @ResponseBody String TaoBangThiSinhThi(ModelAndView model,
+			HttpServletRequest request, HttpSession session) {
+		System.out.println("Tao bang thi sinh duoc goi");
+		String result = "";
+		tableThiSinh = "";
+		int msdt = 0;
+		int soLanThi = 0;
+		String taiKhoan = "";
+		Dethi DeThi = new Dethi();
+		User user = new User();
+		try {
+			user = (User) session.getAttribute("user");
+			taiKhoan = user.getNdTaikhoan();
+			msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			soLanThi = thiSinhThiService.KiemTraSoLanThi(taiKhoan, msdt);
+			thiSinhThiService.CreateTableExam(taiKhoan, msdt, soLanThi);
+			result = taiKhoan+"_"+msdt+"_"+soLanThi;
+			tableThiSinh = result;
+			
+			System.out.println(result);
+		} catch(Exception e) {
+			System.out.println("Tao bang that bai "+e.getMessage()+" : "+soLanThi);
+		}
+		return result;
+	}
 
 	@RequestMapping(value = "/Test.html", method = RequestMethod.GET)
 	public ModelAndView ChuyenTrangThi(ModelAndView model,
 			HttpServletRequest request, HttpSession session,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes) throws InterruptedException {
 
 		System.out.println("Test duoc goi");
 		boolean quyenTruyCap = false;
@@ -131,7 +203,7 @@ public class ThiSinhThiController {
 				for (int i = 1; i <= sizeListCauHoi; i++) {
 					result += "            <span class='question-numberx' id='question-number-"
 							+ i + "'>" + i + "</span>";
-					if (i % 5 == 0) {
+					if (i % 5 == 0) { // Hiển thị 5 câu hỏi trên cùng 1 hàng
 						result += "          </div>";
 						result += "         <div class='group-question'>";
 					}
@@ -165,8 +237,6 @@ public class ThiSinhThiController {
 					listCTL = cauTraLoiService.LayDSCauTraLoi(listCauHoi.get(
 							j - 1).getMsch());
 					String labelAnswer = "";
-					System.out.println(listCauHoi.get(j - 1)
-							.getChNoidungcauhoi());
 					if (dangCauHoi == 1) { // Dạng câu hỏi là radio
 						for (int k = 0; k < listCTL.size(); k++) {
 							labelAnswer = "";
@@ -174,10 +244,9 @@ public class ThiSinhThiController {
 							result += "        <div class='content-answer'>";
 							result += "          <div class='radio'>";
 							result += "            <label>";
-							result += "              <input type='radio' name='"
+							result += "              <input class='radio-answer' type='radio' name='"
 									+ listCauHoi.get(j - 1).getMsch()
-									+ "' id='"
-									+ listCTL.get(k).getMsctl()
+									+ "' id='"+listCauHoi.get(j - 1).getMsch()+"-" + listCTL.get(k).getMsctl()
 									+ "' value=''>";
 							result += " <div class='form-group' style='display: inline' ><p>"
 									+ lableAnswer
@@ -187,7 +256,6 @@ public class ThiSinhThiController {
 							result += "          </div> ";
 							result += "        </div>";
 
-							System.out.println(listCTL.get(k).getCtlNoidung());
 						}
 
 					} else if (dangCauHoi == 2) { // Dạng câu hỏi là checkbox
@@ -197,9 +265,9 @@ public class ThiSinhThiController {
 							result += "        <div class='content-answer'>";
 							result += "          <div class='checkbox'>";
 							result += "            <label>";
-							result += "              <input type='checkbox' name='"
+							result += "              <input class='checkbox-answer' type='checkbox' name='"
 									+ listCauHoi.get(j - 1).getMsch()
-									+ "' id='"
+									+ "' id='"+listCauHoi.get(j - 1).getMsch()+"-"
 									+ listCTL.get(k).getMsctl()
 									+ "' value=''>";
 							result += " <div class='form-group' style='display: inline' ><p>"
@@ -209,7 +277,6 @@ public class ThiSinhThiController {
 							result += "            </label>";
 							result += "          </div> ";
 							result += "        </div>";
-							System.out.println(listCTL.get(k).getCtlNoidung());
 						}
 					} else {
 						// Dạng câu hỏi điền vào chổ trống
@@ -239,11 +306,89 @@ public class ThiSinhThiController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value = "/AjaxLuuBaiThiThiSinh", method = RequestMethod.POST)
+	public String LuubaiThiThiSinh(ModelAndView model,
+			HttpServletRequest request, HttpSession session) {
+		String result = "";
+		
+		return result;
+	}
 
 	@RequestMapping(value = "/Ket-Qua-Thi.html", method = RequestMethod.GET)
 	public ModelAndView KetQuaThi(ModelAndView model,
 			HttpServletRequest request, HttpSession session) {
-		// model.setViewName("redirect:/Lay-Code-Quen-Mat-Khau.html");
+		model.setViewName("KetQuaThi");
 		return model;
 	}
+	
+	@RequestMapping(value = "/AjaxLuuKQThi", method = RequestMethod.POST)
+	public @ResponseBody String LuuKQThi(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try {
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			int msctl = Integer.parseInt(request.getParameter("MaCauTraLoi"));
+			User user = (User) session.getAttribute("user");
+			String taiKhoan = user.getNdTaikhoan();
+			if(tableThiSinh.equals("") || tableThiSinh == null) {
+				tableThiSinh = thiSinhThiService.LayBangDangThi(taiKhoan, msch);
+			}
+			thiSinhThiService.LuuKQThiSinh(tableThiSinh, msch, msctl);
+			result = "Luu Kq thi thanh cong";
+		} catch (Exception e) {
+			System.out.println("Luu ket qua thi that bai");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxSuaKQThi", method = RequestMethod.POST)
+	public @ResponseBody String SuaKQThi(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try {
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			int msctl = Integer.parseInt(request.getParameter("MaCauTraLoi"));
+			User user = (User) session.getAttribute("user");
+			String taiKhoan = user.getNdTaikhoan();
+			if(tableThiSinh.equals("") || tableThiSinh == null) {
+				tableThiSinh = thiSinhThiService.LayBangDangThi(taiKhoan, msch);
+			}
+			thiSinhThiService.SuaKQThiSinh(tableThiSinh, msch, msctl);
+			result = "Sua Kq thi thanh cong";
+		} catch (Exception e) {
+			System.out.println("Luu ket qua thi that bai");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxKiemTraCHCoDuocChon", method = RequestMethod.POST)
+	public @ResponseBody String KiemTraCHCoDuocChon(HttpServletRequest request, HttpSession session) {
+		String result = "";
+		try {
+			boolean kq = false;
+			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
+			User user = (User) session.getAttribute("user");
+			String taiKhoan = user.getNdTaikhoan();
+			if(tableThiSinh.equals("") || tableThiSinh == null) {
+				tableThiSinh = thiSinhThiService.LayBangDangThi(taiKhoan, msch);
+			}
+			kq = thiSinhThiService.KTCHDaDuocChon(tableThiSinh, msch);
+			if(kq) {
+				result = "true";
+			} else {
+				result = "false";
+			}
+			System.out.println("Ket qua chon la "+result);
+		} catch (Exception e) {
+			result = "true";
+		}
+		return result;
+	}
 }
+
+
+
+
+
+
+
+

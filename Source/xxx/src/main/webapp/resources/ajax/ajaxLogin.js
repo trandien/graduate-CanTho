@@ -6,7 +6,7 @@ function ajaxDangKy(){
 		success : function(result) {
 			if(result.length == 0)
 			{
-				$("#thongbao_taikhoan").html("<strong>Tài khoản đã có người sử dụng</strong>")					
+				//$("#thongbao_taikhoan").html("<strong>Tài khoản đã có người sử dụng</strong>")					
 			}
 			else
 			{

@@ -10,7 +10,7 @@ function AjaxLuuDeThi() {
 	var DanDo = $("#danDo").val();
 	var SoLanChoPhep = $("#soLanChoPhep").val();
 	var MatKhauDeThi = $("#matKhauDeThi").val();
-	if(TenDe=="" || ThoiGianLamBai=="" || NgayTaoDe=="" || SoLanChoPhep == "") {
+	if(TenDe=="" || ThoiGianLamBai=="" || NgayTaoDe=="" || SoLanChoPhep == "" || !jQuery.isNumeric(ThoiGianLamBai)) {
 		if(TenDe=="") {
 			$("#tenDe").addClass("empty-input");
 			$("#thongbao_tende").html("<span style='color: #a94442'>Tên đề không được bỏ trống</span>");
@@ -18,6 +18,9 @@ function AjaxLuuDeThi() {
 		if(ThoiGianLamBai=="") {
 			$("#thoiGian").addClass("empty-input");
 			$("#thongbao_thoigian").html("<span style='color: #a94442'>Thời gian làm bài không được bỏ trống</span>");
+		} else if(!jQuery.isNumeric(ThoiGianLamBai)) {
+			$("#thoiGian").addClass("empty-input");
+			$("#thongbao_thoigian").html("<span style='color: #a94442'>Thời gian làm bài phải là số nguyên dương</span>");
 		}
 		if(NgayTaoDe=="") {
 			$("#ngayTaoDe").addClass("empty-input");
@@ -29,6 +32,7 @@ function AjaxLuuDeThi() {
 		}
 		return;
 	}
+	
 	var ketqua = "";
 	$.ajax({
 		data : "TenDe=" + $("#tenDe").val()

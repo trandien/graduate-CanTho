@@ -21,6 +21,8 @@
 	type="text/javascript"></script>
 <script src="<c:url value="/resources/ajax/DeThi.js"/>"
 	type="text/javascript"></script>
+<script src="<c:url value="/resources/ajax/ajaxThiSinhThi.js"/>"
+	type="text/javascript"></script>
 <script type="text/javascript">
 				     $(document).ready(function() {
 			            $('#profile--panel-show').click(function() {
