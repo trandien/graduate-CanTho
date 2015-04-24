@@ -35,22 +35,20 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 	}
 
 	@Override
-	public Integer KiemTraSoLanThi(String taiKhoan, int msdt) {
-		Integer ketQua = 0;
-		try {
-			Query query = sessionFactory
-					.getCurrentSession()
-					.createQuery(
-							"select count(*) from Thi t WHERE t.user.ndTaikhoan=:taiKhoan "
-											+ "AND t.dethi.msdt=:msdt");
-			query.setParameter("taiKhoan", taiKhoan);
-			query.setParameter("msdt", msdt);
-			return ((Number)query.uniqueResult()).intValue();
-		} catch(Exception e) {
-			System.out.println("Xay ra ngoai le KiemTraSoLanThi : "+e.getMessage());
+	public boolean KiemTraSoLanThi(String taiKhoan, int msdt, int soLanThi) {
+		Query query = sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"from Thi t WHERE t.user.ndTaikhoan=:taiKhoan "
+										+ "AND t.dethi.msdt=:msdt"
+										+ " AND t.solanthi=:solanthi");
+		query.setParameter("taiKhoan", taiKhoan);
+		query.setParameter("msdt", msdt);
+		query.setParameter("solanthi", soLanThi);
+		if(query.uniqueResult() != null) {
+			return false;
 		}
-		System.out.println("So lan thi : "+ketQua);
-		return ketQua;
+		return true;
 	}
 
 }

@@ -247,6 +247,7 @@ body {
   height: 100%;
   min-height: 100%;
   width: 100%;
+  padding-right: 60px;
 }
 #wrapper #page-content-wrapper {
   height: 100%;
