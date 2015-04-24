@@ -39,12 +39,14 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${listKQ }" var="kq" varStatus="status">
 						<tr>
-							<td>1</td>
+							<td><c:out value="${status.count}" /></td>
 							<td>24/04/2013</td>
-							<td>46/50</td>
-							<td>9</td>
+							<td>${kq.socaudung }/50</td>
+							<td>${kq.diem }</td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

@@ -31,7 +31,7 @@ public class Thi implements java.io.Serializable {
 	private Dethi dethi;
 	private User user;
 	private Integer solanthi;
-	private Boolean TDanhdau;
+	private Integer TSocaudung;
 	private Boolean TKhoabailam;
 	private Date TNgaylam;
 	private Date TThoigianbatdau;
@@ -47,13 +47,13 @@ public class Thi implements java.io.Serializable {
 		this.TDiem = TDiem;
 	}
 
-	public Thi(Dethi dethi, User user, Integer solanthi, Boolean TDanhdau,
+	public Thi(Dethi dethi, User user, Integer solanthi, Integer TSocaudung,
 			Boolean TKhoabailam, Date TNgaylam, Date TThoigianbatdau,
 			Date TThoigianketthuc, float TDiem) {
 		this.dethi = dethi;
 		this.user = user;
 		this.solanthi = solanthi;
-		this.TDanhdau = TDanhdau;
+		this.TSocaudung = TSocaudung;
 		this.TKhoabailam = TKhoabailam;
 		this.TNgaylam = TNgaylam;
 		this.TThoigianbatdau = TThoigianbatdau;
@@ -101,13 +101,13 @@ public class Thi implements java.io.Serializable {
 		this.solanthi = solanthi;
 	}
 
-	@Column(name = "T_DANHDAU")
-	public Boolean getTDanhdau() {
-		return this.TDanhdau;
+	@Column(name = "T_SOCAUDUNG")
+	public Integer getTDanhdau() {
+		return this.TSocaudung;
 	}
 
-	public void setTDanhdau(Boolean TDanhdau) {
-		this.TDanhdau = TDanhdau;
+	public void setTDanhdau(Integer TSocaudung) {
+		this.TSocaudung = TSocaudung;
 	}
 
 	@Column(name = "T_KHOABAILAM")

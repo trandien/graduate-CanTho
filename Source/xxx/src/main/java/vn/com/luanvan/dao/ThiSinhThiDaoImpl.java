@@ -1,5 +1,6 @@
 package vn.com.luanvan.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.luanvan.form.BangThiSinhThiForm;
+import vn.com.luanvan.form.HocSinhDeThiForm;
 import vn.com.luanvan.model.Thi;
 
 @Repository("thiSinhThiDao")
@@ -94,14 +97,16 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 	}
 
 	@Override
-	public void LuuKQThiSinh(String tableName, int msch, int msctl) {
+	public void LuuKQThiSinh(String tableName, int msch, int msctl, String dapAnDung, float Diem) {
 		try {
 			Query query = sessionFactory.getCurrentSession().createSQLQuery(
 					"INSERT INTO Z" + tableName
 							+ "(MSCH, DAPANDACHON, DAPANDUNG, DIEM) "
-							+ "VALUES(:msch, :msctl, null , 0)");
+							+ "VALUES(:msch, :msctl, :dapAnDung , :diem)");
 			query.setParameter("msch", msch);
 			query.setParameter("msctl", msctl);
+			query.setParameter("dapAnDung", dapAnDung);
+			query.setParameter("diem", Diem);
 			query.executeUpdate();
 			System.out.println("LuuKQThiSinh thanh cong");
 		} catch (Exception e) {
@@ -110,13 +115,14 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 	}
 
 	@Override
-	public void SuaKQThiSinh(String tableName, int msch, int msctl) {
+	public void SuaKQThiSinh(String tableName, int msch, int msctl, float Diem) {
 		try {
 			Query query = sessionFactory.getCurrentSession().createSQLQuery(
 					"UPDATE Z" + tableName
-							+ " SET DAPANDACHON=:msctl WHERE MSCH=:msch ");
+							+ " SET DAPANDACHON=:msctl, DIEM=:diem WHERE MSCH=:msch ");
 			query.setParameter("msch", msch);
 			query.setParameter("msctl", msctl);
+			query.setParameter("diem", Diem);
 			query.executeUpdate();
 			System.out.println("SuaKQThiSinh thanh cong");
 		} catch (Exception e) {
@@ -157,6 +163,63 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 			System.out.println("LayBangDangThi thanh cong : "+ketQua);
 		} catch (Exception e) {
 			System.out.println("LayBangDangThi loi");
+		}
+		return ketQua;
+	}
+// ????????????????
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public void InsertDapAnDungVaoBangThiSinh(String tableName, int msch, String dapAnDung) {
+			try {
+				Query query = sessionFactory.getCurrentSession().createSQLQuery(
+						"INSERT INTO Z" + tableName
+								+ "(MSCH, DAPANDACHON, DAPANDUNG, DIEM) "
+								+ "VALUES(:msch, :msctl, null , 0)");
+				query.setParameter("msch", msch);
+				query.executeUpdate();
+				System.out.println("LuuKQThiSinh thanh cong");
+			} catch (Exception e) {
+				System.out.println("LuuKQThiSinh that bai");
+			}
+	}
+
+	@Override
+	public List<Thi> listBangHocSinhDeThiForm(String taiKhoan,
+			int msdt) {
+		List<Thi> list = new ArrayList<Thi>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Thi t WHERE t.user.ndTaikhoan=:taiKhoan AND t.dethi.msdt=:msdt");
+			query.setParameter("taiKhoan", taiKhoan);
+			query.setParameter("msdt", msdt);
+			list = query.list();
+		} catch (Exception e) {
+			System.out.println("LayBangDangThi loi");
+		}
+		return list;
+	}
+
+	@Override
+	public String BangHocSinhDeThiForm(String taiKhoan, int msdt,
+			int soLanThi) {
+		String tableName = "";
+		String ketQua = "";
+		int soCauDung = 0;
+		float Diem = 0;
+		tableName = "Z"+taiKhoan+"_"+msdt+"_"+soLanThi;
+		try {
+			Query query1 = sessionFactory.getCurrentSession().createSQLQuery(
+					"SELECT COUNT(*) FROM " + tableName+" WHERE diem>0");
+			soCauDung = ((Number) query1.uniqueResult()).intValue();
+			
+			Query query2 = sessionFactory.getCurrentSession().createSQLQuery(
+					"SELECT SUM(diem) FROM " + tableName);
+			Diem = ((Number) query2.uniqueResult()).floatValue();
+			ketQua = String.valueOf(Diem)+"-"+String.valueOf(soCauDung);
+		} catch (Exception e) {
+			System.out.println("Lay BangHocSinhDeThiForm that bai "+e.getMessage());
 		}
 		return ketQua;
 	}

@@ -53,6 +53,6 @@ function LayURL() {
 	}
 }
 
-function test() {
+function NopBai() {
 	window.location.href = "Ket-Qua-Thi.html";
 }

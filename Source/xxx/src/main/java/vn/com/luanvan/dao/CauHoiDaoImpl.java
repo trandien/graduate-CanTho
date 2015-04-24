@@ -102,9 +102,9 @@ public class CauHoiDaoImpl implements CauHoiDao {
 		try {
 			CauHoi = (Cauhoi) sessionFactory.getCurrentSession().get(
 					Cauhoi.class, maCauHoi);
-			System.out.println("LayCauHoiByMa: Loi khi lay cau hoi");
+			
 		} catch (Exception e) {
-
+			System.out.println("LayCauHoiByMa: Loi khi lay cau hoi");
 		}
 		return CauHoi;
 	}

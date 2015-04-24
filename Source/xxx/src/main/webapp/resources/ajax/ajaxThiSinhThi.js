@@ -12,6 +12,7 @@
 						url: "AjaxLuuKQThi",
 						type: "POST",
 						success : function(result) {
+							
 						},
 						error : function(result) {
 							
