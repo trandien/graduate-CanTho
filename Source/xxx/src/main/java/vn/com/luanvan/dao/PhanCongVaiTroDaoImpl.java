@@ -161,4 +161,34 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
 		return ListDeThiGiamThi;
 	}
 
+	@Override
+	public Integer SLPCVTGiamThi(int msdt) {
+		Integer ketQua = 0;
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"select count(*) from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=3");
+			query.setParameter("msdt", msdt);
+			return ((Number) query.uniqueResult()).intValue();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le SLPCVTGiamThi : "
+					+ e.getMessage());
+		}
+		return ketQua;
+	}
+
+	@Override
+	public Integer SLPCVTHS(int msdt) {
+		Integer ketQua = 0;
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"select count(*) from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=4");
+			query.setParameter("msdt", msdt);
+			return ((Number) query.uniqueResult()).intValue();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le SLPCVTHS : "
+					+ e.getMessage());
+		}
+		return ketQua;
+	}
+
 }

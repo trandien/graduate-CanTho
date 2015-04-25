@@ -32,19 +32,19 @@
 				<table class="table table-hover" style="margin-top: 25px;">
 					<thead>
 						<tr>
-							<th>STT</th>
-							<th>Ngày thi</th>
+							<th>Lần thi</th>
+							<th>Thời gian hoàn thành</th>
 							<th>Số câu đúng / Tổng số câu</th>
 							<th>Điểm</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${listKQ }" var="kq" varStatus="status">
+					<c:forEach items="${listBHST }" var="kq" varStatus="status">
 						<tr>
 							<td><c:out value="${status.count}" /></td>
-							<td>24/04/2013</td>
-							<td>${kq.socaudung }/50</td>
-							<td>${kq.diem }</td>
+							<td>${kq.TNgaylam }</td>
+							<td>${kq.TSocaudung }/${kq.TTongsocau }</td>
+							<td>${kq.TDiem }/10.0</td>
 						</tr>
 					</c:forEach>
 					</tbody>

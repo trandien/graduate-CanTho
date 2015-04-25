@@ -59,29 +59,62 @@
 						style="width: 100%; border: 1px solid #ccc;">
 						<thead>
 							<tr>
-								<th colspan="3" style="text-align: center;">Danh sách lớp
+								<th colspan="7" style="text-align: center;">Danh sách lớp
 									tham gia thi</th>
 							</tr>
 
 							<tr>
-								<th colspan="3">
+								<th colspan="7">
 									<div id="wrapper">
 										<div id="page-content-wrapper">
 											<div class="container-fluid">
 												<div class="row">
-													<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-														<div class="form-group">
-															<!--  
-															<input id='tenGV' type="text" class="form-control" id="tenGV" path="tenGV"
-																placeholder="Nhập tên giám thị cần thêm" onclick="AjaxLoadDSGV()"/>
-															-->
-															 <label for="tenlop">Lớp:</label>
+													<div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+														<div class="form-group" style="margin-top: 15px; margin-bottom: 15px;">
+													        <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5">
+													          <label for="tenlop">Lớp:</label>
 															<select class="lop form-control" id='tenlop'>
 																<c:forEach items='${listLop }' var='lop'>
 																	<option value="${lop.msl }">${lop.msl }</option>
 																</c:forEach>
 															</select>
+													       </div>
+													       
+													       <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5">
+													       	<label for="phongthi">Phòng thi:</label>
+																<select name="phongThiLop" id="phongthi" class="form-control"
+																	required="required">
+																	<c:forEach items='${listPhongThi }' var='pt'>
+																		<option value="${pt.mspt }">${pt.ptTen }</option>
+																	</c:forEach>
+																</select>
+													       </div>
+													       </div>
+													       <br>
+												<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+													
+														<div class="form-group" style="margin-top: 30px;">
+															<label for="inputThoiGian">Ngày thi:</label>
+															<input type="date" name="ngaythi" id="ngaythi"
+																class="form-control" value="" title="Thời gian">
+															<div id="thongbao_ngaythi"></div>
 														</div>
+													</div>
+													<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+														<div class="form-group" style="margin-top: 30px;">
+														        <label for="gioibatdau">Giờ bắt đầu:</label>
+														        <input type="time" name="" id="giobatdauLop" class="form-control" value="" required="required" title="" >
+														        <div id="thongbao_giobatdauLop"></div>
+													      </div>
+													  </div>
+													  <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">    
+													      <div class="form-group" style="margin-top: 15px;">
+														        <label for="gioketthuc" class="control-label" style="margin-top: 15px; ">Giờ kết thúc:</label>
+														        <input type="time" name="" id="gioketthucLop" class="form-control" value="" required="required" title=""  >
+													      		<div id="thongbao_gioketthucLop"></div>
+													      </div>
+													</div>
+												
 												</div>
 												</div>
 												<!-- .row -->
@@ -96,8 +129,12 @@
 							</tr>
 							<tr>
 								<th>STT</th>
-								<th>Tên lớp</th>
 								<th>Xóa</th>
+								<th>Lớp</th>
+								<th>Phòng</th>
+								<th>Ngày thi</th>
+								<th>Giờ bắt đầu</th>
+								<th>Giờ kết thúc</th>
 							</tr>
 
 						</thead>

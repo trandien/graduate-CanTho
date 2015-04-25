@@ -1,6 +1,9 @@
 package vn.com.luanvan.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +52,6 @@ public class ThiSinhThiController {
 	CauTraLoiService cauTraLoiService;
 	
 	private String tableThiSinh = "";
-	private Integer msdttam = 0;
 
 	private boolean isLogin(HttpSession session) {
 		return session.getAttribute("isLogin") != null
@@ -179,7 +181,6 @@ public class ThiSinhThiController {
 		if (isLogin(session)) {
 
 			int msdt = Integer.parseInt(request.getParameter("msdt"));
-			msdttam = msdt;
 			Dethi DeThi = deThiService.LayDeThiByMa(msdt);
 			User user = (User) session.getAttribute("user");
 			String taiKhoan = user.getNdTaikhoan();
@@ -304,6 +305,7 @@ public class ThiSinhThiController {
 				result += " </div>";
 				result += "</div>";
 				model.addObject("load", result);
+				model.addObject("msdt", msdt);
 				model.setViewName("DeThi");
 			} else {
 				model.setViewName("403");
@@ -316,31 +318,27 @@ public class ThiSinhThiController {
 
 	@RequestMapping(value = "/Ket-Qua-Thi.html", method = RequestMethod.GET)
 	public ModelAndView KetQuaThi(ModelAndView model,
-			HttpServletRequest request, HttpSession session) {
-//		int msdt = Integer.parseInt(request.getParameter("msdt"));
-		Dethi DeThi = deThiService.LayDeThiByMa(msdttam);
+			HttpServletRequest request, HttpSession session) throws ParseException {
+		int msdt = 0;
+		msdt = Integer.parseInt(request.getParameter("msdt"));
+		
+		Dethi DeThi = deThiService.LayDeThiByMa(msdt);
 		User user = (User) session.getAttribute("user");
 		String taiKhoan = user.getNdTaikhoan();
-		BangThiSinhThiForm hsdtf = new BangThiSinhThiForm();
-		int tongDiem = 0;
-		int soCauDung = 0;
-		String tam = "";
-		List<String> diem = new ArrayList<String>();
-		List<String> socaudung = new ArrayList<String>();
-		List<BangThiSinhThiForm> listHSForm = new ArrayList<BangThiSinhThiForm>();
-		List<KetQuaThiForm> listKQ = new ArrayList<KetQuaThiForm>();
-		KetQuaThiForm kq = new KetQuaThiForm();
-		List<Thi> listBHST = thiSinhThiService.listBangHocSinhDeThiForm(taiKhoan, msdttam);
-		for(Thi t : listBHST) {
-			kq = new KetQuaThiForm();
-			tam = "";
-			tam = thiSinhThiService.BangHocSinhDeThiForm(taiKhoan, msdttam, t.getSolanthi());
-			kq.setDiem(tam.split("-")[0]);
-			kq.setSocaudung(tam.split("-")[1]);
-			listKQ.add(kq);
-			System.out.println(tam);
-		}
-		model.addObject("listKQ", listKQ);
+		int laySoLanThi = thiSinhThiService.KiemTraSoLanThi(taiKhoan, msdt); // Hàm trả về kết quả là số lần thi mà hiện tại đang thi
+		int tongSoCauHoi = deThiService.LaySLCauHoiTrongDeThi(msdt);
+		Thi thi = new Thi();
+		String kqthi = "";
+		kqthi = thiSinhThiService.BangHocSinhDeThiForm(taiKhoan, msdt, laySoLanThi);
+		thi = thiSinhThiService.LayBangThi(taiKhoan, msdt, laySoLanThi);
+		Date timeFinish = new Date();
+		thi.setTDiem(Float.parseFloat(kqthi.split("-")[0]));
+		thi.setTSocaudung(Integer.parseInt(kqthi.split("-")[1]));
+		thi.setTNgaylam(timeFinish);
+		thi.setTTongsocau(tongSoCauHoi);
+		thiSinhThiService.SuaThiSinhThi(thi);
+		List<Thi> listBHST = thiSinhThiService.listBangHocSinhDeThiForm(taiKhoan, msdt);
+		model.addObject("listBHST", listBHST);
 		model.setViewName("KetQuaThi");
 		return model;
 	}

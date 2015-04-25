@@ -28,6 +28,10 @@ public interface ThiSinhThiDao {
 	
 	List<Thi> listBangHocSinhDeThiForm (String taiKhoan, int msdt);
 	
+	Thi LayBangThi(String taiKhoan, int msdt, int soLanThi);
+	
 	String BangHocSinhDeThiForm (String taiKhoan, int msdt, int soLanThi);
+	
+	BangThiSinhThiForm LayBangTSDTForm(String taiKhoan, int msdt, int soLanThi);
 	
 }

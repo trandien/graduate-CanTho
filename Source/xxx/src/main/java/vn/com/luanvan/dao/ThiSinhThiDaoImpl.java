@@ -224,4 +224,40 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 		return ketQua;
 	}
 
+	@Override
+	public BangThiSinhThiForm LayBangTSDTForm(String taiKhoan, int msdt,
+			int soLanThi) {
+		String tableName = "";
+		tableName = "Z"+taiKhoan+"_"+msdt+"_"+soLanThi;
+		BangThiSinhThiForm bangThiSinhThiForm = new BangThiSinhThiForm();
+		try {
+			Query query = sessionFactory.getCurrentSession().createSQLQuery(
+				"SELECT * FROM " + tableName);
+			bangThiSinhThiForm = (BangThiSinhThiForm) query.uniqueResult();
+			System.out.println("Lay LayBangTSDTForm thanh cong ");
+		} catch(Exception e) {
+			System.out.println("Lay LayBangTSDTForm that bai "+e.getMessage());
+		}
+		return bangThiSinhThiForm;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Thi LayBangThi(String taiKhoan, int msdt, int soLanThi) {
+		Thi thi = new Thi();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Thi t WHERE t.user.ndTaikhoan=:taiKhoan AND t.dethi.msdt=:msdt AND t.solanthi=:solanthi");
+			query.setParameter("taiKhoan", taiKhoan);
+			query.setParameter("msdt", msdt);
+			query.setParameter("solanthi", soLanThi);
+			thi = (Thi) query.uniqueResult();
+		} catch (Exception e) {
+			System.out.println("LayBangThi loi");
+		}
+		return thi;
+	}
+
 }

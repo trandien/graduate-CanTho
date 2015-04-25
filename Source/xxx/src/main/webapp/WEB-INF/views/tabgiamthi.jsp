@@ -97,7 +97,7 @@
 				class="btn btn-primary"
 				style="margin-top: -20px; margin-left: 50px;" onclick="ThemPhanCongVaiTro()">
 
-			<table class="table table-hover"
+			<table id='tableGiamThi' class="table table-hover"
 				style="width: 100%; border: 1px solid #ccc; margin-top: 20px;">
 				<thead>
 					

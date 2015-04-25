@@ -41,18 +41,7 @@ $(document).ready(function(){
 	});
 });
 
-
-function LayURL() {
-	var url = $(location).attr('href');
-	var existURL = url.match(/Test.html/i);
-	alert(existURL);
-	if(existURL == null) {
-		alert("null");
-	} else {
-		alert(url);
-	}
-}
-
 function NopBai() {
-	window.location.href = "Ket-Qua-Thi.html";
+	var msdt = $("#msdt").val();
+	window.location.href = "Ket-Qua-Thi.html?msdt="+msdt;
 }

@@ -27,5 +27,7 @@ public interface DeThiDao {
 	
 	Integer LayMaxDeThiByTaiKhoan(String taiKhoan);
 	
+	Integer LaySLCauHoiTrongDeThi(Integer msdt);
+	
 	Dethi LayDeThiByMa(Integer maDeThi);
 }

@@ -14,4 +14,5 @@ public interface PhongThiDao {
 	List<Phongthi> danhSachPhongThi();
 	
 	Phongthi LayPhongThiByMa(int mspt);
+
 }

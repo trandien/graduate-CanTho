@@ -203,4 +203,21 @@ public class DeThiDaoImpl implements DeThiDao {
 		return listDeThi;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Integer LaySLCauHoiTrongDeThi(Integer msdt) {
+		Integer ketQua = 0;
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"select count(*) from Cauhoi ch WHERE ch.dethi.msdt=:msdt");
+			query.setParameter("msdt", msdt);
+			return ((Number) query.uniqueResult()).intValue();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le LaySLCauHoiTrongDeThi : "
+					+ e.getMessage());
+		}
+		System.out.println("So lan thi : " + ketQua);
+		return ketQua;
+	}
+
 }

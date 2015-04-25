@@ -74,4 +74,9 @@ public class DeThiServiceImpl implements DeThiService{
 		return deThiDao.LayDSDeThiByTaiKhoan(taiKhoan);
 	}
 
+	@Override
+	public Integer LaySLCauHoiTrongDeThi(Integer msdt) {
+		return deThiDao.LaySLCauHoiTrongDeThi(msdt);
+	}
+
 }

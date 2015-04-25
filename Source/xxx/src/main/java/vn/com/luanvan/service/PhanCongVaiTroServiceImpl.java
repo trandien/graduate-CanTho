@@ -57,4 +57,14 @@ public class PhanCongVaiTroServiceImpl implements PhanCongVaiTroService{
 		return phanCongVaiTroDao.LayDeThiGiamThi(taiKhoan);
 	}
 
+	@Override
+	public Integer SLPCVTGiamThi(int msdt) {
+		return phanCongVaiTroDao.SLPCVTGiamThi(msdt);
+	}
+
+	@Override
+	public Integer SLPCVTHS(int msdt) {
+		return phanCongVaiTroDao.SLPCVTHS(msdt);
+	}
+
 }

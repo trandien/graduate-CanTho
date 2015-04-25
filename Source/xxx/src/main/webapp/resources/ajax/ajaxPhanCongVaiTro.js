@@ -57,7 +57,6 @@ function ThemPhanCongVaiTro() {
 					url : "AjaxThemPhanCongVaiTro",
 					type : "POST",
 					success : function(result) {
-						
 						$("#bang-giam-thi-").attr('id',"bang-giam-thi-"+msdt);
 						$("#bang-giam-thi-"+msdt).append(result);
 						
@@ -95,12 +94,24 @@ $(document).on('click', '#giobatdau', function (e) {
 
 function AjaxXoaPhanCongVaiTro(mspcvt) {
 	$.ajax({
-		data : "MSPCVT="+mspcvt + "&MaDeThi="+$("#msdt").val(),
+		data : "MSPCVT="+mspcvt,
 		url: "AjaxXoaPhanCongVaiTro",
 		type: "POST",
 		success : function(result) {
-			alert(result);
+			var indexHS = 1;
+			var indexGT = 1;
+			$("#pcvths-"+mspcvt).remove();
 			$("#pcvt-"+mspcvt).remove();
+			
+			 $('.indexHS').each(function () {
+                 $(this).html(indexHS);
+                 indexHS++;
+             });
+			 
+			 $('.indexGiamThi').each(function () {
+                 $(this).html(indexGT);
+                 indexGT++;
+             });
 		} ,
 		error : function(result) {
 			

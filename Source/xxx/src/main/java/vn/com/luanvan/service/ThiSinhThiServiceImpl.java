@@ -71,4 +71,15 @@ public class ThiSinhThiServiceImpl implements ThiSinhThiService {
 		return thiSinhThiDao.BangHocSinhDeThiForm(taiKhoan, msdt, soLanThi);
 	}
 
+	@Override
+	public BangThiSinhThiForm LayBangTSDTForm(String taiKhoan, int msdt,
+			int soLanThi) {
+		return thiSinhThiDao.LayBangTSDTForm(taiKhoan, msdt, soLanThi);
+	}
+
+	@Override
+	public Thi LayBangThi(String taiKhoan, int msdt, int soLanThi) {
+		return thiSinhThiDao.LayBangThi(taiKhoan, msdt, soLanThi);
+	}
+
 }

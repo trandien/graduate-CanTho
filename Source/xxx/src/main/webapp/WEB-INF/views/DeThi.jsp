@@ -40,6 +40,6 @@ p {
 <body style="font-family: 'Calibri', sans-serif; font-size: 16px;">
 	<%@ include file="/WEB-INF/views/head-page.jsp"%>
 	${load }
-
+	<input type="hidden" id="msdt" value="${msdt }">
 </body>
 </html>

@@ -2,7 +2,6 @@ package vn.com.luanvan.dao;
 
 import java.util.List;
 
-import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Phancongvaitro;
 
 public interface PhanCongVaiTroDao {
@@ -23,4 +22,8 @@ public interface PhanCongVaiTroDao {
 	Integer getMaxIdByMaDeThi(Integer msdt);
 	
 	Phancongvaitro LayPhanCongVaiTroByMa(Integer mspcvt);
+	
+	Integer SLPCVTGiamThi(int msdt);
+	
+	Integer SLPCVTHS(int msdt);
 }
