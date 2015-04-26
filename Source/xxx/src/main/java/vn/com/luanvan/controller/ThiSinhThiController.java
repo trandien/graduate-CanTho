@@ -52,6 +52,8 @@ public class ThiSinhThiController {
 	CauTraLoiService cauTraLoiService;
 	
 	private String tableThiSinh = "";
+	
+	private int soLanThiLocal = 0;
 
 	private boolean isLogin(HttpSession session) {
 		return session.getAttribute("isLogin") != null
@@ -163,7 +165,7 @@ public class ThiSinhThiController {
 			thiSinhThiService.CreateTableExam(taiKhoan, msdt, soLanThi);
 			result = taiKhoan+"_"+msdt+"_"+soLanThi;
 			tableThiSinh = result;
-			
+			soLanThiLocal = soLanThi;
 			System.out.println(result);
 		} catch(Exception e) {
 			System.out.println("Tao bang that bai "+e.getMessage()+" : "+soLanThi);
@@ -179,11 +181,12 @@ public class ThiSinhThiController {
 		System.out.println("Test duoc goi");
 		boolean quyenTruyCap = false;
 		if (isLogin(session)) {
-
 			int msdt = Integer.parseInt(request.getParameter("msdt"));
 			Dethi DeThi = deThiService.LayDeThiByMa(msdt);
 			User user = (User) session.getAttribute("user");
 			String taiKhoan = user.getNdTaikhoan();
+			int soLanThi = 0;
+			soLanThi = thiSinhThiService.KiemTraSoLanThi(taiKhoan, msdt);
 			if (isPermission(msdt, taiKhoan)) {
 				List<Cauhoi> listCauHoi = cauHoiService.listCauHoi(msdt);
 				int sizeListCauHoi = listCauHoi.size();
@@ -221,7 +224,7 @@ public class ThiSinhThiController {
 					}
 				}
 				result += "      <hr>";
-				result += "      <span id='time-limit'>Thời gian còn lại: 00:15:42s</span>";
+				result += "      <span id='time-limit'></span>";
 				result += "      <hr>";
 				result += "      <button class='btn btn-primary question-btn' onclick='NopBai()'>Nộp bài và kết thúc</button>";
 				result += "    </div>";
@@ -306,6 +309,8 @@ public class ThiSinhThiController {
 				result += "</div>";
 				model.addObject("load", result);
 				model.addObject("msdt", msdt);
+				model.addObject("taiKhoan", taiKhoan);
+				model.addObject("soLanThi", soLanThi);
 				model.setViewName("DeThi");
 			} else {
 				model.setViewName("403");

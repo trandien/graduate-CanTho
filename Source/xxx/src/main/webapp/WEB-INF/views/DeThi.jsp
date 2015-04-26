@@ -24,13 +24,14 @@
 <script src="<c:url value="/resources/ajax/ajaxThiSinhThi.js"/>"
 	type="text/javascript"></script>
 <script type="text/javascript">
-				     $(document).ready(function() {
-			            $('#profile--panel-show').click(function() {
-			                    $('.bubble').slideToggle("fast");
-			            });
-			       	});
-				     
-	    </script>
+	$(document).ready(function() {
+		$('#profile--panel-show').click(function() {
+			$('.bubble').slideToggle("fast");
+		});
+	});
+
+	
+</script>
 <style>
 p {
 	display: inline;
@@ -41,5 +42,7 @@ p {
 	<%@ include file="/WEB-INF/views/head-page.jsp"%>
 	${load }
 	<input type="hidden" id="msdt" value="${msdt }">
+	<input type="hidden" id="taiKhoan" value="${taiKhoan }">
+	<input type="hidden" id="soLanThi" value="${soLanThi }">
 </body>
 </html>
