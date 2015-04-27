@@ -264,17 +264,18 @@ public class ThiSinhThiController {
 				int macauhoi = 0;
 				for (int j = 1; j <= sizeListCauHoi; j++) {
 					dangCauHoi = 0;
+					dangCauHoi = listCauHoi.get(j - 1).getDangcauhoi()
+							.getMsdch();
+					if (dangCauHoi == 1) { // Dạng câu hỏi là radio
 					listCTL = null;
 					result += "       <div class='content-question' >";
 					result += "         Câu " + j + ": "
 							+ listCauHoi.get(j - 1).getChNoidungcauhoi();
 					result += "        </div>";
-					dangCauHoi = listCauHoi.get(j - 1).getDangcauhoi()
-							.getMsdch();
 					listCTL = cauTraLoiService.LayDSCauTraLoi(listCauHoi.get(
 							j - 1).getMsch());
 					String labelAnswer = "";
-					if (dangCauHoi == 1) { // Dạng câu hỏi là radio
+					
 						for (int k = 0; k < listCTL.size(); k++) {
 							labelAnswer = "";
 							char lableAnswer = (char) (k + 65);
@@ -296,6 +297,14 @@ public class ThiSinhThiController {
 						}
 						
 					} else if (dangCauHoi == 2) { // Dạng câu hỏi là checkbox
+						listCTL = null;
+						result += "       <div class='content-question' >";
+						result += "         Câu " + j + ": "
+								+ listCauHoi.get(j - 1).getChNoidungcauhoi();
+						result += "        </div>";
+						listCTL = cauTraLoiService.LayDSCauTraLoi(listCauHoi.get(
+								j - 1).getMsch());
+						String labelAnswer = "";
 						for (int k = 0; k < listCTL.size(); k++) {
 							labelAnswer = "";
 							char lableAnswer = (char) (k + 65);
@@ -314,9 +323,35 @@ public class ThiSinhThiController {
 							result += "          </div> ";
 							result += "        </div>";
 						}
-						result += "<div id='DaChon-"+listCauHoi.get(j - 1).getMsch()+"'> </div>";
 					} else {
 						// Dạng câu hỏi điền vào chổ trống
+						String ndCauHoi = listCauHoi.get(j - 1).getChNoidungcauhoi();
+						List<String> kq = new ArrayList<String>();
+						String tach1[] = ndCauHoi.split("<strike>");
+						for(String tach2 : tach1) {
+							String k[] = tach2.split("</strike>");
+							for(String n : k) {
+								kq.add(n);
+							}
+						}
+						
+						listCTL = null;
+						result += "       <div class='content-question' >";
+						result += "         Câu " + j + ": ";
+						for(int l=0; l<kq.size(); l++) {
+							if(l%2 != 0) {
+								result+="<input type='text'>";
+							} else {
+								result+=kq.get(l);
+							}
+						}
+						result += "        </div>";
+						listCTL = cauTraLoiService.LayDSCauTraLoi(listCauHoi.get(
+								j - 1).getMsch());
+						String labelAnswer = "";
+						
+						
+					
 					}
 					result += "        <div class='tag' >";
 					result += "          <span class='glyphicon glyphicon-check isTag' title='Đánh dấu' id='tag-"
