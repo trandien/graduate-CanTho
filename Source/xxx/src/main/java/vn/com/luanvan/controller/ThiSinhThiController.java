@@ -300,13 +300,12 @@ public class ThiSinhThiController {
 							labelAnswer = "";
 							char lableAnswer = (char) (k + 65);
 							result += "        <div class='content-answer'>";
-							result += "          <div class='checkbox'>";
+							result += "          <div class='checkbox' id='checkbox-"+listCauHoi.get(j - 1).getMsch()+"'>";
 							result += "            <label>";
 							result += "              <input class='checkbox-answer' type='checkbox' name='"
-									+ listCauHoi.get(j - 1).getMsch()+ "-"+soLanThi+"'"
-									+ "' id='"+listCauHoi.get(j - 1).getMsch()+"-"
-									+ listCTL.get(k).getMsctl()
-									+ "' value='"+listCTL.get(k).getCtlNoidung()+"'>";
+									+ listCauHoi.get(j - 1).getMsch()+"-" + listCTL.get(k).getMsctl()+ "-"+soLanThi+"'"
+											+ " id='"+listCauHoi.get(j - 1).getMsch()+"-" + listCTL.get(k).getMsctl()
+									+ "-"+soLanThi+"' value='"+listCTL.get(k).getCtlNoidung()+"'>";
 							result += " <div class='form-group' style='display: inline' ><p>"
 									+ lableAnswer
 									+ ".&nbsp;&nbsp;</p>"
@@ -315,6 +314,7 @@ public class ThiSinhThiController {
 							result += "          </div> ";
 							result += "        </div>";
 						}
+						result += "<div id='DaChon-"+listCauHoi.get(j - 1).getMsch()+"'> </div>";
 					} else {
 						// Dạng câu hỏi điền vào chổ trống
 					}
@@ -384,7 +384,7 @@ public class ThiSinhThiController {
 		String result = "";
 		try {
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
-			int msctl = Integer.parseInt(request.getParameter("MaCauTraLoi"));
+			String cautraloi = request.getParameter("MaCauTraLoi");
 			float Diem = 0;
 			User user = (User) session.getAttribute("user");
 			String taiKhoan = user.getNdTaikhoan();
@@ -392,13 +392,13 @@ public class ThiSinhThiController {
 			Cauhoi CauHoi = new Cauhoi();
 			CauHoi = cauHoiService.LayCauHoiByMa(msch);
 			dapAnDung = CauHoi.getChDapandung();
-			if(dapAnDung.equals(String.valueOf(msctl))) {
+			if(dapAnDung.equals(cautraloi)) {
 				Diem = CauHoi.getChDiem();
 			}
 			if(tableThiSinh.equals("") || tableThiSinh == null) {
 				tableThiSinh = thiSinhThiService.LayBangDangThi(taiKhoan, msch);
 			}
-			thiSinhThiService.LuuKQThiSinh(tableThiSinh, msch, msctl, dapAnDung, Diem);
+			thiSinhThiService.LuuKQThiSinh(tableThiSinh, msch, cautraloi, dapAnDung, Diem);
 			result = "Luu Kq thi thanh cong";
 		} catch (Exception e) {
 			System.out.println("Luu ket qua thi that bai");
@@ -411,13 +411,13 @@ public class ThiSinhThiController {
 		String result = "";
 		try {
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
-			int msctl = Integer.parseInt(request.getParameter("MaCauTraLoi"));
+			String cautraloi = request.getParameter("MaCauTraLoi");
 			float Diem = 0;
 			String dapAnDung = "";
 			Cauhoi CauHoi = new Cauhoi();
 			CauHoi = cauHoiService.LayCauHoiByMa(msch);
 			dapAnDung = CauHoi.getChDapandung();
-			if(dapAnDung.equals(String.valueOf(msctl))) {
+			if(dapAnDung.equals(cautraloi)) {
 				Diem = CauHoi.getChDiem();
 			}
 			
@@ -426,7 +426,7 @@ public class ThiSinhThiController {
 			if(tableThiSinh.equals("") || tableThiSinh == null) {
 				tableThiSinh = thiSinhThiService.LayBangDangThi(taiKhoan, msch);
 			}
-			thiSinhThiService.SuaKQThiSinh(tableThiSinh, msch, msctl, Diem);
+			thiSinhThiService.SuaKQThiSinh(tableThiSinh, msch, cautraloi, Diem);
 			result = "Sua Kq thi thanh cong";
 		} catch (Exception e) {
 			System.out.println("Luu ket qua thi that bai");

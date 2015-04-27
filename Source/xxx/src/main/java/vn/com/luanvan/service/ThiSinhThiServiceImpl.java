@@ -39,13 +39,13 @@ public class ThiSinhThiServiceImpl implements ThiSinhThiService {
 	}
 
 	@Override
-	public void LuuKQThiSinh(String tableName, int msch, int msctl,
+	public void LuuKQThiSinh(String tableName, int msch, String msctl,
 			String dapAnDung, float Diem) {
 		thiSinhThiDao.LuuKQThiSinh(tableName, msch, msctl, dapAnDung, Diem);
 	}
 
 	@Override
-	public void SuaKQThiSinh(String tableName, int msch, int msctl, float Diem) {
+	public void SuaKQThiSinh(String tableName, int msch, String msctl, float Diem) {
 		thiSinhThiDao.SuaKQThiSinh(tableName, msch, msctl, Diem);
 	}
 

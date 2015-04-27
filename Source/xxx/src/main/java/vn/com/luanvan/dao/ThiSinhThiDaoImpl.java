@@ -97,7 +97,7 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 	}
 
 	@Override
-	public void LuuKQThiSinh(String tableName, int msch, int msctl, String dapAnDung, float Diem) {
+	public void LuuKQThiSinh(String tableName, int msch, String msctl, String dapAnDung, float Diem) {
 		try {
 			Query query = sessionFactory.getCurrentSession().createSQLQuery(
 					"INSERT INTO Z" + tableName
@@ -115,7 +115,7 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 	}
 
 	@Override
-	public void SuaKQThiSinh(String tableName, int msch, int msctl, float Diem) {
+	public void SuaKQThiSinh(String tableName, int msch, String msctl, float Diem) {
 		try {
 			Query query = sessionFactory.getCurrentSession().createSQLQuery(
 					"UPDATE Z" + tableName

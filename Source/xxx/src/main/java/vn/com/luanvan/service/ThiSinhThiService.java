@@ -17,9 +17,9 @@ public interface ThiSinhThiService {
 
 	void XoaThiSinhThi(Thi thi);
 	
-	void LuuKQThiSinh(String tableName, int msch, int msctl, String dapAnDung, float Diem);
+	void LuuKQThiSinh(String tableName, int msch, String msctl, String dapAnDung, float Diem);
 	
-	void SuaKQThiSinh(String tableName, int msch, int msctl, float Diem);
+	void SuaKQThiSinh(String tableName, int msch, String msctl, float Diem);
 	
 	boolean KTCHDaDuocChon(String tableName, int msch);
 	
