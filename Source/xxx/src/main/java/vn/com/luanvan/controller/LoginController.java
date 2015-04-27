@@ -56,7 +56,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/DangXuat")
-	public ModelAndView DangXuat(ModelAndView model, HttpSession session) {
+	public ModelAndView DangXuat(ModelAndView model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("isLogin", false);
+		request.getSession().setAttribute("user", null);
 		session.invalidate();
 		model.setViewName("redirect:/Dang-Nhap.html");
 		return model;
@@ -110,28 +113,32 @@ public class LoginController {
 	@RequestMapping(value = "/Trang-chu.html", method = RequestMethod.GET)
 	public ModelAndView HomePage(ModelAndView model, HttpSession session) {
 		if (isLogin(session)) {
-			User user = (User) session.getAttribute("user");
-			String taiKhoan = user.getNdTaikhoan();
-			if(user.getVaitro().getMsvt() == 1 || user.getVaitro().getMsvt() == 2 || user.getVaitro().getMsvt() == 3|| user.getVaitro().getMsvt() == 5)
-			{
-				List<Chude> listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
-				List<Dethi> listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
-				model.addObject("listDethis", listDethis);
-				model.addObject("listChudes", listChudes);
-				model.setViewName("main");
-			} else {
-				List<Dethi> listDeThiThamGiaThi = new ArrayList<Dethi>();
-				Dethi dt = new Dethi();
-				List<Monhoc> listMonHoc = monHocService.DSMonHoc();
-				List<Phancongvaitro> listPCVT = phanCongVaiTroService.LayDeThiHS(taiKhoan);
-				for(Phancongvaitro a : listPCVT) {
-					listDeThiThamGiaThi.add(deThiService.LayDeThiByMa(a.getDethi().getMsdt()));
+			try {
+				User user = (User) session.getAttribute("user");
+				String taiKhoan = user.getNdTaikhoan();
+				if(user.getVaitro().getMsvt() == 1 || user.getVaitro().getMsvt() == 2 || user.getVaitro().getMsvt() == 3|| user.getVaitro().getMsvt() == 5)
+				{
+					List<Chude> listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
+					List<Dethi> listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
+					model.addObject("listDethis", listDethis);
+					model.addObject("listChudes", listChudes);
+					model.setViewName("main");
+				} else {
+					List<Dethi> listDeThiThamGiaThi = new ArrayList<Dethi>();
+					Dethi dt = new Dethi();
+					List<Monhoc> listMonHoc = monHocService.DSMonHoc();
+					List<Phancongvaitro> listPCVT = phanCongVaiTroService.LayDeThiHS(taiKhoan);
+					for(Phancongvaitro a : listPCVT) {
+						listDeThiThamGiaThi.add(deThiService.LayDeThiByMa(a.getDethi().getMsdt()));
+					}
+					model.addObject("listDeThiThamGiaThi", listDeThiThamGiaThi);
+					model.addObject("user", user);
+					model.addObject("listPCVT", listPCVT);
+					model.addObject("listMonHoc", listMonHoc);
+					model.setViewName("TSMain");
 				}
-				model.addObject("listDeThiThamGiaThi", listDeThiThamGiaThi);
-				model.addObject("user", user);
-				model.addObject("listPCVT", listPCVT);
-				model.addObject("listMonHoc", listMonHoc);
-				model.setViewName("TSMain");
+			}catch(Exception e) {
+				model.setViewName("redirect:/Dang-Nhap.html");
 			}
 		} else {
 			model.setViewName("redirect:/Dang-Nhap.html");
@@ -289,25 +296,29 @@ public class LoginController {
 	@RequestMapping(value = "/XacThuc", method = RequestMethod.POST)
 	public String Validate(HttpServletRequest request, HttpSession session,
 			RedirectAttributes redirectAttributes) {
-		String taiKhoan = request.getParameter("taiKhoan");
-		String matKhau = request.getParameter("matKhau");
-		System.out.println(taiKhoan);
-		System.out.println(matKhau);
-		User user = userService.findByUserName(taiKhoan);
-		String error = null;
-		if (user != null && user.getNdMatkhau().equals(matKhau)) {
-			System.out.println("Tai khoan va mat khau dung");
-			/*
-			 * session.setAttribute("taiKhoan", taiKhoan);
-			 * session.setAttribute("hoTen", user.getNdHoten());
-			 */
-			session.setAttribute("isLogin", true);
-			request.getSession().setAttribute("user", user);
-		} else {
-			error = "Tài khoản hoặc mật khẩu không đúng";
-			System.out.println("dang nhap that bai");
-			redirectAttributes.addFlashAttribute("error", error);
-			return "redirect:/Dang-Nhap.html";
+		try {
+			String taiKhoan = request.getParameter("taiKhoan");
+			String matKhau = request.getParameter("matKhau");
+			System.out.println(taiKhoan);
+			System.out.println(matKhau);
+			User user = userService.findByUserName(taiKhoan);
+			String error = null;
+			if (user != null && user.getNdMatkhau().equals(matKhau)) {
+				System.out.println("Tai khoan va mat khau dung");
+				/*
+				 * session.setAttribute("taiKhoan", taiKhoan);
+				 * session.setAttribute("hoTen", user.getNdHoten());
+				 */
+				session.setAttribute("isLogin", true);
+				request.getSession().setAttribute("user", user);
+			} else {
+				error = "Tài khoản hoặc mật khẩu không đúng";
+				System.out.println("dang nhap that bai");
+				redirectAttributes.addFlashAttribute("error", error);
+				return "redirect:/Dang-Nhap.html";
+			}
+		} catch(Exception e) {
+			return "404";
 		}
 		return "redirect:/Trang-chu.html";
 	}

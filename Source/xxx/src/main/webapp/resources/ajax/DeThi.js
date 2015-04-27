@@ -49,7 +49,7 @@ $(document).ready(function(){
 		      
 		      if(value <= 0 && p<=0){
 		         document.getElementById('time-limit').innerHTML = "Hết thời gian !";
-		         window.location.href = "Ket-Qua-Thi.html?msdt="+msdt;
+		         NopBai();
 		      }
 		    };
 		    var interval = setInterval(function (){counter();}, 1000);
@@ -78,3 +78,7 @@ function NopBai() {
 	var msdt = $("#msdt").val();
 	window.location.href = "Ket-Qua-Thi.html?msdt="+msdt;
 }
+
+
+
+
