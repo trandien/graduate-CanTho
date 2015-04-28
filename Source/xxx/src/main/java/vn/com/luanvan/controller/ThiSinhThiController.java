@@ -53,8 +53,6 @@ public class ThiSinhThiController {
 	
 	private String tableThiSinh = "";
 	
-	private int daVaoTrang = 0;
-	
 	private List<Cauhoi>listCauHois;
 	
 	public List<Cauhoi> getListCauHois() {
@@ -340,7 +338,8 @@ public class ThiSinhThiController {
 						result += "         Câu " + j + ": ";
 						for(int l=0; l<kq.size(); l++) {
 							if(l%2 != 0) {
-								result+="<input type='text'>";
+								result+="<input class='dienvaochotrong' type='text' id='"+listCauHoi.get(j - 1).getMsch()+"-" 
+									+ "-"+soLanThi+"-"+l+"' size='"+kq.get(l).length()+"' name='"+listCauHoi.get(j - 1).getMsch()+"[]'>";
 							} else {
 								result+=kq.get(l);
 							}
@@ -350,7 +349,7 @@ public class ThiSinhThiController {
 								j - 1).getMsch());
 						String labelAnswer = "";
 						
-						
+						result += "        <br>";
 					
 					}
 					result += "        <div class='tag' >";
@@ -379,7 +378,6 @@ public class ThiSinhThiController {
 		} else {
 			model.setViewName("redirect:/Dang-Nhap.html");
 		}
-		daVaoTrang = 1;
 		return model;
 	}
 
@@ -420,14 +418,35 @@ public class ThiSinhThiController {
 		try {
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
 			String cautraloi = request.getParameter("MaCauTraLoi");
+			System.out.println("Cau tra loi la : "+cautraloi);
 			float Diem = 0;
 			User user = (User) session.getAttribute("user");
 			String taiKhoan = user.getNdTaikhoan();
 			String dapAnDung = "";
 			Cauhoi CauHoi = new Cauhoi();
 			CauHoi = cauHoiService.LayCauHoiByMa(msch);
-			dapAnDung = CauHoi.getChDapandung();
-			if(dapAnDung.equals(cautraloi)) {
+			int dangCauHoi = CauHoi.getDangcauhoi().getMsdch();
+			if(dangCauHoi != 3) {
+				dapAnDung = CauHoi.getChDapandung();
+			} else {
+				dapAnDung = "";
+				String ndCauHoi = CauHoi.getChNoidungcauhoi();
+				List<String> kq = new ArrayList<String>();
+				String tach1[] = ndCauHoi.split("<strike>");
+				for(String tach2 : tach1) {
+					String k[] = tach2.split("</strike>");
+					for(String n : k) {
+						kq.add(n.trim());
+					}
+				}
+				for(int l=0; l<kq.size(); l++) {
+					if(l%2 != 0) {
+						dapAnDung += kq.get(l)+"-";
+					} else {
+					}
+				}
+			}
+			if(dapAnDung.toLowerCase().equals(cautraloi.toLowerCase())) {
 				Diem = CauHoi.getChDiem();
 			}
 			if(tableThiSinh.equals("") || tableThiSinh == null) {
@@ -447,13 +466,37 @@ public class ThiSinhThiController {
 		try {
 			int msch = Integer.parseInt(request.getParameter("MaCauHoi"));
 			String cautraloi = request.getParameter("MaCauTraLoi");
+			System.out.println("Cau tra loi la : "+cautraloi);
 			float Diem = 0;
 			String dapAnDung = "";
 			Cauhoi CauHoi = new Cauhoi();
 			CauHoi = cauHoiService.LayCauHoiByMa(msch);
-			dapAnDung = CauHoi.getChDapandung();
-			if(dapAnDung.equals(cautraloi)) {
+			int dangCauHoi = CauHoi.getDangcauhoi().getMsdch();
+			if(dangCauHoi != 3) {
+				dapAnDung = CauHoi.getChDapandung();
+			} else {
+				dapAnDung = "";
+				String ndCauHoi = CauHoi.getChNoidungcauhoi();
+				List<String> kq = new ArrayList<String>();
+				String tach1[] = ndCauHoi.split("<strike>");
+				for(String tach2 : tach1) {
+					String k[] = tach2.split("</strike>");
+					for(String n : k) {
+						kq.add(n);
+					}
+				}
+				for(int l=0; l<kq.size(); l++) {
+					if(l%2 != 0) {
+						dapAnDung += kq.get(l)+"-";
+					} else {
+					}
+				}
+			}
+			if(dapAnDung.toLowerCase().equals(cautraloi.toLowerCase())) {
 				Diem = CauHoi.getChDiem();
+				System.out.println("Tra loi dung "+Diem);
+			} else {
+				System.out.println("Tra loi sai "+cautraloi);
 			}
 			
 			User user = (User) session.getAttribute("user");

@@ -30,4 +30,5 @@ public interface DeThiDao {
 	Integer LaySLCauHoiTrongDeThi(Integer msdt);
 	
 	Dethi LayDeThiByMa(Integer maDeThi);
+	
 }

@@ -88,3 +88,55 @@
 			
 	});
 	
+	$(document).on('keyup', '.dienvaochotrong', function (e) {
+		var msch = $(this).attr('id').split("-")[0];
+		var name = $(this).attr('name');
+		var noiDungDien = document.getElementsByName(name);
+		var arrayNoiDungDien = new Array();
+		var ketQuaChon = "";
+		for(key=0; key < noiDungDien.length; key++)  {
+			ketQuaChon+= noiDungDien[key].value.trim() + "-";
+			
+		}
+		$.ajax({
+			data: "MaCauHoi="+msch,
+			url : "AjaxKiemTraCHCoDuocChon",
+			type: "POST",
+			success : function(kq){
+				if(kq=="false") {
+					$.ajax({
+						
+						data: "MaCauHoi="+msch+"&MaCauTraLoi="+ketQuaChon,
+						url: "AjaxLuuKQThi",
+						type: "POST",
+						success : function(result) {
+						},
+						error : function(result) {
+							
+						}
+					});
+				} else {
+					$.ajax({
+						data: "MaCauHoi="+msch+"&MaCauTraLoi="+ketQuaChon,
+						url: "AjaxSuaKQThi",
+						type: "POST",
+						success : function(result) {
+						},
+						error : function(result) {
+							
+						}
+					});
+				}
+			} ,
+			error : function(kq, e) {
+				alert("Loi AjaxKiemTraCHCoDuocChon "+kq + "- "+e);
+			}
+		});
+	});
+	
+	
+	
+	
+	
+	
+	
