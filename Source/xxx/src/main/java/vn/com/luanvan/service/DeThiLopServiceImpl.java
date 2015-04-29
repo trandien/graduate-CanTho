@@ -32,4 +32,9 @@ public class DeThiLopServiceImpl implements DeThiLopService{
 		return deThiLopdao.LayDSDeThiLop(ngay, mspt);
 	}
 
+	@Override
+	public DethiLop LayDeThiLopById(int msdt, String msl) {
+		return deThiLopdao.LayDeThiLopById(msdt, msl);
+	}
+
 }

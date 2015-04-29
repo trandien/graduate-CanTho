@@ -42,4 +42,9 @@ public class LopServiceImpl implements LopService{
 		lopDao.ThemLopVaoDeThi(msdt, msl);		
 	}
 
+	@Override
+	public Lop LayLopByMa(String msl) {
+		return lopDao.LayLopByMa(msl);
+	}
+
 }

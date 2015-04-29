@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.com.luanvan.model.DethiLop;
 
 @Repository("deThiLopDao")
-public class DeThiLopDaoImpl implements DeThiLopDao{
+public class DeThiLopDaoImpl implements DeThiLopDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -74,6 +74,22 @@ public class DeThiLopDaoImpl implements DeThiLopDao{
 					+ e.getMessage());
 		}
 		return listDeThiLop;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public DethiLop LayDeThiLopById(int msdt, String msl) {
+		DethiLop dtl = new DethiLop();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"select * from Dethi_lop dtl WHERE dtl.dethi.msdt=:msdt "
+							+ "AND dtl.lop.msl=:msl");
+			dtl = (DethiLop) query.uniqueResult();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le LayDeThiLopById : "
+					+ e.getMessage());
+		}
+		return dtl;
 	}
 
 }

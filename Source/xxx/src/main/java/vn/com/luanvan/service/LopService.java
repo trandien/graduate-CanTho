@@ -16,4 +16,6 @@ public interface LopService {
 	List<Lop> listLopByKhoi(Integer msk);
 	
 	void ThemLopVaoDeThi(Integer msdt, String msl);
+	
+	Lop LayLopByMa (String msl);
 }

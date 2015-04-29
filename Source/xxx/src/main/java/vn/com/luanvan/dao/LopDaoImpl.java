@@ -104,4 +104,16 @@ public class LopDaoImpl implements LopDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Lop LayLopByMa(String msl) {
+		Lop lop = new Lop();
+		try {
+			lop = (Lop) sessionFactory.getCurrentSession().get(Lop.class, msl);
+		} catch (Exception e) {
+			System.out.println("LayLopByMa: Loi khi lay cau hoi");
+		}
+		return lop;
+	}
+
 }

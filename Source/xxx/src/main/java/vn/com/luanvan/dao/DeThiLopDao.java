@@ -13,4 +13,6 @@ public interface DeThiLopDao {
 	void XoaDeThiLop(DethiLop dtl);
 	
 	List<DethiLop> LayDSDeThiLop(Date ngay, int mspt);
+	
+	DethiLop LayDeThiLopById(int msdt, String msl);
 }

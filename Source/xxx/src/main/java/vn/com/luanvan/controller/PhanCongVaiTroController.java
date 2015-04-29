@@ -324,14 +324,6 @@ public class PhanCongVaiTroController {
 		return result;
 	}
 
-	// ?????
-	@RequestMapping(value = "/AjaxXoaHSVaoDeThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public @ResponseBody String XoaHSVaoDeThi(ModelAndView model,
-			HttpSession session, HttpServletRequest request)
-			throws ParseException {
-		String result = "";
-		return result;
-	}
 
 	@RequestMapping(value = "/AjaxSLPCVTGiamThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String SLPCVTGiamThi(ModelAndView model,

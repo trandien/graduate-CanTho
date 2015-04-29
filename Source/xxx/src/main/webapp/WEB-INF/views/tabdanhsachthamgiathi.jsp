@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/auto/jquery.tokenize.css" />" />
 <script type="text/javascript" src="<c:url value="/resources/auto/jquery.tokenize.js"/>" > </script>
 <script type="text/javascript" src="<c:url value="/resources/ajax/ajaxPhanCongVaiTro.js"/>" > </script>
-
+<script type="text/javascript" src="<c:url value="/resources/ajax/ajaxDeThiLop.js"/>" > </script>
  <script type="text/javascript">
 			 jQuery(document).ready(function() {
 			     $("select.lop").flexselect();
@@ -55,7 +55,7 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="dslop">
 
-					<table class="table table-hover"
+					<table class="table table-hover tableL"
 						style="width: 100%; border: 1px solid #ccc;">
 						<thead>
 							<tr>
@@ -82,7 +82,7 @@
 													       
 													       <div class="col-sm-5 col-lg-5 col-xs-5 col-md-5">
 													       	<label for="phongthi">Phòng thi:</label>
-																<select name="phongThiLop" id="phongthi" class="form-control"
+																<select name="phongThiLop" id="phongthiL" class="form-control"
 																	required="required">
 																	<c:forEach items='${listPhongThi }' var='pt'>
 																		<option value="${pt.mspt }">${pt.ptTen }</option>
@@ -95,7 +95,7 @@
 													
 														<div class="form-group" style="margin-top: 30px;">
 															<label for="inputThoiGian">Ngày thi:</label>
-															<input type="date" name="ngaythi" id="ngaythi"
+															<input type="date" name="ngaythi" id="ngaythiL"
 																class="form-control" value="" title="Thời gian">
 															<div id="thongbao_ngaythi"></div>
 														</div>
@@ -122,7 +122,7 @@
 										</div>
 									</div> <input type="button" id="themDSLopThamGiaThi" value="Thêm"
 									class="btn btn-primary"
-									style="margin-top: -20px; margin-left: 50px;" onclick="AjaxThemLopThamGiaThi()">
+									style="margin-top: -20px; margin-left: 50px;" onclick="AjaxLuuDeThiLop()">
 								</th>
 
 
