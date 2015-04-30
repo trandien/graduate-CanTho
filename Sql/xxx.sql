@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2015 at 01:14 PM
+-- Generation Time: Apr 30, 2015 at 01:44 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -38,37 +38,26 @@ CREATE TABLE IF NOT EXISTS `cauhoi` (
   KEY `FK_DETHI_CAUHOI` (`MSDT`),
   KEY `FK_DOKHO_CAUHOI` (`MSDK`),
   KEY `FK_THUOC` (`MSDCH`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=85 ;
 
 --
 -- Dumping data for table `cauhoi`
 --
 
 INSERT INTO `cauhoi` (`MSDT`, `MSCH`, `MSDCH`, `MSDK`, `CH_NOIDUNGCAUHOI`, `CH_DIEM`, `CH_DAPANDUNG`) VALUES
-(1, 1, 2, 3, '<p>Đâu là kim loại?</p>', 1, '<p>Sắt</p><p>Chì</p>'),
-(6, 6, 1, 3, '<p>Cường quốc công nghiệp thế giới là:</p>', 1, '<p>Mỹ</p>'),
-(6, 7, 1, 3, '<p>Java <u><strong><em>không </em></strong></u>có tính chất nào sao đây?</p>', 1, '<p>Đa kế thừa</p>'),
-(6, 8, 1, 3, '<p>Đơn vị đo thông tin là</p>', 1, '<p>Bit</p>'),
-(7, 9, 1, 3, '<p>Trong word có mấy cách tạo Word Art&nbsp;</p>', 1, '<p>2</p>'),
-(7, 10, 1, 2, '<p>Trong word để canh lề trái cho đoạn văn bản đã được chọn, ta bấm tổ hợp phím</p>', 1, '<p>Ctrl + L</p>'),
-(7, 11, 1, 3, '<p>Trong soạn thảo văn bản word, muốn tạo hồ sơ mới ta thực hiện lệnh:</p>', 1, '<p>File/New</p>'),
-(7, 12, 1, 1, '<p>1 Byte bằng</p>', 1, '<p>8 Bits</p>'),
-(7, 13, 1, 1, '<p>Đơn vị đo lượng tin là:</p>', 1, '<p>Bit</p>'),
-(7, 14, 1, 3, '<p>Thiết bị lưu trữ nào sao đây có thời gian truy cập nhanh nhất.</p>', 1, '<p>Đĩa cứng</p>'),
-(7, 15, 1, 3, '<p>Bạn muốn che dấu 1 thanh công cụ trong word, việc đầu tiên cần thực hiện là nhấp chuốt vào:</p>', 1, '<p>view</p>'),
-(7, 16, 1, 2, '<p>1KB bằng</p>', 1, '<p>1024 byte</p>'),
-(7, 17, 1, 3, '<p>Đâu là ví dụ về phần mềm máy tính</p>', 1, '<p>Hệ điều hành</p>'),
-(7, 18, 1, 3, '<p>Loại máy tính nào thường đắt nhất</p>', 1, '<p>Máy chủ</p>'),
-(8, 19, 1, 3, '<p>Sắt là</p>', 1, '<p>Kim loại</p>'),
-(8, 20, 1, 2, '<p>Sắt có mấy hóa trị</p>', 1, '<p>2</p>'),
-(8, 21, 1, 1, '<p>Iot thuộc nhóm mấy trong bảng tuần hoàn</p>', 1, '<p>VIIA</p>'),
-(8, 22, 1, 3, '<p>Kim loại nào sau đây mạnh nhất</p>', 1, '<p>Kali</p>'),
-(8, 23, 1, 3, '<p>Bảng tuần hoàn các nguyên tố hóa học có mấy nhóm</p>', 1, '<p>6</p>'),
-(8, 24, 1, 2, '<p>Kim loại nào dẫn điện tốt nhất</p>', 1, '<p>Bạc</p>'),
-(8, 25, 1, 3, '<p>1 byte bằng</p>', 1, '<p>8 bit</p>'),
-(8, 26, 1, 3, '<p>Tập đoán Microsoft do ai sáng lập</p>', 1, '<p>Bill Gates</p>'),
-(8, 27, 1, 3, '<p>Ai tìm ra Châu Mỹ</p>', 1, '<p>Columbo</p>'),
-(8, 28, 1, 1, '<p>Tôi là ai</p>', 1, '<p>Programmer</p>');
+(7, 9, 1, 3, '<p>Trong word có mấy cách tạo Word Art&nbsp;</p>', 1, '38'),
+(7, 10, 1, 2, '<p>Trong word để canh lề trái cho đoạn văn bản đã được chọn, ta bấm tổ hợp phím</p>', 1, '41'),
+(7, 11, 1, 3, '<p>Trong soạn thảo văn bản word, muốn tạo hồ sơ mới ta thực hiện lệnh:</p>', 1, '46'),
+(7, 12, 1, 1, '<p>1 Byte bằng</p>', 1, '50'),
+(7, 13, 1, 1, '<p>Đơn vị đo lượng tin là:</p>', 1, '55'),
+(7, 14, 1, 3, '<p>Thiết bị lưu trữ nào sao đây có thời gian truy cập nhanh nhất.</p>', 1, '57'),
+(7, 15, 1, 3, '<p>Bạn muốn che dấu 1 thanh công cụ trong word, việc đầu tiên cần thực hiện là nhấp chuốt vào:</p>', 1, '61'),
+(7, 16, 1, 2, '<p>1KB bằng</p>', 1, '66'),
+(7, 17, 1, 3, '<p>Đâu là ví dụ về phần mềm máy tính</p>', 1, '69'),
+(7, 18, 1, 3, '<p>Loại máy tính nào thường đắt nhất</p>', 1, '77'),
+(68, 82, 2, 3, '<p>Đâu là kim loại?</p>', 1, '303-305-306-'),
+(68, 83, 3, 1, '<p><strike>Hóa học</strike> là ngành khoa học chuyên <strike>nghiên cứu</strike> các chất và sự <strike>biến đổi</strike> các chất</p>', 3, ''),
+(68, 84, 1, 1, '<p>Kim tử tháp nằm ở đâu?</p>', 1, '309');
 
 -- --------------------------------------------------------
 
@@ -82,28 +71,13 @@ CREATE TABLE IF NOT EXISTS `cautraloi` (
   `CTL_NOIDUNG` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`MSCTL`),
   KEY `FK_CAUHOI_CAUTRALOI` (`MSCH`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=123 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=310 ;
 
 --
 -- Dumping data for table `cautraloi`
 --
 
 INSERT INTO `cautraloi` (`MSCH`, `MSCTL`, `CTL_NOIDUNG`) VALUES
-(1, 1, '<p>Sắt</p>'),
-(1, 2, '<p>Chì</p>'),
-(1, 3, '<p>Nước</p>'),
-(1, 4, '<p>Đá</p>'),
-(6, 26, '<p>Mỹ</p>'),
-(6, 27, '<p>Nga</p>'),
-(6, 28, '<p>Trung Quốc</p>'),
-(6, 29, '<p>Nhật Bản</p>'),
-(7, 30, '<p>Đa hình</p>'),
-(7, 31, '<p>Đóng gói</p>'),
-(7, 32, '<p>Trừu tượng hóa</p>'),
-(7, 33, '<p>Đa kế thừa</p>'),
-(8, 34, '<p>Bit</p>'),
-(8, 35, '<p>Byte</p>'),
-(8, 36, '<p>Kilo Byte</p>'),
 (9, 37, '<p>1</p>'),
 (9, 38, '<p>2</p>'),
 (9, 39, '<p>3</p>'),
@@ -139,57 +113,17 @@ INSERT INTO `cautraloi` (`MSCH`, `MSCTL`, `CTL_NOIDUNG`) VALUES
 (17, 69, '<p>Hệ điều hành</p>'),
 (17, 70, '<p>Đĩa CD</p>'),
 (17, 71, '<p>Cả 3 ý trên</p>'),
-(17, 72, '<p>1</p>'),
-(17, 73, '<p>2</p>'),
-(17, 74, '<p>3</p>'),
-(17, 75, '<p>4</p>'),
 (18, 76, '<p>Máy tính cá nhân</p>'),
 (18, 77, '<p>Máy chủ</p>'),
 (18, 78, '<p>Máy để bàn</p>'),
 (18, 79, '<p>Máy xách tay</p>'),
-(18, 80, '<p>Ctrl + C</p>'),
-(18, 81, '<p>Ctrl + L</p>'),
-(18, 82, '<p>Ctrl + R</p>'),
-(18, 83, '<p>Ctrl + J</p>'),
-(19, 84, '<p>Kim loại</p>'),
-(19, 85, '<p>Phi kim</p>'),
-(19, 86, '<p>Khí hiếm</p>'),
-(20, 87, '<p>1</p>'),
-(20, 88, '<p>2</p>'),
-(20, 89, '<p>3</p>'),
-(20, 90, '<p>4</p>'),
-(21, 91, '<p>VA</p>'),
-(21, 92, '<p>VIA</p>'),
-(21, 93, '<p>VIIA</p>'),
-(21, 94, '<p>IB</p>'),
-(22, 95, '<p>Sắt</p>'),
-(22, 96, '<p>Natri</p>'),
-(22, 97, '<p>Kali</p>'),
-(22, 98, '<p>Magie</p>'),
-(23, 99, '<p>5</p>'),
-(23, 100, '<p>6</p>'),
-(23, 101, '<p>7</p>'),
-(23, 102, '<p>8</p>'),
-(24, 103, '<p>Vàng</p>'),
-(24, 104, '<p>Bạc</p>'),
-(24, 105, '<p>Đồng</p>'),
-(24, 106, '<p>Bạch kim</p>'),
-(25, 107, '<p>8 bit</p>'),
-(25, 108, '<p>9 bit</p>'),
-(25, 109, '<p>1024 bit</p>'),
-(25, 110, '<p>10 bit</p>'),
-(26, 111, '<p>Bill Gates</p>'),
-(26, 112, '<p>Steve Job</p>'),
-(26, 113, '<p>Tôn ngộ không</p>'),
-(26, 114, '<p>Khổng tử</p>'),
-(27, 115, '<p>Oa-sinh-tơn</p>'),
-(27, 116, '<p>Bill Gates</p>'),
-(27, 117, '<p>Clinton</p>'),
-(27, 118, '<p>Columbo</p>'),
-(28, 119, '<p>Singer</p>'),
-(28, 120, '<p>Doctor</p>'),
-(28, 121, '<p>Teacher</p>'),
-(28, 122, '<p>Programmer</p>');
+(82, 303, '<p>Sắt</p>'),
+(82, 304, '<p>Kẻm</p>'),
+(82, 305, '<p>nước</p>'),
+(82, 306, '<p>chì</p>'),
+(84, 307, '<p>Cam - pu - chia</p>'),
+(84, 308, '<p>Nhật Bản</p>'),
+(84, 309, '<p><img class="fr-fin fr-dib" alt="Image title" src="http://i.froala.com/download/d7afd961710e732b237529d69fc4b807c9f6d40d.jpg?1430124985" width="159"></p><p><br></p>');
 
 -- --------------------------------------------------------
 
@@ -287,21 +221,22 @@ CREATE TABLE IF NOT EXISTS `dethi` (
   KEY `FK_DETHI_NIENKHOA` (`MSNK`),
   KEY `FK_HOCKY_DETHI` (`MSHK`),
   KEY `FK_MON_DETHI` (`MSMH`),
-  KEY `FK_RELATIONSHIP_20` (`MSDANGTHI`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  KEY `FK_RELATIONSHIP_20` (`MSDANGTHI`),
+  KEY `dethi_user` (`DT_NGUOIRADE`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=110 ;
 
 --
 -- Dumping data for table `dethi`
 --
 
 INSERT INTO `dethi` (`MSDT`, `MSNK`, `MSHK`, `MSCD`, `MSMH`, `MSDANGTHI`, `DT_TENDE`, `DT_THOIGIANLAMBAI`, `DT_TRANGTHAI`, `DT_MATKHAU`, `DT_NGAYTAODE`, `DT_NGAYCAPNHAT`, `DT_DANDO`, `DT_solanchophep`, `DT_NGUOIRADE`, `LANCAPNHAT`) VALUES
-(1, 1, 1, 1, 1, 1, 'Kiểm tra giữa kỳ', 30, 0, '123456', '2015-04-01', NULL, 'Không được xem tài liệu									', 1, 'tranthanhdien', NULL),
-(2, 1, 1, 3, 1, 1, 'Đề 1', 30, 0, '123456', '2015-04-22', NULL, 'Không được xem tài liệu											', 1, 'tranthanhdien', NULL),
-(3, 1, 1, 3, 1, 1, 'Đề 2', 120, 1, '123456', '2015-04-23', NULL, 'Trao đổi nhỏ thôi mấy em.											', 1, 'tranthanhdien', NULL),
-(4, 1, 1, 1, 12, 1, 'Đề kiểm tra hóa hữu cơ', 1, 1, '123456', '2015-04-10', NULL, 'Xem tài liệu thoải mái										', 1, 'tranthanhdien', NULL),
-(6, 1, 1, 5, 1, 1, 'Đề thi cuối kỳ', 30, 0, '123456', '2015-04-15', NULL, 'Không được la cà											', 1, 'tranthanhdien', NULL),
-(7, 1, 1, 3, 10, 1, 'Đề thi số 3', 30, 1, '123456', '2015-04-15', NULL, 'djskajdklafdsfdafd											', 1, 'tranthanhdien', NULL),
-(8, 1, 1, 6, 12, 3, 'Hóa đại cương 1', 120, 1, '123456', '2015-04-23', NULL, 'Các em nghiêm túc khi thi											', 1, 'tranthanhdien', NULL);
+(7, 1, 1, 3, 10, 1, 'Đề thi số 3', 3, 1, '123456', '2015-04-15', NULL, 'Trao đổi nhỏ thôi mấy em             ', 50, 'tranthanhdien', NULL),
+(68, 1, 1, 6, 1, 1, 'Thais', 30, 1, 'dsa', '2015-04-11', NULL, 'dsa											', 100, 'tranthanhdien', NULL),
+(105, 1, 1, 1, 1, 1, 'Đề mẫu', 30, 0, 'dsa', '2015-04-30', NULL, 'dsa											', 2, 'tranthanhdien', NULL),
+(106, 1, 1, 1, 1, 1, 'DDee', 1, 0, 'dsa', '2015-04-30', NULL, 'dsa											', 3, 'tranthanhdien', NULL),
+(107, 1, 1, 1, 1, 1, 'DDeef maamdsa', 120, 0, 'dsadsa', '2015-04-30', NULL, 'dsa											', 3, 'tranthanhdien', NULL),
+(108, 1, 1, 1, 1, 1, 'xxx', 1, 0, 'dsa', '2015-04-29', NULL, 'dsa											', 3, 'tranthanhdien', NULL),
+(109, 1, 1, 1, 1, 1, 'acb', 30, 0, 'dsa', '2015-04-30', NULL, 'dsa											', 3, 'tranthanhdien', NULL);
 
 -- --------------------------------------------------------
 
@@ -312,12 +247,23 @@ INSERT INTO `dethi` (`MSDT`, `MSNK`, `MSHK`, `MSCD`, `MSMH`, `MSDANGTHI`, `DT_TE
 CREATE TABLE IF NOT EXISTS `dethi_lop` (
   `MSL` varchar(10) NOT NULL,
   `MSDT` int(11) NOT NULL,
+  `MSPT` int(11) DEFAULT NULL,
   `NGAY` date DEFAULT NULL,
   `GIOBATDAU` time DEFAULT NULL,
   `GIOKETTHUC` time DEFAULT NULL,
   PRIMARY KEY (`MSL`,`MSDT`),
   KEY `FK_RELATIONSHIP_29` (`MSDT`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `dethi_lop`
+--
+
+INSERT INTO `dethi_lop` (`MSL`, `MSDT`, `MSPT`, `NGAY`, `GIOBATDAU`, `GIOKETTHUC`) VALUES
+('10A1', 106, 1, '2015-04-30', '01:30:00', '02:30:00'),
+('12A1', 107, 1, '2015-04-30', '03:30:00', '03:40:00'),
+('12A1', 108, 1, '2015-04-30', '07:30:00', '08:30:00'),
+('12A2', 109, 8, '2015-04-30', '09:30:00', '10:30:00');
 
 -- --------------------------------------------------------
 
@@ -494,26 +440,30 @@ CREATE TABLE IF NOT EXISTS `phancongvaitro` (
   PRIMARY KEY (`MSPCVT`),
   KEY `FK_RELATIONSHIP_26` (`ND_TAIKHOAN`),
   KEY `FK_RELATIONSHIP_25` (`MSDT`),
-  KEY `FK_RELATIONSHIP_27` (`MSVT`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=198 ;
+  KEY `FK_RELATIONSHIP_27` (`MSVT`),
+  KEY `phancongvaitro_phongthi` (`MSPT`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=337 ;
 
 --
 -- Dumping data for table `phancongvaitro`
 --
 
 INSERT INTO `phancongvaitro` (`MSPCVT`, `MSDT`, `ND_TAIKHOAN`, `MSVT`, `MSCDA`, `MSPT`, `NGAY`, `GIOBATDAU`, `GIOKETTHUC`) VALUES
-(185, 1, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
-(186, 2, 'tranthanhdien', 5, 3, NULL, NULL, NULL, NULL),
-(187, 2, 'truongvanmenh', 4, 3, 5, '2015-04-29', '03:30:00', '03:50:00'),
-(188, 3, 'tranthanhdien', 5, 3, NULL, NULL, NULL, NULL),
-(189, 3, 'truongvanmenh', 4, 3, 5, '2015-04-29', '03:30:00', '07:30:00'),
-(190, 4, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
-(191, 4, 'truongvanmenh', 4, 1, 8, '2015-04-24', '07:30:00', '09:30:00'),
-(193, 6, 'tranthanhdien', 5, 5, NULL, NULL, NULL, NULL),
 (194, 7, 'tranthanhdien', 5, 3, NULL, NULL, NULL, NULL),
 (195, 7, 'truongvanmenh', 4, 3, 6, '2015-04-24', '15:30:00', '16:30:00'),
-(196, 8, 'tranthanhdien', 5, 6, NULL, NULL, NULL, NULL),
-(197, 8, 'truongvanmenh', 4, 6, 8, '2015-04-24', '09:30:00', '10:00:00');
+(286, 68, 'tranthanhdien', 5, 6, NULL, NULL, NULL, NULL),
+(287, 68, 'truongvanmenh', 4, 6, 5, '2015-04-25', '03:30:00', '04:30:00'),
+(326, 105, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
+(327, 106, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
+(328, 106, 'huynhnhatminh', 3, 1, 1, '2015-04-30', '01:30:00', '02:30:00'),
+(329, 107, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
+(330, 107, 'huynhnhatminh', 3, 1, 1, '2015-04-30', '03:30:00', '03:40:00'),
+(331, 108, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
+(332, 108, 'huynhnhatminh', 3, 1, 1, '2015-04-30', '07:30:00', '08:30:00'),
+(333, 109, 'tranthanhdien', 5, 1, NULL, NULL, NULL, NULL),
+(334, 109, 'huynhnhatminh', 3, 1, 8, '2015-04-30', '09:30:00', '10:30:00'),
+(335, 109, 'nguyenvannhan', 4, 1, 8, '2015-04-30', '09:30:00', '10:30:00'),
+(336, 109, 'truongvanmenh', 4, 1, 8, '2015-04-30', '09:30:00', '10:30:00');
 
 -- --------------------------------------------------------
 
@@ -550,18 +500,17 @@ INSERT INTO `phongthi` (`MSPT`, `PT_TEN`) VALUES
 CREATE TABLE IF NOT EXISTS `thi` (
   `MST` int(11) NOT NULL AUTO_INCREMENT,
   `ND_TAIKHOAN` varchar(100) NOT NULL,
-	`SOLANTHI` int,
+  `SOLANTHI` int(11) DEFAULT NULL,
   `MSDT` int(11) NOT NULL,
-  `T_DANHDAU` tinyint(1) DEFAULT NULL,
+  `T_SOCAUDUNG` int(11) DEFAULT NULL,
+  `T_TONGSOCAU` int(11) DEFAULT NULL,
   `T_KHOABAILAM` tinyint(1) DEFAULT NULL,
   `T_NGAYLAM` datetime DEFAULT NULL,
-  `T_THOIGIANBATDAU` datetime DEFAULT NULL,
-  `T_THOIGIANKETTHUC` datetime DEFAULT NULL,
   `T_DIEM` float NOT NULL,
   PRIMARY KEY (`MST`),
   KEY `FK_HOCSINH_LAM` (`ND_TAIKHOAN`),
   KEY `FK_LAM_DETHI` (`MSDT`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -665,6 +614,7 @@ ALTER TABLE `cautraloi`
 -- Constraints for table `dethi`
 --
 ALTER TABLE `dethi`
+  ADD CONSTRAINT `dethi_user` FOREIGN KEY (`DT_NGUOIRADE`) REFERENCES `user` (`ND_TAIKHOAN`),
   ADD CONSTRAINT `FK_CHUA` FOREIGN KEY (`MSCD`) REFERENCES `chude` (`MSCD`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_DETHI_NIENKHOA` FOREIGN KEY (`MSNK`) REFERENCES `nienkhoa` (`MSNK`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_HOCKY_DETHI` FOREIGN KEY (`MSHK`) REFERENCES `hocky` (`MSHK`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -696,7 +646,8 @@ ALTER TABLE `lop`
 ALTER TABLE `phancongvaitro`
   ADD CONSTRAINT `FK_RELATIONSHIP_25` FOREIGN KEY (`MSDT`) REFERENCES `dethi` (`MSDT`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_RELATIONSHIP_26` FOREIGN KEY (`ND_TAIKHOAN`) REFERENCES `user` (`ND_TAIKHOAN`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_RELATIONSHIP_27` FOREIGN KEY (`MSVT`) REFERENCES `vaitro` (`MSVT`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_RELATIONSHIP_27` FOREIGN KEY (`MSVT`) REFERENCES `vaitro` (`MSVT`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `phancongvaitro_phongthi` FOREIGN KEY (`MSPT`) REFERENCES `phongthi` (`MSPT`);
 
 --
 -- Constraints for table `thi`

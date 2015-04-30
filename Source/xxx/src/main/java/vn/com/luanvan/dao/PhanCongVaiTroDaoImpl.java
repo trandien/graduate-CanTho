@@ -1,6 +1,9 @@
 package vn.com.luanvan.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -13,6 +16,7 @@ import vn.com.luanvan.model.Cauhoi;
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dethi;
 import vn.com.luanvan.model.Phancongvaitro;
+import vn.com.luanvan.model.User;
 
 @Repository("phanCongVaiTroDao")
 public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
@@ -140,7 +144,7 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
 							"from Phancongvaitro pcvt WHERE pcvt.user.ndTaikhoan=:taikhoan AND pcvt.vaitro.msvt=4");
 			ListDeThiHS = query.setParameter("taikhoan", taiKhoan).list();
 		} catch (Exception e) {
-			System.out.println("LayDeThiHS: Loi "+e.getMessage());
+			System.out.println("LayDeThiHS: Loi " + e.getMessage());
 		}
 		return ListDeThiHS;
 	}
@@ -165,8 +169,10 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
 	public Integer SLPCVTGiamThi(int msdt) {
 		Integer ketQua = 0;
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery(
-					"select count(*) from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=3");
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"select count(*) from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=3");
 			query.setParameter("msdt", msdt);
 			return ((Number) query.uniqueResult()).intValue();
 		} catch (Exception e) {
@@ -180,15 +186,41 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
 	public Integer SLPCVTHS(int msdt) {
 		Integer ketQua = 0;
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery(
-					"select count(*) from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=4");
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"select count(*) from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=4");
 			query.setParameter("msdt", msdt);
 			return ((Number) query.uniqueResult()).intValue();
 		} catch (Exception e) {
-			System.out.println("Xay ra ngoai le SLPCVTHS : "
-					+ e.getMessage());
+			System.out.println("Xay ra ngoai le SLPCVTHS : " + e.getMessage());
 		}
 		return ketQua;
+	}
+
+	@Override
+	public List<Phancongvaitro> layDSHSByNgayVaPhong(int mspt, String ngay,
+			String gioBatDau, String gioKetThuc) throws ParseException {
+		List<Phancongvaitro> listPCVT = new ArrayList<Phancongvaitro>(); 
+		SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
+		Date layNgay = dinhDangThoiGian.parse(ngay);
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+		Date layGioBatDau = time.parse(gioBatDau);
+		Date layGioKetThuc = time.parse(gioKetThuc);
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Phancongvaitro pcvt WHERE pcvt.phongthi.mspt=:mspt AND ngay=:ngay AND giobatdau=:giobatdau AND gioketthuc=:gioketthuc AND pcvt.vaitro.msvt=4");
+			query.setParameter("mspt", mspt);
+			query.setParameter("ngay", layNgay);
+			query.setParameter("giobatdau", layGioBatDau);
+			query.setParameter("gioketthuc", layGioKetThuc);
+			listPCVT = query.list();
+		} catch (Exception e) {
+			System.out.println("layDSHSByNgayVaPhong: Loi ");
+		}
+		return listPCVT;
 	}
 
 }

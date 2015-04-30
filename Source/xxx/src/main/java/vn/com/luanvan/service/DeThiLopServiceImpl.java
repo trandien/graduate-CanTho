@@ -1,5 +1,6 @@
 package vn.com.luanvan.service;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class DeThiLopServiceImpl implements DeThiLopService{
 	}
 
 	@Override
-	public DethiLop LayDTLByPhongVaThoiGian(int mspt, Date ngay,
-			Date gioBatDau, Date gioKetThuc) {
+	public DethiLop LayDTLByPhongVaThoiGian(int mspt, String ngay,
+			String gioBatDau, String gioKetThuc) throws ParseException {
 		return deThiLopdao.LayDTLByPhongVaThoiGian(mspt, ngay, gioBatDau, gioKetThuc);
 	}
 

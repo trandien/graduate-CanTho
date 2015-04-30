@@ -1,11 +1,13 @@
 package vn.com.luanvan.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.luanvan.dao.PhanCongVaiTroDao;
 import vn.com.luanvan.model.Phancongvaitro;
+import vn.com.luanvan.model.User;
 
 public class PhanCongVaiTroServiceImpl implements PhanCongVaiTroService{
 	@Autowired
@@ -65,6 +67,12 @@ public class PhanCongVaiTroServiceImpl implements PhanCongVaiTroService{
 	@Override
 	public Integer SLPCVTHS(int msdt) {
 		return phanCongVaiTroDao.SLPCVTHS(msdt);
+	}
+
+	@Override
+	public List<Phancongvaitro> layDSHSByNgayVaPhong(int mspt, String ngay,
+			String gioBatDau, String gioKetThuc) throws ParseException {
+		return phanCongVaiTroDao.layDSHSByNgayVaPhong(mspt, ngay, gioBatDau, gioKetThuc) ;
 	}
 
 }

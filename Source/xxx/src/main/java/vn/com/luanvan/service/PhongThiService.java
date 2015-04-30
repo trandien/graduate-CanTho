@@ -2,6 +2,7 @@ package vn.com.luanvan.service;
 
 import java.util.List;
 
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Phongthi;
 
 public interface PhongThiService {
@@ -13,5 +14,6 @@ public interface PhongThiService {
 
 	List<Phongthi> danhSachPhongThi();
 	
-	public Phongthi LayPhongThiByMa(int mspt);
+	Phongthi LayPhongThiByMa(int mspt);
+	
 }

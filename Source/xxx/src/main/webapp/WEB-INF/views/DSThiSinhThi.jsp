@@ -42,7 +42,7 @@
 		    
 	    </script>
 	</head>
-	<body style="font-family: 'Calibri', sans-serif;">
+	<body style="font-family: 'Calibri', sans-serif; font-size: 18px;">
 	<header class="navbar navbar-menu header--menu" role="navigation">
         <div class="container-fluid">
             <div class="row">
@@ -101,8 +101,8 @@
 						<td>0</td>
 						<td width="200px;">
 							<div class="onoffswitch">
-							    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-							    <label class="onoffswitch-label" for="myonoffswitch">
+							    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="${thisinh.ndTaikhoan }" checked>
+							    <label class="onoffswitch-label" for="${thisinh.ndTaikhoan }">
 							        <span class="onoffswitch-inner"></span>
 							        <span class="onoffswitch-switch"></span>
 							    </label>

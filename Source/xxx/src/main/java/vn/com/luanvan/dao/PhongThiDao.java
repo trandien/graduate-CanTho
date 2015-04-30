@@ -2,6 +2,7 @@ package vn.com.luanvan.dao;
 
 import java.util.List;
 
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Phongthi;
 
 public interface PhongThiDao {
@@ -14,5 +15,6 @@ public interface PhongThiDao {
 	List<Phongthi> danhSachPhongThi();
 	
 	Phongthi LayPhongThiByMa(int mspt);
+	
 
 }

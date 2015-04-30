@@ -1,6 +1,9 @@
 package vn.com.luanvan.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -11,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vn.com.luanvan.model.Cauhoi;
 import vn.com.luanvan.model.Chude;
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Phongthi;
 
 @Repository("phongThiDao")
@@ -64,7 +68,7 @@ public class PhongThiDaoImpl implements PhongThiDao{
 	public List<Phongthi> danhSachPhongThi() {
 		List<Phongthi> listPhongThi = new ArrayList<Phongthi>();
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery( "from Phongthi");
+			Query query = sessionFactory.getCurrentSession().createQuery("from Phongthi");
 			listPhongThi = query.list();
 		} catch (Exception e) {
 			System.out.println("Lay danh sach phong thi " + e.getMessage());
@@ -82,5 +86,6 @@ public class PhongThiDaoImpl implements PhongThiDao{
 			return null;
 		}
 	}
+	
 
 }

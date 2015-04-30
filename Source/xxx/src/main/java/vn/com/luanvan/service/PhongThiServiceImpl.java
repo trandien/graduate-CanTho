@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.luanvan.dao.PhongThiDao;
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Phongthi;
 
 public class PhongThiServiceImpl implements PhongThiService{

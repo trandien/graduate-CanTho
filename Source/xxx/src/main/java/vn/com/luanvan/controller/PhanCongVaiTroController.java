@@ -183,10 +183,13 @@ public class PhanCongVaiTroController {
 					}
 				}
 			}
-			System.out.println("xxxxxxxxxxx: "+pcvt.getPhongthi().getMspt());
-			if (pcvt.getPhongthi().getMspt() == null) {
-				} 
-			else if (pcvt.getPhongthi().getMspt() == mspt) {
+			int msptx = 0;
+			try {
+				msptx = 0;
+				msptx = pcvt.getPhongthi().getMspt();
+			} catch(Exception e) {
+				msptx = 0;			}
+			 if (msptx == mspt) {
 				SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat(
 						"yyyy-MM-dd");
 				Date thoiGian = dinhDangThoiGian.parse(thoiGianThi);
@@ -215,6 +218,8 @@ public class PhanCongVaiTroController {
 						return "Thêm không thành công. Phòng thi này bị trùng lịch";
 					}
 				}
+			} else {
+				
 			}
 
 		}

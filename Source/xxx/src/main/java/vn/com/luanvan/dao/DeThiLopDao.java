@@ -1,5 +1,6 @@
 package vn.com.luanvan.dao;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface DeThiLopDao {
 	
 	DethiLop LayDeThiLopById(int msdt, String msl);
 	
-	DethiLop LayDTLByPhongVaThoiGian(int mspt, Date ngay, Date gioBatDau, Date gioKetThuc);
+	DethiLop LayDTLByPhongVaThoiGian(int mspt, String ngay, String gioBatDau, String gioKetThuc) throws ParseException;
 }

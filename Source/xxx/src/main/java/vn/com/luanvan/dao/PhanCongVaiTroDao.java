@@ -1,8 +1,10 @@
 package vn.com.luanvan.dao;
 
+import java.text.ParseException;
 import java.util.List;
 
 import vn.com.luanvan.model.Phancongvaitro;
+import vn.com.luanvan.model.User;
 
 public interface PhanCongVaiTroDao {
 	void ThemPhanCongVaiTro(Phancongvaitro phancongvaitro);
@@ -26,4 +28,6 @@ public interface PhanCongVaiTroDao {
 	Integer SLPCVTGiamThi(int msdt);
 	
 	Integer SLPCVTHS(int msdt);
+	
+	List<Phancongvaitro> layDSHSByNgayVaPhong(int mspt, String ngay, String gioBatDau, String gioKetThuc) throws ParseException ;
 }

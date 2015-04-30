@@ -240,7 +240,7 @@ a:active {
 									<td>${lich.dethi.monhoc.mhTen }</td>
 									<td>${lich.dethi.user.ndHoten }</td>
 									<td>
-										<a href="DanhSachThi.html?mspt=${lich.phongthi.mspt}&&ngay=${lich.ngay}&&giobatdau=${lich.giobatdau}&&gioketthuc=${lich.gioketthuc}">
+										<a href="DanhSachThi.html?msdt=${lich.dethi.msdt }&&mspt=${lich.phongthi.mspt}&&ngay=${lich.ngay}&&giobatdau=${lich.giobatdau}&&gioketthuc=${lich.gioketthuc}">
 										Xem danh sách
 										</a>
 									</td>
