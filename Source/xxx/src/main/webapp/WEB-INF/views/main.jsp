@@ -227,17 +227,25 @@ a:active {
 									<th>Giờ kết thúc</th>
 									<th>Môn thi</th>
 									<th>Giáo viên ra đề</th>
+									<th>Danh sách thi</th>
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach items="${listGacThi }" var="lich">
 								<tr>
-									<td>Phòng 1</td>
-									<td>20/02/2015</td>
-									<td>15:30</td>
-									<td>16:30</td>
-									<td>Vật Lý</td>
-									<td>Trần Hữu Tính</td>
+									<td>${lich.phongthi.ptTen }</td>
+									<td>${lich.ngay }</td>
+									<td>${lich.giobatdau }</td>
+									<td>${lich.gioketthuc }</td>
+									<td>${lich.dethi.monhoc.mhTen }</td>
+									<td>${lich.dethi.user.ndHoten }</td>
+									<td>
+										<a href="DanhSachThi.html?mspt=${lich.phongthi.mspt}&&ngay=${lich.ngay}&&giobatdau=${lich.giobatdau}&&gioketthuc=${lich.gioketthuc}">
+										Xem danh sách
+										</a>
+									</td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 						</div>

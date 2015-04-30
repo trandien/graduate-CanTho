@@ -15,4 +15,6 @@ public interface DeThiLopDao {
 	List<DethiLop> LayDSDeThiLop(Date ngay, int mspt);
 	
 	DethiLop LayDeThiLopById(int msdt, String msl);
+	
+	DethiLop LayDTLByPhongVaThoiGian(int mspt, Date ngay, Date gioBatDau, Date gioKetThuc);
 }

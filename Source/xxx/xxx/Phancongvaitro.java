@@ -1,16 +1,12 @@
-package vn.com.luanvan.model;
-
-import static javax.persistence.GenerationType.IDENTITY;
+// default package
+// Generated Apr 30, 2015 9:49:25 AM by Hibernate Tools 4.3.1
 
 import java.util.Date;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

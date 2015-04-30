@@ -141,7 +141,7 @@ public class DeThiController {
 			DeThi.setDtSolanchophep(Integer.parseInt(soLanChoPhepThi));
 			DeThi.setDtThoigianlambai(Integer.parseInt(thoiGianLamBai));
 			DeThi.setDtTrangthai(Integer.parseInt(trangThai));
-			DeThi.setDtNguoirade(taiKhoan);
+			DeThi.setUser(user);
 			
 
 			Nienkhoa NienKhoa = new Nienkhoa();
@@ -219,7 +219,7 @@ public class DeThiController {
 			DeThi.setDtSolanchophep(Integer.parseInt(soLanChoPhepThi));
 			DeThi.setDtThoigianlambai(Integer.parseInt(thoiGianLamBai));
 			DeThi.setDtTrangthai(Integer.parseInt(trangThai));
-			DeThi.setDtNguoirade(taiKhoan);
+			DeThi.setUser(user);
 			
 			Nienkhoa NienKhoa = new Nienkhoa();
 			Hocky HocKy = new Hocky(Integer.parseInt(hocKy));

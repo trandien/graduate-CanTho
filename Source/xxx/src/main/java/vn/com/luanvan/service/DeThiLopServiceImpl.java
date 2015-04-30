@@ -37,4 +37,10 @@ public class DeThiLopServiceImpl implements DeThiLopService{
 		return deThiLopdao.LayDeThiLopById(msdt, msl);
 	}
 
+	@Override
+	public DethiLop LayDTLByPhongVaThoiGian(int mspt, Date ngay,
+			Date gioBatDau, Date gioKetThuc) {
+		return deThiLopdao.LayDTLByPhongVaThoiGian(mspt, ngay, gioBatDau, gioKetThuc);
+	}
+
 }

@@ -24,18 +24,24 @@ import vn.com.luanvan.form.KetQuaThiForm;
 import vn.com.luanvan.model.Cauhoi;
 import vn.com.luanvan.model.Cautraloi;
 import vn.com.luanvan.model.Dethi;
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Phancongvaitro;
 import vn.com.luanvan.model.Thi;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.CauHoiService;
 import vn.com.luanvan.service.CauTraLoiService;
+import vn.com.luanvan.service.DeThiLopService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
 import vn.com.luanvan.service.ThiSinhThiService;
+import vn.com.luanvan.service.UserService;
 
 @Controller
 public class ThiSinhThiController {
 
+	@Autowired
+	UserService userService;
+	
 	@Autowired
 	DeThiService deThiService;
 
@@ -50,6 +56,9 @@ public class ThiSinhThiController {
 
 	@Autowired
 	CauTraLoiService cauTraLoiService;
+	
+	@Autowired
+	DeThiLopService deThiLopService;
 	
 	private String tableThiSinh = "";
 	
@@ -534,6 +543,33 @@ public class ThiSinhThiController {
 			result = "true";
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = "/DanhSachThi.html", method = RequestMethod.GET)
+	public ModelAndView DanhSachThi(ModelAndView model, HttpServletRequest request, HttpSession session) {
+		try {
+			int mspt = Integer.parseInt(request.getParameter("mspt"));
+			String layNgay = request.getParameter("ngay");
+			String layGioBatDau = request.getParameter("giobatdau");
+			String layGioKetThuc = request.getParameter("gioketthuc");
+			SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat(
+					"yyyy-MM-dd");
+			Date ngay = dinhDangThoiGian.parse(layNgay);
+			SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+			Date gioBatDau = time.parse(layGioBatDau);
+			Date gioKetThuc = time.parse(layGioKetThuc);
+			
+			DethiLop DeThiLop = new DethiLop();
+			DeThiLop = deThiLopService.LayDTLByPhongVaThoiGian(mspt, ngay, gioBatDau, gioKetThuc);
+			String lop = DeThiLop.getLop().getMsl();
+			List<User> hocSinhThi = userService.LayDanhSachHSTrongLop(lop);
+			
+			model.addObject("hocSinhThi", hocSinhThi);
+			model.setViewName("DSThiSinhThi");
+		} catch (Exception e) {
+			System.out.println("ngoai le xay ra");
+		}
+		return model;
 	}
 }
 

@@ -92,4 +92,25 @@ public class DeThiLopDaoImpl implements DeThiLopDao {
 		return dtl;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public DethiLop LayDTLByPhongVaThoiGian(int mspt, Date ngay,
+			Date gioBatDau, Date gioKetThuc) {
+		DethiLop dtl = new DethiLop();
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery(
+					"select * from Dethi_lop WHERE mspt=:mspt "
+							+ "AND ngay=:ngay AND giobatdau=:giobatdau AND gioketthuc=:gioketthuc");
+			query.setParameter("mspt", mspt);
+			query.setParameter("ngay", ngay);
+			query.setParameter("giobatdau", gioBatDau);
+			query.setParameter("gioketthuc", gioKetThuc);
+			dtl = (DethiLop) query.uniqueResult();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le LayDTLByPhongVaThoiGian : "
+					+ e.getMessage());
+		}
+		return dtl;
+	}
+
 }

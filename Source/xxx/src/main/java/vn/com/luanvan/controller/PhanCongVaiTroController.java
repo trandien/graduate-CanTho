@@ -87,7 +87,7 @@ public class PhanCongVaiTroController {
 			PhanCongVaiTro.setUser(giamThi);
 			PhanCongVaiTro.setDethi(DeThi);
 			PhanCongVaiTro.setVaitro(VaiTro);
-			PhanCongVaiTro.setMspt(mspt);
+			PhanCongVaiTro.setPhongthi(PhongThi);
 			PhanCongVaiTro.setMscda(mscd);
 			PhanCongVaiTro.setNgay(thoiGian);
 			PhanCongVaiTro.setGiobatdau(timeStart);
@@ -183,8 +183,10 @@ public class PhanCongVaiTroController {
 					}
 				}
 			}
-			if (pcvt.getMspt() == null) {
-			} else if (pcvt.getMspt() == mspt) {
+			System.out.println("xxxxxxxxxxx: "+pcvt.getPhongthi().getMspt());
+			if (pcvt.getPhongthi().getMspt() == null) {
+				} 
+			else if (pcvt.getPhongthi().getMspt() == mspt) {
 				SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat(
 						"yyyy-MM-dd");
 				Date thoiGian = dinhDangThoiGian.parse(thoiGianThi);
@@ -294,7 +296,7 @@ public class PhanCongVaiTroController {
 			PhanCongVaiTro.setGiobatdau(timeStart);
 			PhanCongVaiTro.setGioketthuc(timeEnd);
 			PhanCongVaiTro.setNgay(time);
-			PhanCongVaiTro.setMspt(mspt);
+			PhanCongVaiTro.setPhongthi(PhongThi);
 			phanCongVaiTroService.ThemPhanCongVaiTro(PhanCongVaiTro);
 			sttPCVT = phanCongVaiTroService.SLPCVTHS(msdt);
 			mspcvt = phanCongVaiTroService.getMaxIdByMaDeThi(msdt);

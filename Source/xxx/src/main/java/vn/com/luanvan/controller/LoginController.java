@@ -118,10 +118,15 @@ public class LoginController {
 				String taiKhoan = user.getNdTaikhoan();
 				if(user.getVaitro().getMsvt() == 1 || user.getVaitro().getMsvt() == 2 || user.getVaitro().getMsvt() == 3|| user.getVaitro().getMsvt() == 5)
 				{
-					List<Chude> listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
-					List<Dethi> listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
+					List<Chude> listChudes = new ArrayList<Chude>();
+					List<Dethi> listDethis = new ArrayList<Dethi>();
+					List<Phancongvaitro> listGacThi = new ArrayList<Phancongvaitro>();
+					listChudes = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
+					listDethis = deThiService.LayDSDeThiByTaiKhoan(taiKhoan);
+					listGacThi = phanCongVaiTroService.LayDeThiGiamThi(taiKhoan);
 					model.addObject("listDethis", listDethis);
 					model.addObject("listChudes", listChudes);
+					model.addObject("listGacThi", listGacThi);
 					model.setViewName("main");
 				} else {
 					List<Dethi> listDeThiThamGiaThi = new ArrayList<Dethi>();

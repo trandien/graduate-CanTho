@@ -1,0 +1,107 @@
+.bubble {
+			  position: absolute;
+			  width: 380px;
+			  height: auto;
+			  padding: 0px;
+			  background: #2c3e50;
+			  -webkit-border-radius: 3px;
+			  -moz-border-radius: 3px;
+			  border-radius: 3px;
+			  border: #7F7F7F solid 1px;
+			  right: 80px;
+			  top: 10px;
+			  z-index: 2000;
+			}
+			.bubble:after {
+			  content: '';
+			  position: absolute;
+			  border-style: solid;
+			  border-width: 11px 0 11px 12px;
+			  border-color: transparent #2c3e50;
+			  display: block;
+			  width: 0;
+			  z-index: 1;
+			  right: -12px;
+			  top: 20px;
+			}
+			.bubble .avatar {
+			  background: #fff;
+			  display: block;
+			  float: left;
+			  height: 128px;
+			  width: 128px;
+			  padding: 10px;
+			}
+			.bubble .panel-body {
+			  border-bottom: none;
+			}
+			.bubble .panel-footer {
+			  border-top: none;
+			  background: #1a242f;
+			}
+
+			.onoffswitch {
+			    position: relative; width: 120px;
+			    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+			}
+			.onoffswitch-checkbox {
+			    display: none;
+			}
+			.onoffswitch-label {
+			    display: block; overflow: hidden; cursor: pointer;
+			    border: 2px solid #999999; border-radius: 20px;
+			}
+			.onoffswitch-inner {
+			    display: block; width: 200%; margin-left: -100%;
+			    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+			    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+			}
+			.onoffswitch-inner:before, .onoffswitch-inner:after {
+			    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+			    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+			    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+			}
+			.onoffswitch-inner:before {
+			    content: "Đang mở";
+			    padding-left: 10px;
+			    background-color: #34A7C1; color: #FFFFFF;
+			}
+			.onoffswitch-inner:after {
+			    content: "Đang khóa";
+			    padding-right: 10px;
+			    background-color: #EEEEEE; color: #999999;
+			    text-align: right;
+			}
+			.onoffswitch-switch {
+			    display: block; width: 18px; margin: 6px;
+			    background: #FFFFFF;
+			    border: 2px solid #999999; border-radius: 20px;
+			    position: absolute; top: 0; bottom: 0; right: 86px;
+			    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+			    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+			}
+			.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+			    margin-left: 0;
+			}
+			.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+			    right: 0px; 
+			}
+			td {
+			  text-align: center;
+			  vertical-align: middle;
+			}
+			th {
+			  text-align: center;
+			  vertical-align: middle;
+			}
+			#comat {
+
+				width: 10px; height: 10px; 
+				background: #63a924; 
+				text-align: center; 
+				margin-left: 30px;
+				color: #63a924; 
+				-moz-border-radius: 10px; 
+				-webkit-border-radius: 10px; 
+				border-radius: 10px;
+			}
