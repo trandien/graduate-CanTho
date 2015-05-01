@@ -62,7 +62,8 @@ public class DeThiLopDaoImpl implements DeThiLopDao {
 		}
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<DethiLop> LayDSDeThiLop(Date ngay, int mspt) {
 		List<DethiLop> listDeThiLop = new ArrayList<DethiLop>();
 		try {
@@ -82,11 +83,13 @@ public class DeThiLopDaoImpl implements DeThiLopDao {
 	@Transactional
 	public DethiLop LayDeThiLopById(int msdt, String msl) {
 		DethiLop dtl = new DethiLop();
+		String sql = "select * from Dethi_lop WHERE msl=:msl AND msdt=:msdt";
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery(
-					"from Dethi_lop dtl WHERE dtl.dethi.msdt=:msdt "
-							+ "AND dtl.lop.msl=:msl");
-			dtl = (DethiLop) query.uniqueResult();
+			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+			query.addEntity(DethiLop.class);
+			query.setParameter("msl", msl);
+			query.setParameter("msdt", msdt);
+			dtl = (DethiLop) query.list().get(0);
 		} catch (Exception e) {
 			System.out.println("Xay ra ngoai le LayDeThiLopById : "
 					+ e.getMessage());

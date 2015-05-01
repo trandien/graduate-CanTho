@@ -14,12 +14,8 @@
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
  <script src="<c:url value="/resources/js/jquery.blockUI.js" />"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
-<style type="text/css">
-	.empty-input{
-		border: 1px solid red;
-	}
-	
-</style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/tabthongtindethi.css" />" />
+
 
 </head>
 <body>
@@ -115,14 +111,14 @@
 						<!--Trạng thái-->
 						<td>Trạng thái</td>
 						<td>
-							<div class="radio">
-								<label> <input type="radio" name="trangThai"
-									id="trangThai" checked="checked" value="0"> <span>Đóng&nbsp;&nbsp;&nbsp;</span>
-
-								</label> <label> <input type="radio" name="trangThai" id="trangThai"
-									value="1"> <span>Mở</span>
-								</label>
-							</div>
+							<div class="onoffswitch">
+										<input type="checkbox" name="trangThai"
+											class="onoffswitch-checkbox" id="trangThai"> <label
+											class="onoffswitch-label" for="trangThai"> <span
+											class="onoffswitch-inner"></span> <span
+											class="onoffswitch-switch"></span>
+										</label>
+									</div>
 						</td>
 						<td></td>
 					</tr>

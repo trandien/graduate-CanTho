@@ -223,4 +223,34 @@ public class PhanCongVaiTroDaoImpl implements PhanCongVaiTroDao {
 		return listPCVT;
 	}
 
+	@Override
+	public List<Phancongvaitro> ListHSByMSDT(int msdt) {
+		List<Phancongvaitro> ListDeThiGiamThi = new ArrayList<Phancongvaitro>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=4");
+			ListDeThiGiamThi = query.setParameter("msdt", msdt).list();
+		} catch (Exception e) {
+			System.out.println("ListHSByMSDT: Loi ");
+		}
+		return ListDeThiGiamThi;
+	}
+
+	@Override
+	public List<Phancongvaitro> ListGTByMSDT(int msdt) {
+		List<Phancongvaitro> ListDeThiGiamThi = new ArrayList<Phancongvaitro>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Phancongvaitro pcvt WHERE pcvt.dethi.msdt=:msdt AND pcvt.vaitro.msvt=3");
+			ListDeThiGiamThi = query.setParameter("msdt", msdt).list();
+		} catch (Exception e) {
+			System.out.println("ListGTByMSDT: Loi ");
+		}
+		return ListDeThiGiamThi;
+	}
+
 }

@@ -7,14 +7,22 @@
 
 <head>
 <meta charset="utf-8">
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />"
+	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery.js" />"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css" />" />
-   
-<link rel="stylesheet" href="<c:url value="/resources/autocomplete/flexselect.css" />" type="text/css" media="screen" />
-<script src="<c:url value="/resources/autocomplete/liquidmetal.js" />" type="text/javascript"></script>
-<script src="<c:url value="/resources/autocomplete/jquery.flexselect.js" />" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/bootstrap.css" />" />
+
+<link rel="stylesheet"
+	href="<c:url value="/resources/autocomplete/flexselect.css" />"
+	type="text/css" media="screen" />
+<script src="<c:url value="/resources/autocomplete/liquidmetal.js" />"
+	type="text/javascript"></script>
+<script
+	src="<c:url value="/resources/autocomplete/jquery.flexselect.js" />"
+	type="text/javascript"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/custom/register.css" />" />
 <script src="<c:url value="/resources/ajax/ajaxChuDe.js" />"></script>
 <script src="<c:url value="/resources/ajax/ajaxPhanCongVaiTro.js" />"></script>
 <script type="text/javascript">
@@ -22,11 +30,11 @@
 	     $("select.flexselect").flexselect();
 	   });
  </script>
- <style>
- 	.empty-input{
-		border: 1px solid red;
-	}
- </style>
+<style>
+.empty-input {
+	border: 1px solid red;
+}
+</style>
 </head>
 <body>
 	<div class="panel panel-default">
@@ -35,7 +43,7 @@
 			<i class="glyphicon glyphicon-user">&nbsp</i> <strong> Danh
 				sách giám thị </strong>
 		</div>
-		
+
 		<div class="panel-body">
 			<div id="wrapper">
 				<div id="page-content-wrapper">
@@ -47,16 +55,16 @@
 									<input id='tenGV' type="text" class="form-control" id="tenGV" path="tenGV"
 										placeholder="Nhập tên giám thị cần thêm" onclick="AjaxLoadDSGV()"/>
 									-->
-									 <label for="tengv">Tên:</label>
-									<select class="flexselect form-control" id='tengv'>
+									<label for="tengv">Tên:</label> <select
+										class="flexselect form-control" id='tengv'>
 										<c:forEach items='${listGV }' var='gv'>
 											<option value="${gv.ndTaikhoan }">${gv.ndHoten }</option>
 										</c:forEach>
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="inputPhongThi">Phòng:</label>
-									<select name="phongThi" id="inputPhongThi" class="form-control"
+									<label for="inputPhongThi">Phòng:</label> <select
+										name="phongThi" id="inputPhongThi" class="form-control"
 										required="required">
 										<c:forEach items='${listPhongThi }' var='pt'>
 											<option value="${pt.mspt }">${pt.ptTen }</option>
@@ -70,37 +78,41 @@
 									<div id="thongbao_inputThoiGian"></div>
 									<div id='kiemtraphancongvaitro'></div>
 								</div>
-								
-								
+
+
 							</div>
-							
+
 							<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
 								<div class="form-group">
-								        <label for="gioibatdau">Giờ bắt đầu:</label>
-								        <input type="time" name="" id="giobatdau" class="form-control" value="" required="required" title="" >
-								        <div id="thongbao_giobatdau"></div>
-							      </div>
-							      
-							      <div class="form-group" >
-								        <label for="gioketthuc" class="control-label" style="margin-top: 15px; ">Giờ kết thúc:</label>
-								        <input type="time" name="" id="gioketthuc" class="form-control" value="" required="required" title=""  >
-							      		<div id="thongbao_gioketthuc"></div>
-							      </div>
+									<label for="gioibatdau">Giờ bắt đầu:</label> <input type="time"
+										name="" id="giobatdau" class="form-control" value=""
+										required="required" title="">
+									<div id="thongbao_giobatdau"></div>
+								</div>
+
+								<div class="form-group">
+									<label for="gioketthuc" class="control-label"
+										style="margin-top: 15px;">Giờ kết thúc:</label> <input
+										type="time" name="" id="gioketthuc" class="form-control"
+										value="" required="required" title="">
+									<div id="thongbao_gioketthuc"></div>
+								</div>
 							</div>
 						</div>
 						<!-- .row -->
 					</div>
 				</div>
 			</div>
-			
+
 			<input type="button" id="themDSLopThamGiaThi" value="Thêm"
 				class="btn btn-primary"
-				style="margin-top: -20px; margin-left: 50px;" onclick="ThemPhanCongVaiTro()">
+				style="margin-top: -20px; margin-left: 50px;"
+				onclick="ThemPhanCongVaiTro()">
 
 			<table id='tableGiamThi' class="table table-hover"
 				style="width: 100%; border: 1px solid #ccc; margin-top: 20px;">
 				<thead>
-					
+
 					<tr>
 						<th>STT</th>
 						<th>Xóa</th>
@@ -112,9 +124,40 @@
 					</tr>
 
 				</thead>
-				<tbody id='bang-giam-thi-'>
-
-				</tbody>
+				<c:choose>
+					<c:when test="${sua == '1'}">
+						<tbody id='bang-giam-thi-'>
+							<c:forEach items="${listGTGacThi }" var='hsthi'
+								varStatus="status">
+								<tr id='pcvths-${hsthi.mspcvt }'>
+									<td class='indexGiamThi'><c:out value="${status.count}" /></td>
+									<td>
+										<div class='btn-group'>
+											<div class='dropdown-toggle' data-toggle='dropdown' href='#'>
+												<span class='glyphicon glyphicon-trash'></span>
+											</div>
+											<div class='dropdown-menu'>
+												<hr>
+												<BUTTON class='btn btn-danger' style='width: 100%'
+													onclick='AjaxXoaPhanCongVaiTro(${hsthi.mspcvt })'>
+													Xóa</BUTTON>
+											</div>
+										</div>
+									</td>
+									<td>${hsthi.user.ndHoten }</td>
+									<td>${hsthi.phongthi.ptTen }</td>
+									<td>${hsthi.ngay }</td>
+									<td>${hsthi.giobatdau }</td>
+									<td>${hsthi.gioketthuc }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</c:when>
+					<c:otherwise>
+						<tbody id='bang-giam-thi-'>
+						</tbody>
+					</c:otherwise>
+				</c:choose>
 			</table>
 		</div>
 	</div>

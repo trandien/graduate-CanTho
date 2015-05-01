@@ -4,7 +4,12 @@ function AjaxLuuDeThi() {
 	var ChuDe = $("#chuDe").val();
 	var MonHoc = $("#monHoc").val();
 	var HeSo = $("#heSo").val();
-	var TrangThai = jQuery("input[name='trangThai']:checked").val();
+	var kt = jQuery("input[name='trangThai']:checked").val();
+	if(kt == 'on') {
+		var TrangThai = "0";
+	} else {
+		var TrangThai = "1";
+	}
 	var ThoiGianLamBai = $("#thoiGian").val();
 	var NgayTaoDe = $("#ngayTaoDe").val();
 	var DanDo = $("#danDo").val();
@@ -41,7 +46,7 @@ function AjaxLuuDeThi() {
 				+ "&ChuDe=" + $("#chuDe").val()
 				+ "&MonHoc=" + $("#monHoc").val()
 				+ "&HeSo=" + $("#heSo").val()
-				+ "&TrangThai=" + jQuery("input[name='trangThai']:checked").val()
+				+ "&TrangThai=" + TrangThai
 				+ "&ThoiGian=" + $("#thoiGian").val()
 				+ "&NgayTaoDe=" + $("#ngayTaoDe").val()
 				+ "&DanDo=" + $("#danDo").val()
@@ -71,7 +76,13 @@ function AjaxSuaThongTinDeThi() {
 	var ChuDe = $("#chuDe").val();
 	var MonHoc = $("#monHoc").val();
 	var HeSo = $("#heSo").val();
-	var TrangThai = $("#trangThai").val();
+	
+	var kt = jQuery("input[name='trangThai']:checked").val();
+	if(kt == 'on') {
+		var TrangThai = "0";
+	} else {
+		var TrangThai = "1";
+	}
 	var ThoiGianLamBai = $("#thoiGian").val();
 	var NgayTaoDe = $("#ngayTaoDe").val();
 	var DanDo = $("#danDo").val();
@@ -104,7 +115,7 @@ function AjaxSuaThongTinDeThi() {
 				+ "&ChuDe=" + $("#chuDe").val()
 				+ "&MonHoc=" + $("#monHoc").val()
 				+ "&HeSo=" + $("#heSo").val()
-				+ "&TrangThai=" + jQuery("input[name='trangThai']:checked").val()
+				+ "&TrangThai=" + TrangThai
 				+ "&ThoiGian=" + $("#thoiGian").val()
 				+ "&NgayTaoDe=" + $("#ngayTaoDe").val()
 				+ "&DanDo=" + $("#danDo").val()

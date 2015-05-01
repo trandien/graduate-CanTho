@@ -17,7 +17,11 @@ public interface PhanCongVaiTroDao {
 	
 	List<Phancongvaitro> LayDeThiHS(String taiKhoan);
 	
+	List<Phancongvaitro> ListHSByMSDT(int msdt); // ds hs tham gia thi
+
 	List<Phancongvaitro> LayDeThiGiamThi(String taiKhoan);
+	
+	List<Phancongvaitro> ListGTByMSDT(int msdt); // ds giam thi gac thi
 	
 	Boolean KiemTraTonTaiPhanCongVaiTro(Integer msdt, String taiKhoan, Integer msvt, Integer mscd);
 	

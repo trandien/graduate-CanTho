@@ -9,16 +9,19 @@
 <meta charset="utf-8">
 <title>Thêm đề thi</title>
 <script src="<c:url value = "/resources/ajax/ajaxDeThi.js"/>"></script>
-<script src="<c:url value = "/resources/js/bootstrap.min.js" />" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value = "/resources/css/bootstrap.css" />"/>
-<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />" type="text/javascript"></script>
- <script src="<c:url value="/resources/js/jquery.blockUI.js" />"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/custom/register.css" />" />
+<script src="<c:url value = "/resources/ajax/ajaxDeThiLop.js"/>"></script>
+<script src="<c:url value = "/resources/js/bootstrap.min.js" />"
+	type="text/javascript"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value = "/resources/css/bootstrap.css" />" />
+<script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/jquery.blockUI.js" />"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/custom/register.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/custom/tabthongtindethi.css" />" />
 <style type="text/css">
-	.empty-input{
-		border: 1px solid red;
-	}
-	
 </style>
 
 </head>
@@ -28,7 +31,7 @@
 			style="text-align: center; font-size: 20px;">
 			<i class="glyphicon glyphicon-list-alt"></i> &nbsp <strong>Thông
 				tin đề thi </strong>
-				
+
 		</div>
 		<div class="panel-body">
 			<table class="table table-hover">
@@ -39,8 +42,7 @@
 						<td>Tên đề</td>
 						<td><input id="tenDe" class="form-control" type="text"
 							name="tenDe" placeholder="Tên đề thi" value="${DeThi.dtTende }">
-							<div id="thongbao_tende"></div>	
-						</td>
+							<div id="thongbao_tende"></div></td>
 						<td></td>
 					</tr>
 
@@ -50,7 +52,7 @@
 						<td><select name="nienKhoan" id="nienKhoan"
 							class="form-control" required="required" style="width: 50%;">
 								<c:forEach items="${listNienKhoa}" var="NienKhoa">
-									
+
 									<c:choose>
 										<c:when test="${DeThi.nienkhoa.msnk == NienKhoa.msnk}">
 											<option selected="selected" value="${NienKhoa.msnk}">${NienKhoa.nkTen}</option>
@@ -83,12 +85,12 @@
 							required="required" style="width: 50%;">
 								<c:forEach items="${listChude }" var="ChuDe">
 									<c:choose>
-											<c:when test="${ChuDe.mscd == DeThi.chude.mscd}">
-													<option selected="selected" value="${ChuDe.mscd}">${ChuDe.cdTen}</option>
-												</c:when>
-												<c:otherwise>
-													<option value="${ChuDe.mscd }">${ChuDe.cdTen}</option>
-												</c:otherwise>
+										<c:when test="${ChuDe.mscd == DeThi.chude.mscd}">
+											<option selected="selected" value="${ChuDe.mscd}">${ChuDe.cdTen}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${ChuDe.mscd }">${ChuDe.cdTen}</option>
+										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 						</select></td>
@@ -122,16 +124,28 @@
 					<tr>
 						<!--Trạng thái-->
 						<td>Trạng thái</td>
-						<td>
-							<div class="radio">
-								<label> <input type="radio" name="trangThai"
-									id="trangThai" checked="checked" value="0"> <span>Đóng&nbsp;&nbsp;&nbsp;</span>
-
-								</label> <label> <input type="radio" name="trangThai" id="trangThai"
-									value="1"> <span>Mở</span>
-								</label>
-							</div>
-						</td>
+						<td><c:choose>
+								<c:when test="${DeThi.dtTrangthai == 0 }">
+									<div class="onoffswitch">
+										<input type="checkbox" name="trangThai"
+											class="onoffswitch-checkbox" id="trangThai"> <label
+											class="onoffswitch-label" for="trangThai"> <span
+											class="onoffswitch-inner"></span> <span
+											class="onoffswitch-switch"></span>
+										</label>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="onoffswitch">
+										<input type="checkbox" name="trangThai"
+											class="onoffswitch-checkbox" id="trangThai" checked>
+										<label class="onoffswitch-label" for="trangThai"> <span
+											class="onoffswitch-inner"></span> <span
+											class="onoffswitch-switch"></span>
+										</label>
+									</div>
+								</c:otherwise>
+							</c:choose></td>
 						<td></td>
 					</tr>
 
@@ -140,9 +154,9 @@
 						<td>Thời gian làm bài <br> (phút)
 						</td>
 						<td><input id="thoiGian" class="form-control" type="text"
-							name="thoiGian" value="${DeThi.dtThoigianlambai }" style="width: 50%;">
-							<div id="thongbao_thoigian"></div>
-						</td>
+							name="thoiGian" value="${DeThi.dtThoigianlambai }"
+							style="width: 50%;">
+							<div id="thongbao_thoigian"></div></td>
 						<td></td>
 					</tr>
 
@@ -150,10 +164,9 @@
 						<!--Ngày tạo đề-->
 						<td>Ngày tạo đề</td>
 						<td><input type="date" name="ngayTaoDe" id="ngayTaoDe"
-							class="form-control" value="${DeThi.dtNgaytaode }" required="required" title=""
-							style="width: 50%;">
-							<div id="thongbao_ngaytaode"></div> 
-						</td>
+							class="form-control" value="${DeThi.dtNgaytaode }"
+							required="required" title="" style="width: 50%;">
+							<div id="thongbao_ngaytaode"></div></td>
 						<td></td>
 					</tr>
 
@@ -168,22 +181,23 @@
 						<!--Số lần cho phép-->
 						<td>Số lần cho phép thi</td>
 						<td><input type="number" name="soLanChoPhep"
-							id="soLanChoPhep" class="form-control" value="${DeThi.dtSolanchophep }"
-							required="required" title="" style="width: 50%;">
-							<div id="thongbao_solanchophep"></div>
-							</td>
+							id="soLanChoPhep" class="form-control"
+							value="${DeThi.dtSolanchophep }" required="required" title=""
+							style="width: 50%;">
+							<div id="thongbao_solanchophep"></div></td>
 						<td></td>
 					</tr>
 
 					<tr>
 						<!--Mật khẩu đề thi-->
 						<td>Mật khẩu đề thi</td>
-						<td><input id="matKhauDeThi" value='${DeThi.dtMatkhau }' class="form-control"
-							type="password" name="matKhauDeThi"
+						<td><input id="matKhauDeThi" value='${DeThi.dtMatkhau }'
+							class="form-control" type="password" name="matKhauDeThi"
 							style="width: 50%; margin-bottom: 10px;">
 							<div class="checkbox">
-								<label> <input type="checkbox" value="" onclick="showPassword()" id="showPassword"> Hiện
-									mật khẩu
+								<label> <input type="checkbox" value=""
+									onclick="showPassword()" id="showPassword"> Hiện mật
+									khẩu
 								</label>
 							</div></td>
 						<td></td>
@@ -192,7 +206,8 @@
 						<!--Mật khẩu đề thi-->
 						<td></td>
 						<td>
-							<button hidden id="sua-thong-tin" class="btn btn-success" onClick="AjaxSuaThongTinDeThi()">Sửa thông tin đề thi </button>
+							<button hidden id="sua-thong-tin" class="btn btn-success"
+								onClick="AjaxSuaThongTinDeThi()">Sửa thông tin đề thi</button>
 						</td>
 
 						<td></td>

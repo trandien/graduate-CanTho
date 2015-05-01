@@ -3,6 +3,7 @@ package vn.com.luanvan.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -207,6 +208,7 @@ public class DeThiController {
 			String monHoc = request.getParameter("MonHoc");
 			String dangThi = request.getParameter("HeSo");
 			String trangThai = request.getParameter("TrangThai");
+			
 			String thoiGianLamBai = request.getParameter("ThoiGian");
 			String ngayTaoDe = request.getParameter("NgayTaoDe");
 			String danDo = request.getParameter("DanDo");
@@ -282,7 +284,17 @@ public class DeThiController {
 			List<Nienkhoa> listNienKhoa = nienKhoaService.DSNienKhoa();
 			List<Chude> listChude = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
 			List<DethiLop> listDeThiLop = deThiLopService.listLopByMSDT(msdt);
+			List<Phongthi> listPhongThi = phongThiService.danhSachPhongThi();
+			List<Lop> listLop = lopService.listLop();
+			List<User> listGV = userService.LayDanhSachGiaoVien();
+			List<Phancongvaitro> listGTGacThi = phanCongVaiTroService.ListGTByMSDT(msdt);
+			List<Phancongvaitro> listHSThamGiaThi = phanCongVaiTroService.ListHSByMSDT(msdt);
 			model.addObject("sua", 1);
+			model.addObject("listGTGacThi", listGTGacThi);
+			model.addObject("listHSThamGiaThi", listHSThamGiaThi);
+			model.addObject("listGV", listGV);
+			model.addObject("listPhongThi", listPhongThi);
+			model.addObject("listLop", listLop);
 			model.addObject("listDeThiLop", listDeThiLop);
 			model.addObject("listChude", listChude);
 			model.addObject("listMonHoc", listMonHoc);
@@ -296,5 +308,46 @@ public class DeThiController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/AjaxXemDanhSachKQThi", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String XemDanhSachKQThi(ModelAndView model,
+			HttpSession session, HttpServletRequest request){
+		String result = "";
+		if (isLogin(session)) {
+			String msl = request.getParameter("MaLop");
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			List<User> dsThiSinh = new ArrayList<User>();
+			int stt = 1;
+			dsThiSinh = userService.LayDanhSachHSTrongLop(msl);
+			result += " <h4 align='center' style='color: #3b5998; font-weight: bold;'>Kết quả thi lớp "+msl+"</h4>";
+			result += " <div class='table-responsive'>";
+			result += " 	<table class='table table-hover'>";
+			result += " 		<thead>";
+			result += " 			<tr>";
+			result += " 				<th>STT</th>";
+			result += " 				<th>Họ tên</th>";
+			result += " 				<th>Điểm</th>";
+			result += " 				<th>Vắng thi</th>";
+			result += " 				<th>Bị khóa</th>";
+			result += " 			</tr>";
+			result += " 		</thead>";
+			result += " 		<tbody>";
+			for(User u : dsThiSinh) {
+				result += " 			<tr>";
+				result += " 				<td>"+stt+"</td>";
+				result += " 				<td>"+u.getNdHoten()+"</td>";
+				result += " 				<td><div id='DiemThi-"+u.getNdTaikhoan()+"'>0.0</div></td>";
+				result += " 				<td><div id='VangThi-"+u.getNdTaikhoan()+"'><span class='glyphicon glyphicon-remove' style='color: #f0ad4e;'></span></div></td>";
+				result += " 				<td><div id='BiKhoa-"+u.getNdTaikhoan()+"'></div></td>";
+				result += " 			</tr>";
+				stt++;
+			}
+			result += " 		</tbody>";
+			result += " 	</table>";
+			result += " </div>";
+			result += "<button class='btn btn-primary pull-right' style='margin-right: 100px;'>Xuất kết quả</button>";
+		}
+		System.out.println(result);
+		return result;
+	}
 	
 }

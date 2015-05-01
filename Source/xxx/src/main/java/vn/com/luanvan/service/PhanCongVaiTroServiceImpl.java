@@ -75,4 +75,16 @@ public class PhanCongVaiTroServiceImpl implements PhanCongVaiTroService{
 		return phanCongVaiTroDao.layDSHSByNgayVaPhong(mspt, ngay, gioBatDau, gioKetThuc) ;
 	}
 
+	@Override
+	public List<Phancongvaitro> ListHSByMSDT(int msdt) {
+		return phanCongVaiTroDao.ListHSByMSDT(msdt);
+	}
+
+	@Override
+	public List<Phancongvaitro> ListGTByMSDT(int msdt) {
+		return phanCongVaiTroDao.ListGTByMSDT(msdt);
+	}
+
+	
+
 }

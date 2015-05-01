@@ -32,7 +32,12 @@
           width: 100%;
           height: 10px;
         }
+        .glyphicon-trash:hover{
+        	color: red;
+        }
       </style>
+      
+      
 </head>
 <body>
 	<div class="panel panel-default">
@@ -140,10 +145,10 @@
 						</thead>
 						<c:choose>
 							<c:when test="${sua == '1'}">
-								<tbody id='sua-bang-lop-'>
+								<tbody id='bang-lop-'>
 									<c:forEach items="${listDeThiLop }" var='dtlop' varStatus="status">
-										<tr>
-											<td><c:out value="${status.count}" /></td>
+										<tr id='pcvt-${dtlop.dethi.msdt }-${dtlop.lop.msl}'>
+											<td class='indexL'><c:out value="${status.count}" /></td>
 											<td>
 												<div class='btn-group'>
 													<div class='dropdown-toggle' data-toggle='dropdown' href='#'>
@@ -151,7 +156,7 @@
 													</div>
 													<div class='dropdown-menu'>
 														<hr>
-														<BUTTON class='btn btn-danger' style='width: 100%' onclick='AjaxXoaPhanCongVaiTro()'>
+														<BUTTON id='${dtlop.dethi.msdt }-${dtlop.lop.msl}' class='btn btn-danger XoaDeThiLop' style='width: 100%' onclick='XoaDeThiLop()'>
 														Xóa</BUTTON>
 													</div>
 												</div>
@@ -265,9 +270,40 @@
 							</tr>
 
 						</thead>
-						<tbody id="bang-hs-thi-">
-
-						</tbody>
+						<c:choose>
+							<c:when test="${sua == '1'}">
+								<tbody id='bang-hs-thi-'>
+									<c:forEach items="${listHSThamGiaThi }" var='hsthi' varStatus="status">
+										<tr id='pcvths-${hsthi.mspcvt }'>
+											 <td class='indexHS'><c:out value="${status.count}" /></td>
+											 <td>
+												<div class='btn-group'>
+												<div class='dropdown-toggle' data-toggle='dropdown' href='#'>
+													<span class='glyphicon glyphicon-trash'></span>
+												</div>
+												<div class='dropdown-menu'>
+												<hr>
+												<BUTTON class='btn btn-danger' style='width: 100%' onclick='AjaxXoaPhanCongVaiTro(${hsthi.mspcvt })'>
+												Xóa</BUTTON>
+												</div>
+												</div>
+											 </td>
+											 <td>${hsthi.user.ndHoten }</td>
+											 <td>${hsthi.phongthi.ptTen }</td>
+											
+											 <td>${hsthi.ngay }</td>
+											 <td>${hsthi.giobatdau }</td>
+											 <td>${hsthi.gioketthuc }</td>
+											  <td>${hsthi.user.lop.msl }</td>
+										 </tr>
+									</c:forEach>
+								</tbody>
+							</c:when>
+							<c:otherwise>
+								<tbody id='bang-hs-thi-'>
+								</tbody>
+							</c:otherwise>
+						</c:choose>
 					</table>
 				</div>
 			</div>

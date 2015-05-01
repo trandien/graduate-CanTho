@@ -93,6 +93,7 @@
 	
 </div>
 <input type="hidden" id="msdt" value="${DeThi.msdt }">
+<input type="hidden" id="mscd" value="${DeThi.chude.mscd }">
 
 	<div id="form-card-delete" style="display: none">
 		<div class="form-header">Xóa lớp</div>
@@ -128,6 +129,9 @@
 								<li class="classLi text-left" id="noiDungCauHoi"><a
 									href="#tabNoiDunCauHoi" data-toggle="tab"><i
 										class="glyphicon glyphicon-book">&nbsp</i>Nội dung câu hỏi</a></li>
+								<li class="classLi text-left" id="diem"><a
+									href="#tabdiem" data-toggle="tab"><i
+										class="glyphicon glyphicon-file">&nbsp</i>Điểm</a></li>
 
 							</ul>
 						</div>
@@ -158,7 +162,10 @@
 						<%@ include file="/WEB-INF/views/tabnoidungcauhoi.jsp"%>
 					</div>
 					<!--Kết thúc tab đề thi-->
-
+					
+					<div class="tab-pane" id="tabdiem">
+						<%@ include file="/WEB-INF/views/tabDiem.jsp"%>
+					</div>
 				</div>
 			</div>
 		</div>
