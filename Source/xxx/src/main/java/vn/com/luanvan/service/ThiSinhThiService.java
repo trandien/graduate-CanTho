@@ -33,4 +33,6 @@ public interface ThiSinhThiService {
 	
 	BangThiSinhThiForm LayBangTSDTForm(String taiKhoan, int msdt, int soLanThi);
 	
+	List<Thi> layDSDangThi(int msdt);
+	
 }

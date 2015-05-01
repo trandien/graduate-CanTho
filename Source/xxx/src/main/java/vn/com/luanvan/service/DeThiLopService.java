@@ -18,4 +18,8 @@ public interface DeThiLopService {
 	DethiLop LayDeThiLopById(int msdt, String msl);
 	
 	DethiLop LayDTLByPhongVaThoiGian(int mspt, String ngay, String gioBatDau, String gioKetThuc)  throws ParseException;
+	
+	List<DethiLop> listLopByMSDT(int msdt);
+	
+	List<DethiLop> listDeThiByMSDT(String msl);
 }

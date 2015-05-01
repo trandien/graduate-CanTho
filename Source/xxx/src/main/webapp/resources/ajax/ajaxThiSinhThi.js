@@ -1,4 +1,55 @@
-	$(document).on('change', '.radio-answer', function (e) {
+$(document).ready(function () {
+	var khoa = 0;
+	var khongKhoa = 0;
+    var interval = 4000;  
+    var refresh = function() {
+    	var dsthisinh = [];
+        $.ajax({
+            url: "AjaxKiemTraKhoaThiSinh",
+            cache: false,
+            type: "GET",
+            data : "MaDeThi="+$("#msdt").val(),
+            success: function(result) {
+                setTimeout(function() {
+                    refresh();
+                }, interval);
+                if(result == 'true') {
+                	if(khoa == 0) {
+                		alert("Bài thi của bạn đã bị giám thị khóa");
+                		khoa = 1;
+                	}
+                	$(".radio-answer").each(function() {
+                        $(this).prop('disabled', true);
+                    });
+                	$(".checkbox-answer").each(function() {
+                        $(this).prop('disabled', true);
+                    });
+                	$(".dienvaochotrong").each(function() {
+                        $(this).prop('disabled', true);
+                    });
+                } else {
+                	if(khongKhoa != 0) {
+                		alert("Bài thi của bạn đã được giám thị mở khóa");
+                		khongKhoa = 0;
+                	}
+                	$(".radio-answer").each(function() {
+                        $(this).prop('disabled', false);
+                    });
+                	$(".checkbox-answer").each(function() {
+                        $(this).prop('disabled', false);
+                    });
+                	$(".dienvaochotrong").each(function() {
+                        $(this).prop('disabled', false);
+                    });
+                }
+            }
+        });
+    };
+    refresh();
+});	
+
+
+$(document).on('change', '.radio-answer', function (e) {
 		var msch = $(this).attr('id').split("-")[0];
 		var msctl = $(this).attr('id').split("-")[1];
 		$.ajax({

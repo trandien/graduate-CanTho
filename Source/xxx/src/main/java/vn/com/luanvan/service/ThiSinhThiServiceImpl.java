@@ -82,4 +82,9 @@ public class ThiSinhThiServiceImpl implements ThiSinhThiService {
 		return thiSinhThiDao.LayBangThi(taiKhoan, msdt, soLanThi);
 	}
 
+	@Override
+	public List<Thi> layDSDangThi(int msdt) {
+		return thiSinhThiDao.layDSDangThi(msdt);
+	}
+
 }

@@ -18,14 +18,20 @@ import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.DethiLopId;
 import vn.com.luanvan.model.Lop;
 import vn.com.luanvan.model.Phongthi;
+import vn.com.luanvan.model.Thi;
+import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.DeThiLopService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.LopService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
 import vn.com.luanvan.service.PhongThiService;
+import vn.com.luanvan.service.ThiSinhThiService;
 
 @Controller
 public class DeThiLopController {
+	
+	@Autowired
+	ThiSinhThiService thiSinhThiService;
 	
 	@Autowired
 	DeThiService deThiService;
@@ -122,4 +128,47 @@ public class DeThiLopController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/AjaxMoBaiThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String MoBaiThi(HttpServletRequest request,
+			HttpSession session){
+		String result = "";
+		try {
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			String taiKhoan = request.getParameter("TaiKhoan");
+			Thi thi = new Thi();
+			thi = thiSinhThiService.LayBangThi(taiKhoan, msdt, 1);
+			thi.setTKhoabailam(false);
+			thiSinhThiService.SuaThiSinhThi(thi);
+		} catch(Exception e) {
+			System.out.println("Ajax mo bai thi Exception "+e.getMessage());
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/AjaxKhoaBaiThi", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String KhoaBaiThi(HttpServletRequest request,
+			HttpSession session){
+		String result = "";
+		try {
+			int msdt = Integer.parseInt(request.getParameter("MaDeThi"));
+			String taiKhoan = request.getParameter("TaiKhoan");
+			Thi thi = new Thi();
+			thi = thiSinhThiService.LayBangThi(taiKhoan, msdt, 1);
+			thi.setTKhoabailam(true);
+			thiSinhThiService.SuaThiSinhThi(thi);
+		} catch(Exception e) {
+			System.out.println("Ajax khoa bai thi Exception "+e.getMessage());
+		}
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+

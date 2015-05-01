@@ -24,6 +24,7 @@ function CheckPassTest(){
 								url: "AjaxTaoBangThiSinhThi",
 								type: "POST",
 								success : function(create) {
+									
 								},
 								error : function(error) {
 									

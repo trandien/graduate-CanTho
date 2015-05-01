@@ -44,4 +44,14 @@ public class DeThiLopServiceImpl implements DeThiLopService{
 		return deThiLopdao.LayDTLByPhongVaThoiGian(mspt, ngay, gioBatDau, gioKetThuc);
 	}
 
+	@Override
+	public List<DethiLop> listLopByMSDT(int msdt) {
+		return deThiLopdao.listLopByMSDT(msdt);
+	}
+
+	@Override
+	public List<DethiLop> listDeThiByMSDT(String msl) {
+		return deThiLopdao.listDeThiByMSDT(msl);
+	}
+
 }

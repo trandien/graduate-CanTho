@@ -21,10 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dethi;
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Monhoc;
 import vn.com.luanvan.model.Phancongvaitro;
 import vn.com.luanvan.model.User;
 import vn.com.luanvan.service.ChuDeService;
+import vn.com.luanvan.service.DeThiLopService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.MonHocService;
 import vn.com.luanvan.service.PhanCongVaiTroService;
@@ -34,6 +36,9 @@ import vn.com.luanvan.service.UserService;
 public class LoginController {
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	DeThiLopService deThiLopService;
 
 	@Autowired
 	ChuDeService chuDeService;
@@ -135,6 +140,12 @@ public class LoginController {
 					List<Phancongvaitro> listPCVT = phanCongVaiTroService.LayDeThiHS(taiKhoan);
 					for(Phancongvaitro a : listPCVT) {
 						listDeThiThamGiaThi.add(deThiService.LayDeThiByMa(a.getDethi().getMsdt()));
+					}
+					String msl = "";
+					msl = user.getLop().getMsl();
+					List<DethiLop> listDeThiLop = deThiLopService.listDeThiByMSDT(msl);
+					for(DethiLop dtl : listDeThiLop) {
+						listDeThiThamGiaThi.add(deThiService.LayDeThiByMa(dtl.getDethi().getMsdt()));
 					}
 					model.addObject("listDeThiThamGiaThi", listDeThiThamGiaThi);
 					model.addObject("user", user);

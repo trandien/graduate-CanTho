@@ -260,4 +260,21 @@ public class ThiSinhThiDaoImpl implements ThiSinhThiDao {
 		return thi;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Thi> layDSDangThi(int msdt) {
+		List<Thi> listDSDangThi = new ArrayList<Thi>();
+		try {
+			Query query = sessionFactory
+					.getCurrentSession()
+					.createQuery(
+							"from Thi t WHERE t.dethi.msdt=:msdt AND solanthi=1");
+			query.setParameter("msdt", msdt);
+			listDSDangThi = query.list();
+		} catch(Exception e) {
+			System.out.println("layDSDangThi loi");
+		}
+		return listDSDangThi;
+	}
+
 }

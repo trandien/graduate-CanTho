@@ -99,6 +99,10 @@ public class DeThiLopDaoImpl implements DeThiLopDao {
 	public DethiLop LayDTLByPhongVaThoiGian(int mspt, String ngay,
 			String gioBatDau, String gioKetThuc) throws ParseException {
 		DethiLop dtl = new DethiLop();
+		System.out.println("MSDT :"+mspt);
+		System.out.println("ngay :"+ngay);
+		System.out.println("gioBatDau :"+gioBatDau);
+		System.out.println("gioKetThuc :"+gioKetThuc);
 		SimpleDateFormat dinhDangThoiGian = new SimpleDateFormat("yyyy-MM-dd");
 		Date layNgay = dinhDangThoiGian.parse(ngay);
 		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
@@ -121,6 +125,44 @@ public class DeThiLopDaoImpl implements DeThiLopDao {
 					+ e.getMessage());
 		}
 		return dtl;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<DethiLop> listLopByMSDT(int msdt) {
+		List<DethiLop> listDTL = new ArrayList<DethiLop>();
+		try {
+			SQLQuery query = sessionFactory
+					.getCurrentSession()
+					.createSQLQuery(
+							"select * from Dethi_lop WHERE msdt=:msdt");
+			query.addEntity(DethiLop.class);
+			query.setParameter("msdt", msdt);
+			listDTL =  query.list();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le listLopByMSDT : "
+					+ e.getMessage());
+		}
+		return listDTL;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<DethiLop> listDeThiByMSDT(String msl) {
+		List<DethiLop> listDTL = new ArrayList<DethiLop>();
+		try {
+			SQLQuery query = sessionFactory
+					.getCurrentSession()
+					.createSQLQuery(
+							"select * from Dethi_lop WHERE msl=:msl");
+			query.addEntity(DethiLop.class);
+			query.setParameter("msl", msl);
+			listDTL =  query.list();
+		} catch (Exception e) {
+			System.out.println("Xay ra ngoai le listDeThiByMSDT : "
+					+ e.getMessage());
+		}
+		return listDTL;
 	}
 
 }
