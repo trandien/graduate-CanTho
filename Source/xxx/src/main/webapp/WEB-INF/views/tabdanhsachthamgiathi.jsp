@@ -138,9 +138,39 @@
 							</tr>
 
 						</thead>
-						<tbody id='bang-lop-'>
+						<c:choose>
+							<c:when test="${sua == '1'}">
+								<tbody id='sua-bang-lop-'>
+									<c:forEach items="${listDeThiLop }" var='dtlop' varStatus="status">
+										<tr>
+											<td><c:out value="${status.count}" /></td>
+											<td>
+												<div class='btn-group'>
+													<div class='dropdown-toggle' data-toggle='dropdown' href='#'>
+														<span class='glyphicon glyphicon-trash'></span>
+													</div>
+													<div class='dropdown-menu'>
+														<hr>
+														<BUTTON class='btn btn-danger' style='width: 100%' onclick='AjaxXoaPhanCongVaiTro()'>
+														Xóa</BUTTON>
+													</div>
+												</div>
+											</td>
+											<td>${dtlop.lop.msl }</td>
+											<td>${dtlop.phongthi.ptTen }</td>
+											<td>${dtlop.ngay }</td>
+											<td>${dtlop.giobatdau }</td>
+											<td>${dtlop.gioketthuc }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</c:when>
+							<c:otherwise>
+								<tbody id='bang-lop-'>
+								</tbody>
+							</c:otherwise>
+						</c:choose>
 						
-						</tbody>
 					</table>
 				</div>
 

@@ -92,6 +92,7 @@
 <div id="ketquathemdethi">
 	
 </div>
+<input type="hidden" id="msdt" value="${DeThi.msdt }">
 
 	<div id="form-card-delete" style="display: none">
 		<div class="form-header">Xóa lớp</div>

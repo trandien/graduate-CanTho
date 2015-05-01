@@ -78,7 +78,7 @@ public class DeThiLopController {
 		DeThiLop.setGiobatdau(timeStart);
 		DeThiLop.setGioketthuc(timeEnd);
 		DeThiLop.setId(DeThiLopId);
-		DeThiLop.setMspt(mspt);
+		DeThiLop.setPhongthi(PhongThi);
 		DeThiLop.setLop(lop);
 		DeThiLop.setNgay(thoiGian);
 		String stringTimeStart = time.format(timeStart);

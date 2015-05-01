@@ -140,7 +140,7 @@
 						<td>Thời gian làm bài <br> (phút)
 						</td>
 						<td><input id="thoiGian" class="form-control" type="text"
-							name="thoiGian" value="" style="width: 50%;">
+							name="thoiGian" value="${DeThi.dtThoigianlambai }" style="width: 50%;">
 							<div id="thongbao_thoigian"></div>
 						</td>
 						<td></td>
@@ -150,7 +150,7 @@
 						<!--Ngày tạo đề-->
 						<td>Ngày tạo đề</td>
 						<td><input type="date" name="ngayTaoDe" id="ngayTaoDe"
-							class="form-control" value="" required="required" title=""
+							class="form-control" value="${DeThi.dtNgaytaode }" required="required" title=""
 							style="width: 50%;">
 							<div id="thongbao_ngaytaode"></div> 
 						</td>
@@ -160,8 +160,7 @@
 					<tr>
 						<!--Dặn dò-->
 						<td>Dặn dò</td>
-						<td><textarea id="danDo" class="form-control" rows="5">
-											</textarea></td>
+						<td><textarea id="danDo" class="form-control" rows="5"> ${DeThi.dtDando }</textarea></td>
 						<td></td>
 					</tr>
 
@@ -169,7 +168,7 @@
 						<!--Số lần cho phép-->
 						<td>Số lần cho phép thi</td>
 						<td><input type="number" name="soLanChoPhep"
-							id="soLanChoPhep" class="form-control" value=""
+							id="soLanChoPhep" class="form-control" value="${DeThi.dtSolanchophep }"
 							required="required" title="" style="width: 50%;">
 							<div id="thongbao_solanchophep"></div>
 							</td>
@@ -179,7 +178,7 @@
 					<tr>
 						<!--Mật khẩu đề thi-->
 						<td>Mật khẩu đề thi</td>
-						<td><input id="matKhauDeThi" class="form-control"
+						<td><input id="matKhauDeThi" value='${DeThi.dtMatkhau }' class="form-control"
 							type="password" name="matKhauDeThi"
 							style="width: 50%; margin-bottom: 10px;">
 							<div class="checkbox">
@@ -193,8 +192,7 @@
 						<!--Mật khẩu đề thi-->
 						<td></td>
 						<td>
-							<button id="luu-thong-tin" class="btn btn-primary" onClick="AjaxLuuDeThi()">Lưu thông tin đề thi </button>
-							<button hidden id="sua-thong-tin" onClick="AjaxSuaThongTinDeThi()">Sửa thông tin đề thi </button>
+							<button hidden id="sua-thong-tin" class="btn btn-success" onClick="AjaxSuaThongTinDeThi()">Sửa thông tin đề thi </button>
 						</td>
 
 						<td></td>

@@ -1,5 +1,5 @@
 // default package
-// Generated Apr 30, 2015 3:35:47 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2015 6:32:30 PM by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -24,7 +24,7 @@ public class DethiLop implements java.io.Serializable {
 	private DethiLopId id;
 	private Dethi dethi;
 	private Lop lop;
-	private Integer mspt;
+	private Phongthi phongthi;
 	private Date ngay;
 	private Date giobatdau;
 	private Date gioketthuc;
@@ -38,12 +38,12 @@ public class DethiLop implements java.io.Serializable {
 		this.lop = lop;
 	}
 
-	public DethiLop(DethiLopId id, Dethi dethi, Lop lop, Integer mspt,
+	public DethiLop(DethiLopId id, Dethi dethi, Lop lop, Phongthi phongthi,
 			Date ngay, Date giobatdau, Date gioketthuc) {
 		this.id = id;
 		this.dethi = dethi;
 		this.lop = lop;
-		this.mspt = mspt;
+		this.phongthi = phongthi;
 		this.ngay = ngay;
 		this.giobatdau = giobatdau;
 		this.gioketthuc = gioketthuc;
@@ -81,13 +81,14 @@ public class DethiLop implements java.io.Serializable {
 		this.lop = lop;
 	}
 
-	@Column(name = "MSPT")
-	public Integer getMspt() {
-		return this.mspt;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MSPT")
+	public Phongthi getPhongthi() {
+		return this.phongthi;
 	}
 
-	public void setMspt(Integer mspt) {
-		this.mspt = mspt;
+	public void setPhongthi(Phongthi phongthi) {
+		this.phongthi = phongthi;
 	}
 
 	@Temporal(TemporalType.DATE)

@@ -1,5 +1,5 @@
 // default package
-// Generated Apr 30, 2015 3:35:47 PM by Hibernate Tools 4.3.1
+// Generated May 1, 2015 6:32:30 PM by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class Phongthi implements java.io.Serializable {
 
 	private Integer mspt;
 	private String ptTen;
+	private Set<DethiLop> dethiLops = new HashSet<DethiLop>(0);
 	private Set<Phancongvaitro> phancongvaitros = new HashSet<Phancongvaitro>(0);
 
 	public Phongthi() {
@@ -30,8 +31,10 @@ public class Phongthi implements java.io.Serializable {
 		this.ptTen = ptTen;
 	}
 
-	public Phongthi(String ptTen, Set<Phancongvaitro> phancongvaitros) {
+	public Phongthi(String ptTen, Set<DethiLop> dethiLops,
+			Set<Phancongvaitro> phancongvaitros) {
 		this.ptTen = ptTen;
+		this.dethiLops = dethiLops;
 		this.phancongvaitros = phancongvaitros;
 	}
 
@@ -53,6 +56,15 @@ public class Phongthi implements java.io.Serializable {
 
 	public void setPtTen(String ptTen) {
 		this.ptTen = ptTen;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phongthi")
+	public Set<DethiLop> getDethiLops() {
+		return this.dethiLops;
+	}
+
+	public void setDethiLops(Set<DethiLop> dethiLops) {
+		this.dethiLops = dethiLops;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phongthi")

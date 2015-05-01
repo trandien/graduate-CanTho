@@ -103,7 +103,7 @@ public class ChuDeDaoImpl implements ChuDeDao{
 		List<Chude> listChudes = new ArrayList<Chude>();
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery("from Chude WHERE nd_taikhoan=:taikhoan");
-			listChudes = query.setString("taikhoan", taiKhoan).list();
+			listChudes = query.setParameter("taikhoan", taiKhoan).list();
 		} catch(Exception e) {
 			System.out.println ("Lay danh sach that bai "+e.getMessage());
 		}

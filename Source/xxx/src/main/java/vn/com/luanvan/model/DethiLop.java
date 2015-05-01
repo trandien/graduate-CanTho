@@ -1,6 +1,7 @@
 package vn.com.luanvan.model;
 
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -23,8 +24,8 @@ public class DethiLop implements java.io.Serializable {
 	private DethiLopId id;
 	private Dethi dethi;
 	private Lop lop;
+	private Phongthi phongthi;
 	private Date ngay;
-	private Integer mspt;
 	private Date giobatdau;
 	private Date gioketthuc;
 
@@ -37,15 +38,15 @@ public class DethiLop implements java.io.Serializable {
 		this.lop = lop;
 	}
 
-	public DethiLop(DethiLopId id, Dethi dethi, Lop lop, Date ngay,
-			Date giobatdau, Date gioketthuc, int mspt) {
+	public DethiLop(DethiLopId id, Dethi dethi, Lop lop, Phongthi phongthi,
+			Date ngay, Date giobatdau, Date gioketthuc) {
 		this.id = id;
 		this.dethi = dethi;
 		this.lop = lop;
+		this.phongthi = phongthi;
 		this.ngay = ngay;
 		this.giobatdau = giobatdau;
 		this.gioketthuc = gioketthuc;
-		this.mspt = mspt;
 	}
 
 	@EmbeddedId
@@ -80,6 +81,16 @@ public class DethiLop implements java.io.Serializable {
 		this.lop = lop;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MSPT")
+	public Phongthi getPhongthi() {
+		return this.phongthi;
+	}
+
+	public void setPhongthi(Phongthi phongthi) {
+		this.phongthi = phongthi;
+	}
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "NGAY", length = 0)
 	public Date getNgay() {
@@ -109,15 +120,5 @@ public class DethiLop implements java.io.Serializable {
 	public void setGioketthuc(Date gioketthuc) {
 		this.gioketthuc = gioketthuc;
 	}
-	
-	@Column(name="MSPT", nullable=true)
-    public Integer getMspt() {
-        return this.mspt;
-    }
-    
-    public void setMspt(int mspt) {
-        this.mspt = mspt;
-    }
 
 }
-

@@ -121,7 +121,7 @@ function AjaxSuaThongTinDeThi() {
 			$("#sua-thong-tin").prop("class", "btn btn-success");
 		},
 		error : function() {
-			alert("Thêm thất bại");
+			alert("Sửa đề thi thất bại");
 		}
 
 	});

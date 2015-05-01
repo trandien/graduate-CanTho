@@ -23,6 +23,7 @@ public class Phongthi implements java.io.Serializable {
 
 	private Integer mspt;
 	private String ptTen;
+	private Set<DethiLop> dethiLops = new HashSet<DethiLop>(0);
 	private Set<Phancongvaitro> phancongvaitros = new HashSet<Phancongvaitro>(0);
 
 	public Phongthi() {
@@ -32,8 +33,10 @@ public class Phongthi implements java.io.Serializable {
 		this.ptTen = ptTen;
 	}
 
-	public Phongthi(String ptTen, Set<Phancongvaitro> phancongvaitros) {
+	public Phongthi(String ptTen, Set<DethiLop> dethiLops,
+			Set<Phancongvaitro> phancongvaitros) {
 		this.ptTen = ptTen;
+		this.dethiLops = dethiLops;
 		this.phancongvaitros = phancongvaitros;
 	}
 
@@ -55,6 +58,15 @@ public class Phongthi implements java.io.Serializable {
 
 	public void setPtTen(String ptTen) {
 		this.ptTen = ptTen;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phongthi")
+	public Set<DethiLop> getDethiLops() {
+		return this.dethiLops;
+	}
+
+	public void setDethiLops(Set<DethiLop> dethiLops) {
+		this.dethiLops = dethiLops;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "phongthi")

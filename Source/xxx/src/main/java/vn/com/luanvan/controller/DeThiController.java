@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.com.luanvan.model.Chude;
 import vn.com.luanvan.model.Dangthi;
 import vn.com.luanvan.model.Dethi;
+import vn.com.luanvan.model.DethiLop;
 import vn.com.luanvan.model.Hocky;
 import vn.com.luanvan.model.Lop;
 import vn.com.luanvan.model.Monhoc;
@@ -30,6 +31,7 @@ import vn.com.luanvan.model.User;
 import vn.com.luanvan.model.Vaitro;
 import vn.com.luanvan.service.ChuDeService;
 import vn.com.luanvan.service.DangThiService;
+import vn.com.luanvan.service.DeThiLopService;
 import vn.com.luanvan.service.DeThiService;
 import vn.com.luanvan.service.LopService;
 import vn.com.luanvan.service.MonHocService;
@@ -46,6 +48,9 @@ public class DeThiController {
 	
 	@Autowired
 	PhongThiService phongThiService;
+	
+	@Autowired
+	DeThiLopService deThiLopService;
 	
 	@Autowired
 	LopService lopService;
@@ -268,12 +273,18 @@ public class DeThiController {
 	public ModelAndView ChuyenTrangSuaDeThi(ModelAndView model,
 			HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes){
 		if (isLogin(session)) {
+			User user = (User) session.getAttribute("user");
+			String taiKhoan = user.getNdTaikhoan();
 			int msdt = Integer.parseInt(request.getParameter("msdt"));
 			Dethi DeThi = deThiService.LayDeThiByMa(msdt);
 			List<Monhoc> listMonHoc = monHocService.DSMonHoc();
 			List<Dangthi> listDangThi = dangThiService.DSDangThi();
 			List<Nienkhoa> listNienKhoa = nienKhoaService.DSNienKhoa();
-			redirectAttributes.addFlashAttribute("sua", "1");
+			List<Chude> listChude = chuDeService.DSChuDeByTaiKhoan(taiKhoan);
+			List<DethiLop> listDeThiLop = deThiLopService.listLopByMSDT(msdt);
+			model.addObject("sua", 1);
+			model.addObject("listDeThiLop", listDeThiLop);
+			model.addObject("listChude", listChude);
 			model.addObject("listMonHoc", listMonHoc);
 			model.addObject("listDangThi", listDangThi);
 			model.addObject("listNienKhoa", listNienKhoa);
